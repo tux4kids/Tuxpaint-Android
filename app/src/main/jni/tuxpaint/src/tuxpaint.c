@@ -22,7 +22,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   (See COPYING.txt)
 
-  June 14, 2002 - March 27, 2025
+  June 14, 2002 - April 19, 2025
 */
 
 #include "platform.h"
@@ -3181,10 +3181,11 @@ static void mainloop(void)
                   if (tmp != NULL)
                   {
                     int exceeded;
+                    int i;
 
                     mbstowcs(tmp, pasted_txt, n);       /* at most n wchar_t written */
                     exceeded = 0;
-                    for (int i = 0; tmp[i] != '\0' && !exceeded; i++)
+                    for (i = 0; tmp[i] != '\0' && !exceeded; i++)
                     {
                       if (tmp[i] == '\n')
                       {
@@ -14356,6 +14357,7 @@ static SDL_Surface *load_starter_helper(char *path_and_basename,
   char fname[256];
   SDL_Surface *surf;
   unsigned int i;
+
 #ifndef __ANDROID__
   struct stat stat_buf;
 #endif

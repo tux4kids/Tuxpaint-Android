@@ -1,0 +1,1334 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>
+      Utöka Rita med Tux    </title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=utf-8">
+    <style>
+  body { font-size: large; }
+  table { font-size: large; }
+  div.screenshot-center {
+    text-align: center;
+  }
+  div.screenshot-right {
+    float: right;
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+  div.screenshot-right-after {
+    clear: both;
+  }
+  div.keeptogether { page-break-inside: avoid; }
+  section h1 { font-size: 2em; }
+  h1, h2, h3, h4, h5 { font-family: sans; }
+  h1 { color: #800; page-break-before: always; break-before: always; }
+  h2 { color: #440; page-break-after: avoid; break-after: avoid; }
+  h3 { color: #080; page-break-after: avoid; break-after: avoid; }
+  h4 { color: #008; page-break-after: avoid; break-after: avoid; }
+  h5 { color: #808; page-break-after: avoid; break-after: avoid; }
+  h1 + p { page-break-inside: avoid; }
+  h2 + p { page-break-inside: avoid; }
+  h3 + p { page-break-inside: avoid; }
+  h4 + p { page-break-inside: avoid; }
+  h5 + p { page-break-inside: avoid; }
+  dt {
+    font-size: large;
+    color: #404;
+    font-family: sans;
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+  }
+  dd, blockquote {
+    border-left: 1px solid #888;
+    padding-left: 1em;
+    border-radius: 0 0 0 1em;
+  }
+  p.note {
+    border: 1px solid #000;
+    background-color: #eee;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    display: inline-block;
+    margin-right: 3em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  section.outer {
+    padding-bottom: 1em;
+    border-bottom: 2px solid #000;
+  }
+  section.indent p,dl {
+    margin-left: 2em;
+  }
+  section.indent dl p {
+    margin-left: 0;
+  }
+  p + ul, p + ol {
+    margin-left: 2em;
+  }
+
+  @media print {
+    p {
+      orphans: 3;
+      widows: 3;
+    }
+  }
+</style>
+  </head>
+  <body bgcolor="#FFFFFF"
+        text="#000000"
+        link="#0000FF"
+        vlink="#FF0000"
+        alink="#FF00FF">
+
+    <!-- Title -->
+    <section class="outer">
+      <header>
+        <center>
+          <h1>
+            Utvidga<br>
+            <img src="../../html/images/tuxpaint-title.png"
+                width="205"
+                height="210"
+                alt="Tux Paint"><br>
+            version 0.9.35          </h1>
+    
+          <p>
+            Copyright © 2002-2025 av olika bidragsgivare; se <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+            <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
+          </p>
+    
+          <p>
+            maj  2, 2025          </p>
+        </center>
+      </header>
+
+      <table border="2"
+             cellspacing="0"
+             cellpadding="2"
+             summary="Innehåll"
+             align="center"
+             style="page-break-inside: avoid;">
+        <tr>
+          <th>
+            Innehåll          </th>
+        </tr>
+        <tr>
+          <td>
+            <ul>
+              <li><a href="#where_files_go">Vart filerna tar vägen</a>                <ul>
+                  <li><a href="#standard_files">Standardfiler</a></li>                  <li><a href="#personal_files">Personliga filer</a></li>                </ul>
+              </li>
+              <li><a href="#brushes">Penslar</a>                <ul>
+                  <li><a href="#brush_description_text">Borste Beskrivande text</a></li>                  <li><a href="#brush_options">Alternativ för pensel</a></li>                </ul>
+              </li>
+              <li><a href="#stamps">Stämplar</a>                <ul>
+                  <li><a href="#stamps_images">Stämpelbilder</a></li>                  <li><a href="#description_text">Stämpel Beskrivande text</a></li>                  <li><a href="#sound_effects">Stämpel ljudeffekter</a></li>                  <li><a href="#descriptive_sound">Stämpel Beskrivande ljud</a></li>                  <li><a href="#stamp_options">Alternativ för stämplar</a></li>                  <li><a href="#pre_mirroed_and_flipped_images">Förspeglade och omvända stämplar</a></li>                </ul>
+              </li>
+              <li><a href="#fonts">Typsnitt</a></li>              <li><a href="#starters">"Startbilder"</a>                <ul>
+                  <li><a href="#coloring_book_style">Startbok i målarboksstil</a></li>                  <li><a href="#scene_style">Startbilder i scenformat</a></li>                  <li><a href="#starter_options">Startalternativ</a></li>                </ul>
+              </li>
+              <li><a href="#templates">"Mallar"</a>                <ul>
+                  <li><a href="#template_options">Mallalternativ</a></li>                </ul>
+              </li>
+              <li><a href="#translations">Översättningar</a></li>              <li><a href="#input_methods">Alternativa metoder för inmatning</a></li>              <li><a href="#on_screen_keyboard">Tangentbord på skärmen</a></li>              <li><a href="#magic_tools">Magiverktyg</a></li>            </ul>
+          </td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="outer">
+      <p>
+        Om du vill lägga till eller ändra saker som Brushes, Startbilder, Rubber Stamps och annat innehåll som används av Rita med Tux kan du göra det ganska enkelt genom att helt enkelt lägga till, ändra eller ta bort filer där Rita med Tux letar efter dem.      </p>
+  
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Obs:</strong> Du måste starta om Rita med Tux för att ändringarna ska träda i kraft.      </p>
+    </section>
+
+    <section class="indent outer"><!-- H1: Where Files Go -->
+      <header>
+        <h1>
+          <a name="where_files_go"
+              id="where_files_go">Vart filerna tar vägen</a>
+        </h1>
+      </header>
+
+      <section class="indent"><!-- H2: Standard Files -->
+        <header>
+          <h2>
+            <a name="standard_files"
+                id="standard_files">Standardfiler</a>
+          </h2>
+        </header>
+
+        <p>
+          Rita med Tux letar efter sina olika datafiler i katalogen<code>"data</code>".        </p>
+
+        <dl>
+          <dt><strong>Linux och Unix</strong></dt>
+          <dd>
+            <p>
+              Var den här katalogen hamnar beror på vilket värde som ställdes in för "<code>DATA_PREFIX</code>" när Rita med Tux byggdes. Se "Installera dokumentation" för mer information.            </p>
+            <p>
+              Som standard är dock katalogen:              <blockquote>
+                <nobr><code style='background: #EEE;'>/usr/local/share/tuxpaint/</code></nobr>              </blockquote>
+            </p>
+            <p>
+              Om du installerade från ett paket är det mer troligt att det är det:              <blockquote>
+                <nobr><code style='background: #EEE;'>/usr/share/tuxpaint/</code></nobr>              </blockquote>
+            </p>
+          </dd>
+
+          <dt><strong>Windows</strong></dt>
+          <dd>
+            <p>
+              Rita med Tux letar efter en katalog som heter<code>"data</code>" i samma katalog som den körbara filen. Detta är den katalog som installationsprogrammet använde när det installerade Rita med Tux, t.ex:              <blockquote>
+                <nobr><code style='background: #EEE;'>C:\Programfiler\TuxPaint\data</code></nobr>              </blockquote>
+            </p>
+          </dd>
+
+          <dt><strong>macOS</strong></dt>
+          <dd>
+            <p>
+              Rita med Tux lagrar sina datafiler i applikationsikonen "Tux Paint" (som faktiskt är en speciell typ av mapp på macOS &amp; Mac OS X före det). Följande steg förklarar hur man kommer till mapparna i den:            </p>
+            <ol>
+              <li>
+                Ta fram en "kontextmeny" genom att hålla ned <b><code>[Kontroll]</code></b> och klicka på Rita med Tux-ikonen i <cite>Finder</cite>. (Om du har en mus med mer än en knapp kan du helt enkelt högerklicka på ikonen)              </li>
+              <li>
+                Välj "Visa innehåll" i menyn som visas. Ett nytt <cite>Finder-fönster</cite> visas med en mapp inuti som heter "Innehåll".              </li>
+              <li>
+                Öppna mappen "Contents" och öppna mappen "Resources" som finns i den.              </li>
+              <li>
+                Där hittar du olika undermappar, t.ex. "startbilder", "stamps", "brushes" osv. Om du lägger till nytt innehåll i dessa mappar blir innehållet tillgängligt för alla användare som startar den här kopian (ikonen) av Rita med Tux.              </li>
+            </ol>
+            <p class="note">
+              <span title="Information">&#128161;</span>              <em>Obs:</em> Om du installerar en nyare version av Rita med Tux och ersätter eller kasserar den gamla versionen kommer du att förlora ändringar som gjorts genom att följa instruktionerna ovan, så spara säkerhetskopior av ditt nya innehåll (stämplar, penslar etc.).            </p>
+            <p>
+              Rita med Tux letar också efter filer i en "TuxPaint"-mapp som du kan placera i systemets <nobr>"<code style='background: #EEE;'>Applikationsstöd</code>"</nobr>-mapp (finns under <nobr>"<code style='background: #EEE;'>Bibliotek</code>"</nobr> i roten av ditt filsystem):              <blockquote>
+                <nobr><code style='background: #EEE;'>/Bibliotek/Applikationsstöd/TuxPaint/data/</code></nobr>              </blockquote>
+            </p>
+            <p>
+              När du uppgraderar till en nyare version av Rita med Tux kommer innehållet i mappen "TuxPaint" att förbli detsamma och vara tillgängligt för alla användare av Rita med Tux.            </p>
+          </dd>
+        </dl>
+      </section><!-- H2: Standard Files -->
+
+      <section class="indent"><!-- H2: Personal Files -->
+        <header>
+          <h2>
+            <a name="personal_files"
+                id="personal_files">Personliga filer</a>
+          </h2>
+        </header>
+
+        <p>
+          Du kan också skapa penslar, stämplar, "startbilder", mallar och teckensnitt i din egen användarkontokatalog (mapp) som Rita med Tux kan hitta.        </p>
+
+        <dl>
+          <dt><strong>Windows</strong></dt>
+          <dd>
+            <p>
+              Din personliga Rita med Tux-mapp lagras i din personliga "Application Data". Till exempel på nyare Windows:
+              <blockquote>
+                <nobr><code style='background: #EEE;'>C:\Users\<i>användarnamn</i>\AppData\Roaming\TuxPaint\</code></nobr>              </blockquote>
+            </p>
+          </dd>
+
+          <dt><strong>macOS</strong></dt>
+          <dd>
+            <p>
+              Din personliga Rita med Tux-mapp lagras i din personliga <nobr>"<code style='background: #EEE;'>Applikationsstöd</code>"</nobr>-mapp:              <blockquote>
+                <nobr><code style='background: #EEE;'>/Användare/<i>användarnamn</i>/Bibliotek/Applikationsstöd/TuxPaint/</code></nobr>              </blockquote>
+            </p>
+          </dd>
+
+          <dt><strong>Linux och Unix</strong></dt>
+          <dd>
+            <p>
+              Dina personliga Rita med Tux-filer hamnar i en "dold katalog" som finns i ditt kontos hemkatalog: <nobr>"<code style='background: #EEE;'>/home/<i>användarnamn</i>/.tuxpaint/</code>"</nobr>.            </p>
+            <p>
+              Glöm inte punkten ("<code>.</code>") före "<code>tuxpaint</code>"!            </p>
+          </dd>
+        </dl>
+
+        <p>
+          Om du vill lägga till egna penslar, stämplar, "startbilder", mallar och teckensnitt skapar du underkataloger i din personliga Rita med Tux-katalog med namnen "<code><b>brushes</b></code>", "<code><b>stamps</b></code>", "<code><b>starters</b></code>", "<code><b>templates</b></code>" respektive "<code><b>fonts</b></code>".        </p>
+
+        <p>
+          (Om du t.ex. skapade en pensel med namnet <nobr>"<code style='background: #EEE;'>blomma.png</code>"</nobr> skulle du placera den i <nobr>"<code style='background: #EEE;'>/home/<i>användarnamn</i>/.tuxpaint/brushes/</code>"</nobr> under Linux eller Unix)        </p>
+      </section><!-- H2: Personal Files -->
+    </section><!-- H1: Where Files Go -->
+
+    <section class="indent outer"><!-- H1: Brushes -->
+      <header>
+        <h1>
+          <a name="brushes"
+              id="brushes">Penslar</a>
+        </h1>
+      </header>
+
+      <p>
+        De penslar som används för att rita med verktygen "Paint" och "Lines" i Rita med Tux är helt enkelt PNG-bildfiler.      </p>
+      <img src="../../html/images/brush_edit.png"
+                  width="123"
+                  height="147"
+                  alt=""
+                  align="right">
+      <p>
+        PNG-bildens alfa (transparens) används för att bestämma penselns form, vilket innebär att formen kan vara "anti-aliased" och till och med delvis genomskinlig!      </p>
+
+      <p>
+        Gråskalapixlar i PNG-penseln ritas med den färg som för närvarande är vald i Rita med Tux. Färgpixlar kommer att tonas.      </p>
+
+      <section><!-- H2: Brush Descriptive Text -->
+        <header>
+          <h2>
+            <a name="brush_bescription_text"
+                id="brush_description_text">Borste Beskrivande text</a>
+          </h2>
+        </header>
+
+        <p>
+          Rita med Tux kommer att visa beskrivande text när en pensel väljs. Dessa placeras i vanliga textfiler med samma namn som PNG-filen, men med filnamnstillägget "<code>.txt</code>". (t.ex. lagras beskrivningen av "<code>borste.png</code>" i "<code>borste.txt</code>" i samma katalog)        </p>
+
+        <p>
+          Den första raden i textfilen kommer att användas som den amerikanska engelska beskrivningen av penselns bild. Den måste vara kodad i UTF-8.        </p>
+
+        <dl>
+          <dt><strong>Stöd för lokalisering</strong></dt>
+          <dd>
+            <p>
+              Ytterligare rader kan läggas till i textfilen för att ge översättningar av beskrivningen, som ska visas när Rita med Tux körs i en annan språkdräkt (t.ex. franska eller spanska).            </p>
+            <p>
+              Början av raden ska motsvara språkkoden för det aktuella språket (t.ex. "<code>fr</code>" för franska och "<code>zh_TW</code>" för traditionell kinesiska), följt av "<code>.utf8=</code>" och den översatta beskrivningen (Unicode, kodad i UTF-8).            </p>
+            <p>
+              <b>För Rita med Tux-utvecklare:</b> Det finns skript i katalogen "<code>brushes-po</code>" för att konvertera textfilerna till PO-format (och tillbaka) för enkel översättning till olika språk. Därför bör du aldrig lägga till eller ändra översättningar i filerna "<code>.txt</code>" direkt.            </p>
+            <p>
+              Om det inte finns någon översättning tillgänglig för det språk som Rita med Tux för närvarande körs på, används den amerikanska engelska texten.            </p>
+          </dd>
+
+          <dt><strong>Windows-användare</strong></dt>
+          <dd>
+            <p>
+              Använd <cite>NotePad</cite> eller <cite>WordPad</cite> för att redigera/skapa dessa filer. Se till att spara dem som ren text och att de har tillägget "<code>.txt</code>" i slutet av filnamnet.            </p>
+          </dd>
+        </dl>
+      </section><!-- H2: Stamp Descriptive Text -->
+
+      <section><!-- H2: Brush Options -->
+        <header>
+          <h2>
+            <a name="brush_options"
+                id="brush_options">Alternativ för pensel</a>
+          </h2>
+        </header>
+
+        <p>
+          Förutom en grafisk form kan penslar också ges andra attribut. För att göra detta måste du skapa en "datafil" för pensel.        </p>
+
+        <p>
+          En brush's-datafil är helt enkelt en vanlig ASCII-textfil som innehåller alternativen för brush.        </p>
+
+        <p>
+          Filen har samma namn som PNG-bilden, men har tillägget "<code>.dat</code>". (t.ex. är datafilen för "<code>borste.png</code>" textfilen "<code>borste.dat</code>", som finns i samma katalog)        </p>
+
+        <dl>
+          <dt><strong>Penselavstånd</strong></dt>
+          <dd>
+            <p>
+              Du kan ange avståndet mellan penslarna, det vill säga hur ofta de dras över en linje eller ett streck. Som standard är avståndet penselns höjd dividerat med 4.            </p>
+            <p>
+              Lägg till en rad som innehåller raden "<code><b>spacing=<i>N</i></b></code>" i penselns datafil, där "<i>N</i>" är det avstånd du vill ha för penseln. (Ju lägre siffra, desto oftare ritas penseln)            </p>
+          </dd>
+
+          <dt><strong>Animerade penslar</strong></dt>
+          <dd>
+            <p>
+              Borstar kan vara animerade. När penseln används ritas varje bildruta i animationen i sekvens.            </p>
+            <p>
+              Lägg ut varje ram över en bred PNG-bild. Om penseln till exempel är 30x30 och det finns 5 ramar, ska bilden vara 150x30.            </p>
+            <p>
+              Lägg till en rad som innehåller raden "<code><b>frames=<i>N</i></b></code>" i penselns datafil, där "<i>N</i>" är antalet bildrutor i penseln.            </p>
+            <p class="note">
+              <span title="Configuration option">&#9881;</span>              <strong>Obs:</strong> Om du vill att bildrutorna ska bläddras igenom slumpmässigt i stället för sekventiellt kan du också lägga till en rad som innehåller "<code><b>random</b></code>" i penselns datafil.            </p>
+          </dd>
+
+          <dt><strong>Riktningsgivande borstar</strong></dt>
+          <dd>
+            <p>
+              Penslar kan konfigureras så att de ritar olika former beroende på linjens eller penseldragets riktning.  Olika former ritas beroende på vilken av de åtta kompassriktningarna som penseln rör sig i - uppåt (aka norr), uppåt/höger (aka nordost), höger (aka öst), nedåt/höger (aka sydost), etc.)  En nionde "mittform" används när det inte sker någon rörelse (t.ex. om du bara klickar/knackar och släpper "Paint"-verktyget utan att dra).            </p>
+            <p>
+              Riktningsformerna delas in i en 3x3 kvadrat i en PNG-bild. Om din pensel t.ex. är 30x30 ska bilden vara 90x90 och varje riktningsform placeras i ett 3x3 rutnät.            </p>
+            <p>
+              Lägg till en rad som innehåller ordet "<code><b>directional</b></code>" i datafilen penselns.            </p>
+          </dd>
+
+          <dt><strong>Roterande borstar</strong></dt>
+          <dd>
+            <p>
+              Penslar kan vara konfigurerade att rotera baserat på vinkeln på linjen eller penseldraget. (Till skillnad från Directional Brushes, som beskrivs ovan, kan endast en enda penselform tillhandahållas.            </p>
+            <p>
+              Lägg till en rad som innehåller ordet "<code><b>rotate</b></code>" i datafilen penselns.            </p>
+          </dd>
+
+          <dt><strong>Kaotiska penslar</strong></dt>
+          <dd>
+            <p>
+              Penslar kan konfigureras så att de kontinuerligt väljer en slumpmässig riktning när du ritar med dem.            </p>
+            <p>
+              Lägg till en rad som innehåller ordet "<code><b>chaotic</b></code>" i datafilen penselns.            </p>
+          </dd>
+
+          <dt><strong>Animerade riktade, roterande eller kaotiska penslar</strong></dt>
+          <dd>
+            <p>
+              Du kan blanda både animerade och riktade, roterande eller kaotiska funktioner i en och samma pensel. Använd båda önskade alternativ ("<code><b>frames=<i>N</i></b></code>" och "<code><b>directional</b></code>", "<code><b>rotate</b></code>" eller "<code><b>chaotic</b></code>") på separata rader i penselns "<code>.dat</code>"-fil.            </p>
+            <p>
+              För riktade penslar, lägg ut penseln så att varje 3x3 uppsättning riktade former läggs ut över en bred PNG-bild. Om penseln till exempel är 30x30 och det finns 5 ramar blir den 450x90. (De 150x90 pixlarna längst till vänster i bilden representerar till exempel de 9 riktningsformerna för den första bildrutan)            </p>
+          </dd>
+        </dl>
+      </section><!-- H2: Brush Options -->
+
+      <p>
+        Placera PNG-filerna med penselbilderna (och eventuella datatextfiler) i katalogen "<code><b>brushes</b></code>".      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Obs:</strong> Om alla dina nya penslar ser ut som solida kvadrater eller rektanglar beror det på att du glömde att använda alfatransparens! Se "PNG-dokumentationen" i Rita med Tux för mer information och tips.      </p>
+    </section><!-- H1: Brushes -->
+
+    <section class="indent outer"><!-- H1: Stamps -->
+      <header>
+        <h1>
+          <a name="stamps"
+              id="stamps">Stämplar</a>
+        </h1>
+      </header>
+
+      <p>
+        Alla frimärksrelaterade filer hamnar i katalogen "<code><b>stamps</b></code>". Det är bra att skapa underkataloger och underunderkataloger där för att organisera stämplarna. (Du kan t.ex. ha en "<code>helgdagar</code>"-mapp med undermapparna "<code>halloween</code>" och "<code>jul</code>")      </p>
+
+      <section><!-- H2: Stamp Images -->
+        <header>
+          <h2>
+            <a name="stamps_images"
+                id="stamps_images">Stämpelbilder</a>
+          </h2>
+        </header>
+
+        <p>
+          Gummistämplar i Rita med Tux kan bestå av ett antal separata filer. Den enda fil som krävs är naturligtvis själva bilden.        </p>
+        <img src="../../html/images/stamp_edit.png"
+                    width="128"
+                    height="147"
+                    alt=""
+                    align="right">
+        <p>
+          Frimärken kan vara antingen PNG-bitmappbilder eller SVG-vektorbilder. De kan vara i fullfärg eller gråskala. PNG-bildernas alfakanal (transparens) används för att bestämma bildens faktiska form (annars stämplar du en stor rektangel på dina ritningar).        </p>
+
+        <p>
+          PNG-filer kan vara hur stora som helst och Rita med Tux (som standard) innehåller en uppsättning storleksknappar som låter användaren skala upp (större) och ner (mindre) stämpeln.        </p>
+
+        <p>
+          SVG:er är vektorbaserade och kommer att skalas på lämpligt sätt för den dukstorlek som används i Rita med Tux.        </p>
+
+        <p class="note">
+          <span title="Information">&#128161;</span>          <strong>Obs:</strong> Om alla dina nya Frimärken baserade i PNG ser ut som solida kvadrater eller rektanglar beror det på att du glömde att använda alfatransparens! Se "PNG-dokumentationen" i Rita med Tux för mer information och tips.        </p>
+
+        <p class="note">
+          <span title="Information">&#128161;</span>          <strong>Obs:</strong> Om dina nya SVG-stämplar verkar ha mycket blanksteg, se till att SVG-"dokumentet" inte är större än formen (erna) inuti. Om de klipps, se till att "dokumentet" är tillräckligt stort för att innehålla formen (erna). Se "SVG-dokumentationen" i Rita med Tux för mer information och tips.        </p>
+
+        <p class="note">
+          <span title="Configuration option">&#9881;</span>          <b>Avancerade användare:</b> I dokumentet "Advanced Stamps How-To" beskrivs i detalj hur man skapar PNG-bilder som skalas perfekt när de används som stämplar i Rita med Tux.        </p>
+      </section><!-- H2: Stamp Images -->
+
+      <section><!-- H2: Stamp Descriptive Text -->
+        <header>
+          <h2>
+            <a name="description_text"
+                id="description_text">Stämpel Beskrivande text</a>
+          </h2>
+        </header>
+
+        <p>
+          Rita med Tux visar en beskrivande text när en stämpel väljs. Dessa placeras i vanliga textfiler med samma namn som PNG- eller SVG-filen, men med filnamnstillägget "<code>.txt</code>". (t.ex. lagras beskrivningen av "<code>stämpel.png</code>" i "<code>stämpel.txt</code>" i samma katalog)        </p>
+
+        <p>
+          Den första raden i textfilen kommer att användas som beskrivning av stämpelts bild på US-engelska. Den måste vara kodad i UTF-8.        </p>
+
+        <dl>
+          <dt><strong>Stöd för lokalisering</strong></dt>
+          <dd>
+            <p>
+              Ytterligare rader kan läggas till i textfilen för att ge översättningar av beskrivningen, som ska visas när Rita med Tux körs i en annan språkdräkt (t.ex. franska eller spanska).            </p>
+            <p>
+              Början av raden ska motsvara språkkoden för det aktuella språket (t.ex. "<code>fr</code>" för franska och "<code>zh_TW</code>" för traditionell kinesiska), följt av "<code>.utf8=</code>" och den översatta beskrivningen (Unicode, kodad i UTF-8).            </p>
+            <p>
+              <b>För Rita med Tux-utvecklare:</b> Det finns skript i katalogen "<code>po</code>" för att konvertera textfilerna till PO-format (och tillbaka) för enkel översättning till olika språk. Därför bör du aldrig lägga till eller ändra översättningar i filerna "<code>.txt</code>" direkt.            </p>
+            <p>
+              Om det inte finns någon översättning tillgänglig för det språk som Rita med Tux för närvarande körs på, används den amerikanska engelska texten.            </p>
+          </dd>
+
+          <dt><strong>Windows-användare</strong></dt>
+          <dd>
+            <p>
+              Använd <cite>NotePad</cite> eller <cite>WordPad</cite> för att redigera/skapa dessa filer. Se till att spara dem som ren text och att de har tillägget "<code>.txt</code>" i slutet av filnamnet.            </p>
+          </dd>
+        </dl>
+      </section><!-- H2: Stamp Descriptive Text -->
+
+      <section><!-- H2: Stamp Sound Effects -->
+        <header>
+          <h2>
+            <a name="sound_effects"
+                id="sound_effects">Stämpel ljudeffekter</a>
+          </h2>
+        </header>
+
+        <p>
+          Rita med Tux kan spela upp en ljudeffekt när en stämpel väljs. Till exempel ljudet av en anka som skakar när man väljer en anka, eller ett kort musikstycke när man väljer ett musikinstrument.  Filerna kan vara i formaten "WAVE ("<code>.wav</code>")" eller "OGG Vorbis ("<code>.ogg</code>")" och ges samma namn som PNG- eller SVG-bilden. (t.ex. är ljudeffekten för "<code>stämpel.svg</code>" ljudfilen "<code>stämpel.ogg</code>" i samma katalog)        </p>
+
+        <dl>
+          <dt><strong>Stöd för lokalisering</strong></dt>
+          <dd>
+            <p>
+              För ljud för olika lokala språk (t.ex. om ljudet är någon som säger ett ord och du vill ha översatta versioner av det ord som sägs), skapa också WAV- eller OGG-filer med den lokala etiketten i filnamnet, i formen: "<code>stämpel_LOKALANPASSNING.EXT</code>"            </p>
+            <p>
+              Den ljudeffekt som spelas upp när stämpeln som motsvarar bildfilen "<code>stämpel.png</code>" väljs, och när Rita med Tux använder den spanska språkversionen, är "<code>stämpel_es.wav</code>". Under fransk språkdräkt är det "<code>stämpel_fr.wav</code>". Under den brasilianska portugisiska locale, "<code>stämpel_pt_BR.wav</code>". Och så vidare...            </p>
+            <p>
+              Om ingen lokaliserad ljudeffekt kan laddas, försöker Rita med Tux att ladda "standard"-ljudfilen. (t.ex. "<code>stämpel.wav</code>")            </p>
+          </dd>
+        </dl>
+
+        <p class="note">
+          <span title="Information">&#128161;</span>          <strong>Obs:</strong> Överväg också att använda beskrivande ljud, seStämpel Beskrivande ljud nedan.        </p>
+      </section><!-- H2: Stamp Sound Effects -->
+
+      <section><!-- H2: Stamp Descriptive Sound -->
+        <header>
+          <h2>
+            <a name="descriptive_sound"
+                id="descriptive_sound">Stämpel Beskrivande ljud</a>
+          </h2>
+        </header>
+
+        <p>
+          Rita med Tux kan också spela upp ett beskrivande ljud när ett stämpel väljs. Till exempel ljudet av någon som säger ordet "anka" när man väljer en anka, eller namnet på ett musikinstrument när ett sådant väljs.  Filerna kan vara i formaten "WAVE ("<code>.wav</code>")" eller "OGG Vorbis ("<code>.ogg</code>")" och ges samma namn som PNG- eller SVG-bilden, med "<code>_desc</code>" i slutet. (t.ex. är det beskrivande ljudet för "<code>stämpel.svg</code>" ljudfilen "<code>stämpel_desc.ogg</code>" i samma katalog)        </p>
+
+        <dl>
+          <dt><strong>Stöd för lokalisering</strong></dt>
+          <dd>
+            <p>
+              För beskrivande ljud för olika lokaliteter kan du också skapa WAV- eller OGG-filer med <em>både</em> "<code>_desc</code>" <em>och</em> lokalitetens etikett i filnamnet, i formen: "<code>stämpel_desc_LOKALANPASSNING.EXT</code>"            </p>
+            <p>
+              Den beskrivande ljud som spelas upp när stämpeln som motsvarar bildfilen "<code>stämpel.png</code>" väljs, och när Rita med Tux använder den spanska språkversionen, är "<code>stämpel_desc_es.wav</code>". Under fransk språkdräkt är det "<code>stämpel_desc_fr.wav</code>". Under den brasilianska portugisiska locale, "<code>stämpel_desc_pt_BR.wav</code>". Och så vidare...            </p>
+            <p>
+              Om ingen lokaliserad beskrivande ljud kan laddas, försöker Rita med Tux att ladda "standard"-ljudfilen. (t.ex. "<code>stämpel_desc.wav</code>")            </p>
+          </dd>
+        </dl>
+      </section><!-- H2: Stamp Descriptive Sound -->
+
+      <section><!-- H2: Stamp Options -->
+        <header>
+          <h2>
+            <a name="stamp_options"
+                id="stamp_options">Alternativ för stämplar</a>
+          </h2>
+        </header>
+
+        <p>
+          Förutom en grafisk form, en textuell beskrivning, en ljudeffekt och ett beskrivande ljud kan stämplar också ges andra attribut. För att göra detta måste du skapa en "datafil" för stämpel.        </p>
+
+        <p>
+          En stämplar-datafil är helt enkelt en vanlig ASCII-textfil som innehåller alternativen för stämpel.        </p>
+
+        <p>
+          Filen har samma namn som PNG eller SVG-bilden, men har tillägget "<code>.dat</code>". (t.ex. är datafilen för "<code>stämpel.png</code>" textfilen "<code>stämpel.dat</code>", som finns i samma katalog)        </p>
+
+        <dl>
+          <dt><strong>Färgade stämplar</strong></dt>
+          <dd>
+            <p>
+              Stämplar kan göras antingen "färgbara" eller "tonbara"            </p>
+            <dl>
+              <dt><strong>Färgbar</strong></dt>
+              <dd>
+                <p>
+                  "Färgbara" stämplar fungerar ungefär som penslar - du väljer stämpeln för att få formen och väljer sedan den färg du vill ha. (Symbolstämplar, som de matematiska och musikaliska, är ett exempel)                </p>
+                <p>
+                  Ingenting i originalbilden används förutom transparensen (från "alpha"-kanalen). Färgen på stämpeln kommer ut solid.                </p>
+                <center>
+                  <img src="../../html/images/ex_colorable.png"
+                          width="74"
+                          height="92"
+                          alt="">
+                </center>
+                <p>
+                  Lägg till en rad som innehåller ordet "<code><b>colorable</b></code>" i datafilen stämplar.                </p>
+              </dd>
+
+              <dt><strong>Tonad</strong></dt>
+              <dd>
+                <p>
+                  "Tinted" stämplar liknar "färgbara" stämplar, förutom att detaljerna i originalbilden behålls. (För att uttrycka det tekniskt används originalbilden, men dess nyans ändras, baserat på den aktuella valda färgen)                </p>
+                <center>
+                  <img src="../../html/images/ex_tintable.png"
+                          width="151"
+                          height="78"
+                          alt="">
+                </center>
+                <p>
+                  Lägg till en rad som innehåller ordet "<code><b>tintable</b></code>" i datafilen stämplar.                </p>
+              </dd>
+
+              <dt><strong>Alternativ för toning:</strong></dt>
+              <dd>
+                <p>
+                  Beroende på innehållet i ditt stämpel kan du låta Rita med Tux använda en av flera olika metoder för att färglägga det. Lägg till en av följande rader i stämpelns datafil:                </p>
+                <dl>
+                  <dt>
+                    Normal tinter &mdash; "<code><b>tinter=normal</b></code>" NEJ (STANDARD)                  </dt>
+                  <dd>
+                    Detta är det normala färgläggningsläget. Först bestäms stämpelts primära nyans. (Om du t.ex. tar en bild av en blomma med stjälk kommer kronbladets färg att ses som den primära nyansen i hela bilden) Därefter hittas den mest mättade delen av bilden. Med "normal tinter" börjar det nyansområde som används för att göra detta inom ±18° från den primära nyans som hittades i steg 1. (Om ingen kan hittas utökas området med 50% a och försök görs igen.) Slutligen tonas bilden.  Allt som faller inom 50% of intervallet (t.ex. ±27°) ändras så att det får samma nyans som den färg som användaren valt.                  </dd>
+                  <dt>
+                    Smal tinter &mdash; "<code><b>tinter=narrow</b></code>"
+                  </dt>
+                  <dd>
+                    Detta är som alternativet "<code>normal</code>" som beskrivs ovan, men startar ett smalare nyansintervall på ±6°. Allt som finns inom 50% av intervallet (t.ex. ±9°) färgas. Om för mycket av din stämpel färgas, prova det här alternativet.                  </dd>
+                  <dt>
+                    "Any hue"-tinter &mdash; "<code><b>tinter=anyhue</b></code>"
+                  </dt>
+                  <dd>
+                    Detta återskapar <em>alla</em> nyanser i stämpeln. Det fungerar på samma sätt som alternativen "<code>anyhue</code>" och "<code>narrow</code>" som beskrivs ovan, men nyansintervallet är ±180°.                  </dd>
+                  <dt>
+                    Vektorutstickare &mdash; "<code><b>tinter=vector</b></code>"
+                  </dt>
+                  <dd>
+                    På så sätt kopplas "svart genom vitt" till "svart genom destination".                  </dd>
+                </dl>
+              </dd>
+            </dl>
+          </dd>
+
+          <dt><strong>Oföränderliga stämplar</strong></dt>
+          <dd>
+            <p>
+              Som standard kan en stämpel vändas upp och ner, visas som en spegelbild eller bådadera. Detta görs med hjälp av kontrollknapparna under frimärksväljaren, längst ned till höger på skärmen i Rita med Tux.            </p>
+            <p>
+              Ibland är det inte meningsfullt att en stämpel ska kunna vändas eller speglas, t.ex. stämplar med bokstäver eller siffror. Ibland är stämplar symmetriska, och då är det inte meningsfullt att låta användaren vända eller spegla dem.            </p>
+            <p>
+              För att förhindra en stämpel från att vändas vertikalt, lägg till alternativet "<code><b>noflip</b></code>" i stämpelns datafil.            </p>
+            <p>
+              För att förhindra en stämpel från att speglas horisontellt, lägg till alternativet "<code><b>nomirror</b></code>" i stämpelns datafil.            </p>
+          </dd>
+
+          <dt><strong>Initial stämpelstorlek</strong></dt>
+          <dd>
+            <p>
+              Som standard antar Rita med Tux att din stämpel har en storlek som är lämplig för oskalad visning på en 608x472-duk. Detta var den ursprungliga Rita med Tux-bildstorleken, som gavs av en 640x480-skärm. Rita med Tux kommer sedan att justera stämpeln enligt den aktuella skärmstorleken och, om aktiverat, användarens kontroller för stämpelstorlek.            </p>
+            <p>
+              Om din stämpel skulle bli för stor eller för liten kan du ange en skalfaktor. Om din stämpel skulle bli 2,5 gånger så bred (eller hög) som den borde vara, lägger du till ett av följande alternativ, som motsvarar samma justering, i stämpelns datafil. (Ett likhetstecken, "<code>=</code>", kan inkluderas efter ordet "<code>scale</code>")            </p>
+            <ul>
+              <li>"<code><b>scale 40%</b></code>"</li>
+              <li>"<code><b>scale 5/2</b></code>"</li>
+              <li>"<code><b>scale 2.5</b></code>"</li>
+              <li>"<code><b>scale 2:5</b></code>"</li>
+            </ul>
+          </dd>
+
+          <dt><strong>Windows-användare</strong></dt>
+          <dd>
+            <p>
+              Använd <cite>NotePad</cite> eller <cite>WordPad</cite> för att redigera/skapa dessa filer. Se till att spara dem som ren text och att de har tillägget "<code>.dat</code>" i slutet av filnamnet.            </p>
+          </dd>
+        </dl>
+      </section><!-- H2: Stamp Options -->
+
+      <section><!-- H2: Pre-Mirrored and Flipped Stamps -->
+        <header>
+          <h2>
+            <a name="pre_mirroed_and_flipped_images"
+                id="pre_mirroed_and_flipped_images">Förspeglade och omvända stämplar</a>
+          </h2>
+        </header>
+
+        <p>
+          I vissa fall kanske du vill tillhandahålla en färdigritad version av ett stämpels spegelbild, vändade bild eller till och med båda. Tänk dig till exempel en bild av en brandbil med orden<cite>"Fire Department</cite>" skrivna tvärs över sidan. Du vill förmodligen inte att den texten ska visas baklänges när bilden vänds!        </p>
+
+        <p>
+          Om du vill skapa en speglad version av en stämpel som du vill att Rita med Tux ska använda, i stället för att spegla den själv, skapar du helt enkelt en andra "<code>.png</code>" eller "<code>.svg</code>" grafikfil med samma namn, men med "<code><b>_mirror</b></code>" före filnamnstillägget.        </p>
+
+        <p>
+          För stämpeln "<code>stämpel.png</code>" kan du t.ex. skapa en annan fil med namnet "<code>stämpel_mirror.png</code>", som används när stämpeln speglas (i stället för att använda en bakåtversion av "<code>stämpel.png</code>").        </p>
+
+        <p>
+          Du kan också tillhandahålla en förvänd bild med "<code><b>_flip</b></code>" i namnet, och/eller en bild som är både speglad <em>och</em> vänd genom att namnge den "<code><b>_mirror_flip</b></code>".        </p>
+
+        <p class="note">
+          <span title="Information">&#128161;</span>          <strong>Obs:</strong> Om användaren vänder och speglar en bild, och ett förritat "<code>_mirror_flip</code>" inte finns, men antingen "<code>_flip</code>" eller "<code>_mirror</code>" gör det, kommer det att användas och speglas respektive vändas.        </p>
+      </section><!-- H2: Pre-Mirrored and Flipped Stamps -->
+    </section><!-- H1: Stamps -->
+
+    <section class="indent outer"><!-- H1: Fonts -->
+      <header>
+        <h1>
+          <a name="fonts"
+              id="fonts">Typsnitt</a>
+        </h1>
+      </header>
+
+      <img src="../../html/images/fontsizes.png"
+                  width="48"
+                  height="48"
+                  alt=""
+                  align="right">
+      <p>
+        De teckensnitt som används av Rita med Tux är TrueType-teckensnitt (TTF).      </p>
+
+      <p>
+        Placera dem helt enkelt i katalogen "<code><b>fonts</b></code>". När du använder verktygen "Text" och "Etikett" kommer Rita med Tux att presentera teckensnittet i "Letters"-väljaren till höger, tillsammans med alternativ för att aktivera fet och/eller kursiv stil och ändra storleken.      </p>
+    </section><!-- H1: Fonts -->
+
+    <section class="indent outer"><!-- H1: Starters -->
+      <header>
+        <h1>
+          <a name="starters"
+              id="starters">"Startbilder"</a>
+        </h1>
+      </header>
+
+      <img src="../../html/images/open_open.png"
+                  width="48"
+                  height="48"
+                  alt=""
+                  align="right">
+      <p>
+        "Startbilder" visas i dialogrutan "Ny", tillsammans med val av bakgrund i enfärgad färg.      </p>
+
+      <p>
+        När du använder en "startbild", gör ändringar och sparar den, skrivs inte den ursprungliga "startbilden" över. När du redigerar din nya bild kan dessutom innehållet i den ursprungliga "startbilden" påverka den.      </p>
+
+      <section><!-- H2: Coloring-Book Style Starters -->
+        <header>
+          <h2>
+            <a name="coloring_book_style"
+                id="coloring_book_style">Startbok i målarboksstil</a>
+          </h2>
+        </header>
+
+        <p>
+          Den mest grundläggande typen av "starter" kan liknas vid en bild i en målarbok. Det är en kontur av en form som du sedan kan färglägga och lägga till detaljer i. I Rita med Tux, när du ritar, skriver text eller stämplar stämplar, förblir konturen "ovanför" det du ritar. Du kan radera de delar av teckningen som du har gjort, men du kan inte radera konturen.        </p>
+
+        <p>
+          För att skapa den här typen av "startbild" skapar du helt enkelt en svartvit bild med konturer i ett färgprogram och sparar den som en PNG-rasterfil eller som en SVG-vektor.  Om du sparar som en PNG-fil kan du välja att göra bilden svart och genomskinlig i stället för svartvit, även om detta inte är nödvändigt.        </p>
+      </section><!-- H2: Coloring-Book Style Starters -->
+
+      <section><!-- H2: Scene-Style Starters -->
+        <header>
+          <h2>
+            <a name="scene_style"
+                id="scene_style">Startbilder i scenformat</a>
+          </h2>
+        </header>
+
+        <p>
+          Tillsammans med överlägget i "målarboksstil" kan du också tillhandahålla en separat bakgrundsbild som en del av en "startbild". Överlägget fungerar på samma sätt: det kan inte ritas över, raderas eller påverkas av "Magic"-verktygen. Det kan däremot bakgrunden!        </p>
+
+        <p>
+          När verktyget "Eraser" används på en bild som bygger på den här typen av bild "start, återgår den delen av duken till den ursprungliga bakgrundsbilden från bild "start i stället för att bli enfärgad, t.ex. vit.        </p>
+
+        <p>
+          Genom att skapa både ett överlägg och en bakgrund kan du skapa en "starter" som simulerar djup. Tänk dig en bakgrund som visar havet och en overlay som är en bild av ett rev. Du kan sedan rita (eller stämpla) fiskar i bilden. De kommer att dyka upp i havet, men aldrig "framför" revet.        </p>
+
+        <p>
+          För att skapa den här typen av "startbild" skapar du helt enkelt ett överlägg (med transparens) och sparar det som en PNG. Skapa sedan en annan bild (utan transparens) och spara den med samma filnamn, men med "<code>-back</code>" (förkortning för "bakgrund") som tillägg till namnet. (t.ex. "<code>start-back.png</code>" skulle vara den bakgrundsbild som motsvarar överlägget eller förgrunden)        </p>
+      </section><!-- H2: Scene-Style Starters -->
+
+      <p>
+        För bästa resultat bör "start" bilder vara minst lika stor som Rita med Tuxs ritduk. (Se avsnittet "Ladda andra bilder i Rita med Tux" i Rita med Tuxs huvuddokumentation (README) för detaljer om storlek) Om de inte är det kommer de att sträckas ut eller skalas.  Detta görs utan att påverka formen ("bildförhållandet"), men kan dock ge upphov till viss utslätning av kanterna.      </p>
+
+      <p>
+        Placera dem i katalogen "<code><b>starters</b></code>". När dialogrutan "New" öppnas i Rita med Tux kommer "start" bilder att visas i den skärm som visas, efter de olika valmöjligheterna för enfärg.      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Obs:</strong> "Startbilder" "bifogas" till sparade bilder via en liten textfil som har samma namn som den sparade filen, men med "<code>.dat</code>" som tillägg. Detta gör att den kan fortsätta att påverka teckningen även efter att Rita med Tux har avslutats, eller en annan bild har laddats eller en ny bild har skapats. (Med andra ord, om du baserar en teckning på en bild "start, kommer den alltid att påverkas av den)      </p>
+
+      <section><!-- H2: Starter Options -->
+        <header>
+          <h2>
+            <a name="starter_options"
+                id="starter_options">Startalternativ</a>
+          </h2>
+        </header>
+
+        <p>
+          Förutom en bild kan startbilder också ges andra attribut. För att göra detta måste du skapa en "datafil" för startmotor.          (Obs: Rita med Tux före version 0.9.29 hade inte stöd för startalternativ)        </p>
+
+        <p>
+          En starter's-datafil är helt enkelt en vanlig ASCII-textfil som innehåller alternativen för starter.        </p>
+
+        <p>
+          Filen har samma namn som -bilden, men har tillägget "<code>.dat</code>". (t.ex. är datafilen för "<code>start.png</code>" textfilen "<code>start.dat</code>", som finns i samma katalog)        </p>
+
+        <dl>
+          <dt><strong>tillåta skala</strong></dt>
+          <dd><!-- allowscale -->
+            <p>
+              När en startbild har ett annat bildförhållande (proportioner mellan bredd och höjd) än Rita med Tuxs duk, kommer den som standard att skalas så att den helt passar in i duken, utan att startbilden sträcks ut (bildförhållandet ändras); till exempel kommer en kvadratisk startbild på en porträttformad duk att placeras i mitten av duken.  Som standard tar Rita med Tux sedan remsan med pixlar i kanterna på startbilden och sträcker ut dem till kanterna på målarduken och "smetar ut" den.            </p>
+
+            <center>
+              <img src="../../html/images/smear-wide.png"
+                      width="320"
+                      height="153"
+                      alt=""
+                      valign="middle" />
+              <img src="../../html/images/smear-tall.png"
+                      width="216"
+                      height="320"
+                      alt=""
+                      valign="middle" />
+            </center>
+
+            <p>
+              Om det är acceptabelt att startbilden beskärs i en eller båda riktningarna, kan "<code><b>tillåta skala</b></code>" användas för att tala om för Rita med Tux vilket beteende som ska tillåtas:            </p>
+            <ul>
+              <li><!-- allowscale=horizontal -->
+                <img src="../../html/images/allowscale-horizontal.png"
+                    width="108"
+                    height="160"
+                    alt=""
+                    align="right">
+                För att börja med där det är okej <em>att beskära vänster och höger -kanterna</em>, men topp och botten -kanterna måste behållas, använd "<code><b>allowcale=horizontal</b></code>".                <ul>
+                  <li>
+                    Om startbildens bildförhållande är bredare större än bildytans, skalas den så att den passar in i bildytans höjd och vänster och höger beskärs.                  </li>
+                  <li>
+                    Om startbildens bildförhållande är längre större än bildytans, skalas den så att den passar bildytans höjd, ingen beskärning sker och vänster och höger kanterna blir utsmetade.                  </li>
+                </ul>
+                <br clear="all" />
+              </li><!-- allowscale=horizontal -->
+
+              <li><!-- allowscale=vertical -->
+                <img src="../../html/images/allowscale-vertical.png"
+                    width="240"
+                    height="115"
+                    alt=""
+                    align="right">
+                För att börja med där det är okej <em>att beskära topp och botten -kanterna</em>, men vänster och höger -kanterna måste behållas, använd "<code><b>allowcale=vertical</b></code>".                <ul>
+                  <li>
+                    Om startbildens bildförhållande är längre större än bildytans, skalas den så att den passar in i bildytans bredd och topp och botten beskärs.                  </li>
+                  <li>
+                    Om startbildens bildförhållande är bredare större än bildytans, skalas den så att den passar bildytans bredd, ingen beskärning sker och topp och botten kanterna blir utsmetade.                  </li>
+                </ul>
+                <br clear="all" />
+              </li><!-- allowscale=vertical -->
+
+              <li><!-- allowscale=both -->
+                Om det är acceptabelt att beskära antingen toppen och botten eller vänster och höger, använd "<code><b>tillåt skala=båda</b></code>". Innehåll från startsidan kommer alltid att fylla ut duken, oavsett hur dess bildförhållande förhåller sig till dukens.              </li><!-- allowscale=both -->
+
+              <li><!-- allowscale=none -->
+                Standardbeteendet är att inte tillåta beskärning. Detta kan anges explicit med "<code><b>tillåter skala=inget</b></code>".              </li><!-- allowscale=none -->
+            </ul>
+          </dd><!-- allowscale -->
+
+          <dt><strong>bakgrund</strong></dt>
+          <dd><!-- background -->
+            <p>
+              Med det här alternativet kan du ange hur Rita med Tux ska fylla resten av duken när startbilen inte passar i den ena eller den andra riktningen.  Som standard, enligt beskrivningen ovan, kommer Rita med Tux att "smeta ut" pixlarna från kanterna på startbilden.  (Detta kan specificeras explicit med "<code><b>bakgrund=utstrykning</b></code>".)            </p>
+            <p>
+              Du kan i stället ange en enfärgad bakgrundsfärg (t.ex. vit för en starter i målarboksstil) med "<code><b>bakgrund=#fff</b></code>").            </p>
+            <p>
+              Färgerna kan anges med tre decimala siffror (t.ex. "<code>255 68 136</code>") eller en sex- eller tresiffrig hexadecimal "triplett" (t.ex. "<code>#ff4488</code>" eller "<code>#F48</code>").            </p>
+            <p>
+              Se <a href="OPTIONS.html#colorfile"> avsnittet "Färgpalettfil" i "Dokumentation om alternativ"</a> för mer information.            </p>
+          </dd><!-- background -->
+
+          <dt><strong>gravitation</strong></dt>
+          <dd><!-- gravity -->
+            <p>
+              Med det här alternativet kan du ange hur Rita med Tux ska placera en startbild när den beskärs i den ena eller andra riktningen.  Som standard kommer Rita med Tux att placera startbildens mittpunkt inom duken. (Detta kan specificeras explicit med "<code><b>gravity=center</b></code>".)            </p>
+            <p>
+              Om det viktigaste innehållet finns längst upp i mitten av startsidan kan du till exempel ange "<code><b>gravity=topp</b></code>".  Eller, om den nedre högra delen är viktig, ange "<code><b>gravity=bottom-right</b></code>".            </p>
+
+            <p>
+              De tillgängliga alternativen är:              <ul>
+                <li><code><b>center</b></code> &mdash; föredrar mitten (standard)</li>
+                <li><code><b>top</b></code> &mdash; föredrar den övre mitten</li>
+                <li><code><b>bottom</b></code> &mdash; föredrar den nedre mitten</li>
+                <li><code><b>left</b></code> &mdash; föredrar den vänstra mitten</li>
+                <li><code><b>right</b></code> &mdash; föredrar rätt centrum</li>
+                <li><code><b>top-left</b></code> &mdash; föredrar längst upp till vänster</li>
+                <li><code><b>top-right</b></code> &mdash; föredrar längst upp till höger</li>
+                <li><code><b>bottom-left</b></code> &mdash; föredrar längst ner till vänster</li>
+                <li><code><b>bottom-right</b></code> &mdash; föredrar längst ner till höger</li>
+              </ul>
+            </p>
+
+                          <div style="display: inline-block; border: 1px solid #888; width: 320px;">
+                <figure style="text-align: center;">
+                  <img src="../../html/images/gravity-center-landscape.png"
+                    width="160"
+                    height="72"
+                    alt="[ Landskapsformad bild av en horisont med solen i mitten och en byggnad till höger. ]"
+                    title="Landskapsformad bild av en horisont med solen i mitten och en byggnad till höger."
+                    valign="middle" />
+                  <span style="display: none;"><br/>&nbsp;</span>
+                  <figcaption style="font-size: smaller;">
+                    <p>Fokuserar på center i en startbild som sträcks ut för att passa bredd på duken.<p/>
+                  </figcaption>
+                </figure>
+              </div>
+                            <div style="display: inline-block; border: 1px solid #888; width: 320px;">
+                <figure style="text-align: center;">
+                  <img src="../../html/images/gravity-center-portrait.png"
+                    width="84"
+                    height="160"
+                    alt="[ Porträttformad bild av en horisont med solen i mitten och den vänstra sidan av en byggnad till höger. ]"
+                    title="Porträttformad bild av en horisont med solen i mitten och den vänstra sidan av en byggnad till höger."
+                    valign="middle" />
+                  <span style="display: none;"><br/>&nbsp;</span>
+                  <figcaption style="font-size: smaller;">
+                    <p>Fokuserar på center i en startbild som sträcks ut för att passa höjd på duken.<p/>
+                  </figcaption>
+                </figure>
+              </div>
+                            <div style="display: inline-block; border: 1px solid #888; width: 320px;">
+                <figure style="text-align: center;">
+                  <img src="../../html/images/gravity-top-landscape.png"
+                    width="160"
+                    height="72"
+                    alt="[ Landskapsformad bild av himlen med solen längst ner och toppen av en byggnad till höger. ]"
+                    title="Landskapsformad bild av himlen med solen längst ner och toppen av en byggnad till höger."
+                    valign="middle" />
+                  <span style="display: none;"><br/>&nbsp;</span>
+                  <figcaption style="font-size: smaller;">
+                    <p>Fokuserar på topp i en startbild som sträcks ut för att passa bredd på duken.<p/>
+                  </figcaption>
+                </figure>
+              </div>
+                            <div style="display: inline-block; border: 1px solid #888; width: 320px;">
+                <figure style="text-align: center;">
+                  <img src="../../html/images/gravity-bottom-landscape.png"
+                    width="160"
+                    height="72"
+                    alt="[ Landskapsformad bild av marken med solen högst upp. ]"
+                    title="Landskapsformad bild av marken med solen högst upp."
+                    valign="middle" />
+                  <span style="display: none;"><br/>&nbsp;</span>
+                  <figcaption style="font-size: smaller;">
+                    <p>Fokuserar på botten i en startbild som sträcks ut för att passa bredd på duken.<p/>
+                  </figcaption>
+                </figure>
+              </div>
+                            <div style="display: inline-block; border: 1px solid #888; width: 320px;">
+                <figure style="text-align: center;">
+                  <img src="../../html/images/gravity-right-portrait.png"
+                    width="84"
+                    height="160"
+                    alt="[ Porträttformad bild av en horisont med solen till vänster och en byggnad i mitten. ]"
+                    title="Porträttformad bild av en horisont med solen till vänster och en byggnad i mitten."
+                    valign="middle" />
+                  <span style="display: none;"><br/>&nbsp;</span>
+                  <figcaption style="font-size: smaller;">
+                    <p>Fokuserar på höger i en startbild som sträcks ut för att passa höjd på duken.<p/>
+                  </figcaption>
+                </figure>
+              </div>
+                        </dd><!-- gravity -->
+        </dl>
+
+        <p class="note">
+          <span title="Information">&#128161;</span>          <strong>Observera:</strong> Mallar (beskrivs nedan) kan också ha alternativfiler och stöder för närvarande alla samma alternativ som startbilder.        </p>
+        <br clear="all">
+      </section><!-- H2: Starter Options -->
+
+    </section><!-- H1: Starters -->
+
+    <section class="indent outer"><!-- H1: 'Templates' -->
+      <header>
+        <h1>
+          <a name="templates"
+              id="templates">"Mallar"</a>
+        </h1>
+      </header>
+
+      <img src="../../html/images/open_open.png"
+                  width="48"
+                  height="48"
+                  alt=""
+                  align="right">
+      <p>
+        "Mall"-bilder visas också i "Ny"-dialogen, tillsammans med val av enfärgad bakgrund och "Startare".      </p>
+
+      <p>
+        Till skillnad från bilder som ritats i Rita med Tux av användare och sedan öppnats senare, skapas en ny teckning när du öppnar en "mall". När du sparar skrivs inte "mall"-bilden över. Till skillnad från "startbilder" finns det inget oföränderligt "lager" ovanför duken. Du kan rita över vilken del som helst av den.      </p>
+
+      <p>
+          När verktyget "Eraser" används på en bild som bygger på den här typen av "mall"-bild, återgår den delen av duken till den ursprungliga bakgrundsbilden från "mall"-bild i stället för att bli enfärgad, t.ex. vit.      </p>
+
+      <p>
+        "Mallar" är helt enkelt bildfiler (i PNG-, JPEG-, SVG- eller KPX-format (KidPix)). Ingen förberedelse eller konvertering ska krävas.      </p>
+
+      <p>
+        För bästa resultat bör "mall"-bilder vara minst lika stor som Rita med Tuxs ritduk. (Se avsnittet "Ladda andra bilder i Rita med Tux" i Rita med Tuxs huvuddokumentation (README) för detaljer om storlek) Om de inte är det kommer de att sträckas ut eller skalas.  Detta görs utan att påverka formen ("bildförhållandet"), men kan dock ge upphov till viss utslätning av kanterna.      </p>
+
+      <p>
+        Placera dem i katalogen "<code><b>templates</b></code>". När dialogrutan "New" öppnas i Rita med Tux kommer "mall"-bilder att visas i den skärm som visas, efter de olika valmöjligheterna för enfärg.      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Obs:</strong> "Mallar" "bifogas" till sparade bilder via en liten textfil som har samma namn som den sparade filen, men med "<code>.dat</code>" som tillägg. Detta gör att den kan fortsätta att påverka teckningen även efter att Rita med Tux har avslutats, eller en annan bild har laddats eller en ny bild har skapats. (Med andra ord, om du baserar en teckning på en "mall"-bild, kommer den alltid att påverkas av den)      </p>
+      <br clear="all">
+
+      <section><!-- H2: Template Options -->
+        <header>
+          <h2>
+            <a name="template_options"
+                id="template_options">Mallalternativ</a>
+          </h2>
+        </header>
+
+        <p>
+          Precis som för <a href="#startbilder">"Startbilder</a>" kan en konfigurationsfil anges som definierar hur Rita med Tux ska bete sig när "mallbilder" appliceras på duken när de inte har identiska proportioner (bildförhållande). Se<a href="#starter_options">"Startalternativ</a>" ovan.          (Obs: Rita med Tux före version 0.9.29 hade inte stöd för startalternativ)        </p>
+      </section><!-- H2: Template Options -->
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        Det är också möjligt att skapa enkla mallar (utan alternativ) från befintliga sparade ritningar direkt i Rita med Tux, från dialogrutan<a href="README.html#using_tools_other_open">"Öppna</a>". De kommer att placeras i användarens personliga mallmapp.        (Obs: Rita med Tux före version 0.9.31 hade inte stöd för Skapa mallar från dialogrutan Öppna)      </p>
+
+    </section><!-- H1: 'Templates' -->
+
+    <section class="indent outer"><!-- H1: Translations -->
+      <header>
+        <h1>
+          <a name="translations"
+              id="translations">Översättningar</a>
+        </h1>
+      </header>
+
+      <p>
+        Rita med Tux stöder många språk tack vare användningen av lokaliseringsbiblioteket "gettext". (Se <a href="OPTIONS.html#languages">avsnittet "Språk" i "Dokumentation om alternativ"</a> för information om hur du ändrar lokalspråk i Rita med Tux)      </p>
+
+      <p>
+        För att översätta Rita med Tux till ett nytt språk kopierar du översättningsmallfilen "<code>tuxpaint.pot</code>" (finns i Rita med Tuxs källkod, i mappen "<code>src/po/</code>"). Byt namn på kopian till en "<code>.po</code>"-fil, med ett lämpligt namn för det språk du översätter till (t.ex. "<code>es.po</code>" för spanska; eller "<code>pt_BR.po</code>" för brasiliansk portugisiska, jämfört med "<code>pt.po</code>" eller "<code>pt_PT.po</code>" för portugisiska som talas i Portugal)      </p>
+
+      <p>
+        Öppna den nyskapade filen "<code>.po</code>" - du kan redigera den i en <i>vanlig</i> texteditor, t.ex. Emacs, Pico eller VI på Linux, eller NotePad på Windows. Den engelska originaltexten som används i Rita med Tux listas på rader som börjar med "<code>msgid</code>". Skriv in dina översättningar av var och en av dessa textstycken i de tomma "<code>msgstr</code>" raderna direkt under motsvarande "<code>msgid</code>" rader.<i>(Obs:</i> Ta inte bort citattecknen.)      </p>
+
+      <p>
+        Exempel:
+        <blockquote>
+          <code>msgid "Smudge"<br>
+          msgstr "<u>Manchar</u>"<br>
+          <br>
+          msgid "Click and drag to draw large bricks."<br>
+          msgstr "<u>Haz clic y arrastra para dibujar ladrillos grandes.</u>"</code>
+        </blockquote>
+      </p>
+
+      <p>
+        Det finns olika verktyg för att hantera gettext-översättningskataloger, så att du inte behöver redigera dem för hand i en textredigerare. Här är några av dem:        <ul>
+          <li><a href="http://www.poedit.net/">Poedit</a></li>
+          <li><a href="https://wiki.gnome.org/Apps/Gtranslator">Gtranslator (GNOME Translator)</a></li>
+          <li><a href="https://virtaal.translatehouse.org/">Virtraal</a></li>
+          <li><a href="https://apps.kde.org/en/lokalize">Lokalize</a></li>
+        </ul>
+      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Observera:</strong> Det är bäst att alltid arbeta utifrån den <i>senaste</i> mallen för Rita med Tux-textkatalogen ("<code>tuxpaint.pot</code>"), eftersom ny text läggs till och gammal text ibland ändras. Textkatalogen för den kommande, outgivna versionen av Rita med Tux finns i Rita med Tuxs Git-repository (se: <a href="https://tuxpaint.org/download/source/git/">https://tuxpaint.org/download/source/git/</a>) och på Rita med Tuxs webbplats på <a href="https://tuxpaint.org/help/po/">https://tuxpaint.org/help/po/</a>.      </p>
+
+      <p>
+        Om du vill redigera en befintlig översättning laddar du ner den senaste "<code>.po</code>"-filen för det aktuella språket och redigerar den enligt beskrivningen ovan.      </p>
+
+      <p>
+        Du kan skicka nya eller redigerade översättningsfiler till Bill Kendrick, huvudutvecklare av Rita med Tux, på: <a href="mailto:bill@newbreedsoftware.com">bill@newbreedsoftware.com</a>, eller posta dem till e-postlistan "tuxpaint-i18n" (se: <a href="https://tuxpaint.org/lists/">https://tuxpaint.org/lists/</a>).      </p>
+
+      <p>
+        Alternativt, om du har ett konto hos <a href="http://www.sourceforge.net/">SourceForge.net</a>, kan du begära att bli tillagd till "<code>tuxpaint</code>"-projektet och få skrivåtkomst till Git-källkodsarkivet så att du kan göra dina ändringar direkt.      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Obs:</strong> Stöd för nya lokalanpassningar kräver tillägg till Rita med Tuxs källkod (<code>/src/i18n.h</code>; uppdaterad <code>/src/i18n.c</code>), och kräver uppdateringar av <code>Makefile</code>, för att säkerställa att "<code>.po</code>"-filerna kompileras till "<code>.mo</code>"-filer och är tillgängliga för användning vid körning.      </p>
+    </section><!-- H1: Translations -->
+
+    <section class="indent outer"><!-- H1: Alternative Input Methods -->
+      <header>
+        <h1>
+          <a name="input_methods"
+              id="input_methods">Alternativa metoder för inmatning</a>
+        </h1>
+      </header>
+
+      <p>
+        Verktygen "Text" och "Etikett" i Rita med Tux kan ge alternativa inmatningsmetoder för vissa språk. När Rita med Tux körs med ett japanskt språk kan du t.ex. trycka på tangenten höger <b><code>[Alt]</code></b> för att växla mellan lägena Latin, Romaniserad Hiragana och Romaniserad Katakana. Detta gör det möjligt att skriva in inhemska tecken och ord i verktygen "Text" och "Etikett" genom att trycka på en eller flera tangenter på ett tangentbord med latinska tecken (t.ex. ett <i>US QWERTY</i>-tangentbord).      </p>
+
+      <p>
+        Om du vill skapa en inmatningsmetod för en ny språkdräkt skapar du en textfil med ett namn som baseras på språkdräkten (t.ex. "<code>ja</code>" för japanska), med "<code>.im</code>" som tillägg (t.ex. "<code>ja.im</code>").      </p>
+
+      <p>
+        Filen "<code>.im</code>" kan innehålla flera teckenmappningssektioner för olika teckenmappningslägen. Om du till exempel skriver <b><code>[K]</code></b> <b><code>[A]</code></b> i Hiragana-läge på ett japanskt typsystem genereras ett annat Unicode-tecken ("&#12363;") än om du skriver <b><code>[K]</code></b> <b><code>[A]</code></b> i Katakana-läge ("&#12459;").      </p>
+
+      <p>
+        Lista teckenmappningarna i denna fil, en per rad. Varje rad ska innehålla (åtskilda av blanksteg):      </p>
+
+      <ul>
+        <li>teckenets Unicode-värde, i hexadecimal (mer än ett tecken kan anges, åtskilda av ett kolon (':'), vilket gör att vissa sekvenser kan mappas till ord)        </li>
+
+        <li>nyckelkodsekvensen (de ASCII-tecken som måste anges för att generera Unicode-tecknet)        </li>
+
+        <li>en flagga (eller "<code>-</code>" om ingen flagga finns)        </li>
+      </ul>
+
+      <p>
+        Starta ytterligare teckenmappningsavsnitt med en rad som innehåller ordet "<code>section</code>".      </p>
+
+      <p>
+        Exempel:
+        <blockquote>
+          <code># Hiragana<br>
+          304B ka -<br>
+          304C ga -<br>
+          304D ki -<br>
+          304E gi -<br>
+          304D:3083 kya -<br>
+          3063:305F tta -<br>
+          <br>
+          # Katakana<br>
+          section<br>
+          30AB ka -<br>
+          30AC ga -<br>
+          30AD ki -<br>
+          30AE gi -</code>
+        </blockquote>
+      </p>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Anmärkning:</strong> Tomma rader i filen "<code>.im</code>" ignoreras, liksom all text som följer efter tecknet "<code>#</code>" (pund/hash) - det kan användas för att ange kommentarer, som i exemplet ovan.      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Obs:</strong> Betydelsen av flaggorna är lokalspecifik och behandlas av den språkspecifika källkoden i "<code>src/im.c</code>". Till exempel används "<code>b</code>" på koreanska för att hantera Batchim, som kan överföras till nästa tecken.      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Obs:</strong> Stöd för nya inmatningsmetoder kräver tillägg till Rita med Tuxs källkod ("<code>/src/im.c</code>"), och kräver uppdateringar av <code>Makefile</code>, för att säkerställa att "<code>.im</code>"-filerna är tillgängliga för användning vid körning.      </p>
+    </section><!-- H1: Alternative Input Methods -->
+
+    <section class="indent outer"><!-- H1: On-screen Keyboard -->
+      <header>
+        <h1>
+          <a name="on_screen_keyboard"
+              id="on_screen_keyboard">Tangentbord på skärmen</a>
+        </h1>
+      </header>
+
+      <p>
+        Rita med Tux-verktygen "Text" och "Label" kan visa ett tangentbord på skärmen som gör att pekaren (via en mus, pekskärm, ögonspårningssystem etc.) kan användas för att mata in tecken. Filer som beskriver layouten och tillgängliga tangenter lagras i Rita med Tux-katalogen "<code>osk</code>". Varje tangentbordslayout definieras av ett antal filer (varav vissa kan delas av olika layouter).      </p>
+      <p>
+        Vi använder QWERTY-tangentbordet som exempel:      </p>
+      
+      <section><!-- H2: Layout overview file ("qwerty.layout") -->
+        <header>
+          <h2>
+            Översiktsfil för layout ("<code>qwerty.layout</code>")          </h2>
+        </header>
+
+        <p>
+          Detta är en textfil som specificerar de andra filer som används för att beskriva layout och tangentmappningar.        </p>
+
+        <blockquote>
+          <p>
+            <code>layout qwerty.h_layout<br>
+            keymap us-intl-altgr-dead-keys.keymap<br>
+            composemap en_US.UTF-8_Compose<br>
+            keysymdefs keysymdef.h<br>
+            keyboardlist qwerty.layout default.layout</code>
+          </p>
+        </blockquote>
+
+        <p class="note">
+          <span title="Configuration option">&#9881;</span>          <strong>Anmärkning:</strong> Tomma rader i filen "<code>.layout</code>" ignoreras, liksom all text som följer efter tecknet "<code>#</code>" (pund/hash) - det kan användas för att ange kommentarer, som i exemplet nedan.        </p>
+
+        <p>
+          Raden "<code>keyboardlist</code>" beskriver vilka layouter som ska växlas till när användaren klickar på vänster- och högerknapparna på tangentbordet. (Se nedan.)        </p>
+      </section><!-- H2: Layout overview file ("qwerty.layout") -->
+
+      <section><!-- H2: Keyboard layout file ("qwerty.h_layout") -->
+        <header>
+          <h2>
+            Fil för tangentbordslayout ("<code>qwerty.h_layout</code>")          </h2>
+        </header>
+
+        <p>
+          Detta beskriver hur stort tangentbordet är (som ett "bredd × höjd"-raster) och listar varje tangent med dess numeriska tangentkod (se filen "<code>keymap</code>" nedan), bredden den ska ritas på (vanligtvis "<code>1.0</code>", för att ta ett utrymme på tangentbordet, men i exemplet nedan är tangenterna "<code>TAB</code>" och "<code>SPACE</code>" mycket bredare), tecknet eller texten som ska visas på tangenten, beroende på vilka modifieringstangenter som har tryckts in (en vardera för: inga modifierare, <b><code>[Skift]</code></b>, <b><code>[AltGr]</code></b> och <b><code>[Skift]</code></b> + <b><code>[AltGr]</code></b>), och slutligen om tangenten påverkas av tangenten <b><code>[CapsLock]</code></b> (använd "<code>1</code>") eller <b><code>[AltGr]</code></b> (alternativ grafik) (använd "<code>2</code>"), eller inte alls (använd "<code>0</code>").        </p>
+
+        <p>
+          Nyckelordet "<code>NEWLINE</code>" används för att ange slutet på en rad på tangentbordet, och därmed kommer efterföljande tangentlayoutbeskrivningar att börja på en ny rad.        </p>
+
+        <blockquote>
+          <p>
+            <code>WIDTH 15<br>
+            HEIGHT 5<br>
+            <br>
+            KEY 49 1.0 ` ~ ` ~ 0<br>
+            KEY 10 1.0 1 ! ¡ ¹ 0<br>
+            KEY 11 1.0 2 @ ² ˝ 0<br>
+            KEY 12 1.0 3 # · ³ 0<br>
+            KEY 13 1.0 4 $ ¤ £ 0<br>
+            KEY 14 1.0 5 % € ¸ 0<br>
+            KEY 15 1.0 6 ^ ¼ ^ 0<br>
+            ...<br>
+            KEY 21 1.0 = + × ÷ 0<br>
+            KEY 22 2.0 DELETE DELETE DELETE DELETE 0<br>
+            <br>
+            NEWLINE<br>
+            <br>
+            KEY 23 1.5 TAB TAB TAB TAB 0<br>
+            KEY 24 1.0 q Q ä Ä 1<br>
+            KEY 25 1.0 w W å Å 1<br>
+            KEY 26 1.0 e E é É 1<br>
+            KEY 27 1.0 r R ® ® 1<br>
+            ...<br>
+            <br>
+            NEWLINE<br>
+            <br>
+            # Pil till vänster växlar till föregående tangentbord<br>
+            KEY 2 1.0 &lt;- &lt;- &lt;- &lt;- 0<br>
+            <br>
+            KEY 133 2.0 Cmp Cmp Cmp Cmp 0<br>
+            <br>
+            # Knapparna ALT eller ALTGR används i "im" (inmatningsmetoder) för att växla inmatningsläge<br>
+            KEY 64 2.0 Alt Alt Alt Alt 0<br>
+            <br>
+            # Mellanslag<br>
+            KEY 65 5.0 SPACE SPACE SPACE SPACE 0<br>
+            <br>
+            # AltGr<br>
+            KEY 108 2.0 AltGr AltGr AltGr AltGr 0<br>
+            <br>
+            # Klistra in<br>
+            KEY 143 2.0 Paste Paste Paste Paste 0<br>
+            <br>
+            # Pil till höger växlar till nästa tangentbord<br>
+            KEY 1 1.0 -&gt; -&gt; -&gt; -&gt; 0</code>
+          </p>
+        </blockquote>
+
+        <p>
+          Observera här att alfabetiska tangenter (<b><code>[Q]</code></b>, <b><code>[W]</code></b>, etc.) påverkas av <b>[CapsLock]</b>, medan numeriska tangenter (<b><code>[1]</code></b>, <b><code>[2]</code></b>, etc.), <b><code>[Mellanslag]</code></b>, etc. inte gör det.        </p>
+
+        <p>
+          Nyckelkoder upp till "<code>8</code>" är reserverade för internt bruk. De som används för närvarande beskrivs nedan.        </p>
+
+        <ul>
+          <li>
+            <code>0</code> —
+                tom knapp          </li>
+
+          <li>
+            <code>1</code> —
+                nästa layout (enligt layoutfilens "<code>keyboardlist</code>"-inställning)          </li>
+
+          <li>
+            <code>2</code> —
+                tidigare layout (enligt layoutfilens "<code>keyboardlist</code>"-inställning)          </li>
+        </ul>
+
+        <p class="note">
+          <span title="Version variation">&#128220;</span>          Från och med Rita med Tux 0.9.35 kan tangentsymbolen <code>XF86Paste</code> (värde 143) användas för att initiera en "klistra in"-händelse i klippbordsbufferten för kopiera/klistra in. Se tangenten "Paste" i filerna för tangentbordslayout. (Inklistring via ett fysiskt tangentbord initieras med tangentkombinationen <code>[Control]</code> + <code>[V]</code>.        </p>
+
+      </section><!-- H2: Keyboard layout file ("qwerty.h_layout") -->
+
+      <section><!-- H2: Keymap file ("us-intl-altgr-dead-keys.keymap") -->
+        <header>
+          <h2>
+            Keymap-fil ("<code>us-intl-altgr-dead-keys.keymap</code>")          </h2>
+        </header>
+
+        <p>
+          Den här filen definierar vilka numeriska tangentkoder (som finns i tangentbordslayoutfilerna, t.ex. "<code>qwerty.h_layout</code>" som beskrivs ovan) som ska mappas till de faktiska tecken som ett program som Rita med Tux förväntar sig att få när tangenterna (t.ex. på ett riktigt tangentbord) trycks ned.        </p>
+
+        <p>
+          Om du använder ett operativsystem som <cite>Linux,</cite> som kör <cite>X-Window</cite> och har kommandoradsverktyget "<code>xmodmap</code>" tillgängligt, kan du köra det med alternativet ("print keymap expressions", "<code>-pke</code>", för att generera en keymap-fil.        </p>
+
+        <blockquote>
+          <p>
+            <code>keycode 9 = Escape NoSymbol Escape Escape<br>
+            keycode 10 = 1 exclam exclamdown onesuperior 1 exclam 1
+            exclam NoSymbol onesuperior<br>
+            keycode 11 = 2 at twosuperior dead_doubleacute 2 at 2
+            at onehalf twosuperior<br>
+            keycode 12 = 3 numbersign periodcentered threesuperior
+            dead_macron periodcentered<br>
+            ...<br>
+            keycode 52 = z Z ae AE Arabic_hamzaonyeh asciitilde
+            guillemotright NoSymbol Greek_zeta Greek_ZETA U037D
+            U03FF<br>
+            keycode 53 = x X x X Arabic_hamza Arabic_sukun
+            guillemotleft NoSymbol Greek_chi Greek_CHI rightarrow
+            leftarrow<br>
+            keycode 54 = c C copyright cent Arabic_hamzaonwaw
+            braceright Greek_psi Greek_PSI copyright<br>
+            keycode 55 = v V v V Arabic_ra braceleft Greek_omega
+            Greek_OMEGA U03D6<br>
+            keycode 56 = b B b B UFEFB UFEF5 Greek_beta Greek_BETA
+            U03D0<br>
+            keycode 57 = n N ntilde Ntilde Arabic_alefmaksura
+            Arabic_maddaonalef Greek_nu Greek_NU U0374 U0375<br>
+            keycode 58 = m M mu mu Arabic_tehmarbuta apostrophe
+            Greek_mu Greek_MU U03FB U03FA<br>
+            keycode 59 = comma less ccedilla Ccedilla Arabic_waw
+            comma comma less guillemotleft<br>
+            keycode 60 = period greater dead_abovedot dead_caron
+            Arabic_zain period period greater guillemotright
+            periodcentered<br>
+            keycode 61 = slash question questiondown dead_hook
+            Arabic_zah Arabic_question_mark slash question<br>
+            keycode 62 = Shift_R NoSymbol Shift_R Shift_R<br>
+            ...<br></code>
+          </p>
+        </blockquote>
+      </section><!-- H2: Keymap file ("us-intl-altgr-dead-keys.keymap") -->
+
+      <section><!-- H2: Composemap file ("en_US.UTF-8_Compose") -->
+        <header>
+          <h2>
+            Composemap-fil ("<code>en_US.UTF-8_Compose</code>")          </h2>
+        </header>
+
+        <p>
+          Den här filen beskriver enstaka tecken som kan sättas samman av flera inmatningar. Till exempel kan "<b><code>[Skriv nytt]</code></b>" följt av "<b><code>[A]</code></b>" och "<b><code>[E]</code></b>" användas för att skapa tecknet "<code>æ</code>".        </p>
+
+        <p>
+          Filen som medföljer Rita med Tux är baserad på den amerikanska engelska UTF-8 (Unicode) composemap som medföljer X.Org:s <cite>X Window-system</cite>. Den aktuella versionen från <cite>Xlib-biblioteket</cite> har en webbsida på <a href="https://www.x.org/releases/current/doc/libX11/i18n/compose/en_US.UTF-8.html">https://www.x.org/releases/current/doc/libX11/i18n/compose/en_US.UTF-8.html</a>.        </p>
+      </section><!-- H2: Composemap file ("en_US.UTF-8_Compose") -->
+
+      <section><!-- H2: Keysym definitions file ("keysymdef.h") -->
+        <header>
+          <h2>
+            Keysym definitionsfil ("<code>keysymdef.h</code>")          </h2>
+        </header>
+
+        <p>
+          Denna fil (som är en header-fil för programmeringsspråket <cite>C)</cite> kommer också från <cite>X Window System</cite>. Den definierar Unicode-värdena för varje knappsats (t.ex. motsvarar "<code>XK_equal</code>" "<code>U+003D</code>", för tecknet "<code>=</code>" ("<code>EQUALS SIGN</code>").        </p>
+
+        <p class="note">
+          <span title="Information">&#128161;</span>          <strong>Obs:</strong> Den här filen kompileras inte till Rita med Tux, utan läses och analyseras vid körning.        </p>
+
+        <p>
+          Det är osannolikt att någon ändring kommer att krävas av denna fil.        </p>
+      </section><!-- H2: Keysym definitions file ("keysymdef.h") -->
+    </section><!-- H1: On-screen Keyboard -->
+
+    <section class="indent outer"><!-- H1: Magic Tools -->
+      <header>
+        <h1>
+          <a name="magic_tools"
+              id="magic_tools">Magiverktyg</a>
+        </h1>
+      </header>
+
+      <p>
+        Rita med Tux's Magic-verktyg är programdelar som ligger utanför huvudprogrammet Rita med Tux och som laddas som "plugins" vid körning och interagerar med programmet med hjälp av ett definierat API (Application Programming Interface). De plugins som levereras med Rita med Tux (liksom Rita med Tux självt) är skrivna i programmeringsspråket C.      </p>
+
+      <p>
+        Läs <a href="MAGIC-API.html">API-dokumentationen för Magic Tool Plugin</a> om du vill veta hur du skriver din egen.      </p>
+    </section>
+
+  </body>
+</html>

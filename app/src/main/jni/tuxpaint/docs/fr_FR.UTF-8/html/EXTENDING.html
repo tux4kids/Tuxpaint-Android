@@ -100,7 +100,7 @@
           </p>
     
           <p>
-            janvier 12, 2025          </p>
+            mai  2, 2025          </p>
         </center>
       </header>
 
@@ -121,10 +121,10 @@
                   <li><a href="#standard_files">Fichiers standards</a></li>                  <li><a href="#personal_files">Fichiers personnels</a></li>                </ul>
               </li>
               <li><a href="#brushes">Pinceaux</a>                <ul>
-                  <li><a href="#brush_description_text">Brush Descriptive Text</a></li>                  <li><a href="#brush_options">Options de pinceau</a></li>                </ul>
+                  <li><a href="#brush_description_text">Texte de description du pinceau</a></li>                  <li><a href="#brush_options">Options de pinceau</a></li>                </ul>
               </li>
               <li><a href="#stamps">Tampons</a>                <ul>
-                  <li><a href="#stamps_images">Images des tampons</a></li>                  <li><a href="#description_text">Texte de description des tampons</a></li>                  <li><a href="#sound_effects">Effets sonores des tampons</a></li>                  <li><a href="#descriptive_sound">Son descriptif du tampon</a></li>                  <li><a href="#stamp_options">Options des tampons</a></li>                  <li><a href="#pre_mirroed_and_flipped_images">Mise en miroir et retournement</a></li>                </ul>
+                  <li><a href="#stamps_images">Images des tampons</a></li>                  <li><a href="#description_text">Texte de description des tampons</a></li>                  <li><a href="#sound_effects">Effets sonores des tampons</a></li>                  <li><a href="#descriptive_sound">Son descriptif du tampon</a></li>                  <li><a href="#stamp_options">Options des tampons</a></li>                  <li><a href="#pre_mirroed_and_flipped_images">Tampons mis en miroir et inversés</a></li>                </ul>
               </li>
               <li><a href="#fonts">Polices</a></li>              <li><a href="#starters">'Images de démarrage'</a>                <ul>
                   <li><a href="#coloring_book_style">Images de démarrage avec style 'livre de coloriage'</a></li>                  <li><a href="#scene_style">Images de démarrage avec 'style scénique'</a></li>                  <li><a href="#starter_options">Options d'image de démarrage</a></li>                </ul>
@@ -184,7 +184,7 @@
           <dd>
             <p>
               Tux Paint recherche un répertoire appelé 'data' dans le même répertoire que l'exécutable. C'est le répertoire que l'installateur a utilisé lors de l'installation de Tux Paint, par exemple :              <blockquote>
-                <nobr><code style='background: #EEE;'>C:\Program Files\TuxPaint\data</code></nobr>              </blockquote>
+                <nobr><code style='background: #EEE;'>C:\Fichiers programmes\TuxPaint\data</code></nobr>              </blockquote>
             </p>
           </dd>
 
@@ -205,8 +205,8 @@
             <p class="note">
               <span title="Information">&#128161;</span>              <em>Remarque :</em> Si vous installez une version plus récente de Tux Paint et remplacez ou supprimez l'ancienne version, vous perdrez les modifications apportées avec les instructions ci-dessus, faites donc des sauvegardes de votre nouveau contenu (tampons,pinceaux, etc.).            </p>
             <p>
-              Tux Paint also looks for files in a "TuxPaint" folder that you can place in your system's <nobr>"<code style='background: #EEE;'>Application Support</code>"</nobr> folder (found under <nobr>"<code style='background: #EEE;'>Library</code>"</nobr> at the root of your filesystem):              <blockquote>
-                <nobr><code style='background: #EEE;'>/Library/Application Support/TuxPaint/data/</code></nobr>              </blockquote>
+              Tux Paint recherche également les fichiers dans un dossier "Tux Paint" que vous pouvez placer dans votre dossier système <nobr>"<code style='background: #EEE;'>Support de l'application</code>"</nobr> (situé sous <nobr>"<code style='background: #EEE;'>Bibliothèque</code>"</nobr> à la racine de votre système de fichiers) :              <blockquote>
+                <nobr><code style='background: #EEE;'>/Bibliothèque/Support de l'application/TuxPaint/data/</code></nobr>              </blockquote>
             </p>
             <p>
               Lorsque vous passez à une version plus récente de Tux Paint , le contenu de ce dossier "TuxPaint" restera à la même place et restera accessible à tous les utilisateurs de Tux Paint .            </p>
@@ -238,15 +238,15 @@
           <dt><strong>macOS</strong></dt>
           <dd>
             <p>
-              Your personal Tux Paint folder is stored in your personal <nobr>"<code style='background: #EEE;'>Application Support</code>"</nobr> folder:              <blockquote>
-                <nobr><code style='background: #EEE;'>/Users/<i>nom d'utilisateur</i>/Library/Application Support/TuxPaint/</code></nobr>              </blockquote>
+              Votre dossier personnel Tux Paint est stocké dans votre dossier <nobr>"<code style='background: #EEE;'>Support de l'application</code>"</nobr> :              <blockquote>
+                <nobr><code style='background: #EEE;'>/Utilisateurs/<i>nom d'utilisateur</i>/Bibliothèque/Support de l'application/TuxPaint/</code></nobr>              </blockquote>
             </p>
           </dd>
 
           <dt><strong>Linux et Unix</strong></dt>
           <dd>
             <p>
-              Your personal Tux Paint files go into a 'hidden directory' found in your account's home directory: <nobr>"<code style='background: #EEE;'>/home/<i>nom d'utilisateur</i>/.tuxpaint/</code>"</nobr>.            </p>
+              Vos fichiers personnels Tux Paint vont dans un 'répertoire caché' que l'on trouve dans votre répertoire personnel : <nobr>"<code style='background: #EEE;'>/home/<i>nom d'utilisateur</i>/.tuxpaint/</code>"</nobr>.            </p>
             <p>
               N'oubliez pas le point (" <code>.</code>") avant le "<code>tuxpaint</code>" !            </p>
           </dd>
@@ -256,7 +256,7 @@
           Pour ajouter des pinceaux, des tampons, des 'images de démarrage',des modèles et des polices créez des sous-répertoires dans votre répertoire personnel Tux Paint nommés respectivement "<code><b>brushes</b></code>", "<code><b>stamps</b></code>", "<code><b>starters</b></code>", "<code><b>templates</b></code>", "<code><b>fonts</b></code>".        </p>
 
         <p>
-          (For example, if you created a brush named <nobr>"<code style='background: #EEE;'>flower.png</code>"</nobr>, you would put it in <nobr>"<code style='background: #EEE;'>/home/<i>nom d'utilisateur</i>/.tuxpaint/brushes/</code>"</nobr> under Linux or Unix.)        </p>
+          (Par exemple, si vous avez créé un pinceau nommé <nobr>"<code style='background: #EEE;'>flower.png</code>"</nobr>, vous le mettrez dans <nobr>"<code style='background: #EEE;'>/home/<i>nom d'utilisateur</i>/.tuxpaint/brushes/</code>"</nobr> sous Linux ou Unix.)        </p>
       </section><!-- H2: Personal Files -->
     </section><!-- H1: Where Files Go -->
 
@@ -269,7 +269,7 @@
       </header>
 
       <p>
-        The brushes used for drawing with the 'Paint' and 'Lines' tools in Tux Paint are simply PNG image files.      </p>
+        Les pinceaux utilisés pour dessiner avec les outils "Pinceau" et "Lignes" dans Tux Paint sont tout simplement des fichiers image PNG.      </p>
       <img src="../../html/images/brush_edit.png"
                   width="123"
                   height="147"
@@ -285,15 +285,15 @@
         <header>
           <h2>
             <a name="brush_bescription_text"
-                id="brush_description_text">Brush Descriptive Text</a>
+                id="brush_description_text">Texte de description du pinceau</a>
           </h2>
         </header>
 
         <p>
-          Tux Paint will display descriptive text when a brush is selected. These are placed in plain text files with the same name as the PNG, but with a "<code>.txt</code>" filename extension. (e.g., "<code>brush.png</code>"'s description is stored in "<code>brush.txt</code>" in the same directory.)        </p>
+          Tux Paint affichera un texte descriptif quand un tampon est sélectionné. Le texte est mis dans fichier (avec texte simple) ayant le même nom que le PNG, mais avec une extension "<code>.txt</code>".  (par exemple, "<code>piceaux.png</code>" dont la description est "<code>piceaux.txt</code>" est placée dans le même répertoire).        </p>
 
         <p>
-          The first line of the text file will be used as the US English description of the brush's image. It must be encoded in UTF-8.        </p>
+          La première ligne du fichier texte sera utilisée comme description de l'image du tampon, en anglais américain. Il doit être encodé en UTF-8.        </p>
 
         <dl>
           <dt><strong>Support pour la régionalisation</strong></dt>
@@ -337,7 +337,7 @@
           <dt><strong>Espacement des pinceaux</strong></dt>
           <dd>
             <p>
-              You may specify the spacing for brushes &mdash; that is, how frequently they are drawn across the length of a line or stroke. By default, the spacing will be the brush's height, divided by 4.            </p>
+              Vous pouvez spécifier l'espacement des coups de pinceaux &mdash; (c'est-à-dire la fréquence à laquelle ils sont dessinés). Par défaut, l'espacement correspond à la hauteur du pinceau, divisée par 4.            </p>
             <p>
               Ajoutez une ligne contenant la ligne "<code><b>spacing=<i>N</i></b></code>" au fichier de données du pinceau, où "<i>N</i>" est l'espacement souhaité pour les coups de  pinceau. (Plus le nombre est bas, plus le pinceau est dessiné souvent.)            </p>
           </dd>
@@ -345,21 +345,21 @@
           <dt><strong>Pinceaux animés</strong></dt>
           <dd>
             <p>
-              Brushes may be animated. As the brush is used, each frame of the animation is drawn in sequence.            </p>
+              Vous pouvez créer des pinceaux animés. Au fur et à mesure que le pinceau est utilisé, chaque image de l'animation est dessinée séquentiellement.            </p>
             <p>
-              Lay each frame out across a wide PNG image. For example, if the brush is 30x30 and there are 5 frames, the image should be 150x30.            </p>
+              Disposez chaque trame sur une grande image PNG. Par exemple, si votre pinceau mesure 30x30 et que vous avez 5 trames, l'image doit être 150x30.            </p>
             <p>
               Ajoutez une ligne contenant la ligne "<code><b>frames=<i>N</i></b></code>" au fichier de données du pinceau, où"<i>N</i>" est le nombre d'images dans le pinceau.            </p>
             <p class="note">
-              <span title="Configuration option">&#9881;</span>              <strong>Remarque :</strong> si vous préférez que les images apparaissent de manière aléatoire plutôt que séquentielle, ajoutez en plus une ligne contenant "<code><b>random</b></code>" au fichier de données du pinceau.            </p>
+              <span title="Configuration option">&#9881;</span>              <strong>Remarque :</strong> si vous préférez que les cadres soient inversés de manière aléatoire plutôt que séquentiellement, ajoutez également une ligne contenant « <code><b>random</b></code> » au fichier de données du pinceau.            </p>
           </dd>
 
           <dt><strong>Pinceaux directionnels</strong></dt>
           <dd>
             <p>
-              Brushes may be configured to draw a different shape based on the direction of the line or brush stroke.  Different shapes will be drawn depending on which of the eight compass directions the brush is moving &mdash; up (aka North), up/right (aka Northeast), right (aka East), down/right (aka Southeast), etc.).  A ninth "center" shape is used when there's no motion (e.g., simply clicking/tapping and releasing the "Paint" tool, without dragging).            </p>
+              Les pinceaux peuvent être configurés pour dessiner une forme différente en fonction de la direction de la ligne ou du coup de pinceau.  Différentes formes seront dessinées en fonction de la direction du pinceau parmi les huit directions de la boussole - vers le haut (Nord), vers le haut/droit (Nord-Est), vers la droite (Est), vers le bas/droit (Sud-Est), etc.)  Une neuvième forme "centrale" est utilisée lorsqu'il n'y a pas de mouvement (par exemple, lorsque l'on clique simplement sur l'outil "Peinture" et qu'on le relâche, sans le faire glisser).            </p>
             <p>
-              The directional shapes are divided into a 3x3 square in a PNG image. For example, if your brush is 30x30, the image should be 90x90, and each of the direction's shapes placed in a 3x3 grid.            </p>
+              Les formes orientables sont divisées en carrés de 3x3 dans une image PNG. Par exemple, si votre pinceau fait 30x30, l'image doit être de 90x90 et chacune des formes orientables est placée dans une grille de 3x3.            </p>
             <p>
               Ajoute une ligne contenant le mot "<code><b>directional</b></code>" au fichier de données brosse.            </p>
           </dd>
@@ -367,23 +367,23 @@
           <dt><strong>Pinceaux tournants</strong></dt>
           <dd>
             <p>
-              Brushes may be configured to rotate based on the angle of the line or brush stroke. (Unlike Directional Brushes, described above, only a single brush shape may be provided.            </p>
+              Les pinceaux peuvent être configurés pour tourner en fonction de l'angle de la ligne ou du coup de pinceau. Contrairement aux pinceaux directionnels décrits ci-dessus, une seule forme de pinceau peut être fournie.            </p>
             <p>
               Ajoute une ligne contenant le mot "<code><b>rotate</b></code>" au fichier de données brosse.            </p>
           </dd>
 
-          <dt><strong>Chaotic Brushes</strong></dt>
+          <dt><strong>Pinceaux chaotiques</strong></dt>
           <dd>
             <p>
-              Brushes may be configured to continuously choose a random direction as you draw with them.            </p>
+              Les pinceaux peuvent être configurés pour choisir une direction continuellement aléatoire lorsque vous les utilisez.            </p>
             <p>
               Ajoute une ligne contenant le mot "<code><b>chaotic</b></code>" au fichier de données brosse.            </p>
           </dd>
 
-          <dt><strong>Animated Directional, Rotating, or Chaotic Brushes</strong></dt>
+          <dt><strong>Pinceaux animés orientables, tournants ou chaotiques</strong></dt>
           <dd>
             <p>
-              You may mix both animated and either directional, rotating, or chaotic features into one brush. Use both options desired ("<code><b>frames=<i>N</i></b></code>" and "<code><b>directional</b></code>", "<code><b>rotate</b></code>", or "<code><b>chaotic</b></code>"), in separate lines in the brush's "<code>.dat</code>" file.            </p>
+              Vous pouvez mélanger animation, orientation,  rotation et chaotique dans un même pinceau. Utilisez les deux options ("<code><b>frames=<i>N</i></b></code>" et "<code><b>directional</b></code>", "<code><b>rotate</b></code>, ou "<code><b>chaotic</b></code>) en deux lignes séparées dans le fichier "<code>.dat</code>" qui concerne le pinceau.            </p>
             <p>
               Pour les pinceaux directionnels, disposez le pinceau de manière à ce que chaque ensemble 3x3 de formes orientables soit disposé sur une grande image PNG. Par exemple, si le pinceau mesure 30x30 et qu'il y a 5 cadres, ce sera 450x90. (Les 150x90 pixels les plus à gauche de l'image représentent les 9 formes de direction pour la première image, par exemple).            </p>
           </dd>
@@ -424,7 +424,7 @@
                     alt=""
                     align="right">
         <p>
-          Stamps may be either PNG bitmap images or SVG vector images. They can be full-color or greyscale. The alpha (transparency) channel of PNGs is used to determine the actual shape of the picture (otherwise you'll stamp a large rectangle on your drawings).        </p>
+          Les tampons peuvent être des images bitmap PNG ou bien des images vectorielles SVG. Ils peuvent être en couleur ou en niveaux de gris. Le canal alpha (transparence) des PNG est utilisé pour déterminer la forme réelle de l'image (sinon vous obtiendriez un grand rectangle sur vos dessins).        </p>
 
         <p>
           Les fichiers PNG peuvent être de n'importe quelle taille, et Tux Paint (par défaut) fournit un ensemble de boutons de redimensionnement pour permettre à l'utilisateur d'ajuster le tampon vers le haut (plus grand) et vers le bas (plus petits).        </p>
@@ -613,9 +613,9 @@
           <dt><strong>Tampons inaltérables</strong></dt>
           <dd>
             <p>
-              Par défaut, un tampon peut être retourné, affiché comme une image miroir, ou les deux. Cela se fait à l'aide des boutons de commande sous le sélecteur de tampon, en bas à droite de l'écran dans Tux Paint .            </p>
+              Par défaut, un tampon peut être inversé, affiché comme une image miroir, ou les deux. Cela se fait à l'aide des boutons de commande sous le sélecteur de tampon, en bas à droite de l'écran dans Tux Paint .            </p>
             <p>
-              Parfois, cela n'a pas de sens pour un timbre d'être retourné ou reflété; par exemple, des timbres de lettres ou de chiffres. Parfois, les tampons sont symétriques, il n'est donc pas utile de laisser l'utilisateur les retourner ou les refléter.            </p>
+              Parfois, cela n'a pas de sens pour un timbre d'être inversé ou reflété; par exemple, des timbres de lettres ou de chiffres. Parfois, les tampons sont symétriques, il n'est donc pas utile de laisser l'utilisateur les retourner ou les refléter.            </p>
             <p>
               Pour empêcher un tampon d'être qui a été inversé verticalement, ajoutez une ligne contenant le mot «<code><b>noflip</b></code>» au fichier de données du tampon.            </p>
             <p>
@@ -648,7 +648,7 @@
         <header>
           <h2>
             <a name="pre_mirroed_and_flipped_images"
-                id="pre_mirroed_and_flipped_images">Mise en miroir et retournement</a>
+                id="pre_mirroed_and_flipped_images">Tampons mis en miroir et inversés</a>
           </h2>
         </header>
 
@@ -662,10 +662,10 @@
           Par exemple, pour le tampon "<code>stamp.png</code>", vous créeriez un autre fichier nommé "<code>stamp_mirror.png</code>", qui sera utilisé lorsque le tampon est mis en miroir (plutôt que d'utiliser une version à l'envers de "<code>stamp.png</code>").        </p>
 
         <p>
-          You may also provide a pre-flipped image with "<code><b>_flip</b></code>" in the name, and/or an image that is both mirrored <em>and</em> flipped, by naming it "<code><b>_mirror_flip</b></code>".        </p>
+          Vous pouvez également fournir une image pré-rinversée avec "<code><b>_flip</b></code>" dans le nom, et / ou une image qui est à la fois en miroir et retournée, en la nommant " <code><b>_mirror_flip</b></code>".        </p>
 
         <p class="note">
-          <span title="Information">&#128161;</span>          <strong>Remarque :</strong> Si l'utilisateur retourne et reflète une image, et qu'un "<code>_mirror_flip</code>" pré-dessiné n'existe pas, mais que "<code>_flip</code>" ou "<code>_mirror</code>" existe , il sera utilisé, et reflété ou retourné, selon le cas.        </p>
+          <span title="Information">&#128161;</span>          <strong>Remarque :</strong> Si l'utilisateur inverse et reflète une image, et qu'un "<code>_mirror_flip</code>" pré-dessiné n'existe pas, mais que "<code>_flip</code>" ou "<code>_mirror</code>" existe , il sera utilisé, et reflété ou retourné, selon le cas.        </p>
       </section><!-- H2: Pre-Mirrored and Flipped Stamps -->
     </section><!-- H1: Stamps -->
 
@@ -686,7 +686,7 @@
         Les fontes utilisées par Tux Paint sont des fontes True Type Fonts (TTF).      </p>
 
       <p>
-        Simply place them in the "<code><b>fonts</b></code>" directory. When using the 'Text' and 'Label' tools, Tux Paint will present the font in the 'Letters' selector at the right, along with options to enable bold and/or italics, and change the size.      </p>
+        Placez-les simplement dans le répertoire "<code><b>fonts</b></code>". Quand on utilise les outils 'Texte' et 'Étiquettes', Tux Paint affichera la police dans le sélecteur de 'Lettres' sur la droite, en même temps que les options pour afficher en gras ou en italique, et pour changer la taille.      </p>
     </section><!-- H1: Fonts -->
 
     <section class="indent outer"><!-- H1: Starters -->
@@ -720,7 +720,7 @@
           Le type le plus élémentaire "d'image de démarrage" est similaire à une image dans un livre de coloriage. C'est le contour d'une forme que vous pouvez ensuite colorier et ajouter des détails. Dans Tux Paint , lorsque vous dessinez, tapez du texte ou des tampons, le contour reste «au-dessus» de ce que vous dessinez. Vous pouvez effacer des parties du dessin que vous avez faites, mais vous ne pouvez pas effacer le contour.        </p>
 
         <p>
-          To create this kind of 'starter' image, simply create an outlined black and white picture in a paint program, and save it as a raster PNG file, or vector SVG.  If saving as a PNG, you may optionally render the image as black-and-transparent, rather than black-and-white, although this is not required.        </p>
+          Pour créer ce type "d'image de départ", dessinez simplement une image noir et blanc avec contour dans un programme de dessin, et sauvegardez la en tant fichier PNG ou SVG. Si vous sauvegardez en PNG, vous pouvez optionnellement rendre l'image noire et transparente, plutôt que noire et blanche, mais ceci n'est pas obligatoire.        </p>
       </section><!-- H2: Coloring-Book Style Starters -->
 
       <section><!-- H2: Scene-Style Starters -->
@@ -957,7 +957,7 @@
                   alt=""
                   align="right">
       <p>
-        'Template' images also appear in the 'New' dialog, along with solid color background choices and 'Starters'.      </p>
+        Les images «modèle» apparaissent dans la boîte de dialogue «Nouveau», avec des choix d'arrière-plan de couleur unie.      </p>
 
       <p>
         À la différence des  images dessinées dans Tux Paint par les utilisateurs puis réouvertes plus tard, l'ouverture d'un «modèle» crée un nouveau dessin. Lorsque vous enregistrez, l'image «modèle» n'est pas écrasée. À la différence des «images de démarrage», il n'y a pas de «calque» immuable au-dessus du canevas. Vous pouvez dessiner sur n'importe quelle partie de celui-ci.      </p>
@@ -1118,7 +1118,7 @@
       </header>
 
       <p>
-        Tux Paint's 'Text' and 'Label' tools can present an on-screen keyboard that allows the pointer (via a mouse, touch screen, eye-tracking systems, etc.) to be used to input characters. Files that describe the layout and available keys are stored in Tux Paint "<code>osk</code>" directory. Each keyboard layout is defined by a number of files (some of which may be shared by different layouts).      </p>
+        Les outils «Texte» et «Étiquette» de Tux Paint peuvent présenter un clavier à l'écran qui permet d'utiliser le pointeur (via une souris, des systèmes de suivi oculaire, etc.) pour saisir des caractères. Les fichiers qui décrivent la disposition et les touches disponibles sont stockés dans le répertoire "<code>osk</code>" de Tux Paint . Chaque disposition de clavier est définie par un certain nombre de fichiers (dont certains peuvent être partagés par différentes dispositions).      </p>
       <p>
         Nous utiliserons le clavier QWERTY comme exemple :      </p>
       
@@ -1142,7 +1142,7 @@
         </blockquote>
 
         <p class="note">
-          <span title="Configuration option">&#9881;</span>          <strong>Note:</strong> Blank lines within the "<code>.layout</code>" file will be ignored, as will any text following a "<code>#</code>" (pound/hash) character — it can be used to denote comments, as seen in the example below.        </p>
+          <span title="Configuration option">&#9881;</span>          <strong>Note </strong>Les lignes vides du fichier "<code>.layout</code>" sont ignorées, aussi bien que les lignes commençant par le caractère "<code>#</code>" ( livre/dièse)-- on peut l'utiliser pour ajouter des commentaires, comme dans l'exemple ci-dessous.        </p>
 
         <p>
           La ligne "<code>keyboardlist</code>" décrit les dispositions vers lesquelles on bascule lorsque l'utilisateur clique sur les boutons gauche et droit du clavier. (Voir ci-dessous.)        </p>
@@ -1158,7 +1158,7 @@
           Ceci décrit la taille du clavier (sous forme de grille L × H), et répertorie chaque touche avec son code numérique (voir le fichier "<code>keymap</code>", ci-dessous), la largeur à laquelle il doit être dessiné (généralement "<code>1.0</code>", pour en prendre un espace sur le clavier, mais dans l'exemple ci-dessous, notez que les touches "<code>TAB</code>" et "<code>SPACE</code>" sont beaucoup plus larges), le caractère ou le texte à afficher sur la touche, selon les touches de modification qui ont été enfoncées (une pour chacune : pas de modificateurs, <b><code>[Shift]</code></b> , <b><code>[AltGr]</code></b> et <b><code>[Shift]</code></b> + <b><code>[AltGr]</code></b> ), et enfin si la touche est affectée ou non par la touche <b><code>[CapsLock]</code></b> (utilisez "<code>1</code>") ou <b><code>[AltGr]</code></b> (alt graphiques alternatifs) (utilisez "<code>2</code>"), ou pas du tout (utilisez "<code>0</code>").        </p>
 
         <p>
-          The "<code>NEWLINE</code>" keyword is used to indicate the end of one row of the keyboard, and thus subsequent key layout descriptions will be beginning on a new row.        </p>
+          Le mot-clé « <code>NEWLINE</code> » est utilisé pour indiquer la fin d'une ligne du clavier, dès lors les descriptions suivantes de disposition des touches commenceront sur une nouvelle ligne.        </p>
 
         <blockquote>
           <p>
@@ -1192,7 +1192,7 @@
             <br>
             KEY 133 2.0 Cmp Cmp Cmp Cmp 0<br>
             <br>
-            # The ALT or ALTGR keys are used in 'im' (input methods) to switch the input mode<br>
+            # Les touches ALT ou ALTGR sont utilisées dans im (input method)  pour changer de mode de saisie<br>
             KEY 64 2.0 Alt Alt Alt Alt 0<br>
             <br>
             # Espace<br>
@@ -1201,7 +1201,7 @@
             # AltGr<br>
             KEY 108 2.0 AltGr AltGr AltGr AltGr 0<br>
             <br>
-            # Paste<br>
+            # Coller<br>
             KEY 143 2.0 Paste Paste Paste Paste 0<br>
             <br>
             # Flèche droite pour aller au clavier suivant<br>
@@ -1230,7 +1230,7 @@
         </ul>
 
         <p class="note">
-          <span title="Version variation">&#128220;</span>          Starting with Tux Paint 0.9.35, the <code>XF86Paste</code> keysym (value 143) can be used to initiate a copy/paste clipboard buffer "paste" event. See the "Paste" key in the keyboard layout files. (Pasting via a physical keyboard is initiated using the <code>[Control]</code> + <code>[V]</code> key combination.        </p>
+          <span title="Version variation">&#128220;</span>          À partir de Tux Paint 0.9.35, la touche <code>XF86Paste</code> (valeur 143) peut être utilisée pour lancer un copier-coller dans le tampon du presse-papiers. Voir la touche « Paste » dans les fichiers de disposition du clavier. (Le collage via un clavier physique est lancé avec la combinaison de touches <code>[Control]</code> + <code>[V]</code>.)        </p>
 
       </section><!-- H2: Keyboard layout file ("qwerty.h_layout") -->
 

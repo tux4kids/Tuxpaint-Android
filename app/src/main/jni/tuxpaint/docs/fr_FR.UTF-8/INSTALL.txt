@@ -5,7 +5,7 @@
        Copyright © 2002-2025 by divers contributeurs; voir AUTHORS.txt.
                              https://tuxpaint.org/
 
-                               janvier 23, 2025
+                                  mai 2, 2025
 
 +-------------------------------------------------------+
 |                  Table des matières                   |
@@ -88,9 +88,9 @@ installées, soit facilement disponibles avec votre distribution Linux.
      
 → libpaper (Linux/Unix uniquement) ←
 
-    Tux Paint can determine your system's default paper size (e.g., A4 or
-    Letter), or can be told to use a particular paper size, thanks to
-    "libpaper".
+    Tux Paint peut déterminer le format de papier par défaut (par exemple, A4
+    ou Lettre), ou peut être invité à utiliser un format particulier, ceci
+    grâce à "libpaper".
 
     https://github.com/naota/libpaper
 
@@ -107,9 +107,9 @@ installées, soit facilement disponibles avec votre distribution Linux.
      
 → Support des graphismes SVG ←
 
-    Tux Paint can load SVG (Scalable Vector Graphics) images as stamps. Two
-    sets of libraries are supported, and SVG support can be completely disabled
-    (via "make SVG_LIB:=")
+    Tux Paint peut prendre en charge les images SVG (Scalable Vector Graphics)
+    pour les tampons. Deux ensembles de bibliothèques sont pris en charge et le
+    support SVG peut être complètement désactivé (via "make SVG_LIB:=")
 
     → librsvg-2 & libCairo2 (nouvelles bibliothèques) ←
           @ libRSVG 2: http://librsvg.sourceforge.net/
@@ -162,8 +162,8 @@ juillet 10, 2022 Shin-ichi TOYAMA <dolphin6k@wmail.plala.or.jp>
 
 ## Réglages pour compilation ##
 
-The "Makefile" includes support for building on a Windows system using MinGW/
-MSYS (https://sourceforge.net/projects/msys2/).
+Le "Makefile" inclut la prise en charge de la construction sur un système
+Windows à l'aide de MinGW/MSYS (https://sourceforge.net/projects/msys2/).
 
 Beaucoup d'outils et de bibliothèques sont nécessaires pour élaborer Tux Paint.
 Le système de gestion de paquet "pacman" apporte une aide pour installer
@@ -448,14 +448,15 @@ choisissez un autre emplacement.
 
 À ce stade, vous pouvez cliquer sur «Installer» pour installer Tux Paint !
 
-💡 The installers for both Tux Paint (plus Tux Paint Config.)
-(tuxpaint-X.Y.Z-windows-ARCH-installer.exe) and Tux Paint Stamps
-(tuxpaint-stamps-YYYY.MM.DD-windows-installer.exe) accept the command-line
-options "/SILENT" ("silent") or "/VERYSILENT" ("very silent") which can be used
-to install and uninstall their component without use of an interactive set-up
-window. This can be useful for automating installation on a collection of PCs,
-for example using Microsoft Intune cloud-based endpoint management solution
-(see https://learn.microsoft.com/mem/intune/).
+💡 Les programmes d'installation de Tux Paint (et Tux Paint Config.)
+(tuxpaint-X.Y.Z-windows-ARCH-installer.exe) et de Tux Paint Stamps
+(tuxpaint-stamps-YYYY.MM.DD-windows-installer.exe) acceptent les options de
+ligne de commande « /SILENT » (« silencieux ») ou « /VERYSILENT » (« très
+silencieux ») qui permettent d'installer et de désinstaller leur composant sans
+utiliser de fenêtre de configuration interactive. Cela peut être utile pour
+automatiser l'installation sur plusieurs PC, par exemple avec la solution de
+gestion des terminaux cloud Microsoft Intune (voir https://learn.microsoft.com/
+mem/intune/).
 
 ## Modification des paramètres à l'aide du raccourci ##
 
@@ -466,7 +467,7 @@ Assurez-vous que l'onglet "Raccourci" est sélectionné dans la fenêtre qui
 apparaît et examinez le champ «Cible:». Vous devriez voir quelque chose comme
 ceci :
 
-    "C:\Program Files\TuxPaint\TuxPaint.exe"
+    "C:\Fichiers programmes\TuxPaint\TuxPaint.exe"
 
 Vous pouvez maintenant ajouter des options de ligne de commande qui seront
 activées lorsque vous double-cliquez sur l'icône.
@@ -475,7 +476,7 @@ Par exemple, pour faire fonctionner le jeu en mode plein écran, avec des formes
 simples (pas d'option de rotation) et en français, ajoutez les options (après
 'TuxPaint.exe'), comme ceci :
 
-    "C:\Program Files\TuxPaint\TuxPaint.exe" -f -s --lang french
+    "C:\Fichiers programmes\TuxPaint\TuxPaint.exe" -f -s --lang french
 
 (Voir «README.txt» pour une liste complète des options de ligne de commande
 disponibles.)
@@ -488,11 +489,11 @@ Quand vous avez fini, appuyez sur "OK".
 
 ## Si quelque chose ne va pas ##
 
-If, when you double-click on the shortcut to run Tux Paint, nothing happens, it
-is probably because some of these command-line options are wrong. Open an
-Explorer, and look for a file called "stderr.txt" in your personal saving
-folder for TuxPaint which is normaly 
-"C:\Users\nom d'utilisateur\AppData\Roaming\TuxPaint\".
+Si, lorsque vous double-cliquez sur le raccourci pour lancer le jeu, rien ne se
+passe, c'est probablement parce que certaines des options en lignes de commande
+sont erronées. Ouvrez un explorateur et recherchez un fichier appelé
+"stderr.txt" dans votre dossier personnel de sauvegarde de TuxPaint, qui est
+normalement "C:\Users\nom d'utilisateur\AppData\Roaming\TuxPaint\".
 
 Il contiendra une description de ce qui n'allait pas. Habituellement, ce sera
 simplement dû à une casse de caractère incorrecte (majuscule 'Z' à la place de
@@ -696,8 +697,8 @@ Tapez simplement :
     % make install
 
 ... pour crée l'application TuxPaint.app qui peut être exécutée sur place ou
-copiée sur /Applications. Pour créer le fichier DMG pour la distribution,
-faites 'make TuxPaint.dmg'.
+copiée sur /Application. Pour créer le fichier DMG pour la distribution, faites
+'make TuxPaint.dmg'.
 
 Des étapes supplémentaires sont nécessaires pour construire un 'Universal
 Binary'. Voyez "Construire un Universal Binary" ci-dessous.
@@ -934,11 +935,12 @@ dans la Section Ajout / Suppression de programmes du Panneau de configuration.
 
                                  ### macOS ###
 
-Delete "TuxPaint.app" from the "/Applications" folder. Data files, including
-the configuration files, stamps, and saved pictures, may be found in 
-"/Library/Application Support/TuxPaint/" (all users) and 
-"/Users/nom d'utilisateur/Library/Application Support/TuxPaint/" (individual
-users).
+Enlevez "TuxPaint.app" du dossier "/Application". Les fichiers de données les
+fichiers de configuration, les tampons et les images sauvegardées peuvent être
+trouvées dans "/Bibliothèque/Support de l'application/TuxPaint/" (pour tous les
+utilisateurs) et "
+"/Utilisateurs/nom d'utilisateur/Bibliothèque/Support de l'application/TuxPaint/"
+" pour les utilisateurs individuels.
 
                                  ### Linux ###
 

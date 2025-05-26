@@ -1,0 +1,2028 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>
+      Dokumentation om Rita med Tux ("README")    </title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=utf-8">
+    <style>
+  body { font-size: large; }
+  table { font-size: large; }
+  div.screenshot-center {
+    text-align: center;
+  }
+  div.screenshot-right {
+    float: right;
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+  div.screenshot-right-after {
+    clear: both;
+  }
+  div.keeptogether { page-break-inside: avoid; }
+  section h1 { font-size: 2em; }
+  h1, h2, h3, h4, h5 { font-family: sans; }
+  h1 { color: #800; page-break-before: always; break-before: always; }
+  h2 { color: #440; page-break-after: avoid; break-after: avoid; }
+  h3 { color: #080; page-break-after: avoid; break-after: avoid; }
+  h4 { color: #008; page-break-after: avoid; break-after: avoid; }
+  h5 { color: #808; page-break-after: avoid; break-after: avoid; }
+  h1 + p { page-break-inside: avoid; }
+  h2 + p { page-break-inside: avoid; }
+  h3 + p { page-break-inside: avoid; }
+  h4 + p { page-break-inside: avoid; }
+  h5 + p { page-break-inside: avoid; }
+  dt {
+    font-size: large;
+    color: #404;
+    font-family: sans;
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+  }
+  dd, blockquote {
+    border-left: 1px solid #888;
+    padding-left: 1em;
+    border-radius: 0 0 0 1em;
+  }
+  p.note {
+    border: 1px solid #000;
+    background-color: #eee;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    display: inline-block;
+    margin-right: 3em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  section.outer {
+    padding-bottom: 1em;
+    border-bottom: 2px solid #000;
+  }
+  section.indent p,dl {
+    margin-left: 2em;
+  }
+  section.indent dl p {
+    margin-left: 0;
+  }
+  p + ul, p + ol {
+    margin-left: 2em;
+  }
+
+  @media print {
+    p {
+      orphans: 3;
+      widows: 3;
+    }
+  }
+</style>
+  </head>
+  <body bgcolor="#FFFFFF"
+        text="#000000"
+        link="#0000FF"
+        vlink="#FF0000"
+        alink="#FF00FF">
+
+    <!-- Title -->
+    <section class="outer">
+      <header>
+        <center>
+          <h1 style="page-break-before: avoid;">
+            <img src="../../html/images/tuxpaint-title.png"
+                width="205"
+                height="210"
+                alt="Tux Paint"><br>
+            version 0.9.35          </h1>
+
+          <h3 align="center">
+            Ett enkelt ritprogram för barn          </h3>
+
+          <p>
+            Copyright © 2002-2025 av olika bidragsgivare; se <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br/>
+            <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
+          </p>
+
+          <p>
+            maj 26, 2025          </p>
+        </center>
+      </header>
+      <table border="2"
+       cellspacing="0"
+       cellpadding="2"
+       summary="Innehåll"
+       align="center"
+       style="page-break-inside: avoid;">
+  <tr>
+    <th>
+      Innehåll    </th>
+  </tr>
+
+  <tr>
+    <td>
+      <ol type="I">
+        <li><a href="#about">Om Rita med Tux</a></li>        <li><a href="#using">Använda Rita med Tux</a>          <ol type="A">
+            <li><a href="#using_loading">Lansering av Rita med Tux</a></li>            <li><a href="#using_title">Titelskärm</a></li>            <li><a href="#using_main">Huvudskärm</a></li>            <li><a href="#using_tools">Tillgängliga verktyg</a>              <ol type="1">
+                <li><a href="#using_tools_drawing">Verktyg för ritning</a>                  <ol type="a">
+                    <li><a href="#using_tools_drawing_paint">"Färg"-verktyg (pensel)</a></li>                    <li><a href="#using_tools_drawing_stamp">verktyg "Stämpel" (gummistämplar)</a></li>                    <li><a href="#using_tools_drawing_lines">"Linjer"-verktyget</a></li>                    <li><a href="#using_tools_drawing_shapes">verktyget "Shapes"</a></li>                    <li><a href="#using_tools_drawing_text_and_label">verktyg för "text" och "etikett"</a></li>                    <li><a href="#using_tools_drawing_fill">"Fyll"-verktyget</a></li>                    <li><a href="#using_tools_drawing_magic">"Magiskt" verktyg (specialeffekter)</a></li>                    <li><a href="#using_tools_drawing_eraser">Verktyget "Sudda"</a></li>                  </ol>
+                </li><!-- Using: Tools: Drawing -->
+                <li><a href="#using_tools_other">Övriga kontroller</a>                  <ol type="a">
+                    <li><a href="#using_tools_other_undo_and_redo">kommandona "Ångra" och "Gör om"</a></li>                    <li><a href="#using_tools_other_new">"Nytt" kommando</a></li>                    <li><a href="#using_tools_other_open">kommando "Öppna"</a></li>                    <li><a href="#using_tools_other_save">kommando "Spara"</a></li>                    <li><a href="#using_tools_other_print">kommando "Skriv ut"</a></li>                    <li><a href="#using_tools_other_open_slides">kommando "Slides" (under "Open")</a></li>                    <li><a href="#using_tools_other_quit">kommando "Avsluta"</a></li>                    <li><a href="#using_tools_other_sound_muting">Ljuddämpning</a></li>                  </ol>
+                </li><!-- Using: Tools: Other -->
+              </ol>
+            </li>
+            <li><a href="#using_controlling">Kontrollera Rita med Tux</a></li>          </ol>
+        </li><!-- Using -->
+        <li><a href="#loading_into">Ladda andra bilder i Rita med Tux</a></li>        <li><a href="#further">Ytterligare läsning</a></li>        <li><a href="#help">Hur du kan få hjälp</a></li>        <li><a href="#participate">Hur man deltar</a></li>      </ol>
+    </td>
+  </tr>
+</table>
+    </section>
+    <!-- Title -->
+
+    <section class="outer">
+  <header>
+    <h1 id="about">
+      I. Om Rita med Tux    </h1>
+  </header>
+
+  <section class="indent">
+    <header>
+      <h2>
+        A. Vad är "Rita med Tux"?      </h2>
+    <header>
+
+    <p>
+      Rita med Tux är ett gratis ritprogram som är utformat för små barn (från 3 år och uppåt). Det har ett enkelt och lättanvänt gränssnitt, roliga ljudeffekter och en uppmuntrande tecknad maskot som hjälper barnen att använda programmet. Det ger en tom duk och en mängd olika ritverktyg för att hjälpa ditt barn att vara kreativt.    </p>
+  </section>
+
+  <section class="indent">
+    <header>
+      <h2>
+        B. Målsättningar      </h2>
+    </header>
+
+    <dl>
+      <div class="keeptogether">
+        <dt>
+          <strong>Enkelt och roligt</strong>
+        </dt>
+
+        <dd>
+          Rita med Tux är tänkt att vara ett enkelt ritprogram för små barn. Det är inte avsett som ett allmänt ritverktyg. Det <em>är</em> tänkt att vara roligt och lätt att använda. Ljudeffekter och en tecknad karaktär hjälper till att låta användaren veta vad som händer och håller dem underhållna. Det finns också extra stora muspekarformer i tecknad stil.        </dd>
+      </div>
+
+      <div class="keeptogether">
+        <dt>
+          <strong>Utökad tillgänglighet</strong>
+        </dt>
+
+        <dd>
+          Rita med Tux är utbyggbart. Penslar och "gummistämpel"-former kan läggas in och dras ut. En lärare kan t.ex. lägga in en samling djurformer och be eleverna rita ett ekosystem. Varje form kan ha ett ljud som spelas upp och textfakta som visas när barnet väljer formen.        </dd>
+      </div>
+
+      <div class="keeptogether">
+        <dt>
+          <strong>Bärbarhet</strong>
+        </dt>
+
+        <dd>
+          Rita med Tux är portabelt mellan olika datorplattformar: Windows, Macintosh, Linux, etc. Gränssnittet ser likadant ut för alla. Rita med Tux fungerar bra på äldre system och kan byggas för att fungera bättre på långsamma system.        </dd>
+      </div>
+
+      <div class="keeptogether">
+        <dt>
+          <strong>Enkelhet</strong>
+        </dt>
+
+        <dd>
+          Det finns ingen direkt åtkomst till datorns underliggande krångligheter. Den aktuella bilden sparas när programmet avslutas och visas igen när det startas om. För att spara bilder behöver man inte skapa filnamn eller använda tangentbordet. En bild öppnas genom att man väljer den från en samling miniatyrbilder. Åtkomsten till andra filer på datorn är begränsad.        </dd>
+      </div>
+
+      <div class="keeptogether">
+        <dt>
+          <strong>Hjälpmedel</strong>
+        </dt>
+
+        <dd>
+          Rita med Tux erbjuder ett antal tillgänglighetsalternativ, inklusive att öka storleken på kontrollknapparna, ändra UI-typsnitt, alternativ för att styra markören (muspekaren) med hjälp av tangentbordet eller andra inmatningsenheter (joystick, gamepad etc.), ett skärmtangentbord och "stick" musklick.        </dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="indent">
+    <header>
+      <h2>
+        C. Licens      </h2>
+    </header>
+
+    <p>
+      Rita med Tux är ett Open Source-projekt, fri programvara som släpps under GNU General Public License (GPL). Det är gratis, och "källkoden" bakom programmet är tillgänglig. (Detta gör att andra kan lägga till funktioner, fixa buggar och använda delar av programmet i sin egen GPL-programvara)    </p>
+
+    <p>
+      Se <a href="../../COPYING.txt">COPYING.txt</a> för den fullständiga texten till GPL-licensen.    </p>
+  </section>
+
+  <section class="indent">
+    <header>
+      <h2>
+        D. Vad är nytt i Rita med Tux version 0.9.35?      </h2>
+    </header>
+
+    <dl>
+  <dt>Förbättrad färgväljare</dt>
+  <dd>Bättre beteende när du klickar/tappar och drar i rutan för nyans/mättnad och värde-reglaget.</dd>
+
+  <dt>Stöd för att klistra in text i urklipp</dt>
+  <dd>Verktygen "Text" och "Etikett" har stöd för att klistra in i klippbordet för copy/paste.</dd>
+
+  <dt>"Hjärtan" Magiskt verktyg</dt>
+  <dd>Rita ett spår av svävande hjärtan.</dd>
+
+  <dt>"Sparkles" Magiskt verktyg</dt>
+  <dd>Rita ett spår av fallande gnistrar.</dd>
+
+  <dt>"Stjärnor" Magiskt verktyg</dt>
+  <dd>Rita ett spår av stjärnor.</dd>
+
+  <dt>Documentation translated to Swedish</dt>
+  <dd></dd>
+</dl>
+
+    <p>
+      Se <a href="../../CHANGES.txt">CHANGES.txt</a> för en fullständig lista över ändringar.    </p>
+  </section>
+
+</section>
+
+    <!-- Using -->
+    <section class="outer">
+      <header>
+        <h1 id="using">
+          II. Använda Rita med Tux        </h1>
+      </header>
+
+      <section class="outer">
+  <header>
+    <h2 id="using_loading">
+      A. Lansering av Rita med Tux    </h2>
+  </header>
+
+  <section class="indent">
+    <header>
+      <h3>
+        1. Linux/Unix-användare      </h3>
+    <header>
+
+    <p>
+      Rita med Tux borde ha placerat en startikon i dina KDE- och/eller GNOME-menyer, under "Graphics"    </p>
+
+    <div class="keeptogether">
+      <p>
+        Alternativt kan du köra följande kommando i en shell-prompt (t.ex.<code>"$</code>"):      </p>
+
+      <blockquote>
+        <code>$ tuxpaint</code>
+      </blockquote>
+    </div>
+
+    <p>
+      Om något fel uppstår visas det på terminalen (till <code>STDERR</code>).    </p>
+  </section>
+
+  <section class="indent">
+    <header>
+      <h3>
+        2. Windows-användare      </h3>
+    </header>
+
+    <table border="0"
+           cellspacing="0"
+           cellpadding="4"
+           bgcolor="#AAAAFF"
+           align="right"
+           summary="">
+      <tr>
+        <td align="center">
+          <img src="../../html/images/icon-win32.png"
+              width="32"
+              height="32"
+              alt="[Rita med Tux-ikon]"><br>
+          Tux Paint
+        </td>
+      </tr>
+    </table>
+
+    <p>
+      Om du har installerat Rita med Tux på din dator med hjälp av "Rita med Tux Installer", har du fått frågan om du vill ha en genväg till Start-menyn och/eller en genväg till skrivbordet. Om du samtyckte kan du helt enkelt köra Rita med Tux från avsnittet "Rita med Tux" i Start-menyn (t.ex. under "Alla program") eller genom att dubbelklicka på ikonen "Rita med Tux" på skrivbordet, om du fick installationsprogrammet att placera en ikon där.    </p>
+
+    <p>
+      Om du använder den "bärbara" (ZIP-fil) versionen av Rita med Tux, eller om du använde "Rita med Tux Installer" men valde att inte ha genvägar installerade, måste du dubbelklicka på ikonen "<code>tuxpaint.exe</code>" i mappen "<code>Tux Paint</code>" på din dator.    </p>
+
+    <p>
+      Som standard kommer "Rita med Tux Installer" att placera Rita med Tuxs mapp i <nobr>"<code style='background: #EEE;'>C:\Programfiler\TuxPaint\</code>"</nobr>, men du kan ha ändrat detta när du körde installationsprogrammet.    </p>
+
+    <p>
+      Om du använde nedladdningen av ZIP-filen kommer Rita med Tux-mappen att finnas där du extraherade innehållet i ZIP-filen.    </p>
+  </section>
+
+  <section class="indent">
+    <header>
+      <h3>
+        3. macOS-användare      </h3>
+    </header>
+
+    <p>
+      Dubbelklicka bara på ikonen "<code>Tux Paint</code>".    </p>
+  </section>
+</section>
+      <section class="outer indent">
+  <div class="keeptogether">
+    <header>
+      <div class="screenshot-right">
+        <img src="../../html/images/tuxpaint-title.jpg"
+           width="324"
+           height="254"
+           alt="[Titelskärm]">
+        <span style="display: none;"><br/>&nbsp;</span>
+      </div>
+      <h2 id="using_title">
+        B. Titelskärm      </h2>
+    </header>
+
+    <p>
+      När Rita med Tux laddas första gången visas en titel- och kreditskärm.    </p>
+  </div>
+
+  <p>
+    När laddningen är klar trycker du på en tangent eller klickar eller trycker på i Rita med Tux-fönstret för att fortsätta. (Eller så försvinner titelskärmen automatiskt efter ca 5 sekunder)  </p>
+
+  <div class="screenshot-right-after"></div>
+</section>
+      <section class="outer indent">
+  <div class="keeptogether">
+    <header>
+      <h2 id="using_main">
+        C. Huvudskärm      </h2>
+    </header>
+
+    <p>
+      Huvudskärmen är indelad i följande avsnitt:    </p>
+  </div>
+
+  <dl>
+    <div class="keeptogether">
+      <!-- FIXME: Update screenshot to add "Fill" tool -->
+      <div class="screenshot-right">
+        <img src="../../html/images/tools.jpg"
+           width="324"
+           height="254"
+           alt=
+           "[Verktyg: Färg, Stämpel, Linjer, Former, Text, Magi, Etikett, Ångra, Gör om, Sudda, Ny, Öppna, Spara, Skriv ut, Avsluta]">
+        <span style="display: none;"><br/>&nbsp;</span>
+      </div>
+      <dt>
+        <strong>Vänster sida: Verktygsfält</strong>
+      </dt>
+
+      <dd>
+        <p>
+          Verktygsfältet innehåller rit- och redigeringskontroller.        </p>
+      </dd>
+    </div>
+
+    <div class="screenshot-right-after"></div>
+
+    <div class="keeptogether">
+      <div class="screenshot-right">
+        <img src="../../html/images/canvas.jpg"
+           width="324"
+           height="254"
+           alt="[Målarduk]">
+        <span style="display: none;"><br/>&nbsp;</span>
+      </div>
+
+      <dt>
+        <strong>Mellan: Ritning Canvas</strong>
+      </dt>
+
+      <dd>
+        <p>
+          Den största delen av skärmen, i mitten, är teckningsytan. Det är naturligtvis här du ritar!        </p>
+
+        <p class="note">
+          <span title="Information">&#128161;</span>          <strong>Observera:</strong> Storleken på ritytan beror på storleken på Rita med Tux. Du kan ändra storleken på Rita med Tux med hjälp av konfigurationsverktyget <em>Konfigurera Rita med Tux</em>. eller på annat sätt. Se avsnittet <a href="OPTIONS.html"><em>Alternativ</em></a> dokumentationen för mer information.        </p>
+      </dd>
+    </div>
+
+    <div class="screenshot-right-after"></div>
+
+    <div class="keeptogether">
+      <div class="screenshot-right">
+        <img src="../../html/images/selector.jpg"
+           width="324"
+           height="254"
+           alt=
+           "[Väljare - penslar, bokstäver, former, stämplar]">
+        <span style="display: none;"><br/>&nbsp;</span>
+      </div>
+
+      <dt>
+        <strong>Höger sida: Väljare</strong>
+      </dt>
+
+      <dd>
+        <p>
+          Väljaren visar olika saker beroende på vilket verktyg som används. När du t.ex. väljer verktyget Paint Brush eller Line visas de olika penslar som finns tillgängliga. När verktyget Rubber Stamp är markerat visas de olika formerna som du kan använda. När text- eller etikettverktyget är markerat visas olika teckensnitt.        </p>
+      </dd>
+    </div>
+
+    <div class="screenshot-right-after"></div>
+
+    <div class="keeptogether">
+      <div class="screenshot-right">
+        <img src="../../html/images/colors.jpg"
+           width="324"
+           height="254"
+           alt=
+           "[Färger - Svart, vit, röd, rosa, orange, gul, grön, cyan, blå, lila, brun, grå]">
+        <span style="display: none;"><br/>&nbsp;</span>
+      </div>
+
+      <dt>
+        <strong>Lägre Färger</strong>
+      </dt>
+
+      <dd>
+        <p>
+          När det aktiva verktyget har stöd för färger visas en palett med färgval längst ned på skärmen. Klicka på en färg för att välja den, så kommer den att användas av det aktiva verktyget. (Till exempel kommer verktyget "Paint" att använda den som färg för att rita med den valda penseln, och verktyget "Fill" kommer att använda den som färg för att fylla ut ett område i bilden)        </p>
+
+        <div class="screenshot-right-after">
+          <img src="../../html/images/colors_special.png"
+              width="105"
+              height="48"
+              alt=""
+              align="right">
+        </div>
+
+        <p id="special_color_options">
+          Längst till höger finns tre speciella färgalternativ:          <ul>
+            <li>
+              <strong>Färgväljare</strong><br/>
+              Med "färgväljaren" (som har en kontur av en pipett) kan du välja en färg som finns i din ritning.<br/>
+              (Det finns en genvägsknapp för att snabbt komma åt denna funktion, se nedan)            </li>
+            <li>
+              <strong>Regnbågspalett</strong><br/>
+              Med regnbågspaletten kan du välja vilken färg du vill genom att välja nyans, mättnad och värde för den färg du vill ha.              En ruta till vänster visar hundratals nyanser - från rött längst upp till violett längst ner - med hundratals mättnads-/intensitetsnivåer - från blek &amp; urtvättad till vänster till ren till höger. En grå vertikal stapel ger tillgång till hundratals värdenivåer - från ljusast upptill till mörkast nedtill.<br/>
+              Klicka på den gröna kryssrutan för att välja färg eller på knappen "Tillbaka" för att stänga av popup-fönstret utan att välja en ny färg.              <div class="screenshot-center">
+                <img src="../../html/images/colors_rainbow_palette.png"
+                  width="542"
+                  height="291"
+                  alt="" />
+              </div>
+              Du kan också ställa in verktygets färg så att den motsvarar andra färgval:              <ul>
+                <li>Oavsett vilken inbyggd färg som väljs, om någon</li>
+                <li>Färgväljarens aktuella färg</li>
+                <li>Färgmixerns aktuella färg</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Färgblandare</strong><br/>
+              Med "färgblandaren" (som har en silhuett av en färgpalett) kan du skapa färger genom att blanda primära additiva färger - rött, gult och blått - tillsammans med vitt (för att "tona"), grått (för att "tona") och svart (för att "skugga").<br/>
+              Du kan klicka på en knapp flera gånger (t.ex. <span class="white-space: nowrap;">röd + röd + gul</span> ger en röd-orange färg). Förhållandet mellan de färger som läggs till visas längst ned.<br/>
+              Du kan börja om (återställa till inga färger i din bild) genom att klicka på knappen "Clear". Du kan också ångra eller göra om flera steg i mixningen om du har gjort ett misstag (utan att behöva börja om från början).<br/>
+              Klicka på den gröna kryssrutan för att välja färg eller på knappen "Tillbaka" för att stänga av popup-fönstret utan att välja en ny färg.              <div class="screenshot-center">
+                <img src="../../html/images/colors_mixer.png"
+                  width="420"
+                  height="320"
+                  alt="" />
+              </div>
+            </li>
+          </ul>
+        </p>
+
+        <p class="note">
+          <span title="Keyboard shortcut">&#9000;</span>          När det aktiva verktyget har stöd för färger kan en genväg användas för snabb åtkomst till alternativet "färgväljare". Håll ned <b><code>[Kontroll]</code></b>-tangenten medan du klickar, så visas färgen under muspekaren längst ned. Du kan dra runt på duken för att hitta den färg du vill ha. När du släpper musknappen kommer färgen under markören att väljas. Om du släpper musen utanför målarduken (t.ex. över området "Tools") kommer färgvalet att lämnas oförändrat. (Detta liknar att klicka på "Tillbaka"-knappen som finns tillgänglig när man tar fram alternativet "färgväljare" via dess knapp i färgpaletten)        </p>
+
+        <p class="note">
+          <span title="Configuration option">&#9881;</span>          <strong>Obs:</strong> Du kan definiera dina egna färger för Rita med Tux. Se avsnittet "<a href="OPTIONS.html"><em>Alternativ</em></a>" dokumentation.        </p>
+      </dd>
+    </div>
+
+    <div class="keeptogether">
+      <div class="screenshot-right">
+        <img src="../../html/images/tips.jpg"
+           width="324"
+           height="254"
+           alt=
+           "(Exempel på tips: "Välj en form. Klicka för att välja centrum, dra och släpp sedan när den har den storlek du vill ha. Flytta runt den för att rotera den och klicka för att rita den)">
+        <span style="display: none;"><br/>&nbsp;</span>
+      </div>
+
+      <dt>
+        <strong>Botten Hjälpområde</strong>
+      </dt>
+
+      <dd>
+        <p>
+          Längst ned på skärmen ger <em>Tux</em>, Linux-pingvinen, tips och annan information medan du använder Rita med Tux.        </p>
+      </dd>
+    </div>
+
+    <div class="screenshot-right-after"></div>
+  </dl>
+</section>
+
+      <!-- Using: Tools -->
+      <section>
+        <header>
+          <h2 id="using_tools">
+            D. Tillgängliga verktyg          </h2>
+        </header>
+
+        <!-- Using: Tools: Drawing -->
+        <section>
+          <header>
+            <h3 id="using_tools_drawing">
+              1. Verktyg för ritning            </h3>
+          </header>
+
+          <dl>
+            <dt id="using_tools_drawing_paint">
+  <strong>a. "Färg"-verktyg (pensel)</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_paint.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    Med verktyget Paint Brush kan du rita på fri hand med hjälp av olika penslar (väljs i väljaren till höger) och färger (väljs i färgpaletten längst ned).  </p>
+
+  <p>
+    Om du håller musknappen nedtryckt och rör musen, kommer den att rita när du rör dig.  </p>
+
+  <p>
+    Vissa penslar är animerade - de ändrar form när du ritar dem.  Ett bra exempel på detta är vinranksborsten som medföljer Rita med Tux.  Dessa penslar har en liten "filmstrip"-ikon ritad på sina Selector-knappar.  </p>
+
+  <p>
+    Andra penslar är riktade - de ritar en annan form beroende på i vilken riktning du målar med dem.  Ett exempel på detta är pilborsten som medföljer Rita med Tux.  Dessa penslar har en liten 8-vägs pilikon ritad på sina Selector-knappar.  </p>
+
+  <p>
+    Slutligen kan vissa penslar vara både riktade <em>och</em> animerade.  Exempel på detta är katt- och ekorrborstarna som medföljer Rita med Tux.  Dessa penslar har både ikonerna "filmstrip" och 8-vägspil.  </p>
+
+  <p>
+    När du ritar spelas ett ljud upp. Ju större pensel, desto lägre tonläge.  </p>
+
+  <div class="screenshot-center">
+    <img src="../../html/images/ex_paint.png"
+       width="120"
+       height="95"
+       alt="">
+  </div>
+
+  <strong id="brush_spacing">Penselavstånd</strong>
+  <blockquote>
+    <p>
+      Avståndet mellan varje position där en pensel appliceras på målarduken kan variera.  Vissa penslar (t.ex. fotavtryck och blommor) är som standard placerade tillräckligt långt ifrån varandra för att inte överlappa varandra.  Andra penslar (t.ex. de grundläggande cirkelformade penslarna) ligger nära varandra så att de bildar ett sammanhängande streck.    </p>
+    <p>
+      Standardavståndet mellan penslarna kan ändras genom att klicka i den triangelformade serien av staplar längst ned till höger; ju större stapel, desto större avstånd. Penselavståndet påverkar båda verktygen som använder penslarna: "Paint"-verktyget och "Lines"-verktyget.    </p>
+    <div class="screenshot-center">
+      <img src=
+      "../../html/images/tool_slider.png"
+         width="96"
+         height="48"
+         alt="">
+    </div>
+    <p class="note">
+      <span title="Configuration option">&#9881;</span>      <strong>Obs</strong>: Om alternativet "<code>nobrushspacing</code>" är inställt kommer Rita med Tux inte att visa kontrollerna för penselavstånd. Se avsnittet "<a href="OPTIONS.html"><em>Alternativ</em></a>" dokumentationen.    </p>
+  </blockquote>
+</dd>
+            <dt id="using_tools_drawing_stamp">
+  <strong>b.verktyg "Stämpel" (gummistämplar)</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_stamp.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    Stämpelverktyget är som en uppsättning gummistämplar eller klistermärken. Med det kan du klistra in förritade eller fotografiska bilder (t.ex. en bild av en häst, ett träd eller månen) i din bild.  </p>
+
+  <p>
+    När du flyttar musen runt på duken följer en kontur musen och visar var stämpeln kommer att placeras och hur stor den kommer att bli. Klicka på den yta där du vill placera stämpeln.  </p>
+
+  <div class="screenshot-center">
+    <img src="../../html/images/ex_stamps.png"
+       width="182"
+       height="156"
+       alt="">
+  </div>
+
+  <dl>
+    <dt>
+      <strong>Stämpelkategorier</strong>
+    </dt>
+
+    <dd>
+      <img src="../../html/images/tool_stamp_categories.png"
+        width="96"
+        height="48"
+        alt=""
+        align="right">
+      Det kan finnas många olika kategorier av stämplar (t.ex. djur, växter, rymden, fordon, människor etc.). Använd vänster- och högerpilarna längst ned på väljaren för att bläddra igenom samlingarna.    </dd>
+
+    <dt>
+      <strong>Rotation av stämpel</strong>
+    </dt>
+
+    <dd>
+      <img src="../../html/images/tool_stamp_rotation.png"
+          width="48"
+          height="48"
+          alt=""
+          align="right">
+      <p>
+        Med hjälp av växlingsknappen för rotation längst ned till höger kan du aktivera ett rotationssteg när du placerar ut stämplar.  När du har placerat stämpeln väljer du vinkeln för att rotera den genom att flytta musen runt på duken.  Klicka på musknappen igen så läggs stämpeln till i ritningen.      </p>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om alternativet "stämpelrotation" är inaktiverat kommer stämpeln att ritas på duken när du släpper musknappen. (Det finns inget rotationssteg.)        Se avsnittet "<a href="OPTIONS.html"><em>Alternativ</em></a>" om du vill veta mer om alternativet "stämpelrotation" ("<code>stamprotation</code>").      </p>
+
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>Obs:</strong> Funktionen för frimärksrotation lades till i Rita med Tux i version 0.9.29.      </p>
+    </dd>
+
+
+    <dt>
+      <strong>Stämpelkontroller</strong>
+    </dt>
+
+    <dd>
+      <img src="../../html/images/tool_stamp_controls.png"
+        width="96"
+        height="96"
+        alt=""
+        align="right">
+
+      <p>
+        Innan du "stämplar" en bild på din ritning kan du ibland använda olika effekter (beroende på stämpel):      </p>
+
+      <ul>
+        <li>
+          Vissa stämplar kan vara färgade eller tonade. Om färgpaletten under duken är aktiverad kan du klicka på färgerna för att ändra stämpelns nyans eller färg innan du placerar den i bilden.        </li>
+
+        <li>
+          Frimärken kan förminskas och förstoras genom att klicka i den triangelformade serien av staplar längst ned till höger; ju större stapel, desto större stämpel kommer att visas i din bild.        </li>
+
+        <li>
+          Många stämplar kan vändas vertikalt eller visas som en spegelbild med hjälp av kontrollknapparna längst ned till höger.        </li>
+      </ul>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs</strong>: Om alternativet "<code>nostampcontrols</code>" är inställt kommer Rita med Tux inte att visa kontrollerna för rotation, spegling, vändning eller storlek för stämplar. Se avsnittet "<a href="OPTIONS.html"><em>Alternativ</em></a>" dokumentationen.      </p>
+
+    </dd>
+
+    <dt>
+      <strong>Stämpel ljud</strong>
+    </dt>
+
+    <dd>
+      <img src="../../html/images/tool_sfx.png"
+        width="48"
+        height="24"
+        alt=""
+        align="right">
+      <p>
+        Olika stämplar kan ha olika ljudeffekter och/eller beskrivande (talade) ljud. Med hjälp av knapparna i hjälpområdet längst ned till vänster (nära Linux-pingvinen <em>Tux</em>) kan du spela upp ljudeffekterna och de beskrivande ljuden för den aktuella stämpeln.      </p>
+    </dd>
+  </dl>
+</dd>
+
+            <dt id="using_tools_drawing_lines">
+  <strong>c."Linjer"-verktyget</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_lines.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    Med detta verktyg kan du rita raka linjer med hjälp av de olika penslar och färger som du normalt använder med Paint Brush.  </p>
+
+  <p>
+    Klicka på musen och håll den intryckt för att välja linjens startpunkt. När du flyttar runt musen kommer en tunn "gummibandslinje" att visa var linjen ska dras. Längst ned ser du linjens vinkel i grader. En linje som går rakt åt höger är 0°, en linje som går rakt uppåt är 90°, en linje som går rakt åt vänster är 180°, en linje som går rakt nedåt är 270°, och så vidare.  </p>
+
+  <p>
+    Släpp musen för att slutföra linjen. Ett "sproing!"-ljud spelas upp.  </p>
+
+  <p>
+    Vissa penslar är animerade och visar ett mönster av former längs linjen.  Andra är riktade och visar en annan form beroende på vinkeln på penseln.  Och slutligen finns det några som är både animerade och riktade.  Se "Måla" ovan om du vill veta mer.  </p>
+
+  <p>
+    Olika penslar har olika avstånd, vilket ger antingen en serie enskilda former eller ett kontinuerligt streck av penselformen. Penselavståndet kan justeras. Se avsnittet om <a href="#brush_spacing">penselavstånd</a> i verktyget "Paint" ovan för mer information.  </p>
+
+  <div class="screenshot-center">
+    <img src="../../html/images/ex_lines.png"
+       width="76"
+       height="103"
+       alt="">
+  </div>
+</dd>
+            <dt id="using_tools_drawing_shapes">
+  <strong>d.verktyget "Shapes"</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_shapes.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    Med detta verktyg kan du rita några enkla fyllda och ofyllda former.  </p>
+
+  <p>
+    Välj en form i väljaren till höger (cirkel, kvadrat, oval etc.).  </p>
+
+  <p>
+    Använd alternativen längst ned till höger för att välja hur formverktyget ska fungera:  </p>
+
+  <dl>
+    <dt>
+      <strong>Former från mitten</strong>
+    </dt>
+
+    <dd>
+      Formen expanderar från den plats där du ursprungligen klickade och centreras runt den positionen.      <br/>
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        Detta var det enda beteendet hos Rita med Tux i version 0.9.24)      </p>
+    </dd>
+
+    <dt>
+      <strong>Former från hörn</strong>
+    </dt>
+
+    <dd>
+      Formen kommer att förlängas med ett hörn som börjar där du ursprungligen klickade. Detta är standardmetoden i de flesta andra traditionella ritprogram.      <p class="note">
+        <span title="Version variation">&#128220;</span>        Detta alternativ lades till från och med Rita med Tux version 0.9.25.      </p>
+    </dd>
+  </dl>
+
+  <p class="note">
+    <span title="Configuration option">&#9881;</span>    <strong>Obs:</strong> Om formkontrollerna är inaktiverade (t.ex. med alternativet "<code>noshapecontrols</code>") visas inte kontrollerna och metoden "former från mitten" används.  </p>
+
+  <p>
+    Klicka på musen i målarduken och håll den intryckt för att sträcka ut formen från den plats där du klickade. Vissa former kan ändra proportion (t.ex. rektangel och oval kan vara bredare än höga eller högre än breda), andra kan inte det (t.ex. kvadrat och cirkel).  </p>
+
+  <p>
+    För former som kan ändra proportion visas formens bildförhållande längst ned.  Till exempel: "1:1" visas om den är "kvadratisk" (lika lång som bred); "2:1" om den antingen är dubbelt så bred som den är lång eller dubbelt så lång som den är bred; och så vidare.  </p>
+
+  <p>
+    Släpp musen när du har stretchat färdigt.  </p>
+
+  <dl>
+    <dt>
+      <strong>Läge för normala former</strong>
+    </dt>
+
+    <dd>
+      <p>
+        Nu kan du flytta musen runt på duken för att rotera formen. Den vinkel som formen roteras i visas längst ned i grader (på samma sätt som med verktyget "Lines", som beskrivs ovan).      </p>
+
+      <p>
+        Klicka på musknappen igen så ritas formen i den aktuella färgen.      </p>
+    </dd>
+
+    <dt>
+      <strong>Läget för enkla former</strong>
+    </dt>
+
+    <dd>
+      Om alternativet "enkla former" är aktiverat kommer formen att ritas på duken när du släpper musknappen. (Det finns inget rotationssteg.)      <p class="note">
+        <span title="Configuration option">&#9881;</span>        Se avsnittet "<a href="OPTIONS.html"><em>Alternativ</em></a>" om du vill veta mer om alternativet "enkla former" ("<code>simpleshapes</code>").      </p>
+    </dd>
+  </dl>
+
+  <div class="screenshot-center">
+    <img src="../../html/images/ex_shapes.png"
+       width="177"
+       height="104"
+       alt="">
+  </div>
+</dd>
+            <dt id="using_tools_drawing_text_and_label">
+  <strong>e.verktyg för "text" och "etikett"</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_text.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    Välj ett teckensnitt (från "Letters" som finns till höger) och en färg (från färgpaletten längst ned). Du kan också lägga till en fet och/eller kursiv stil på texten. Klicka på skärmen så kommer en markör att visas. Skriv in text så visas den på skärmen. (Du kan ändra teckensnitt, färg och styling medan du skriver in texten, innan den appliceras på duken)  </p>
+
+  <p>
+    Tryck på <b><code>[Enter]</code></b> eller <b><code>[Återgå]</code></b> så ritas texten på bilden och markören flyttas en rad nedåt.  </p>
+
+  <p>
+    Alternativt kan du trycka på <strong><code>[Flik]</code></strong> så ritas texten på bilden, men markören flyttas till höger om texten, i stället för nedåt på en rad, och till vänster. (Detta kan vara användbart för att skapa en textrad med blandade färger, typsnitt, stilar och storlekar)  </p>
+
+  <p>
+    Text från urklipp (copy/paste-buffert) kan infogas med verktygen "Text" och "Etikett" genom att trycka på tangentkombinationen <strong><code>[Control]</code> + <code>[V]</code></strong> på ett fysiskt tangentbord eller klicka på knappen "<strong>Paste</strong>" i Rita med Tuxs skärmtangentbord.  Om texten överskrider den högra kanten på målarduken bryts den till en ny textrad (och går tillbaka till föregående mellanslag eller bindestreck ('-') om möjligt).  Om texten når botten av duken avbryts klistringen och texten trunkeras.  </p>
+
+  <p>
+    Om du klickar någon annanstans i bilden medan textinmatningen fortfarande är aktiv flyttas den aktuella textraden till den platsen (där du kan fortsätta att redigera den).  </p>
+
+  <div class="screenshot-center">
+    <img src="../../html/images/ex_text.png"
+       width="139"
+       height="69"
+       alt="">
+  </div>
+
+  <dl>
+    <dt>
+      <strong>"Text" kontra "Etikett"</strong>
+    </dt>
+
+    <dd>
+      <p>
+        <strong>Textverktyget</strong> är det ursprungliga verktyget för textinmatning i Rita med Tux. Text som skrivs in med detta verktyg kan inte ändras eller flyttas senare, eftersom den blir en del av teckningen. Men eftersom texten blir en del av bilden kan den ritas över eller ändras med hjälp av <strong>Magic</strong> Tool-effekter (t.ex. kladdig, tonad, präglad etc.)      </p>
+
+      <p>
+        När du använder verktyget <strong>Label</strong> (som lades till i Rita med Tux i version 0.9.22) "flyter" texten över bilden och detaljerna i etiketten (texten, etikettens position, teckensnitt och färg) lagras separat. Detta gör att etiketten kan flyttas eller redigeras senare.      </p>
+
+      <p>
+        Om du vill redigera en etikett klickar du på knappen för etikettval. Alla etiketter i ritningen visas markerade. Klicka på en - eller använd tangenten <strong><code>[Flik]</code></strong> för att bläddra igenom alla etiketter och tangenten <strong><code>[Enter]</code></strong> eller <strong><code>[Återgå]</code></strong> för att välja en - så kan du redigera etiketten. (Använd <strong><code>[Backsteg]</code></strong>-tangenten för att radera tecken och andra tangenter för att lägga till text i etiketten; klicka i målarduken för att flytta etiketten; klicka i paletten för att ändra färg på texten i etiketten; etc.)      </p>
+
+      <p>
+        Du kan "applicera" en etikett på duken och måla in texten i bilden som om den hade lagts till med hjälp av <strong>textverktyget</strong> genom att klicka på knappen för etikettapplicering. (Denna funktion lades till i Rita med Tux version 0.9.28.) Alla etiketter i bilden markeras och du väljer en etikett på samma sätt som när du väljer en etikett att redigera. Den valda etiketten tas bort och texten läggs till direkt på duken.      </p>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Etikettverktyget</strong> kan inaktiveras (t.ex. genom att välja "Disable 'Label' Tool" i <em>Konfigurera Rita med Tux</em>. eller köra <em>Rita med Tux</em> med alternativet "<code>nolabel</code>").      </p>
+
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        Möjligheten att klistra in text från urklippet lades till i Rita med Tux 0.9.35      </p>
+    </dd>
+
+    <dt>
+      <strong>Inmatning av internationella tecken</strong>
+    </dt>
+
+    <dd>
+      <p>
+        Rita med Tux tillåter inmatning av tecken på olika språk. De flesta latinska tecken<em>(</em><em>A-Z</em>, <em>ñ</em>, <em>è</em>, etc.) kan skrivas in direkt. Vissa språk kräver att Rita med Tux växlas till ett alternativt inmatningsläge innan inmatning, och vissa tecken måste komponeras med hjälp av flera tangenttryckningar.      </p>
+
+      <p>
+        När Rita med Tux är inställt på ett av de språk som har alternativa inmatningslägen används en tangent för att växla mellan normala (latinska tecken) och lokalspecifika lägen.      </p>
+
+      <p>
+        Nedan visas de lokala språk som stöds för närvarande, tillgängliga inmatningsmetoder och tangenter för att växla eller växla mellan olika lägen.      </p>
+
+      <ul>
+        <li>Japanska - Romaniserad Hiragana och Romaniserad Katakana - höger <code><b>[Alt]</b></code>-knapp eller vänster <code><b>[Alt]</b></code>-knapp        </li>
+
+        <li>Koreanska - Hangul 2-Bul - höger <code><b>[Alt]</b></code>-knapp eller vänster <code><b>[Alt]</b></code>-knapp        </li>
+
+        <li>Traditionell kinesiska - höger <code><b>[Alt]</b></code>-knapp eller vänster <code><b>[Alt]</b></code>-knapp        </li>
+
+        <li>Thailändsk - höger <code><b>[Alt]</b></code>-knapp        </li>
+      </ul>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Observera:</strong> Många teckensnitt innehåller inte alla tecken för alla språk, så ibland måste du byta teckensnitt för att se de tecken du försöker skriva.      </p>
+
+    </dd>
+
+    <dt>
+      <strong>Tangentbord på skärmen</strong>
+    </dt>
+
+    <dd>
+      <p>
+        Ett valfritt skärmtangentbord finns tillgängligt för verktygen Text och Etikett, vilket kan ge en mängd olika layouter och teckensammansättningar (t.ex. sammansättning av "a" och "e" till "æ").  Kör Rita med Tux med alternativet "<code>--onscreen-keyboard</code>", eller aktivera den inställningen i Rita med Tux's konfigurationsfil, för att aktivera det.  Flera layouter erbjuds (för närvarande "QWERTY" och "ABC"), som användaren kan växla mellan.  Ytterligare konfigurationsalternativ gör det möjligt att ange en standardlayout samt att förhindra att layouten ändras.      </p>
+
+      <p>
+        Skärmtangentbordet visas längst ner eller längst upp i Rita med Tux-fönstret och skymmer en del av arbetsytan, beroende på var markören för textinmatning är placerad.  Förutom alfabetiska och numeriska tangenter samt vissa skiljetecken har tangentbordet följande funktioner:        <ul>
+          <li>En "Backspace"-knapp (⇐) för att ta bort föregående tecken</li>
+          <li>En "Carriage Return"-tangent ("Return"/"Enter") (⏎) för att avsluta den aktuella inmatningen och påbörja en ny på följande rad (under och till vänster)</li>
+          <li>En "Tab"-knapp (⇔) för att avsluta den aktuella inmatningen och påbörja en ny vid markörens aktuella position</li>
+          <li>En "Shift"-knapp (⇑) för att flytta alfabetiska knappar från gemener till versaler, få tillgång till fler skiljetecken etc.</li>
+          <li>En "Caps Lock"-knapp (⤒) för att växla permanent växling av alfabetiska tangenter från gemener till versaler (klicka på den igen för att avaktivera Caps Lock)</li>
+          <li>En "Compose"-knapp ("Cmp") för att starta teckenkomposition (t.ex. klicka på "Cmp", "a", "e" för att skapa ett "æ"-tecken)</li>
+          <li>En "Alternate Graphics"-knapp ("AltGr") för att komma åt ytterligare tecken (t.ex. "¿", "ß" etc.)</li>
+          <li>En "alternativ" tangent ("Alt")</li>
+          <li>En "Klistra in"-knapp för att klistra in texten i det aktuella urklippet i text- eller etikettverktyget</li>
+          <li>Vänster- och högerpilar (← &amp; →) för att komma åt olika tangentbordslayouter på skärmen</li>
+        </ul>
+      </p>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        Se avsnittet "<a href="OPTIONS.html"><em>Alternativ</em></a>" och "<a href="EXTENDING.html"><em>Utökning av Rita med Tux</em></a>" för mer information.      </p>
+    </dd>
+  </dl>
+</dd>
+            <dt id="using_tools_drawing_fill">
+  <strong>f."Fyll"-verktyget</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_fill.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    Verktyget "Fill" fyller ett sammanhängande område i din ritning med en valfri färg.  Tre fyllningsalternativ erbjuds:    <ul>
+      <li><strong>Solid</strong> - klicka en gång för att fylla ett område med en solid färg.</li>
+      <li><strong>Brush</strong> - klicka och dra för att fylla ett område med en solid färg genom att måla på fri hand.</li>
+      <li><strong>Linjär</strong> - klicka och dra sedan för att fylla området med en färg som tonas ut (en gradient) mot den plats där du drar musen.</li>
+      <li><strong>Radial</strong> - klicka en gång för att fylla ett område med en färg som tonas ut (en gradient) radiellt, centrerat på den plats där du klickade.</li>
+      <li><strong>Shaped</strong> - klicka en gång för att fylla ett område med en färg som tonas ut (en gradient) och följer konturerna av den form du fyller.</li>
+      <li><strong>Eraser</strong> - klicka en gång för att radera ett område, vilket exponerar den enfärgade bakgrunden, eller bakgrundsbilden för start eller mall, som teckningen baserades på. (Se <a href="#using_tools_drawing_eraser">Tillgängliga verktyg &gt; Verktyg för ritning &gt; Verktyget "Sudda"</a> och <a href="#new-starter-template">Övriga kontroller &gt; 'Startbilder' &amp; Mallbilder</a>.)</li>
+    </ul>
+  </p>
+
+  <p class="note">
+    <span title="Version variation">&#128220;</span>    <strong>Obs:</strong> Före Rita med Tux 0.9.24 var "Fill" ett magiskt verktyg (se nedan).    Före Rita med Tux 0.9.26 erbjöd verktyget "Fill" endast fyllningsmetoden "Solid".    "Shaped" fill introducerades i Rita med Tux 0.9.29.  </p>
+</dd>
+            <dt id="using_tools_drawing_magic">
+  <strong>g."Magiskt" verktyg (specialeffekter)</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_magic.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    Det magiska verktyget är egentligen en uppsättning specialverktyg. Välj en av de "magiska" effekterna i väljaren till höger. Sedan kan du, beroende på verktyget, antingen klicka och dra runt bilden och/eller bara klicka på bilden en gång för att tillämpa effekten.  </p>
+
+  <strong>Magiverktyg</strong>
+  <blockquote>
+    <p>
+      Se <a href="../magic-docs/html/index.html">instruktionerna för varje Magic-verktyg</a> (i mappen "magic-docs").    </p>
+  </blockquote>
+
+  <strong>Magiska kontroller</strong>
+  <blockquote>
+    <p>
+      Om verktyget kan användas genom att klicka och dra kommer en "painting"-knapp att finnas till vänster, under listan med Magic-verktyg på höger sida av skärmen. Om verktyget kan påverka hela bilden på en gång finns en "hela bilden"-knapp till höger.    </p>
+    <div class="screenshot-center">
+      <img src=
+      "../../html/images/tool_magic_controls.png"
+         width="96"
+         height="48"
+         alt="">
+    </div>
+    <p class="note">
+      <span title="Configuration option">&#9881;</span>      <strong>Obs</strong>: Om alternativet "<code>nomagiccontrols</code>" är inställt kommer Rita med Tux inte att visa målningen eller hela bildkontrollerna. Se avsnittet "<a href="OPTIONS.html"><em>Alternativ</em></a>" dokumentationen.    </p>
+    <p class="note">
+      <span title="Information">&#128161;</span>      Om de magiska kontrollerna är inaktiverade kan Magic plugin göra separata verktyg tillgängliga, ett för målning och ett som påverkar hela bilden.    </p>
+  </blockquote>
+
+  <strong>Magisk storlek</strong>
+  <blockquote>
+    <p>
+      Vissa verktyg erbjuder olika storleksalternativ. Om så är fallet visas ett reglage längst ned till höger på skärmen. Detta kan påverka radien för en specialeffekt (t.ex. Darken) eller ett målat objekt (t.ex. Patterns), eller andra attribut (t.ex. stora kontra små tegelstenar).    </p>
+
+    <div class="screenshot-center">
+      <img src=
+      "../../html/images/tool_slider.png"
+         width="96"
+         height="48"
+         alt="">
+    </div>
+    <p class="note">
+      <span title="Configuration option">&#9881;</span>      <strong>Obs</strong>: Om alternativet "<code>nomagicsizes</code>" är inställt kommer Rita med Tux inte att visa storlekskontrollerna. Se avsnittet "<a href="OPTIONS.html"><em>Alternativ</em></a>" dokumentationen.    </p>
+    <p class="note">
+      <span title="Information">&#128161;</span>      Om storleksalternativet är inaktiverat kan Magic-pluginet helt enkelt erbjuda en standardstorlek (t.ex. Patterns), eller så kan det göra separata verktyg tillgängliga med olika förinställda storlekar (t.ex. Bricks och Googly Eyes).    </p>
+    <p class="note">
+      <span title="Version variation">&#128220;</span>      Detta alternativ lades till från och med Rita med Tux version 0.9.30.    </p>
+  </blockquote>
+
+  <p class="note">
+    <span title="Configuration option">&#9881;</span>    <strong>Obs</strong>: Om alternativet "<code>ungroupmagictools</code>" är inställt kommer Rita med Tux inte att dela upp Magic-verktygen i grupper av relaterade verktyg, utan istället presentera dem alla som en enda stor lista. Se avsnittet "<a href="OPTIONS.html"><em>Alternativ</em></a>" dokumentationen.  </p>
+</dd>
+            <dt id="using_tools_drawing_eraser">
+  <strong>h.Verktyget "Sudda"</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_eraser.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    Detta verktyg fungerar på samma sätt som en målarpensel. Var du än klickar (eller klickar och drar) raderas det som du har lagt till i din ritning, så att du får fram den bakgrund som du valde när du började rita, oavsett om det är en enfärgad bild, bakgrunden till en "Startbild"-bild eller en "Template"-bild. (Se <a href="#using_tools_other_new">Tillgängliga verktyg &gt; Övriga kontroller &gt; "Nytt" kommando</a>.)  </p>
+
+  <p>
+    <img src="../../html/images/tool_eraser_erasers.png"
+        width="411"
+        height="192"
+        alt=""
+        align="right" />
+    Ett antal olika typer av suddgummin finns tillgängliga, var och en med flera storlekar:    <ul>
+      <li>
+        Square - Kvadratformade suddgummin som helt tar bort delar av din teckning.      </li>
+      <li>
+        Circle (solid) - Cirkelformade suddgummin som helt tar bort delar av din teckning.      </li>
+      <li>
+        Fuzzy-edged Circle - Cirkelformade suddgummin med mjuka kanter som smälter in i bakgrunden.      </li>
+      <li>
+        Transparent Circle - Cirkelformade suddgummin som gör att din teckning smälter samman med bakgrunden. Släpp och klicka igen för att exponera mer och mer av bakgrunden.      </li>
+    </ul>
+  </p>
+
+  <p>
+    När du flyttar musen följer en kontur pekaren och visar vilken del av bilden som ska raderas.  </p>
+
+  <p>
+    När du raderar spelas ett "pipigt rent" radergummitorkningsljud upp.  </p>
+
+
+  <p class="note">
+    <span title="Keyboard shortcut">&#9000;</span>    Håll ned <b><code>[X]</code></b>-tangenten medan du klickar för att snabbt få tillgång till ett litet, vasst, runt suddgummi (inte tillgängligt när verktygen Text eller Etikett är valda, när du håller på att rotera en stämpel eller form eller när du använder ett interaktivt magiskt verktyg). Släpp musen för att återgå till det aktuella verktyget.  </p>
+</dd>
+          </dl>
+        </section>
+        <!-- Using: Tools: Drawing -->
+
+        <!-- Using: Tools: Other -->
+        <section>
+          <header>
+            <h3 id="using_tools_other">
+              2. Övriga kontroller            </h3>
+          </header>
+
+          <dl>
+            <dt id="using_tools_other_undo_and_redo">
+  <strong>a.kommandona "Ångra" och "Gör om"</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_redo.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <img src="../../html/images/tool_undo.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+
+  <p>
+    Genom att klicka på knappen "Undo" ångrar (återställer) du den senaste ritningen. Du kan till och med ångra mer än en gång!  </p>
+
+  <p class="note">
+    <span title="Keyboard shortcut">&#9000;</span>    <strong>Du</strong> kan också trycka på <b><code>[Kontroll / &#8984;]</code></b> + <code><b>[Z]</b></code> på tangentbordet för att komma till Ångra.  </p>
+
+  <p>
+    Om du klickar på knappen "Redo" görs den ritningsåtgärd om som du just avbröt med kommandot "Undo".  </p>
+
+  <p>
+    Så länge du inte drar igen kan du göra om lika många gånger som du hade ogjort!  </p>
+
+  <p class="note">
+    <span title="Keyboard shortcut">&#9000;</span>    <strong>Du</strong> kan också trycka på <b><code>[Kontroll / &#8984;]</code></b> + <code><b>[R]</b></code> på tangentbordet för att komma till Gör om.  </p>
+</dd>
+            <dt id="using_tools_other_new">
+  <strong>b."Nytt" kommando</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_new.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    Genom att klicka på knappen "New" startar du en ny teckning. En dialogruta visas där du kan välja att starta en ny bild med en enfärgad bakgrundsfärg eller med en "Startbild"- eller "Template"-bild<a href="#new-starter-template">(se nedan).</a> Du kommer först att få frågan om du verkligen vill göra detta.  </p>
+
+  <p>
+    När du använder verktyget "Eraser" tas det som du har lagt till i din teckning bort, så att den bakgrund du valde när du började rita en ny teckning framträder. (Se <a href="#using_tools_drawing_eraser">Tillgängliga verktyg &gt; Verktyg för ritning &gt; Verktyget "Sudda"</a>.)
+  <p class="note">
+    <span title="Keyboard shortcut">&#9000;</span>    <strong>Du</strong> kan också trycka på <b><code>[Kontroll / &#8984;]</code></b> + <code><b>[N]</b></code> på tangentbordet för att komma till starta en ny ritning.  </p>
+
+  <dl>
+    <dt><strong>Särskilda val av solid bakgrundsfärg</strong></dt>
+    <dd>
+      Förutom de förinställda solida färgerna kan du också välja färger med hjälp av en regnbågspalett eller en "färgmixer". Dessa fungerar på samma sätt som de alternativ som finns i färgpaletten som visas under duken när du ritar en bild. Se <a href="#special_color_options">Huvudskärm &gt; Lägre Färger &gt; Särskilda färgalternativ</a> för mer information.    </dd>
+
+    <dt id="new-starter-template"><strong>'Startbilder' &amp; Mallbilder</strong></dt>
+    <dd>
+      <ul>
+        <li>"Startbilder" kan bete sig som en sida i en målarbok - en svartvit kontur av en bild som du sedan kan färglägga, och den svarta konturen förblir intakt - eller som ett 3D-fotografi, där du ritar mellan ett förgrunds- och ett bakgrundslager.</li>
+        <li>"Templates" är snarlika, men ger helt enkelt en bakgrundsritning att arbeta utifrån. Till skillnad från "Startbilder" finns det inget lager som ligger kvar i förgrunden för allt du ritar i bilden.</li>
+      </ul>
+
+      <p>
+        När du använder verktyget "Eraser" eller "Eraser"-läget i verktyget "Fill" kommer originalbilden från "Startbild" eller "Template" att visas igen.  (Se <a href="#using_tools_drawing_eraser">Tillgängliga verktyg &gt; Verktyg för ritning &gt; Verktyget "Sudda" och</a> <a href="#using_tools_drawing_fill">"Fyll"-verktyget</a>.)      </p>
+
+      <p>
+        De magiska verktygen "Flip" och "Mirror" påverkar också orienteringen av "Startbild" eller "Template". (Se <a href="../magic-docs/html/flip.html">Tillgängliga verktyg &gt; "Magiskt" verktyg (specialeffekter) &gt; Vänd och</a> <a href="../magic-docs/html/mirror.html">Spegel</a>.)      </p>
+
+      <p>
+        När du laddar en "Startbild" eller "Template", ritar på den och sedan klickar på "Save" skapas en ny bildfil - originalet skrivs inte över, så du kan använda den igen senare (genom att öppna den från dialogrutan "New").      </p>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        Du kan skapa dina egna "Startbild"- och mallbilder. Se avsnitten om " <a href="EXTENDING.html#startbilder">Startbild</a> " och " <a href="EXTENDING.html#templates">Templates</a>" i dokumentationen <em>Extending Rita med Tux</em>.      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        Du kan också konvertera dina sparade ritningar till mallar direkt i Rita med Tux, från dialogrutan "Öppna". Se "<a href="#using_tools_other_open">Öppna</a>" nedan.      </p>
+    </dd>
+
+    <dt><strong>Radering av exporterade mallbilder</strong></dt>
+    <dd>
+      <img src="../../html/images/open_erase.png"
+          width="48"
+          height="48"
+          alt=""
+          align="right">
+      <p>
+        Om du har valt en mall i din personliga mallmapp och den skapades i Rita med Tux (med hjälp av knappen "Mall" i dialogrutan " <a href="#using_tools_other_open">Öppna"</a> ), kan du ta bort den från Rita med Tux också.  En "Erase"-knapp (papperskorg) visas längst ned till höger i listan. Klicka på den för att radera den valda mallen. (Du kommer att bli ombedd att bekräfta)      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Obs:</strong> På Linux, Windows och macOS kommer bilden att placeras i skrivbordets papperskorg (där du kan återställa den om du ändrar dig).      </p>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs: "</strong> Erase"-knappen kan avaktiveras via alternativet "<code>noerase</code>".      </p>
+
+      <div class="screenshot-right-after"></div>
+    </dd>
+  </dl>
+
+  <p class="note">
+    <span title="Configuration option">&#9881;</span>    <strong>Obs:</strong> De solida färgerna kan placeras i slutet av dialogrutan "Ny" (under Start och Mallar) med hjälp av alternativet "<code>newcolorslast</code>".  </p>
+
+</dd>
+            <dt id="using_tools_other_open">
+  <strong>c.kommando "Öppna"</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_open.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    Här visas en lista över alla bilder som du har sparat. Om det finns fler bilder än vad som ryms på skärmen kan du använda upp- och nedpilarna längst upp och längst ned i listan för att bläddra igenom listan med bilder.  </p>
+
+  <div class="screenshot-center">
+    <img src="../../html/images/open_dialog.jpg"
+       width="194"
+       height="152"
+       alt="">
+  </div>
+
+  <p>
+    Klicka på en bild för att markera den, och sedan...
+    <ul>
+      <li>
+        <img src="../../html/images/open_open.png"
+            width="48"
+            height="48"
+            alt=""
+            align="right">
+        <p>
+          Klicka på den gröna "Öppna"-knappen längst ned till vänster i listan för att ladda den valda bilden. Du kommer sedan att kunna redigera den.        </p>
+
+        <p>
+          (Alternativt kan du dubbelklicka på ikonen för en bild för att ladda den)        </p>
+
+        <p class="note">
+          <span title="Information">&#128161;</span>          Om du väljer att öppna en bild och din nuvarande teckning inte har sparats, kommer du att få frågan om du vill spara den eller inte. (Se "<a href="#using_tools_other_save">Spara</a>" nedan.)        </p>
+
+        <div class="screenshot-right-after"></div>
+      </li>
+
+      <li>
+        <img src="../../html/images/open_erase.png"
+            width="48"
+            height="48"
+            alt=""
+            align="right">
+        <p>
+          Klicka på den bruna "Erase"-knappen (papperskorgen) längst ned till höger i listan för att radera den valda bilden. (Du kommer att bli ombedd att bekräfta.)        </p>
+
+        <p class="note">
+          <span title="Version variation">&#128220;</span>          <strong>Obs:</strong> På Linux (från och med version 0.9.22), Windows (från och med version 0.9.27) och macOS (från och med version 0.9.29) placeras bilden i skrivbordets papperskorg (där du kan återställa den om du ändrar dig).        </p>
+
+        <p class="note">
+          <span title="Configuration option">&#9881;</span>          <strong>Obs: "</strong> Erase"-knappen kan avaktiveras via alternativet "<code>noerase</code>".        </p>
+
+        <div class="screenshot-right-after"></div>
+      </li>
+
+      <li clear="all">
+        <img src="../../html/images/open_export.png"
+            width="48"
+            height="48"
+            alt=""
+            align="right">
+        <p>
+          Klicka på "Export"-knappen längst ned till höger för att exportera den valda bilden till din exportmapp. (t.ex. "<code>~/Pictures/TuxPaint/</code>")        </p>
+        <div class="screenshot-right-after"></div>
+      </li>
+    </ul>
+  </p>
+
+  <p>
+    Från skärmen "Öppna" kan du också:    <ul>
+      <li>
+        <img src="../../html/images/open_slides.png"
+            width="48"
+            height="48"
+            alt=""
+            align="right">
+        <p>
+          Klicka på den blå knappen "Slides" (bildprojektor) längst ned till vänster för att gå till bildspelsläge. Se "<a href="#using_tools_other_open_slides">Diabilder</a>" nedan för mer information.        </p>
+        <div class="screenshot-right-after"></div>
+      </li>
+
+      <li>
+        <img src="../../html/images/open_template.png"
+            width="48"
+            height="48"
+            alt=""
+            align="right">
+        <p>
+          Klicka på den blå "Template"-knappen längst ned till vänster för att konvertera den valda bilden till en ny mall, som kan användas som underlag för nya ritningar.        </p>
+        <div class="screenshot-right-after"></div>
+
+        <p class="note">
+          <span title="Version variation">&#128220;</span>          <strong>Obs:</strong> Funktionen för att skapa mallar lades till i Rita med Tux i version 0.9.31.          För att lära dig hur du skapar mallar utanför Rita med Tux, se <a href="EXTENDING.html#templates"><cite>Utöka Rita med Tux</cite></a>        </p>
+
+        <p class="note">
+          <span title="Configuration option">&#9881;</span>          Funktionen för att skapa mallar kan avaktiveras (t.ex. genom att välja "Disable 'Make Template'" i <em>Konfigurera Rita med Tux</em>. eller köra <em>Rita med Tux</em> med alternativet "<code>notemplateexport</code>").        </p>
+      </li>
+
+      <li>
+        <img src="../../html/images/open_back.png"
+            width="48"
+            height="48"
+            alt=""
+            align="right">
+        <p>
+          Klicka på den röda "Tillbaka"-pilen längst ned till höger i listan för att avbryta och återgå till den bild du höll på att rita.        </p>
+        <div class="screenshot-right-after"></div>
+      </li>
+    </ul>
+  </p>
+
+  <p class="note">
+    <span title="Keyboard shortcut">&#9000;</span>    <strong>Du</strong> kan också trycka på <b><code>[Kontroll / &#8984;]</code></b> + <code><b>[O]</b></code> på tangentbordet för att komma till ta fram dialogrutan "Öppna.  </p>
+</dd>
+            <dt id="using_tools_other_save">
+  <strong>d.kommando "Spara"</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_save.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    Detta sparar din aktuella bild.  </p>
+
+  <p>
+    Om du inte har sparat den tidigare skapas en ny post i listan över sparade bilder. (d.v.s. det kommer att skapas en ny fil)  </p>
+
+  <p class="note">
+    <span title="Information">&#128161;</span>    <strong>Observera:</strong> Du kommer inte att bli tillfrågad om något (t.ex. ett filnamn). Bilden sparas helt enkelt och en ljudeffekt av typen "kameraslutare" spelas upp.  </p>
+
+  <p>
+    Om du <em>har</em> sparat bilden tidigare, eller om det är en bild som du just har laddat med kommandot "Open", får du först frågan om du vill spara över den gamla versionen eller skapa en ny post (en ny fil).  </p>
+
+  <div class="screenshot-center">
+    <img src="../../html/images/saveover.png"
+       width="177"
+       height="110"
+       alt="">
+  </div>
+
+  <p class="note">
+    <span title="Configuration option">&#9881;</span>    <strong>Obs:</strong> Om alternativen "<code>saveover</code>" eller "<code>saveovernew</code>" är inställda kommer det inte att fråga innan du sparar över. Se avsnittet "<a href="OPTIONS.html"><em>Alternativ</em></a>" dokumentationen.  </p>
+
+  <p class="note">
+    <span title="Keyboard shortcut">&#9000;</span>    <strong>Du</strong> kan också trycka på <b><code>[Kontroll / &#8984;]</code></b> + <code><b>[S]</b></code> på tangentbordet för att komma till sparat.  </p>
+</dd>
+            <dt id="using_tools_other_print">
+  <strong>e.kommando "Skriv ut"</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_print.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    Klicka på den här knappen så kommer din bild att skrivas ut!  </p>
+
+  <p>
+    På de flesta plattformar kan du också hålla ned <b><code>[Alt]</code></b>-tangenten (kallas <b><code>[Alternativ]</code></b> på Mac-datorer) medan du klickar på knappen "Skriv ut" för att få en skrivardialog. Observera att detta kanske inte fungerar om du kör Rita med Tux i helskärmsläge. Se nedan.  </p>
+
+  <dl>
+    <dt>
+      <strong>Inaktivera utskrifter</strong>
+    </dt>
+
+    <dd>
+      <p>
+        Alternativet "<code>noprint</code>" kan ställas in, vilket kommer att inaktivera Rita med Tux's "Print" -knapp.      </p>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        Se avsnittet "<a href="OPTIONS.html"><em>Alternativ</em></a>" dokumentation.      </p>
+    </dd>
+
+    <dt>
+      <strong>Begränsning av utskrift</strong>
+    </dt>
+
+    <dd>
+      <p>
+        Alternativet "<code>printdelay</code>" kan ställas in, vilket endast tillåter enstaka utskrifter - en gång varannan sekund, enligt din konfiguration.      </p>
+
+      <p>
+        Med "<code>printdelay=60</code>" i Rita med Tuxs konfigurationsfil kan utskriften t.ex. bara ske en gång per minut (60 sekunder).      </p>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        Se avsnittet "<a href="OPTIONS.html"><em>Alternativ</em></a>" dokumentation.      </p>
+    </dd>
+
+    <dt>
+      <strong>Kommandon för utskrift</strong>
+    </dt>
+
+    <dd>
+      <p>
+        <em>(endast Linux och Unix)</em>
+      </p>
+
+      <p>
+        Rita med Tux skriver ut genom att generera en PostScript-representation av teckningen och skicka den till ett externt program. Som standard är programmet:      </p>
+
+      <blockquote>
+        <code>lpr</code>
+      </blockquote>
+
+      <p>
+        Detta kommando kan ändras genom att ställa in ett "<code>printcommand</code>"-alternativ i Rita med Tuxs konfigurationsfil.      </p>
+
+      <p>
+        Ett alternativt utskriftskommando kan aktiveras genom att hålla ned tangenten "<b><code>[Alt]</code></b>" på tangentbordet samtidigt som du klickar på knappen "Skriv ut", så länge du inte är i helskärmsläge körs ett alternativt program. Som standard är programmet KDE:s grafiska utskriftsdialog:      </p>
+
+      <blockquote>
+        <code>kprinter</code>
+      </blockquote>
+
+      <p>
+        Detta kommando kan ändras genom att ställa in ett "<code>altprintcommand</code>"-alternativ i Rita med Tuxs konfigurationsfil.      </p>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        Se avsnittet "<a href="OPTIONS.html"><em>Alternativ</em></a>" dokumentation.      </p>
+    </dd>
+
+    <dt>
+      <strong>Inställningar för skrivare</strong>
+    </dt>
+
+    <dd>
+      <p>
+        <em>(Windows och macOS)</em>
+      </p>
+
+      <p>
+        Som standard skriver Rita med Tux helt enkelt ut till standardskrivaren med standardinställningar när du trycker på knappen "Skriv ut".      </p>
+
+      <p>
+        Men om du håller ned tangenten <b><code>[Alt]</code></b> (eller <b><code>[Alternativ]</code></b>) på tangentbordet medan du klickar på knappen "Skriv ut", så länge du inte är i helskärmsläge, visas operativsystemets skrivardialog där du kan ändra inställningarna.      </p>
+
+      <p>
+        Du kan lagra ändringarna i skrivarens konfiguration mellan Rita med Tux-sessionerna genom att ställa in alternativet "<code>printcfg</code>".      </p>
+
+      <p>
+        Om alternativet "<code>printcfg</code>" används kommer skrivarinställningarna att hämtas från filen "<code>printcfg.cfg</code>" i din personliga mapp (se nedan). Eventuella ändringar sparas även där.      </p>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        Se avsnittet "<a href="OPTIONS.html"><em>Alternativ</em></a>" dokumentation.      </p>
+    </dd>
+
+    <dt>
+      <strong>Alternativ för skrivardialog</strong>
+    </dt>
+
+    <dd>
+      <p>
+        Som standard visar Rita med Tux bara skrivardialogen (eller, under Linux/Unix, kör "<code>altprintcommand</code>"; t.ex. "<code>kprinter</code>" i stället för "<code>lpr</code>") om tangenten <b><code>[Alt]</code></b> (eller <b><code>[Alternativ]</code></b>) hålls nedtryckt medan du klickar på knappen "Skriv ut".      </p>
+
+      <p>
+        Detta beteende kan dock ändras. Du kan få skrivardialogen att alltid visas genom att använda "<code>--altprintalways</code>" på kommandoraden eller "<code>altprint=always</code>" i Rita med Tuxs konfigurationsfil. Omvänt kan du förhindra att tangenterna <b><code>[Alt]</code></b>/<b><code>[Alternativ]</code></b> har någon effekt genom att använda "<code>--altprintnever</code>" eller "<code>altprint=never</code>".      </p>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        Se avsnittet "<a href="OPTIONS.html"><em>Alternativ</em></a>" dokumentation.      </p>
+    </dd>
+  </dl>
+</dd>
+            <dt id="using_tools_other_open_slides">
+  <strong>f.kommando "Slides" (under "Open")</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/open_slides.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    Knappen "Slides" finns tillgänglig i dialogrutan "Open". Den kan användas för att spela upp en enkel animation i Rita med Tux eller ett bildspel med bilder. Den kan också exportera en animerad GIF baserad på de valda bilderna.  </p>
+
+  <dl>
+    <dt>
+      <strong>Välja bilder</strong>
+    </dt>
+
+    <dd>
+      <p>
+        När du går in i avsnittet "Slides" i Rita med Tux visas en lista över dina sparade filer, precis som i dialogrutan "Öppna".      </p>
+
+      <p>
+        Klicka på de bilder som du vill visa i en bildspelsliknande presentation, en efter en. En siffra visas över varje bild, så att du vet i vilken ordning de kommer att visas.      </p>
+
+      <p>
+        Du kan klicka på en markerad bild för att avmarkera den (ta bort den från bildspelet). Klicka på den igen om du vill lägga till den i slutet av listan.      </p>
+    </dd>
+
+    <dt>
+      <strong>Ställ in uppspelningshastighet</strong>
+    </dt>
+
+    <dd>
+      <p>
+        En glidande skala längst ner till vänster på skärmen (bredvid knappen "Spela upp") kan användas för att justera hastigheten på bildspelet eller den animerade GIF:en, från långsammast till snabbast. Välj inställningen längst till vänster för att inaktivera automatisk framflyttning under uppspelning i Rita med Tux - du måste trycka på en tangent eller klicka för att gå till nästa bild (se nedan).      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Obs:</strong> Den långsammaste inställningen gör att du inte automatiskt avancerar genom bilderna. Använd den när du vill gå igenom dem manuellt. (Detta gäller inte för en exporterad animerad GIF)      </p>
+
+      <div class="screenshot-center">
+        <img src=
+        "../../html/images/tool_slider.png"
+           width="96"
+           height="48"
+           alt="">
+      </div>
+    </dd>
+
+    <dt>
+      <strong>Uppspelning i Rita med Tux</strong>
+    </dt>
+
+    <dd>
+      <p>
+        Om du vill spela upp ett bildspel i Rita med Tux klickar du på knappen "Spela upp".      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Obs</strong>: Om du inte har valt några bilder kommer <em>alla</em> dina sparade bilder att spelas upp i bildspelet!      </p>
+
+      <p>
+        Under bildspelet kan du trycka på <b><code>[Mellanslag]</code></b>, <b><code>[Enter]</code></b>, <b><code>[Återgå]</code></b> eller <b><code>[Pil höger]</code></b> - eller klicka på knappen "Nästa" längst ned till vänster - för att manuellt gå vidare till nästa bild. Tryck på <b><code>[Vänster pil]</code></b> för att gå tillbaka till föregående bild.      </p>
+
+      <p>
+        Tryck på <b><code>[Avsluta meny]</code></b> eller klicka på "Tillbaka"-knappen längst ned till höger för att avsluta bildspelet och återgå till skärmen för val av bild i bildspelet.      </p>
+    </dd>
+
+    <dt>
+      <strong>Exportera en animerad GIF</strong>
+    </dt>
+
+    <dd>
+      <p>
+        <img src=
+        "../../html/images/open_slides_export_gif.png"
+           width="48"
+           height="48"
+           alt=""
+           align="right">
+           Klicka på knappen "GIF Export" längst ned till höger för att låta Rita med Tux generera en animerad GIF-fil baserat på de valda bilderna.      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Obs:</strong> Minst två bilder måste väljas. (Om du vill exportera en enda bild använder du alternativet "Exportera" i huvuddialogen "Öppna") Om inga bilder väljs kommer Rita med Tux <em>inte</em> att försöka generera en GIF baserad på alla sparade bilder.      </p>
+
+      <p>
+        Om du trycker på <b><code>[Avsluta meny]</code></b> under exportprocessen avbryts processen och du kommer tillbaka till dialogrutan "Bildspel".      </p>
+    </dd>
+  </dl>
+
+  <p>
+    Klicka på "Tillbaka" på skärmen för val av bild i bildspelet för att återgå till dialogrutan "Öppna".  </p>
+</dd>
+            <dt id="using_tools_other_quit">
+  <strong>g.kommando "Avsluta"</strong>
+</dt>
+
+<dd>
+  <img src="../../html/images/tool_quit.png"
+      width="48"
+      height="48"
+      alt=""
+      align="right">
+  <p>
+    Klicka på knappen "Avsluta", stäng fönstret Rita med Tux eller tryck på tangenten <b><code>[Avsluta meny]</code></b> för att avsluta Rita med Tux.  </p>
+
+  <p>
+    Du kommer först att få frågan om du verkligen vill sluta.  </p>
+
+  <p>
+    Om du väljer att avsluta och inte har sparat den aktuella bilden, får du först frågan om du vill spara den. Om det inte är en ny bild kommer du att få frågan om du vill spara över den gamla versionen eller skapa en ny post. (Se "<a href="#using_tools_other_save">Spara</a>" ovan.)  </p>
+
+  <p class="note">
+    <span title="Configuration option">&#9881;</span>    <strong>Obs:</strong> Om bilden sparas kommer den att laddas om automatiskt nästa gång du kör Rita med Tux - om inte alternativet "<code>startblank</code>" är inställt.  </p>
+
+  <p class="note">
+    <span title="Configuration option">&#9881;</span>    <strong>Obs:</strong> Knappen "Avsluta" i Rita med Tux och avslutning via <b><code>[Avsluta meny]</code></b> kan inaktiveras via alternativet "<code>noquit</code>".  </p>
+
+  <p>
+    I så fall kan knappen "Stäng fönster" på Rita med Tuxs titelrad (om den inte är i helskärmsläge) eller tangentsekvensen <b><code>[Alt]</code></b> + <b><code>[F4]</code></b> användas för att avsluta.  </p>
+
+  <p>
+    Om inget av detta är möjligt kan tangentsekvensen <b><code>[Skift]</code></b> + <b><code>[Kontroll / &#8984;]</code></b> + <b><code>[Avsluta meny]</code></b> användas för att avsluta.  </p>
+
+  <p class="note">
+    <span title="Configuration option">&#9881;</span>    Se avsnittet "<a href="OPTIONS.html"><em>Alternativ</em></a>" dokumentation.  </p>
+</dd>
+            <dt id="using_tools_other_sound_muting">
+  <strong>h.Ljuddämpning</strong>
+</dt>
+
+<dd>
+  <p>
+    För närvarande finns det ingen kontrollknapp på skärmen, men med hjälp av tangentbordssekvensen <b><code>[Alt]</code></b> + <b><code>[S]</code></b> kan ljudeffekterna stängas av och aktiveras igen (dämpas och återställas) medan programmet körs.  </p>
+
+  <p>
+    Observera att om ljudet är helt avaktiverat med alternativet "<code>nosound</code>" har tangentkombinationen <b><code>[Alt]</code></b> + <b><code>[S]</code></b> ingen effekt. (dvs. den kan inte användas för att sätta på ljud när föräldern/läraren vill att de ska vara avstängda)  </p>
+
+  <p class="note">
+    <span title="Configuration option">&#9881;</span>    Se avsnittet "<a href="OPTIONS.html"><em>Alternativ</em></a>" dokumentation.  </p>
+</dd>
+          </dl>
+        </section>
+        <!-- Using: Tools: Other -->
+
+      </section>
+      <!-- Using: Tools -->
+
+      <!-- Using: Controlling -->
+      <section>
+        <header>
+          <h2 id="using_controlling">
+            E. Kontrollera Rita med Tux          </h2>
+        </header>
+
+        <!-- Using: Controlling: Mouse -->
+        <section>
+          <header>
+            <h3 id="using_controlling_mouse">
+              1. Använda en mus eller styrkula            </h3>
+          </header>
+
+          <p>
+            Rita med Tux fungerar huvudsakligen via en enhet som i ditt operativsystem ser ut som en mus, inklusive vanliga möss, styrkulor och trackpads, samt ritplattor (som vanligtvis används med en penna) och pekskärmar (som används med ett finger och/eller en penna) (se <a href="#using_controlling_tablet">"Använda</a> en surfplatta eller pekskärm" nedan för mer information).          </p>
+
+          <p>
+            För att rita och styra Rita med Tux används endast en enda musknapp - på möss med flera knappar är det vanligtvis den vänstra musknappen, men detta kan vanligtvis konfigureras på operativsystemnivå. Som standard ignorerar Rita med Tux indata från den eller de andra knapparna. Om en användare försöker använda de andra knapparna visas en popup-dialogruta som påminner om att Rita med Tux bara känner igen en knapp. Du kan dock konfigurera Rita med Tux så att alla knappar accepteras som indata (se dokumentationen <a href="OPTIONS.html#mouse_keyboard">Options</a> ).          </p>
+
+          <section>
+            <header>
+              <h4>
+                a. Rullning              </h4>
+            </header>
+            <p>
+              Många inmatningsenheter erbjuder ett sätt att snabbt skrolla inom program - många möss har ett skrollhjul, styrkulor har skrollringar och styrplattor känner igen vissa "skroll"-gester (t.ex. vertikal rörelse med två fingrar eller vertikal rörelse på kanten av styrplattan). Rita med Tux stöder rullningsinmatning för att möjliggöra snabb rullning genom vissa listor (t.ex. stämplar, magiska verktyg och dialogrutorna Ny och Öppna).            </p>
+
+            <p>
+              Rita med Tux rullar också automatiskt om du klickar och håller musen nere på en rullningsknapp - pilknapparna "upp" och "ner" som visas ovanför och under rullningslistor.            </p>
+          </section>
+
+          <section>
+            <header>
+              <h4>
+                b. Tillgänglighet för mus              </h4>
+            </header>
+            <p>
+              Andra enheter som ser ut som en mus kan användas för att styra Rita med Tux. Till exempel:              <ul>
+                <li>Huvudpekare/spårningsanordningar</li>
+                <li>Spårare för ögonstyrning</li>
+                <li>Fotmöss</li>
+              </ul>
+            </p>
+  
+            <p>
+              Rita med Tux erbjuder en tillgänglighetsinställning för "klibbigt musklick", där ett enda klick påbörjar en klick- och dragoperation och ett efterföljande klick avslutar den.  (Se dokumentationen för <a href="OPTIONS.html#accessibility">Alternativ</a>.)            </p>
+          </section>
+        </section>
+        <!-- Using: Controlling: Mouse -->
+
+        <!-- Using: Controlling: Tablet -->
+        <section>
+          <header>
+            <h3 id="using_controlling_tablet">
+              2. Använda en ritplatta eller pekskärm            </h3>
+          </header>
+
+          <p>
+            Som nämnts ovan känner Rita med Tux igen alla enheter som ser ut som en mus. Detta innebär att ritplattor och pekskärmar kan användas.  Dessa enheter har dock ofta stöd för andra funktioner än X/Y-rörelser, knappklick och rullhjulsrörelser.  För närvarande <strong>stöds inte</strong> dessa ytterligare funktioner av Rita med Tux.  Några exempel:            <ul>
+              <li>Tryck och vinkel</li>
+              <li>Spets för suddgummi</li>
+              <li>Multi-touch-gester</li>
+            </ul>
+          </p>
+        </section>
+        <!-- Using: Controlling: Tablet -->
+
+        <!-- Using: Controlling: Joystick -->
+        <section>
+          <header>
+            <h3 id="using_controlling_joystick">
+              3. Använda en styrspaksliknande enhet            </h3>
+          </header>
+
+          <p>
+            Rita med Tux kan konfigureras för att känna igen indata från alla spelkontroller som visas för operativsystemet som en joystick.  Det inkluderar till och med moderna spelkonsolkontroller som är anslutna via USB eller Bluetooth (t.ex. <cite>Nintendo Switch</cite> eller <cite>Microsoft Xbox</cite> game pads)!          </p>
+
+          <p>
+            Många konfigurationsalternativ finns tillgängliga för att bäst passa den enhet som används och användarens behov. Analog ingång kommer att användas för grova rörelser och digital "hatt"-ingång för fina rörelser. Knapparna på styrenheten kan mappas till olika Rita med Tux-kontroller (t.ex. fungera som <b><code>[Avsluta meny]</code></b> -tangenten, växla till Paint-verktyget, ångra och göra om osv.)  Se dokumentationen för <a href="OPTIONS.html#joystick">Options för</a> mer information.          </p>
+        </section>
+        <!-- Using: Controlling: Joystick -->
+
+        <!-- Using: Controlling: Keyboard -->
+        <section>
+          <header>
+            <h3 id="using_controlling_keyboard">
+              4. Använda tangentbordet            </h3>
+          </header>
+
+          <p>
+            Rita med Tux erbjuder ett alternativ som gör att tangentbordet kan användas för att styra muspekaren. Detta inkluderar rörelse och klickning, samt genvägar för att navigera mellan och inom vissa delar av gränssnittet. Se dokumentationen <a href="OPTIONS.html#accessibility">Options</a> för mer information.          </p>
+        </section>
+        <!-- Using: Controlling: Keyboard -->
+
+      </section>
+      <!-- Using: Controlling -->
+
+    </section>
+    <!-- Using -->
+
+    <section class="outer indent">
+  <header>
+    <h1 id="loading_into">
+      III. Ladda andra bilder i Rita med Tux    </h1>
+  </header>
+
+  <section class="inner">
+    <header>
+      <h2>
+        A. Översikt      </h2>
+    </header>
+
+    <p>
+      Rita med Tux's "Öppna"-dialog visar bara bilder som du har skapat med Rita med Tux. Så vad gör man om man vill ladda in en annan teckning eller till och med ett fotografi i Rita med Tux, så att man kan redigera eller rita på det?    </p>
+  
+    <p>
+      Du kan helt enkelt konvertera bilden till det format som Rita med Tux använder - PNG (Portable Network Graphic) - och placera den i Rita med Tuxs "<code>saved</code>"-katalog/mapp. Här är var du hittar den (som standard):    </p>
+
+    <dl>
+  <dt>
+    <cite>Windows Windows 8, Windows 10, Windows 11</cite>
+  </dt>
+
+  <dd>
+    I användarens mapp "AppData":<br> t.ex, <nobr>"<code style='background: #EEE;'>C:\Users\<i>användarnamn</i>\AppData\Roaming\TuxPaint\saved\</code>"</nobr>    <br/>
+    <br/>
+    (Obs: Mappen "<nobr><code style='background: #EEE;'>AppData</code></nobr>" är dold (inte synlig) som standard. Du kan ange sökvägen manuellt i platsfältet i din filbläddrare (t.ex. <cite>File Explorer</cite>)    <br/>
+    <br/>
+    Du kan använda variabeln <nobr><code style='background: #EEE;'>%APPDATA%</code></nobr> som en förkortning, dvs. <nobr>"<code style='background: #EEE;'>%APPDATA%\Tuxpaint\Saved</code>"</nobr>.    <br/>
+    <br/>
+    Du kan använda tangentkombinationen <b><code>[&#8862; (Windows)]</code></b> + <b><code>[R]</code></b> för att få fram kommandofönstret <cite>Kör</cite> och sedan skriva in sökvägen och trycka på <b><code>[Enter / Return]</code></b>.  </dd>
+
+  <dt>
+    <cite>macOS</cite>
+  </dt>
+
+  <dd>
+    I användarens mapp "Application Support":<br> t.ex, <nobr>"<code style='background: #EEE;'>/Användare/<i>användarnamn</i>/Bibliotek/Applikationsstöd/TuxPaint/saved/</code>"</nobr>  </dd>
+
+  <dt>
+    <cite>Linux / Unix</cite>
+  </dt>
+
+  <dd>
+    I användarens mapp "hemkatalog":<br> t.ex, <nobr>"<code style='background: #EEE;'>/home/<i>användarnamn</i>/.tuxpaint/saved/</code>"</nobr>    <br/>
+    <br/>
+    (Obs: Mappen ".tuxpaint" är dold (inte synlig) som standard. Du kan ange sökvägen manuellt i platsfältet i din filbläddrare (t.ex. <cite>GNOME-filer</cite> eller <cite>Dolphin</cite>)    <br/>
+    <br/>
+    Du kan använda variabeln <nobr><code style='background: #EEE;'>$HOME</code></nobr> som en förkortning, dvs. <nobr>"<code style='background: #EEE;'>$HOME/.tuxpaint/saved</code>"</nobr>.  </dd>
+
+  <dt>
+    <cite>Haiku</cite>
+  </dt>
+
+  <dd>
+    I användarens mapp "settings":<br> t.ex, <nobr>"<code style='background: #EEE;'>/boot/home/config/settings/TuxPaint/saved/</code>"</nobr>  </dd>
+</dl>
+  
+    <p class="note">
+      <span title="Information">&#128161;</span>      <strong>Det</strong> är också från den här mappen som du kan kopiera eller öppna bilder som ritats i Rita med Tux med <em>andra</em> program, även om alternativet "Export" i Rita med Tuxs "Öppna"-dialog kan användas för att kopiera dem till en plats som är lättare och säkrare att komma åt.    </p>
+  </section>
+
+  <section class="inner">
+    <header>
+      <h2>
+        B.        Med hjälp av importskriptet, "<code>tuxpaint-import</code>"      </h2>
+    </header>
+
+    <p>
+      Linux- och Unix-användare kan använda skalskriptet "<code>tuxpaint-import</code>" som installeras när du installerar Rita med Tux. Det använder några NetPBM-verktyg för att konvertera bilden ("<code>anytopnm</code>"), ändra storlek på den så att den får plats i Rita med Tuxs canvas ("<code>pnmscale</code>") och konvertera den till en PNG ("<code>pnmtopng</code>").    </p>
+
+    <p>
+      Det använder också kommandot "<code>date</code>" för att få aktuell tid och datum, vilket är den filnamnskonvention som Rita med Tux använder för sparade filer. (Kom ihåg att du aldrig blir ombedd att ange ett "filnamn" när du ska spara eller öppna bilder!)    </p>
+
+    <p>
+      Om du vill använda det här skriptet kör du det bara från en kommandorad och anger namnet på den eller de filer som du vill konvertera.    </p>
+
+    <p>
+      De kommer att konverteras och placeras i din Rita med Tux "<code>saved</code>"-katalog.    </p>
+    <p class="note">
+      <span title="Information">&#128161;</span>      <strong>Obs:</strong> Om du gör detta för en annan användare (t.ex. ditt barn) måste du se till att köra kommandot under <em>deras</em> konto)    </p>
+
+    <p>
+      Exempel:    </p>
+
+    <blockquote>
+      <code>$ <strong>tuxpaint-import farmor.jpg</strong><br>
+      farmor.jpg -&gt;
+      /home/username/.tuxpaint/saved/20211231012359.png<br>
+      jpegtopnm: WRITING A PPM FILE</code>
+    </blockquote>
+
+    <p>
+      Den första raden ("<code>tuxpaint-import farmor.jpg</code>") är kommandot som ska köras. De följande två raderna är utdata från programmet medan det arbetar.    </p>
+
+    <p>
+      Nu kan du ladda Rita med Tux, och en version av originalbilden kommer att finnas tillgänglig under dialogrutan "Öppna". Dubbelklicka bara på dess ikon!    </p>
+  </section>
+
+  <section class="inner">
+    <header>
+      <h2>
+        C.        Importera bilder manuellt      </h2>
+    </header>
+
+    <p>
+      Windows-, macOS- och Haiku-användare som vill importera godtyckliga bilder till Rita med Tux måste göra det via en manuell process.    </p>
+
+    <p>
+      Ladda ett grafikprogram som både kan ladda din bild och spara en fil i PNG-format. (Se dokumentationsfilen<a href="PNG.html">"PNG.html</a>" för en lista över föreslagna program och andra referenser)    </p>
+
+    <p>
+      När Rita med Tux laddar en bild som inte är lika stor som dess målarduk, skalar den (och ibland smetar den ut kanterna på) bilden så att den passar in i målarduken.    </p>
+
+    <p>
+      För att undvika att bilden blir utsträckt eller utsmetad kan du ändra storleken på den till Rita med Tuxs canvasstorlek. Denna storlek beror på storleken på Rita med Tux-fönstret eller den upplösning som Rita med Tux körs med, om det är i helskärm.<strong>(Obs:</strong> Standardupplösningen är 800x600.) Se "Beräkning av bilddimensioner" nedan.    </p>
+
+    <section class="inner">
+      <header>
+        <h3>
+          1.          Namnge filen        </h3>
+      </header>
+
+      <p>
+        Spara bilden i PNG-format. Det rekommenderas <strong>starkt att</strong> du namnger filnamnet med aktuellt datum och tid, eftersom det är den konvention som Rita med Tux använder:      </p>
+  
+      <blockquote>
+        <code><strong>ÅÅÅÅMMDDyyyy-MM-dd HH:mmmmss</strong>.png</code>
+      </blockquote>
+  
+      <ul>
+        <li><code>ÅÅÅÅ</code> = År</li>
+        <li><code>MM</code> = Månad (två siffror, "01"-"12")</li>
+        <li><code>DD</code> = Dag i månaden (två siffror, "01"-"31")</li>
+        <li><code>TT</code> = Timme (två siffror, i 24-timmarsformat, "00"-"23")</li>
+        <li><code>mm</code> = Minut (två siffror, "00"-"59")</li>
+        <li><code>ss</code> = Sekunder (två siffror, "00"-"59")</li>
+      </ul>
+  
+      <p>
+        Exempel:<code>"20210731110500.png</code>", för 31 juli 2021 kl. 11:05.      </p>
+  
+      <p>
+        Placera denna PNG-fil i din Rita med Tux "<code>saved</code>"-katalog/mapp. (Se ovan.)      </p>
+    </section>
+
+    <section class="inner">
+      <header>
+        <h3>
+          2.          Beräkning av bilddimensioner        </h3>
+      </header>
+
+      <p>
+        Den här delen av dokumentationen behöver skrivas om, eftersom det nya alternativet "<code>buttonsize</code>" har lagts till. För tillfället kan du prova att rita och spara en bild i Rita med Tux, sedan avgöra vilken storlek (pixelbredd och höjd) den fick och försöka matcha den när du skalar bilden/bilderna som du importerar till Rita med Tux.      </p>
+    </section>
+  </section>
+</section>
+    <section class="outer indent">
+  <header>
+    <h1 id="further">
+      IV.Ytterligare läsning    </h1>
+  </header>
+
+  <p>
+    Annan dokumentation som ingår i Rita med Tux (finns i mappen "<code>docs</code>") inkluderar:    <dl>
+      <dt>
+        Använda Rita med Tux:      </dt>
+      <dd>
+        <ul>
+          <li>
+            <a href="OPTIONS.html">OPTIONS.html</a><br>
+            Detaljerade instruktioner om kommandorads- och konfigurationsfilsalternativ, för dem som inte vill använda verktyget Konfigurera Rita med Tux för att hantera Rita med Tuxs konfiguration.          </li>
+
+          <li>
+            <a href="../magic-docs/html/index.html">dokumentation av "Magic"-verktyget ("<code>magic-docs</code>")</a><br>
+            Dokumentation för vart och ett av de för närvarande installerade "Magic"-verktygen.          </li>
+
+          <li>
+            <a href="FAQ.html">Vanliga frågor ("Vanliga frågor") om Rita med Tux</a><br>
+            Svar på och lösningar för några vanliga frågor om och problem med att använda Rita med Tux.          </li>
+        </ul>
+      </dd>
+
+      <dt>
+        Hur man utökar Rita med Tux:      </dt>
+      <dd>
+        <ul>
+          <li>
+            <a href="EXTENDING.html">EXTENDING.html</a><br>
+            Detaljerade instruktioner om hur du utökar Rita med Tux: skapa penslar, stämplar, förrätter och mallar, lägga till teckensnitt och skapa nya tangentbordslayouter och inmatningsmetoder på skärmen.          </li>
+
+          <li>
+            <a href="PNG.html">PNG.html</a><br>
+            Anvisningar om hur du skapar bitmappade (raster-) bilder i PNG-format för användning i Rita med Tux.          </li>
+
+          <li>
+            <a href="SVG.html">SVG.html</a><br>
+            Anvisningar om hur du skapar vektorbilder i SVG-format för användning i Rita med Tux.          </li>
+        </ul>
+      </dd>
+
+      <dt>
+        Teknisk information:      </dt>
+      <dd>
+        <ul>
+          <li>
+            <a href="INSTALL.html">INSTALL.html</a><br>
+            Instruktioner för kompilering och installation av Rita med Tux, om tillämpligt.          </li>
+
+          <li>
+            <a href="SIGNALS.html">SIGNALS.html</a><br>
+            Information om de POSIX-signaler som Rita med Tux reagerar på.          </li>
+
+          <li>
+            <a href="MAGIC-API.html">MAGIC-API.html</a><br>
+            Skapa nya magiska verktyg med hjälp av Rita med Tuxs plugin-API.          </li>
+        </ul>
+      </dd>
+
+      <dt>
+        Utvecklingshistoria och licens:      </dt>
+      <dd>
+        <ul>
+          <li>
+            <a href="../../AUTHORS.txt">AUTHORS.txt</a><br>
+            Förteckning över författare och bidragsgivare.          </li>
+
+          <li>
+            <a href="../../CHANGES.txt">CHANGES.txt</a><br>
+            Sammanfattning av vad som har ändrats mellan utgåvorna av Rita med Tux.          </li>
+
+          <li>
+            <a href="../../COPYING.txt">COPYING.txt</a><br>
+            Rita med Tuxs programvarulicens, <cite>GNU General Public License</cite> (GPL)          </li>
+        </ul>
+      </dd>
+    </dl>
+  </p>
+</section>
+    <section class="outer indent">
+  <header>
+    <h1 id="help">
+      V.Hur du kan få hjälp    </h1>
+  </header>
+
+  <p>
+    Om du behöver hjälp finns det många sätt att interagera med Rita med Tux-utvecklare och andra användare:    <ul>
+      <li>Rapportera buggar eller begära nya funktioner via projektets buggspårningssystem</li>
+      <li>Delta i projektets olika e-postlistor</li>
+      <li>Kontakta utvecklarna direkt</li>
+    </ul>
+  </p>
+
+  <p>
+    Mer information finns på sidan "Kontakt" på den officiella webbplatsen för Rita med Tux: <a href="https://tuxpaint.org/contact/">https://tuxpaint.org/contact/</a>  </p>
+</section>
+    <section class="outer indent">
+  <header>
+    <h1 id="participate">
+      VI.Hur man deltar    </h1>
+  </header>
+
+  <p>
+    Rita med Tux är ett volontärdrivet projekt, och vi tar gärna emot din hjälp på olika sätt:
+    <ul>
+      <li>Översätt Rita med Tux till ett annat språk</li>
+      <li>Förbättra befintliga översättningar</li>
+      <li>Skapa konstverk (stämplar, startbilder, mallar, penslar)</li>
+      <li>Lägga till eller förbättra funktioner eller magiska verktyg</li>
+      <li>Skapa läroplan för klassrummet</li>
+      <li>Marknadsför eller hjälp till att stödja andra som använder Rita med Tux</li>
+    </ul>
+  </p>
+
+  <p>
+    Mer information finns på sidan "Hjälp oss" på den officiella webbplatsen för Rita med Tux: <a href="https://tuxpaint.org/help/">https://tuxpaint.org/help/</a>  </p>
+</section>
+    <section class="outer indent">
+  <header>
+    <h1 id="participate">
+      VII.Följ Rita med Tux-projektet på sociala medier    </h1>
+  </header>
+
+  <p>
+    Rita med Tux har en närvaro på en mängd olika sociala medier, där vi publicerar uppdateringar och konstverk.
+        <ul>
+      <li>
+        <a href="https://bsky.app/profile/tuxpaint.bsky.social">Följ @tuxpaint.bsky.social på Bluesky</a>
+      </li>
+      <li>
+        <a href="http://www.facebook.com/TuxPaint">Gå med i Rita med Tux-sidan på Facebook</a>
+      </li>
+      <li>
+        <a href="https://www.instagram.com/tuxpaintdevs/">Följ @TuxPaintDevs på Instagram</a>
+      </li>
+      <li>
+        <a href="https://floss.social/@tuxpaint">Följ @tuxpaint@floss.social på Mastodon</a>
+      </li>
+      <li>
+        <a href="https://www.reddit.com/user/TuxPaintDevs/">Följ u/TuxPaintDevs på Reddit</a>
+      </li>
+      <li>
+        <a href="https://www.threads.net/@tuxpaintdevs">Följ @TuxPaintDevs på Trådar</a>
+      </li>
+      <li>
+        <a href="https://www.tiktok.com/@tuxpaintdevs">Följ @TuxPaintDevs på TikTok</a>
+      </li>
+      <li>
+        <a href="https://tuxpaint.tumblr.com/">Följ Rita med Tux på Tumblr</a>
+      </li>
+      <li>
+        <a href="https://www.youtube.com/@TuxPaintOfficial">Prenumerera på @TuxPaintOfficial på YouTube</a>
+      </li>
+    </ul>
+  </p>
+</section>
+
+    <footer>
+      <section class="outer">
+        <header>
+          <h1>
+            VIII. Meddelanden om varumärken</a>
+          </h1>
+        </header>
+
+        <ul>
+                    <li>"Linux" är ett registrerat varumärke som tillhör Linus Torvalds.</li>
+          <li>"Microsoft" och "Windows" är registrerade varumärken som tillhör Microsoft Corp.</li>
+          <li>"Apple" och "macOS" är registrerade varumärken som tillhör Apple Inc.</li>
+          <li>"Haiku" är ett registrerat varumärke som tillhör Haiku, Inc.</li>
+                              <li>"Facebook", "Instagram" och "Threads" är registrerade varumärken som tillhör Meta Platforms, Inc.</li>
+          <li>"Mastodon" är ett registrerat varumärke som tillhör Mastodon gGmbH.</li>
+          <li>"Reddit" är ett registrerat varumärke som tillhör Reddit, Inc.</li>
+          <li>"TIK TOK" är ett varumärke som tillhör Bytedance Ltd.</li>
+          <li>"Tumblr" är ett registrerat varumärke som tillhör Tumblr, Inc.</li>
+          <li>"YouTube" är ett registrerat varumärke som tillhör Alphabet, Inc.</li>
+        </ul>
+      </section>
+    </footer>
+  </body>
+</html>

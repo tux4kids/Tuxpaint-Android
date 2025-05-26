@@ -1,0 +1,60 @@
+                                   Tux Paint
+                                version 0.9.35
+                           Dokumentation av signaler
+
+         Copyright © 2019-2022 av olika bidragsgivare; se AUTHORS.txt.
+                             https://tuxpaint.org/
+
+                                 juni 4, 2022
+
+Rita med Tux reagerar på följande signaler (som kan skickas till programmets
+process via t.ex. `kill` eller `killall`).
+
+→ SIGTERM (även, [Kontroll] + [C] från en terminal som kör `tuxpaint`) ←
+
+    Rita med Tux reagerar som om "Avsluta"-knappen hade tryckts in eller som om
+    skrivbordsmiljön hade uppmanats att stänga Rita med Tux (t.ex. genom att
+    klicka på knappen för att stänga fönstret eller genom att trycka på [Alt] +
+    [F4] på de flesta system).
+
+    Från huvudgränssnittet kommer Rita med Tux att fråga om du vill avsluta
+    eller inte, och (såvida det inte åsidosätts av alternativet för automatisk
+    sparning, t.ex. "--autosave") om du vill spara den aktuella ritningen (om
+    den inte sparats), och om så är fallet, och det är en modifierad version av
+    en befintlig ritning (såvida det inte åsidosätts av alternativen för att
+    spara över gamla bilder eller alltid spara nya bilder; t.ex. "--saveover"
+    respektive "--saveovernew"), om du vill skriva över den befintliga
+    ritningen eller spara till en ny fil.
+
+    Exempel: killall tuxpaint
+
+    💡 Obs: Från andra delar av gränssnittet tolkas signalen för närvarande som
+    en begäran om att gå tillbaka (t.ex. från dialogrutan "New" tillbaka till
+    huvudgränssnittet), som om man klickade på knappen "Back" i Rita med Tux
+    eller tryckte på [Esc].
+
+
+     
+→ SIGUSR1 & SIGUSR2 ←
+
+    Rita med Tux svarar med att ställa in sitt autosparalternativ (som om det
+    hade startats med "--autosave"), samt antingen alternativet att alltid
+    spara nya bilder (som om det hade startats med "--saveovernew") vid
+    mottagande av en SIGUSR1-signal, eller att alltid spara över den befintliga
+    bilden (som om det hade startats med "--saveover") vid mottagande av
+    SIGUSR2. Sedan skickar Rita med Tux en SIGTERM-signal till sig själv i ett
+    försök att avsluta. (Se ovan.)
+
+    Så från huvudgränssnittet bör Rita med Tux sluta nästan omedelbart, utan
+    några frågor ställda.
+
+    Exempel: killall -s SIGUSR1 tuxpaint
+
+    💡 Obs: Från andra delar av gränssnittet kommer Rita med Tux tyvärr att gå
+    tillbaka en nivå i gränssnittet. Därför kan det just nu vara nödvändigt att
+    skicka denna signal till Rita med Tux några gånger, för att den ska sluta
+    helt.
+
+
+     
+

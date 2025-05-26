@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>
+      Rita med Tux PNG Dokumentation    </title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=utf-8">
+    <style>
+  body { font-size: large; }
+  table { font-size: large; }
+  div.screenshot-center {
+    text-align: center;
+  }
+  div.screenshot-right {
+    float: right;
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+  div.screenshot-right-after {
+    clear: both;
+  }
+  div.keeptogether { page-break-inside: avoid; }
+  section h1 { font-size: 2em; }
+  h1, h2, h3, h4, h5 { font-family: sans; }
+  h1 { color: #800; page-break-before: always; break-before: always; }
+  h2 { color: #440; page-break-after: avoid; break-after: avoid; }
+  h3 { color: #080; page-break-after: avoid; break-after: avoid; }
+  h4 { color: #008; page-break-after: avoid; break-after: avoid; }
+  h5 { color: #808; page-break-after: avoid; break-after: avoid; }
+  h1 + p { page-break-inside: avoid; }
+  h2 + p { page-break-inside: avoid; }
+  h3 + p { page-break-inside: avoid; }
+  h4 + p { page-break-inside: avoid; }
+  h5 + p { page-break-inside: avoid; }
+  dt {
+    font-size: large;
+    color: #404;
+    font-family: sans;
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+  }
+  dd, blockquote {
+    border-left: 1px solid #888;
+    padding-left: 1em;
+    border-radius: 0 0 0 1em;
+  }
+  p.note {
+    border: 1px solid #000;
+    background-color: #eee;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    display: inline-block;
+    margin-right: 3em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  section.outer {
+    padding-bottom: 1em;
+    border-bottom: 2px solid #000;
+  }
+  section.indent p,dl {
+    margin-left: 2em;
+  }
+  section.indent dl p {
+    margin-left: 0;
+  }
+  p + ul, p + ol {
+    margin-left: 2em;
+  }
+
+  @media print {
+    p {
+      orphans: 3;
+      widows: 3;
+    }
+  }
+</style>
+  </head>
+  <body bgcolor="#FFFFFF"
+        text="#000000"
+        link="#0000FF"
+        vlink="#FF0000"
+        alink="#FF00FF">
+    <section class="outer">
+      <header>
+        <center>
+          <h1>
+            <img src="../../html/images/tuxpaint-title.png"
+                width="205"
+                height="210"
+                alt="Tux Paint"><br>
+            version 0.9.35<br/>
+            PNG-dokumentation          </h1>
+    
+          <p>
+            Copyright © 2007-2022 av olika bidragsgivare; se <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+            <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
+          </p>
+    
+          <p>
+            juni  4, 2022          </p>
+        </center>
+      </header>
+    </section>
+
+    <section class="indent">
+      <header>
+        <h1>Om PNG</h1>
+      </header>
+
+      <p>
+        PNG är Portable Network Graphic-formatet.  Det är en öppen standard som inte är belastad av patent (som GIF).  Det är ett mycket komprimerat format (men inte "lossy" som JPEG - lossiness gör att filer kan vara mycket mindre, men introducerar "misstag" i bilden när den sparas) och stöder 24-bitars färg (16,7 miljoner färger) samt en fullständig "alfakanal" - det vill säga varje pixel kan ha en varierande grad av transparens.      </p>
+  
+      <p>
+        För mer information, besök: <a href="http://www.libpng.org/">http://www.libpng.org/</a>      </p>
+  
+      <p>
+        Dessa funktioner (öppenhet, förlustfrihet, komprimering, transparens / alfa) gör det till det bästa valet för Rita med Tux.  (Rita med Tuxs stöd för PNG-formatet kommer från Open Source SDL_Image-biblioteket, som i sin tur får det från libPNG-biblioteket)      </p>
+  
+      <p>
+        Stöd för många färger gör det möjligt att använda "stämpelbilder" i fotokvalitet i Rita med Tux, och alfatransparens gör det möjligt att använda penslar av hög kvalitet.      </p>
+    </section>
+
+    <section class="indent">
+      <header>
+        <h2>Hur man skapar PNG-filer</h2>
+      </header>
+  
+      <p>Här följer en mycket <em>kortfattad</em> lista över olika sätt att skapa PNG-filer eller konvertera befintliga bilder till PNG-filer.  
+      <dl>
+        <dt>GIMP &amp; Krita</dt>
+        <dd>
+          <p>
+            Utmärkta verktyg för att skapa PNG-bilder för användning i Rita med Tux är GIMP och Krita, båda högkvalitativa interaktiva rit- och fotoredigeringsprogram med öppen källkod.          </p>
+      
+          <p>
+            Det är troligt att en eller båda redan är installerade på ditt system. Om inte, bör de vara lätt tillgängliga från din Linux-distributions programvaruarkiv.  Om inte, eller om du vill veta mer, besök <a href="http://www.gimp.org/">http://www.gimp.org/</a> respektive <a href="http://www.krita.org/">http://www.krita.org/</a>.          </p>
+        </dd>
+  
+        <dt>Verktyg för kommandoraden</dt>
+        <dd>
+          <dl>
+            <dt>NetPBM</dt>
+            <dd>
+              <p>
+                Portable Bitmap tools (kollektivt kända som "NetPBM") är en samling kommandoradsverktyg med öppen källkod som konverterar till och från olika format, inklusive GIF, TIFF, BMP, PNG och många fler.              </p>
+          
+              <p>
+                Det är möjligt att det redan finns installerat på ditt system. Om inte, finns det lätt tillgängligt från din Linux-distributions programvaruarkiv.  Om inte, eller för att lära dig mer, besök <a href="http://netpbm.sourceforge.net/">http://netpbm.sourceforge.net/</a>.              </p>
+            </dd>
+        
+            <dt>cjpeg/djpeg</dt>
+            <dd>
+              <p>
+                Kommandoradsprogrammen "cjpeg" och "djpeg" konverterar mellan NetPBM Portable Any Map (PNM)-formatet och JPEG.          
+                Det är möjligt att det redan finns installerat på ditt system. Om inte, finns det lätt tillgängligt från din Linux-distributions programvaruarkiv.  Om inte, eller för att lära dig mer, besök <a href="https://jpegclub.org/">https://jpegclub.org/</a>.              </p>
+            </dd>
+          </dl>
+        </dd>
+  
+        <dt>Egenutvecklad programvara för Windows</dt>
+        <dd>
+          <ul>
+            <li>  <cite>CorelDRAW</cite>
+  (Corel)
+  &mdash;
+  <a href="http://www.corel.com/">http://www.corel.com/</a>
+              <li>  <cite>Illustrator</cite>
+  (Adobe)
+  &mdash;
+  <a href="http://www.adobe.com/products/illustrator.html">http://www.adobe.com/products/illustrator.html</a>
+              <li>  <cite>Paint Shop Pro</cite>
+  (Corel)
+  &mdash;
+  <a href="https://www.paintshoppro.com/">https://www.paintshoppro.com/</a>
+              <li>  <cite>Photoshop</cite>
+  (Adobe)
+  &mdash;
+  <a href="http://www.adobe.com/products/photoshop.html">http://www.adobe.com/products/photoshop.html</a>
+              <li>  <cite>PIXresizer</cite>
+  (Bluefive software)
+  &mdash;
+  <a href="http://bluefive.pair.com/pixresizer.htm">http://bluefive.pair.com/pixresizer.htm</a>
+            </ul>
+        </dd>
+  
+        <dt>Macintosh-användare</dt>
+        <dd>
+          <ul>
+            <li>  <cite>CorelDRAW</cite>
+  (Corel)
+  &mdash;
+  <a href="http://www.corel.com/">http://www.corel.com/</a>
+              <li>  <cite>GraphicConverter</cite>
+  (Lemke Software)
+  &mdash;
+  <a href="https://www.lemkesoft.de/mac-fotobearbeitung-mac-diashow-mac-grafikprogramm-mac-bildbetrachter/">https://www.lemkesoft.de/mac-fotobearbeitung-mac-diashow-mac-grafikprogramm-mac-bildbetrachter/</a>
+              <li>  <cite>Illustrator</cite>
+  (Adobe)
+  &mdash;
+  <a href="http://www.adobe.com/products/illustrator.html">http://www.adobe.com/products/illustrator.html</a>
+              <li>  <cite>Photoshop</cite>
+  (Adobe)
+  &mdash;
+  <a href="http://www.adobe.com/products/photoshop.html">http://www.adobe.com/products/photoshop.html</a>
+            </ul>
+        </dd>
+      </dl>
+    </section>
+  </body>
+</html>
+

@@ -1,13 +1,13 @@
 # Makefile for Tux Paint docs
 #
-# Uses "links" to convert docs from HTML to plain text.
+# Uses "w3m" to convert docs from HTML to plain text.
 # (Normally only ran by the developers after updating the HTML, prior to
 # release.)
 #
 # Bill Kendrick
 # bill@newbreedsoftware.com
 #
-# Sept. 4, 2005 - January 26, 2024
+# Sept. 4, 2005 - April 19, 2025
 
 HTML2TXT_OPTIONS:=-dump -cols 80 -no-graph -o pseudo_inlines=f -o display_image=f -T text/html
 HTML2TXT:=./w3m.sh $(HTML2TXT_OPTIONS)
@@ -39,6 +39,9 @@ NL_TEXTFILES:=$(patsubst nl/html/%.html,nl/%.txt,$(NL_HTMLFILES))
 RU_HTMLFILES:=$(wildcard ru/html/*.html)
 RU_TEXTFILES:=$(patsubst ru/html/%.html,ru/%.txt,$(RU_HTMLFILES))
 
+SV_HTMLFILES:=$(wildcard sv_SE.UTF-8/html/*.html)
+SV_TEXTFILES:=$(patsubst sv_SE.UTF-8/html/%.html,sv_SE.UTF-8/%.txt,$(SV_HTMLFILES))
+
 SQ_HTMLFILES:=$(wildcard sq_AL.UTF-8/html/*.html)
 SQ_TEXTFILES:=$(patsubst sq_AL.UTF-8/html/%.html,sq_AL.UTF-8/%.txt,$(SQ_HTMLFILES))
 
@@ -60,6 +63,7 @@ all:	$(EN_TEXTFILES) \
 	$(NL_TEXTFILES) \
 	$(RU_TEXTFILES) \
 	$(SQ_TEXTFILES) \
+	$(SV_TEXTFILES) \
 	$(ZH_CN_TEXTFILES) \
 	$(ZH_TW_TEXTFILES)
 
@@ -76,6 +80,7 @@ clean:
 	$(NL_TEXTFILES) \
 	$(RU_TEXTFILES) \
 	$(SQ_TEXTFILES) \
+	$(SV_TEXTFILES) \
 	$(ZH_CN_TEXTFILES) \
 	$(ZH_TW_TEXTFILES)
 
@@ -107,6 +112,9 @@ $(RU_TEXTFILES): ru/%.txt: ru/html/%.html
 	$(HTML2TXT) $< > $@
 
 $(SQ_TEXTFILES): sq_AL.UTF-8/%.txt: sq_AL.UTF-8/html/%.html
+	$(HTML2TXT) $< > $@
+
+$(SV_TEXTFILES): sv_SE.UTF-8/%.txt: sv_SE.UTF-8/html/%.html
 	$(HTML2TXT) $< > $@
 
 $(ZH_CN_TEXTFILES): zh_cn/%.txt: zh_cn/html/%.html

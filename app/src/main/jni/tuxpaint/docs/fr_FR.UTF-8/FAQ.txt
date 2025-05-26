@@ -5,7 +5,7 @@
        Copyright © 2002-2025 by divers contributeurs; voir AUTHORS.txt.
                              https://tuxpaint.org/
 
-                               janvier 23, 2025
+                                  mai 2, 2025
 
 +-----------------------------------+
 |        Table des matières         |
@@ -35,10 +35,11 @@
     Cela signifie que Tux Paint n'a pas pu trouver d'images de tampons ou a été
     invité à ne pas les charger.
 
-    If you installed Tux Paint, but did not install the separate, optional
-    "Stamps" collection, quit Tux Paint and install it now. It should be
-    available from the same place you got the main Tux Paint program. (Note:
-    Tux Paint ships with a very small collection of example stamps.)
+    Si vous avez installé Tux Paint, mais que vous n'avez pas installé la
+    collection optionnelle "Tampons" séparée, quittez Tux Paint et installez-la
+    maintenant. Elle devrait être disponible à partir du même endroit où vous
+    avez obtenu le programme principal de Tux Paint. (Tux Paint est livré avec
+    une toute petite collection d'exemples de tampons.)
 
     Si vous ne souhaitez pas installer la collection de tampons par défaut,
     vous pouvez simplement créer la vôtre. Consultez la documentation
@@ -237,38 +238,38 @@ imprimer ←
     emplacement standard sur votre disque local :
 
     → Windows Windows 8, Windows 10, Windows 11 ←
-        In the user's "AppData" folder:
-        e.g., "C:\Users\nom d'utilisateur\AppData\Roaming\TuxPaint\saved\"
+        Dans le dossier utilisateurs "AppData"; par ex. 
+        "C:\Users\nom d'utilisateur\AppData\Roaming\TuxPaint\saved\"
 
-        (Note: The "AppData" folder is hidden (not visible) by default. You can
-        enter the path manually in the location bar of your file browser (e.g.,
-        File Explorer).)
+        (Remarque : le dossier "AppData" est caché (non visible) par défaut.
+        Vous pouvez saisir le chemin manuellement dans la barre d'emplacement
+        de votre navigateur de fichiers (par exemple, File Explorer)
 
-        You can use the %APPDATA% variable as a shorthand, i.e. 
-        "%APPDATA%\Tuxpaint\Saved".
+        Vous pouvez utiliser la variable %APPDATA% comme raccourci, c'est à
+        dire "%APPDATA%\Tuxpaint\Saved".
 
-        You can use the [⊞ (Windows)] + [R] key combination to bring up the Run
-        command window, and then type the path and hit [Enter / Return].
+        Vous pouvez utiliser la combinaison de touches [⊞ (Windows)] + [R] pour
+        ouvrir la fenêtre de commande Exécuter, puis taper le chemin d'accès et
+        appuyer sur [Enter / Return].
          
     → macOS ←
-        In the user's "Application Support" folder:
-        e.g., 
-        "/Users/nom d'utilisateur/Library/Application Support/TuxPaint/saved/"
+        Dans le dossier utilisateurs "Application Support"; par ex. 
+        "/Utilisateurs/nom d'utilisateur/Bibliothèque/Support de l'application/TuxPaint/saved/"
          
     → Linux / Unix ←
-        In the user's "home directory" folder:
-        e.g., "/home/nom d'utilisateur/.tuxpaint/saved/"
+        Dans le dossier utilisateurs "répertoire utilisateur"; par ex. 
+        "/home/nom d'utilisateur/.tuxpaint/saved/"
 
-        (Note: The ".tuxpaint" folder is hidden (not visible) by default. You
-        can enter the path manually in the location bar of your file browser
-        (e.g., GNOME Files or Dolphin).)
+        (Remarque : le dossier ".tuxpaint" est caché (non visible) par défaut.
+        Vous pouvez saisir le chemin manuellement dans la barre d'emplacement
+        de votre navigateur de fichiers (par exemple, GNOME Files ou Dolphin)
 
-        You can use the $HOME variable as a shorthand, i.e. 
+        Vous pouvez utiliser la variable $HOME comme raccourci, c'est à dire 
         "$HOME/.tuxpaint/saved".
          
     → Haiku ←
-        In the user's "settings" folder:
-        e.g., "/boot/home/config/settings/TuxPaint/saved/"
+        Dans le dossier utilisateurs "settings"; par ex. 
+        "/boot/home/config/settings/TuxPaint/saved/"
          
 
     Les images sont stockées sous forme de bitmaps PNG, que la plupart des
@@ -418,8 +419,8 @@ imprimer ←
             plus de détails) et ajoutez une ligne contenant "nosound=yes".
           # Ou utilisez Tux Paint Config. et assurez-vous que "Activez les
             effets sonores" (sous "Vidéo et son") n'est pas coché.
-          # Alternatively, recompile Tux Paint with sound support disabled.
-            (See above, and the 'Install' documentation.)
+          # Autrement, recompilez Tux Paint avec la prise en charge du son
+            désactivée. (Voir ci-dessus et la documentation 'install' .)
 
      
 → La stéréo des effets sonores est gênante; les effets sonores peuvent-ils être
@@ -496,29 +497,31 @@ fenêtré ! ←
     Si vous exécutez Tux Paint à partir d'une ligne de commande, assurez-vous
     de ne pas lui donner l'option "--fullscreen=...".
 
-    If you're running Tux Paint by double-clicking an icon, check the
-    properties of the icon to see if "--fullscreen=yes" or "--fullscreen=
-    native" is listed as a command-line argument.
+    Si vous exécutez Tux Paint en double-cliquant sur une icône, vérifiez les
+    propriétés de l'icône pour voir si "--fullscreen=yes" ou "--fullscreen=
+    native" est répertorié comme argument de ligne de commande.
 
-    If "--fullscreen=yes" or "--fullscreen=native" options aren't being sent on
-    the command line, check Tux Paint's configuration file for a line reading:
-    "fullscreen=yes" or "fullscreen=native".
+    Si les options "--fullscreen=yes" ou "--fullscreen=native"ne sont pas mis
+    sur la ligne de commande, vérifiez si le fichier de configuration de Tux
+    Paint possède une ligne comportant : "fullscreen=yes" ou "fullscreen=
+    native".
 
-    Either remove that line, or simply run Tux Paint with the command-line
-    argument: "--windowed" or "--fullscreen=no", which will override the
-    configuration file's setting.
+    Supprimez cette ligne ou exécutez simplement Tux Paint avec l'argument de
+    ligne de commande : "--windowed" ou "--fullscreen=no, ce qui remplacera les
+    réglages du fichier de configuration.
 
     Ou utilisez Tux Paint Config. et assurez-vous que "Plein écran" (sous
     "Vidéo et son") n'est pas coché.
 
 
      
-→ How do I access other applications when Tux Paint is running in Full Screen?
-←
-      o Windows and Linux users, try the [Alt] + [Tab] key combination to
-        switch between applications.
-      o macOS users, switch to other applications using [Control] + [Left
-        Arrow], then back to Tux Paint using [Control] + [Right Arrow].
+→ Comment puis-je accéder à une autre application lorsque Tux Paint est en mode
+plein écran ? ←
+      o Pour les utilisateurs de Windows et Linux, essayez la combinaison de
+        touche [Alt] + [Tab] pour naviguer entre les applications.
+      o Les utilisateurs de macOS passent à une autre application en utilisant
+        [Control] + [Flèche gauche], puis reviennent à Tux Paint avec [Control]
+        + [Flèche droite].
 
      
 
@@ -528,17 +531,19 @@ fenêtré ! ←
 
 → Tux Paint ne veut pas fonctionner ←
 
-    If Tux Paint aborts with the message: "You're already running a copy of Tux
-    Paint!", this means it has been launched in the last 30 seconds. (On Unix/
-    Linux, this message would appear in a terminal console if you ran Tux Paint
-    from a command-line. On Windows, this message would appear in a file named
-    "stdout.txt" in the same folder where TuxPaint.exe resides (e.g., in 
-    "C:\Program Files\TuxPaint\").
+    Si Tux Paint échoue avec le message: "You're already running a copy of Tux
+    Paint!", cela signifie qu'il a déjà été lancé dans les 30 dernières
+    secondes. (Sous Unix / Linux, ce message devrait apparaîtrr dans une
+    console de terminal si vous exécutiez Tux Paint en ligne de commande. Sous
+    Windows, ce message apparaîtrait dans un fichier nommé "stdout.txt" dans le
+    même dossier où TuxPaint.exe réside (par exemple, dans "
+    "C:\Fichiers programmes\TuxPaint\"").
 
-    A lockfile (e.g., "/home/nom d'utilisateur/.tuxpaint/lockfile.dat" on Linux
-    and Unix, "userdata\lockfile.dat" on Windows) is used to make sure Tux
-    Paint isn't run too many times at once (e.g., due to a child impatiently
-    clicking its icon more than once).
+    Un fichier de verrouillage (
+    "/home/nom d'utilisateur/.tuxpaint/lockfile.dat" sous Linux et Unix, 
+    "userdata\lockfile.dat" sous Windows) est utilisé pour s'assurer que Tux
+    Paint n'est pas exécuté trop de fois en même temps (par exemple, en à cause
+    d'un enfant impatient qui clique plusieurs fois sur son icône).
 
     Même si le fichier de verrouillage existe, il contient l'heure de la
     dernière exécution de Tux Paint. Si cela fait plus de 30 secondes, Tux
@@ -555,23 +560,25 @@ fenêtré ! ←
 
 
      
-→ Tux Paint launches very slowly ←
+→ Tux Paint se lance vraiment très lentement ←
 
-    The first time Tux Paint is launched (for a particular user), it may take a
-    minute or more to respond. The font system used by Tux Paint (FontConfig,
-    via Pango) is creating a 'cache' of information about the fonts on your
-    system. Subsequent launches of Tux Paint should be fast.
+    Lors du premier lancement de Tux Paint (pour un utilisateur particulier),
+    le temps de réponse peut être d'une minute ou plus. Le système de polices
+    utilisé par Tux Paint (FontConfig, via Pango) crée un « cache »
+    d'informations sur les polices de votre système. Les lancements suivants de
+    Tux Paint devraient être rapides.
 
-    While the font cache is generated behind the scenes, Tux Paint should
-    remain interactive (showing an animated 'please wait' animation) as this
-    process runs.
+    Pendant que le cache de polices est généré en arrière-plan, Tux Paint
+    devrait rester interactif (affichant une présentation animée « veuillez
+    patienter ») pendant l'exécution de ce processus.
 
-    If this delay persists or reoccurs, it could be that the cache is being
-    deleted — for example, in an environment (such as a school computer lab)
-    where a system is returned into a default state when a user finishes using
-    the program. Some versions of Tux Paint ship with a file, "fonts.conf" (
-    documented at freedesktop.org), which can be modified to have FontConfig
-    store the file elsewhere, e.g.:
+    Si ce délai persiste ou se reproduit, il est possible que le cache soit en
+    cours de suppression —, par exemple dans un environnement (comme un
+    laboratoire informatique scolaire) où le système revient à son état par
+    défaut lorsqu'un utilisateur finit d'utiliser le programme. Certaines
+    versions de Tux Paint sont livrées avec un fichier, "fonts.conf" (documenté
+    sur freedesktop.org), qui peut être modifié pour que FontConfig stocke le
+    fichier ailleurs, par exemple :
 
         <cachedir>C:\Documents and Settings\All Users\Application Data\
         fontconfig\cache</cachedir>
@@ -642,10 +649,10 @@ texte ←
 
       o Windows
 
-        Under Windows, it first examines the system-wide configuration file,
-        located here:
+        Sous Windows, il examine d'abord le fichier de configuration à
+        l'échelle du système, situé ici :
 
-            C:\Program Files\TuxPaint\tuxpaint.cfg
+            C:\Fichiers programmes\TuxPaint\tuxpaint.cfg
 
         Il examine ensuite le fichier de configuration personnel de
         l'utilisateur :
@@ -657,15 +664,15 @@ texte ←
 
       o macOS
 
-        Under macOS, it first examines the system-wide configuration file,
-        located here:
+        Sous macOS, il examine d'abord le fichier de configuration à l'échelle
+        du système, situé ici :
 
-            /Library/Application Support/TuxPaint/tuxpaint.cfg
+            /Bibliothèque/Support de l'application/TuxPaint/tuxpaint.cfg
 
         Il examine ensuite le fichier de configuration personnel de
         l'utilisateur :
 
-            /Users/nom d'utilisateur/Library/Application Support/TuxPaint/tuxpaint.cfg
+            /Utilisateurs/nom d'utilisateur/Bibliothèque/Support de l'application/TuxPaint/tuxpaint.cfg
 
         Et finalement, toutes les options envoyées en tant qu'arguments de
         ligne de commande sont utilisées.
@@ -687,7 +694,7 @@ texte ←
 
       o Haiku
 
-        Under Haiku, Tux Paint first examines the configuration file:
+        Sous Haiku, Tux Paint examine d'abord le fichier de configuration :
 
             /boot/home/config/settings/TuxPaint/tuxpaint.conf
 
@@ -699,13 +706,13 @@ texte ←
     le fichier config. fichier (si vous le pouvez), ou changer l'option par le
     biais de la ligne de commande.
 
-    For example, on Linux and Unix, if "/etc/tuxpaint/tuxpaint.conf" includes
-    this option to disable sound...
+    Par exemple, sous Linux ou Unix, si ""/etc/tuxpaint/tuxpaint.conf"" inclut
+    une option pour désactiver le son ...
 
         nosound=yes
 
-    ...then you can reenable sound by either adding this option to your own 
-    "/home/nom d'utilisateur/.tuxpaintrc" file:
+    ... alors vous pouvez réactiver le son en ajoutant cette option à votre
+    propre fichier "/home/nom d'utilisateur/.tuxpaintrc" :
 
         sound=yes
 
@@ -713,24 +720,27 @@ texte ←
 
         --sound
 
-    On platforms where Tux Paint offers a system-wide configuration file, the
-    settings in that file may be skipped (so only the user configuration file
-    and other command-line arguments will be used) by including the following
-    command-line argument:
+    Sur les plateformes où Tux Paint propose un fichier de configuration pour
+    l'ensemble du système, les paramètres de ce fichier peuvent être ignorés
+    (de sorte que seul le fichier de configuration utilisateur et les arguments
+    en ligne de commande seront utilisés) en incluant l'argument de ligne de
+    commande suivant :
 
         --nosysconfig
 
 
      
-→ I need to deploy Tux Paint on many Windows systems at once ←
-    The installers for both Tux Paint (plus Tux Paint Config.)
-    (tuxpaint-X.Y.Z-windows-ARCH-installer.exe) and Tux Paint Stamps
-    (tuxpaint-stamps-YYYY.MM.DD-windows-installer.exe) accept the command-line
-    options "/SILENT" ("silent") or "/VERYSILENT" ("very silent") which can be
-    used to install and uninstall their component without use of an interactive
-    set-up window. This can be useful for automating installation on a
-    collection of PCs, for example using Microsoft Intune cloud-based endpoint
-    management solution (see https://learn.microsoft.com/mem/intune/).
+→ J'ai besoin d'installer Tux Paint sur plusieurs systèmes Windows en une seule
+fois ←
+    Les programmes d'installation de Tux Paint (et Tux Paint Config.)
+    (tuxpaint-X.Y.Z-windows-ARCH-installer.exe) et de Tux Paint Stamps
+    (tuxpaint-stamps-YYYY.MM.DD-windows-installer.exe) acceptent les options de
+    ligne de commande « /SILENT » (« silencieux ») ou « /VERYSILENT » (« très
+    silencieux ») qui permettent d'installer et de désinstaller leur composant
+    sans utiliser de fenêtre de configuration interactive. Cela peut être utile
+    pour automatiser l'installation sur plusieurs PC, par exemple avec la
+    solution de gestion des terminaux cloud Microsoft Intune (voir https://
+    learn.microsoft.com/mem/intune/).
      
 
 -------------------------------------------------------------------------------

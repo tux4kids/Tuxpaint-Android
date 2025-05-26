@@ -1,0 +1,3541 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>
+      Dokumentation av Tux färgalternativ    </title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=utf-8">
+    <style>
+  body { font-size: large; }
+  table { font-size: large; }
+  div.screenshot-center {
+    text-align: center;
+  }
+  div.screenshot-right {
+    float: right;
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+  div.screenshot-right-after {
+    clear: both;
+  }
+  div.keeptogether { page-break-inside: avoid; }
+  section h1 { font-size: 2em; }
+  h1, h2, h3, h4, h5 { font-family: sans; }
+  h1 { color: #800; page-break-before: always; break-before: always; }
+  h2 { color: #440; page-break-after: avoid; break-after: avoid; }
+  h3 { color: #080; page-break-after: avoid; break-after: avoid; }
+  h4 { color: #008; page-break-after: avoid; break-after: avoid; }
+  h5 { color: #808; page-break-after: avoid; break-after: avoid; }
+  h1 + p { page-break-inside: avoid; }
+  h2 + p { page-break-inside: avoid; }
+  h3 + p { page-break-inside: avoid; }
+  h4 + p { page-break-inside: avoid; }
+  h5 + p { page-break-inside: avoid; }
+  dt {
+    font-size: large;
+    color: #404;
+    font-family: sans;
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+  }
+  dd, blockquote {
+    border-left: 1px solid #888;
+    padding-left: 1em;
+    border-radius: 0 0 0 1em;
+  }
+  p.note {
+    border: 1px solid #000;
+    background-color: #eee;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    display: inline-block;
+    margin-right: 3em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  section.outer {
+    padding-bottom: 1em;
+    border-bottom: 2px solid #000;
+  }
+  section.indent p,dl {
+    margin-left: 2em;
+  }
+  section.indent dl p {
+    margin-left: 0;
+  }
+  p + ul, p + ol {
+    margin-left: 2em;
+  }
+
+  @media print {
+    p {
+      orphans: 3;
+      widows: 3;
+    }
+  }
+</style>
+  </head>
+  <body bgcolor="#FFFFFF"
+        text="#000000"
+        link="#0000FF"
+        vlink="#FF0000"
+        alink="#FF00FF">
+
+    <!-- Title -->
+    <section class="outer">
+      <header>
+        <center>
+          <h1 style="page-break-before: avoid;">
+            <img src="../../html/images/tuxpaint-title.png"
+                width="205"
+                height="210"
+                alt="Tux Paint"><br>
+            version 0.9.35          </h1>
+
+          <h2>
+            Dokumentation av optioner          </h2>
+
+          <p>
+            Copyright © 2002-2025 av olika bidragsgivare; se <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+            <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
+          </p>
+
+          <p>
+            maj  2, 2025          </p>
+        </center>
+      </header>
+
+      <table border="2"
+             cellspacing="0"
+             cellpadding="2"
+             summary="Innehåll"
+             align="center"
+             style="page-break-inside: avoid;">
+        <tr>
+          <th>
+            Innehåll          </th>
+        </tr>
+
+        <tr>
+          <td>
+            <ul>
+              <li><a href="#tpc">Tux Färgkonfiguration.</a></li>              <li><a href="#cfg-file">Konfigurationsfil för KVIrc</a></li>              <li><a href="#available">Tillgängliga alternativ</a>                <ul>
+                  <li><a href="#video_sound">Video/ljud</a></li>                  <li><a href="#mouse_keyboard">Mus/tangentbord</a></li>                  <li><a href="#simplification">Förenkling</a></li>                  <li><a href="#languages">Språk</a></li>                  <li><a href="#printing">Skriver ut</a></li>                  <li><a href="#saving">Sparar</a></li>                  <li><a href="#data">Data</a></li>                  <li><a href="#accessibility">Hjälpmedel</a></li>                  <li><a href="#joystick">Styrspak</a></li>                </ul>
+              </li>
+              <li><a href="#overriding">Åsidosättande av System Config. Alternativ</a></li>              <li><a href="#command_line">Alternativ för kommandoraden</a>                <ul>
+                  <li><a href="#info-cmd">Alternativ för information på kommandoraden</a></li>                </ul>
+              </li>
+              <li><a href="#different_language">Att välja ett annat språk</a>                <ul>
+                  <li><a href="#available_languages">Tillgängliga språk</a></li>                  <li><a href="#env_locale">Ställa in lokal språkdräkt för din miljö</a></li>                  <li><a href="#special_fonts">Särskilda teckensnitt</a></li>                </ul>
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="outer"><!-- H1: Tux Paint Config. -->
+      <div class="keeptogether">
+        <header>
+          <h1 id="tpc">
+            Tux Färgkonfiguration.          </h1>
+        </header>
+
+        <p>
+          Det finns ett grafiskt verktyg som gör att du kan ändra Rita med Tuxs beteende. Om du inte vill installera och använda det här verktyget, eller om du vill ha en bättre förståelse för de tillgängliga alternativen, kan du fortsätta läsa.        </p>
+      </div>
+    </section><!-- H1: Tux Paint Config. -->
+
+    <section class="outer"><!-- H1: Configuration File -->
+      <div class="keeptogether">
+        <header>
+          <h1 id="cfg-file">
+            Konfigurationsfil för KVIrc          </h1>
+        </header>
+
+        <p>
+          Du kan skapa en enkel konfigurationsfil för Rita med Tux, som den kommer att läsa varje gång du startar den.        </p>
+      </div>
+
+      <p>
+        Filen är helt enkelt en ren textfil som innehåller de alternativ som du vill aktivera:      </p>
+
+      <section class="indent"><!-- H2: Linux and Unix Users -->
+        <div class="keeptogether">
+          <header>
+            <h2>
+              Linux- och Unix-användare            </h2>
+          </header>
+
+          <p>
+            <nobr><code style='background: #EEE;'>/home/<i>användarnamn</i>/.tuxpaintrc</code></nobr>          </p>
+        </div>
+
+        <section class="indent"><!-- H3: System-Wide Configuration File -->
+          <header>
+            <h3>
+              Systemomfattande konfigurationsfil            </h3>
+          </header>
+
+          <p>
+            Innan denna fil läses, läses en systemomfattande konfigurationsfil. (Som standard har denna konfiguration inga inställningar aktiverade.) Den finns normalt på:          </p>
+
+          <blockquote>
+            <nobr><code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code></nobr>          </blockquote>
+        </section><!-- H3: System-Wide Configuration File -->
+      </section><!-- H2: Linux and Unix Users -->
+
+      <section class="indent"><!-- H2: macOS Users -->
+        <header>
+          <h2>
+            macOS-användare          </h2>
+        </header>
+
+        <p>
+          <nobr><code style='background: #EEE;'>/Användare/<i>användarnamn</i>/Bibliotek/Applikationsstöd/TuxPaint/tuxpaint.cfg</code></nobr>        </p>
+
+        <section class="indent"><!-- H3: System-Wide Configuration File -->
+          <header>
+            <h3>
+              Systemomfattande konfigurationsfil            </h3>
+          </header>
+
+          <p>
+            Innan denna fil läses, läses en systemomfattande konfigurationsfil. (Som standard har denna konfiguration inga inställningar aktiverade.) Den finns normalt på:          </p>
+
+          <blockquote>
+            <nobr><code style='background: #EEE;'>/Bibliotek/Applikationsstöd/TuxPaint/tuxpaint.cfg</code></nobr>          </blockquote>
+        </section><!-- H3: System-Wide Configuration File -->
+      </section><!-- H2: macOS Users -->
+
+      <section class="indent"><!-- H2: Windows Users -->
+        <header>
+          <h2>
+            Windows-användare          </h2>
+        </header>
+
+        <p>
+          <nobr><code style='background: #EEE;'>C:\Users\<i>användarnamn</i>\AppData\Roaming\TuxPaint\tuxpaint.cfg</code></nobr>        </p>
+
+        <p>
+          Du kan använda NotePad eller WordPad för att skapa denna fil. Var noga med att spara den som vanlig text och se till att filnamnet inte har ".txt" i slutet ...        </p>
+
+        <section class="indent"><!-- H3: System-Wide Configuration File -->
+          <header>
+            <h3>
+              Systemomfattande konfigurationsfil            </h3>
+          </header>
+
+          <p>
+            Innan denna fil läses, läses en systemomfattande konfigurationsfil. (Som standard har denna konfiguration inga inställningar aktiverade.) Den finns normalt på:          </p>
+
+          <p>
+            <nobr><code style='background: #EEE;'>C:\Programfiler\TuxPaint\tuxpaint.cfg</code></nobr>          </p>
+        </section><!-- H3: System-Wide Configuration File -->
+      </section><!-- H2: Windows Users -->
+
+      <section class="indent"><!-- H2: Haiku Users -->
+        <header>
+          <h2>
+            Haiku-användare          </h2>
+        </header>
+
+        <p>
+          <nobr><code style='background: #EEE;'>/boot/home/config/settings/TuxPaint/tuxpaint.conf</code></nobr>        </p>
+      </section><!-- H2: Haiku Users -->
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        Du kan avaktivera läsning av den här filen helt och hållet och låta inställningarna vara standardinställningar (som sedan kan åsidosättas av din personliga konfigurationsfil och/eller kommandoradsargument) genom att använda kommandoradsalternativet "<code>--nosysconfig</code>".      </p>
+    </section><!-- H1: Configuration File -->
+
+    <section class="outer"><!-- H1: Available Options -->
+      <div class="keeptogether">
+        <header>
+          <h1 id="available">
+            Tillgängliga alternativ          </h1>
+        </header>
+
+        <p>
+          Följande inställningar kan göras i konfigurationsfilen. (Inställningar på kommandoraden åsidosätter dessa. Se avsnittet "<a href="#command_line"><i>Alternativ för kommandoraden</i></a>" nedan)        </p>
+      </div>
+
+        <header>
+    <h2 id="video_sound">Video/ljud</h2>
+  </header>
+  <section class="indent">
+    <section>
+  <header>
+    <h3>Video</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>fullscreen=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Kör programmet i helskärmsläge i stället för i ett fönster.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med "<code>fullscreen=no</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--windowed</code>".      </p>
+    </dd>
+
+    <dt>
+        <code><b>fullscreen=native</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Kör programmet i helskärmsläge. Utgå dessutom från skärmens aktuella upplösning (som ställs in av operativsystemet).      </p>
+    </dd>
+
+    <dt>
+      <code><b>windowsize=<i>STRL</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Kör programmet i en annan storlek (i fönsterläge) eller med en annan skärmupplösning (i helskärmsläge) än standardinställningen (vanligtvis 800x600).      </p>
+
+      <p>
+        Värdet <i>STRL</i> ska anges i pixlar, i formatet "bredd-för-höjd", med ett "x" (litet X) mellan värdena. Storleken kan vara vad som helst som är minst 640 brett och minst 480 högt.      </p>
+
+      <p>
+        Några exempel:      </p>
+
+      <ul>
+        <li>640x480
+        </li>
+
+        <li>1024x768
+        </li>
+
+        <li>768x1024
+        </li>
+
+        <li>1600x1200
+        </li>
+      </ul>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        Om endast en bildskärm är tillgänglig och Rita med Tux körs i fönsterläge (inte fullskärm) och den valda fönsterstorleken överskrider bildskärmens kapacitet, kommer Rita med Tux att falla tillbaka till bildskärmens dimensioner.      </p>
+    </dd>
+
+    <dt>
+      <code><b>orient=portrait</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Byter ut bredd- och höjdalternativen som ges till Rita med Tux, vilket är användbart för att rotera fönstret på porträttskärmar, t.ex. en surfplatta som är i surfplatteorientering.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med "<code>orient=landscape</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--orient=landscape</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>native=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        När Rita med Tux körs i helskärmsläge antas skärmens aktuella upplösning (vilket åsidosätter eventuella "<code>windowsize</code>"-alternativ), som den har ställts in av operativsystemet.      </p>
+    </dd>
+
+    <dt>
+      <code><b>allowscreensaver=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Som standard hindrar Rita med Tux systemets skärmsläckare från att starta. Du kan åsidosätta detta genom att använda alternativet "<code>allowscreensaver</code>". (Du kan också göra det genom att ställa in miljövariabeln "<code>SDL_VIDEO_ALLOW_SCREENSAVER</code>" på ditt system till "<code>1</code>")      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>allowscreensaver=no</code>" eller "<code>disablescreensaver=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--disablescreensaver</code>".      </p>
+    </dd>
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Ljud</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>nosound=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Avaktivera ljudeffekter. (Obs: Om du trycker på <code><b>[Alt]</b></code> + <b>[S]</b> kan du inte aktivera ljud igen om de har inaktiverats med detta alternativ)      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>nosound=no</code>" eller "<code>sound=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--sound</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>nostereo=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Avaktivera stöd för stereopanorering. (Användbart för användare med hörselnedsättning på ett öra eller på platser där en enda högtalare eller hörlur används)      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>nostereo=no</code>" eller "<code>stereo=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--stereo</code>".      </p>
+    </dd>
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Gränssnittets storlek</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>buttonsize=<i>STRL</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Ställ in pixelstorleken på knapparna i Rita med Tuxs användargränssnitt (åsidosätter standardvärdet "48"). Användbart vid användning av skärmar med mycket hög densitet eller grova inmatningsenheter, t.ex. ögonstyrningsenheter.      </p>
+
+      <p>
+        Värdet <i>STRL</i> ska anges i pixlar och kan vara allt mellan 24 och 192, inklusive. De flesta knappar är kvadratiska och detta påverkar deras bredd och höjd.      </p>
+
+      <p>
+        Ett värde på "<code>auto</code>" kan anges, och Rita med Tux väljer en lämplig knappstorlek baserat på storleken på Rita med Tuxs fönster (eller fullskärmsvisning).  (För standardskärmstorleken 800x600 kommer det att vara standardknappstorleken: "48".)      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Obs:</strong> Om den valda knappstorleken gör att knapparna blir för stora för att alla nödvändiga användargränssnittselement ska visas i den fönsterstorlek som Rita med Tux har valt, används den största möjliga knappstorleken. (En anteckning visas i <code>stderr</code>.)      </p>
+    </dd>
+
+    <dt>
+      <code><b>colorsrows=<i>RADER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Hur många rader med färgpalettknappar som ska visas; användbart vid användning av en stor färgpalett (se "<code>colorfile</code>" ovan) och/eller för användning med grova inmatningsenheter (t.ex. eyegaze-trackers).  "<code>RADER</code>" kan vara mellan "1" (standard) och "3".      </p>
+    </dd>
+  </dl>
+</section>
+  </section>
+    <header>
+    <h2 id="mouse_keyboard">Mus/tangentbord</h2>
+  </header>
+  <section class="indent">
+    <section>
+  <header>
+    <h3>Markör</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>nofancycursors=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Detta inaktiverar de snygga muspekarformerna i Rita med Tux och använder din miljös normala muspekare.      </p>
+
+      <p>
+        I vissa miljöer orsakar de snygga markörerna problem. Använd det här alternativet för att undvika dem.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>nofancycursors=no</code>" eller "<code>fancycursors=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--fancycursors</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>hidecursor=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Detta döljer helt muspekarformerna i Rita med Tux.      </p>
+
+      <p>
+        Detta är användbart för enheter med pekskärm, t.ex. surfplattor.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>hidecursor=no</code>" eller "<code>showcursor=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--showcursor</code>".      </p>
+    </dd>
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Tangentbord</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>noshortcuts=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Detta inaktiverar kortkommandon (t.ex. <b>[Ctrl]-[S]</b> för spara, <b>[Ctrl]-[N]</b> för en ny bild etc.)      </p>
+
+      <p>
+        Detta är användbart för att förhindra att oönskade kommandon aktiveras av barn som inte är vana vid tangentbord.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>noshortcuts=no</code>" eller "<code>shortcuts=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--shortcuts</code>".      </p>
+    </dd>
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Mus</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>grab=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Rita med Tux kommer att försöka "ta tag i" musen och tangentbordet så att musen begränsas till Rita med Tux-fönstret och nästan all tangentbordsinmatning skickas direkt till den.      </p>
+
+      <p>
+        Detta är användbart för att inaktivera åtgärder i operativsystemet som kan få användaren att lämna Rita med Tux <b>[Alt]-[Tab]</b> fönstercykling, <b>[Ctrl]-[Escape]</b>, etc. Detta är särskilt användbart i helskärmsläge.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>grab=no</code>" eller "<code>dontgrab=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--dontgrab</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>nowheelmouse=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Detta inaktiverar stöd för hjulet på möss som har det. (Normalt kommer hjulet att rulla väljaren menyn till höger)      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>nowheelmouse=no</code>" eller "<code>wheelmouse=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--wheelmouse</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>nobuttondistinction=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        För barn som har problem med musen kan denna skillnad mellan de två eller tre knapparna på en mus inaktiveras med hjälp av detta alternativ.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>nobuttondistinction=no</code>" eller "<code>buttondistinction=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--buttondistinction</code>".      </p>
+    </dd>
+  </dl>
+</section>
+  </section>
+    <header>
+    <h2 id="simplification">Förenkling</h2>
+  </header>
+  <section class="indent">
+    <section>
+  <header>
+    <h3>Förenkling av gränssnitt</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>simpleshapes=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Inaktivera rotationssteget i verktyget "Shape". Klicka, dra och släpp - det är allt som behövs för att rita en form.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>simpleshapes=no</code>" eller "<code>complexshapes=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--complexshapes</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>nooutlines=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        I det här läget visas mycket enklare konturer och "gummibandslinjer" när du använder verktygen <b>Lines</b>, <b>Shapes</b>, <b>Stamps</b> och <b>Eraser</b>.      </p>
+
+      <p>
+        Detta kan vara till hjälp när Rita med Tux körs på mycket långsamma datorer eller visas på en fjärrskärm i X-Window.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>nooutlines=no</code>" eller "<code>outlines=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--outlines</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>uppercase=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        All text återges endast med versaler (t.ex. "Brush" blir "BRUSH"). Användbart för barn som kan läsa, men som hittills bara har lärt sig versaler.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>uppercase=no</code>" eller "<code>mixedcase=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--mixedcase</code>".      </p>
+    </dd>
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Initial stämpelstorlek</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>stampsize=<i>STRL</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Använd detta alternativ för att tvinga Rita med Tux att ställa in startstorleken för alla stämplar. Värdet <code>STRL</code> bör ligga mellan 0 (minst) och 10 (störst). Storleken är relativ till de tillgängliga storlekarna på stämpeln, vilket beror på själva stämpeln och Rita med Tuxs aktuella canvasstorlek.      </p>
+
+      <p>
+        Ange "<code>default</code>" för att låta Rita med Tux bestämma (standardbeteende).      </p>
+    </dd>
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Förenkling av styrning</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>noquit=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Inaktivera "Avsluta"-knappen på skärmen och förhindra att <b>[Avsluta meny]</b>-tangenten avslutar Rita med Tux.      </p>
+
+      <p>
+        Att använda tangentbordskombinationen <code><b>[Alt]</b></code> + <code><b>[F4]</b></code> eller klicka på fönstrets stängknapp (förutsatt att du inte är i helskärmsläge) fungerar fortfarande för att avsluta Rita med Tux.      </p>
+
+      <p>
+        Du kan också använda följande tangentbordskombination för att avsluta: <b>[Skift]</b> + <b>[Kontroll]</b> + <b>[Avsluta meny]</b>.      </p>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>noquit=no</code>" eller "<code>quit=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--quit</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>nostamps=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Detta alternativ talar om för Rita med Tux att inte ladda några stämpelbilder, vilket i sin tur slutar inaktivera <b>stämpelverktyget</b>.      </p>
+
+      <p>
+        Detta kan snabba upp Rita med Tux när det först laddas upp och minska minnesanvändningen medan det körs. Naturligtvis kommer inga stämplar att vara tillgängliga alls.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>nostamps=no</code>" eller "<code>stamps=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--stamps</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>nostampcontrols=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Vissa bilder i verktyget <b>Stämplar</b> kan speglas, vändas och/eller få ändrad storlek. Detta alternativ inaktiverar kontrollerna och ger endast de grundläggande stämplarna.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>nostampcontrols=no</code>" eller "<code>stampcontrols=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--stampcontrols</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>nostamprotation=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Detta inaktiverar rotationssteget i verktyget <b>Stamps</b> och placerar omedelbart stämpeln i dess vanliga orientering (med eventuell vändning eller spegling) vid första klicket.      </p>
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>Obs:</strong> Funktionen för frimärksrotation lades till i Rita med Tux i version 0.9.29.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>nostamprotation=no</code>" eller "<code>stamprotation=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--stamprotation</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>nomagiccontrols=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Vissa <b>Magic-verktyg</b> har möjlighet att fungera som en pensel eller påverka hela duken på en gång. Detta alternativ inaktiverar kontrollerna och ger endast standardfunktionen (vanligtvis färgläge).      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>nomagiccontrols=no</code>" eller "<code>magiccontrols=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--magiccontrols</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>nomagicsizes=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Vissa <b>Magic-verktyg</b> erbjuder olika storleksinställningar. Det här alternativet inaktiverar storlekskontrollen och ger endast verktygens standardstorlekar. (Vissa plugins kan erbjuda ytterligare varianter av ett magiskt verktyg för att göra några storlekar möjliga, t.ex. "tegelstenar" och "googly Eyes")      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>nomagicsizes=no</code>" eller "<code>magicsizes=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--magicsizes</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>ungroupmagictools=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Som standard är de <b>magiska</b> verktygen i Rita med Tux organiserade i grupper med liknande verktyg (t.ex. alla verktyg för färg, mättnad och mörkare/ljusare tillsammans).  Detta alternativ tar bort gruppindelningen och placerar alla verktyg i en lång lista.      </p>
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>Obs:</strong> Grupper för magiska verktyg lades till i Rita med Tux 0.9.27.  Möjligheten att inaktivera gruppering lades till i Rita med Tux i version 0.9.33.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>ungroupmagictools=no</code>" eller "<code>groupmagictools=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--groupmagictools</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>noshapecontrols=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Inaktivera de kontrollknappar som visas när du använder verktyget <b>Shapes</b> och som gör det möjligt att ändra hur former ritas - centrerade runt det första musklicket eller med ett hörn vid det första musklicket.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>noshapecontrols=no</code>" eller "<code>shapecontrols=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--shapecontrols</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>nolabel=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Inaktiverar <b>etikettverktyget</b>: det verktyg som gör det möjligt att skriva in text som kan redigeras senare.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>nolabel=no</code>" eller "<code>label=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--label</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>nobrushspacing=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Inaktiverar alternativet för <a href="README.html#brush_spacing">penselavstånd</a> i <a href="README.html#using_tools_drawing_paint"><b>Måla</b></a> och <a href="using_tools_drawing_lines"><b>Linjer</b></a> verktygen. Penslarnas standardavstånd kommer att användas.      </p>
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>Obs:</strong> Alternativet för penselavstånd lades till i Rita med Tuxs användargränssnitt i version 0.9.28. För mer information om penselavstånd, se <a href="EXTENDING.html">EXTENDING.html</a>      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>nobrushspacing=no</code>" eller "<code>brushspacing=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--brushspacing</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>complexity=<i>KOMPLEXITET</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Ställer in komplexitetsnivån (expertisnivån) för Rita med Tux, vilket antingen kan inaktivera vissa Magic-verktyg eller få dem att fungera annorlunda. (Verktyget "Clone" är t.ex. inte tillgängligt i <em>nybörjarläget</em>, och verktygen för 1-, 2- och 3-punktsperspektiv gör det inte möjligt att redigera försvinnande punkter i <em>nybörjarläget</em> )      </p>
+      <p>
+        Värdet <code>KOMPLEXITET</code> kan vara ett av följande:        <dl>
+          <dt><code>advanced</code> NEJ (STANDARD)</dt>
+          <dd>"Avancerat" - För användare som är bekanta med Rita med Tux och som kan använda mer komplexa verktyg.</dd>
+          <dt><code>beginner</code></dt>
+          <dd>"Nybörjare" - För användare som är bekväma med Rita med Tux, men där komplexa verktyg kan orsaka förvirring eller frustration.</dd>
+          <dt><code>novice</code></dt>
+          <dd>"Novis" - För förstagångsanvändare av Rita med Tux, användare utan datorvana eller användare med särskilda tillgänglighetsbehov.</dd>
+        </dl>
+      </p>
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>Obs:</strong> Alternativet komplexitet lades till i Rita med Tux i version 0.9.32. Se <a href="magic-docs/html/index.html">dokumentationen för de enskilda Magic-verktygen</a>.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med "<code>complexity=advanced</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--complexity=advanced</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>notemplateexport=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Inaktiverar möjligheten att skapa en ny <a href="README.html#using_tools_other_new">mallbild</a> (baserad på en sparad ritning) från <a href="README.html#using_tools_other_open"><strong>Öppna</strong></a> dialogrutan.      </p>
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>Obs:</strong> Funktionen för att skapa mallar lades till i Rita med Tux i version 0.9.31.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>notemplateexport=no</code>" eller "<code>templateexport=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--templateexport</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>noerase=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Inaktiverar möjligheten att radera sparade ritningar via knappen "Erase" på <a href="README.html#using_tools_other_open"><strong>Öppna</strong></a> eller exporterade <a href="README.html#using_tools_other_new">mallbilder</a> (baserade på en sparad ritning) via knappen "Erase" i dialogrutan <a href="README.html#using_tools_other_new">New.</a> Användbart för att hindra användare från att radera arbete, särskilt i kombination med <a href="#saving"><code>--sparapånytt</code></a> alternativet.      </p>
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>Obs:</strong> Detta alternativ lades till i Rita med Tux i version 0.9.31.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>noerase=no</code>" eller "<code>erase=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--erase</code>".      </p>
+    </dd>
+  </dl>
+</section>
+  </section>
+    <header>
+    <h2 id="languages">Språk</h2>
+  </header>
+  <section class="indent">
+    <section>
+  <header>
+    <h3>Språk</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>lang=<i>SPRÅK</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Kör Rita med Tux på ett av de språk som stöds. Möjliga val för <i>LANGUAGE</i> inkluderar för närvarande:      </p>
+
+      <blockquote>
+        <table border="1"
+               cellspacing="0"
+               cellpadding="2"
+               summary=
+               "Möjliga värden för 'lang' språkinställning">
+            <tr>
+    <td><!-- lang_arg --><code>english</code></td>
+    <td><!-- lang_arg --><code>american-english</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>acholi</code></td>
+    <td><!-- lang_arg --><code>acoli</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>afrikaans</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>akan</code></td>
+    <td><!-- lang_arg --><code>twi-fante</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>albanian</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>amharic</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>arabic</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>aragones</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>armenian</code></td>
+    <td><!-- lang_arg --><code>hayeren</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>assamese</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>asturian</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>australian-english</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>azerbaijani</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>bambara</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>basque</code></td>
+    <td><!-- lang_arg --><code>euskara</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>belarusian</code></td>
+    <td><!-- lang_arg --><code>bielaruskaja</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>bengali</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>bodo</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>bokmal</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>bosnian</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>brazilian-portuguese</code></td>
+    <td><!-- lang_arg --><code>portugues-brazilian</code></td>
+    <td><!-- lang_arg --><code>brazilian</code></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>breton</code></td>
+    <td><!-- lang_arg --><code>brezhoneg</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>british-english</code></td>
+    <td><!-- lang_arg --><code>british</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>bulgarian</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>canadian-english</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>catalan</code></td>
+    <td><!-- lang_arg --><code>catala</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>chinese</code></td>
+    <td><!-- lang_arg --><code>simplified-chinese</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>croatian</code></td>
+    <td><!-- lang_arg --><code>hrvatski</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>czech</code></td>
+    <td><!-- lang_arg --><code>cesky</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>danish</code></td>
+    <td><!-- lang_arg --><code>dansk</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code></code></td>
+    <td><!-- lang_arg --><code>dogri</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>dutch</code></td>
+    <td><!-- lang_arg --><code>nederlands</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>esperanto</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>estonian</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>faroese</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>finnish</code></td>
+    <td><!-- lang_arg --><code>suomi</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>french</code></td>
+    <td><!-- lang_arg --><code>francais</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>fula</code></td>
+    <td><!-- lang_arg --><code>fulah</code></td>
+    <td><!-- lang_arg --><code>pulaar-fulfulde</code></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>gaelic</code></td>
+    <td><!-- lang_arg --><code>gaidhlig</code></td>
+    <td><!-- lang_arg --><code>irish-gaelic</code></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>galician</code></td>
+    <td><!-- lang_arg --><code>galego</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>georgian</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>german</code></td>
+    <td><!-- lang_arg --><code>deutsch</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>greek</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>gronings</code></td>
+    <td><!-- lang_arg --><code>zudelk-veenkelonioals</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>gujarati</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>hebrew</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>hindi</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>hungarian</code></td>
+    <td><!-- lang_arg --><code>magyar</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>icelandic</code></td>
+    <td><!-- lang_arg --><code>islenska</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>indonesian</code></td>
+    <td><!-- lang_arg --><code>bahasa-indonesia</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>inuktitut</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>italian</code></td>
+    <td><!-- lang_arg --><code>italiano</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>japanese</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>kabyle</code></td>
+    <td></td>
+    <td><!-- lang_arg --><code>kabylian</code></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>kannada</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>kashmiri-devanagari</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>kashmiri-perso-arabic</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>khmer</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>kiga</code></td>
+    <td><!-- lang_arg --><code>chiga</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>kinyarwanda</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>klingon</code></td>
+    <td><!-- lang_arg --><code>tlhIngan</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>konkani-devanagari</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>konkani-roman</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>korean</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>kurdish</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>latvian</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>lithuanian</code></td>
+    <td><!-- lang_arg --><code>lietuviu</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>luganda</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>luxembourgish</code></td>
+    <td><!-- lang_arg --><code>letzebuergesch</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>macedonian</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>maithili</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>malay</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>malayalam</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>manipuri-bengali</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>manipuri-meitei-mayek</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>marathi</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>mexican-spanish</code></td>
+    <td><!-- lang_arg --><code>espanol-mejicano</code></td>
+    <td><!-- lang_arg --><code>mexican</code></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>mongolian</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>ndebele</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>nepali</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>northern-sotho</code></td>
+    <td><!-- lang_arg --><code>sesotho-sa-leboa</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>norwegian</code></td>
+    <td><!-- lang_arg --><code>nynorsk</code></td>
+    <td><!-- lang_arg --><code>norsk</code></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>occitan</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>odia</code></td>
+    <td><!-- lang_arg --><code>oriya</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>ojibwe</code></td>
+    <td><!-- lang_arg --><code>ojibway</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>persian</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>polish</code></td>
+    <td><!-- lang_arg --><code>polski</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>portuguese</code></td>
+    <td><!-- lang_arg --><code>portugues</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>punjabi</code></td>
+    <td><!-- lang_arg --><code>panjabi</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>romanian</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>russian</code></td>
+    <td><!-- lang_arg --><code>russkiy</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>sanskrit</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>santali-devanagari</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>santali-ol-chiki</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>scottish</code></td>
+    <td><!-- lang_arg --><code>ghaidhlig</code></td>
+    <td><!-- lang_arg --><code>scottish-gaelic</code></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>serbian</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>serbian-latin</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>shuswap</code></td>
+    <td><!-- lang_arg --><code>secwepemctin</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>sindhi-devanagari</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>sindhi-perso-arabic</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>slovak</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>slovenian</code></td>
+    <td><!-- lang_arg --><code>slovensko</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>songhay</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>southafrican-english</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>spanish</code></td>
+    <td><!-- lang_arg --><code>espanol</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>sundanese</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>swahili</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>swedish</code></td>
+    <td><!-- lang_arg --><code>svenska</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>tagalog</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>tamil</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>telugu</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>thai</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>tibetan</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>traditional-chinese</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>turkish</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>twi</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>ukrainian</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>urdu</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>venda</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>venetian</code></td>
+    <td><!-- lang_arg --><code>veneto</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>vietnamese</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>walloon</code></td>
+    <td><!-- lang_arg --><code>walon</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>welsh</code></td>
+    <td><!-- lang_arg --><code>cymraeg</code></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>wolof</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>xhosa</code></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>miahuatlan-zapotec</code></td>
+    <td></td>
+    <td><!-- lang_arg --><code>zapotec</code></td>
+  </tr>
+    <tr>
+    <td><!-- lang_arg --><code>zulu</code></td>
+    <td></td>
+    <td><!-- lang_arg --><code>zulu</code></td>
+  </tr>
+          </table>
+      </blockquote>
+    </dd>
+
+    <dt>
+      <code><b><a name="locale"
+         id="locale">--locale LOKALANPASSNING</a></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Kör Rita med Tux på ett av de språk som stöds. Se avsnittet "<i><a href="#different_language">Välja ett annat språk</a></i>" nedan för de lokala strängarna (t.ex. "<code>de_DE</code>" för tyska) som ska användas.      </p>
+
+      <p>
+        (Om din locale redan är inställd, t.ex. med miljövariabeln "<code>$LANG</code>", är det här alternativet inte nödvändigt eftersom Rita med Tux om möjligt följer din miljöinställning)      </p>
+    </dd>
+
+    <dt>
+      <code><b>mirrorstamps=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        För stämplar som kan speglas innebär det här alternativet att de som standard får den spegelvända formen.      </p>
+
+      <p>
+        Detta kan vara användbart för personer som föredrar saker från höger till vänster snarare än från vänster till höger.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>mirrorstamps=no</code>" eller "<code>dontmirrorstamps=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--dontmirrorstamps</code>".      </p>
+    </dd>
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3 id="fonts">Typsnitt</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>sysfonts=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Detta alternativ gör att Rita med Tux försöker ladda in teckensnitt (för användning i <b>textverktyget</b> ) från operativsystemet. Normalt laddar Rita med Tux bara de teckensnitt som medföljer Rita med Tux.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>sysfonts=no</code>" eller "<code>nosysfonts=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--nosysfonts</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>alllocalefonts=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Före version 0.9.21 laddade Rita med Tux alla teckensnitt i sin egen teckensnittskatalog, inklusive lokalspecifika (t.ex. den för tibetanska, som inte hade några latinska tecken). Från och med 0.9.21 är det enda teckensnittet som laddas från den lokalspecifika underkatalogen, om det finns något, ett som matchar den lokal som Rita med Tux körs på.      </p>
+
+      <p>
+        Om du vill ladda alla lokalspecifika teckensnitt (det gamla beteendet) anger du detta alternativ.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>alllocalefonts=no</code>" eller "<code>currentlocalefont=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--currentlocalefont</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>uifont=TYPSNITTSNAMN</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Detta alternativ gör att Rita med Tux försöker ladda in teckensnitt (för användning i <b>textverktyget</b> ) från operativsystemet. Normalt laddar Rita med Tux bara de teckensnitt som medföljer Rita med Tux.      </p>
+
+      <p>
+        Ange "<code>default</code>" för att låta Rita med Tux använda sitt standardteckensnitt, "DejaVu Sans" (standardbeteende).      </p>
+    </dd>
+  </dl>
+</section>
+  </section>
+    <header>
+    <h2 id="printing">Skriver ut</h2>
+  </header>
+  <section class="indent">
+    <section>
+  <header>
+    <h3>Skriv ut behörigheter</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>noprint=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Inaktivera utskriftsfunktionen.      </p>
+    </dd>
+
+    <dt>
+        <code><b>printdelay=<i>SEKUNDER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Begränsa utskriften så att den endast kan ske en gång var <i>SEKUNDER</i> sekund.      </p>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med "<code>printdelay=0</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--printdelay=0</code>".      </p>
+    </dd>
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Visa dialogruta för skrivare</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>altprint=always</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Detta gör att Rita med Tux alltid visar skrivardialogen (eller, på Linux/Unix, kör "altprintcommand") när man klickar på "Print"-knappen. Med andra ord, det är som att klicka på "Print" medan du håller in <code><b>[Alt]</b></code>, förutom att du inte behöver hålla in <code><b>[Alt]</b></code> varje gång.      </p>
+    </dd>
+
+    <dt>
+      <code><b>altprint=never</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Detta förhindrar Rita med Tux från att <i>någonsin</i> visa skrivardialogen (eller, på Linux/Unix, köra "altprintcommand") när man klickar på "Print"-knappen. Med andra ord får tangenten <code><b>[Alt]</b></code> ingen effekt när man klickar på "Print"-knappen.      </p>
+    </dd>
+
+    <dt>
+      <code><b>altprint=mod</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Detta är det normala standardbeteendet. Rita med Tux visar en skrivardialog (eller, under Linux/Unix, kör "altprintcommand") när tangenten <code><b>[Alt]</b></code> hålls nedtryckt samtidigt som man klickar på knappen "Print". Om du klickar på "Print" utan att hålla in <code><b>[Alt]</b></code> skrivs ut utan att en dialogruta visas.      </p>
+    </dd>
+
+  </dl>
+</blockquote>
+
+<h3>
+  Spara skrivarens konfiguration</h3>
+
+<blockquote>
+  <dl>
+    <dt>
+      <code><b>printcfg=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        <i>(Endast Windows och macOS)</i>
+      </p>
+
+      <p>
+        Rita med Tux använder en konfigurationsfil för skrivaren vid utskrift. Tryck på tangenten <code><b>[Alt]</b></code> samtidigt som du klickar på knappen "Skriv ut" i Rita med Tux för att få fram ett dialogfönster för utskrift i Windows.      </p>
+
+      <p>
+        Alla konfigurationsändringar som görs i denna dialog sparas i filen "<code>userdata/print.cfg</code>" och kan användas igen så länge alternativet "printcfg" är inställt.      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Obs:</strong> Detta fungerar bara när du inte kör Rita med Tux i helskärmsläge.      </p>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>printcfg=no</code>" eller "<code>noprintcfg=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--noprintcfg</code>".      </p>
+    </dd>
+
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Kommandon för utskrift</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>printcommand=<i>KOMMANDO</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        <i>(endast Linux och Unix)</i>
+      </p>
+
+      <p>
+        Använd kommandot <i>KOMMANDO</i> för att skriva ut en fil i PostScript-format när du klickar på knappen "Skriv ut". Om det här alternativet inte är specifikt inställt är standardkommandot:      </p>
+
+      <blockquote>
+        <code>lpr</code>
+      </blockquote>
+    </dd>
+
+    <dt>
+      <code><b>altprintcommand=<i>KOMMANDO</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        <i>(endast Linux och Unix)</i>
+      </p>
+
+      <p>
+        Använd kommandot <i>KOMMANDO</i> för att skriva ut en fil i PostScript-format när du klickar på knappen "Skriv ut" samtidigt som du håller in modifieringstangenten <code><b>[Alt]</b></code>. (Detta används vanligtvis för att skapa en utskriftsdialog, på samma sätt som när du trycker på <code><b>[Alt]</b></code>+'Print' i Windows och macOS)      </p>
+
+      <p>
+        Om det här alternativet inte är specifikt inställt, är standardkommandot KDE:s grafiska utskriftsdialog:      </p>
+
+      <blockquote>
+        <code>kprinter</code>
+      </blockquote>
+    </dd>
+
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Pappersstorlek</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>papersize=<i>PAPPERSSTORLEK</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        <i>(Plattformar som använder Rita med Tuxs interna PostScript-generator - inte Windows, macOS, BeOS eller Haiku)</i>
+      </p>
+
+      <p>
+        Tala om för Rita med Tux vilken storlek på PostScript som ska genereras. Om ingen anges kontrollerar Rita med Tux först miljövariabeln <code>$PAPER</code>, sedan filen <code>/etc/papersize</code> och använder sedan standardpappersstorleken i biblioteket 'libpaper'.      </p>
+
+      <p>
+        Giltiga pappersstorlekar inkluderar: letter, legal, tabloid, executive, note, statement, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, b0, b1, b2 b3, b4, 10x14, 11x17, halfletter, halfexecutive, halfnote, folio, quarto, ledger, archA, archB, archC, archD, archE, flsa, flse, csheet, dsheet, esheet.      </p>
+    </dd>
+
+  </dl>
+</section>
+  </section>
+    <header>
+    <h2 id="saving">Sparar</h2>
+  </header>
+  <section class="indent">
+    <section>
+  <header>
+    <h3>Spara över tidigare arbete</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>saveover=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Detta inaktiverar frågan<i>"Spara över den gamla versionen...?</i>" när en befintlig fil sparas. Med detta alternativ kommer den äldre versionen alltid att ersättas av den nya versionen automatiskt.      </p>
+    </dd>
+
+    <dt>
+      <code><b>saveover=new</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Detta inaktiverar också frågan<i>"Spara över den gamla versionen...?</i>" när du sparar en befintlig fil. Detta alternativ kommer dock alltid att spara en ny fil i stället för att skriva över den äldre versionen.      </p>
+    </dd>
+
+    <dt>
+      <code><b>saveover=ask</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        <i>(Detta alternativ är överflödigt eftersom det är standardinställningen)</i>
+      När du sparar en befintlig ritning får du först frågan om du vill spara över den äldre versionen eller inte.      </p>
+    </dd>
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Börja om</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>startblank=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Detta gör att Rita med Tux visar en tom bild när den startas första gången, i stället för att ladda den senaste bilden som redigerades.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>startblank=no</code>" eller "<code>startlast=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--startlast</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>newcolorslast=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Placerar de tomma färgalternativen i dialogrutan <b>Ny</b> i slutet, så att eventuella startbilder och/eller mallar visas först.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>newcolorslast=no</code>" eller "<code>newcolorsfirst=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--newcolorsfirst</code>".      </p>
+    </dd>
+
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Spara och exportera kataloger</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>savedir=<i>KATALOG</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Använd det här alternativet för att ändra var Rita med Tuxs katalog/mapp "<code>saved</code>" finns, där Rita med Tux sparar och öppnar bilder.      </p>
+
+      <p>
+        Om du inte åsidosätter den, kommer <b><i>standard</i></b> plats:      </p>
+
+      <dl>
+        <dt>Linux / Unix</dt>
+        <dd>
+          Under en dold katalog i din hemkatalog:<br/>
+          <nobr><code style='background: #EEE;'>/home/<i>användarnamn</i>/.tuxpaint/saved/</code></nobr>        </dd>
+
+        <dt>Windows</dt>
+        <dd>
+          <nobr><code style='background: #EEE;'>C:\Users\<i>användarnamn</i>\AppData\Roaming\TuxPaint\saved\</code></nobr>        </dd>
+
+        <dt>macOS</dt>
+        <dd>
+          <nobr><code style='background: #EEE;'>/Användare/<i>användarnamn</i>/Bibliotek/Applikationsstöd/TuxPaint/saved/</code></nobr>        </dd>
+
+        <dt>Haiku</dt>
+        <dd>
+          <nobr><code style='background: #EEE;'>/boot/home/config/settings/TuxPaint/saved/</code></nobr>        </dd>
+      </dl>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Obs:</strong> När du anger en Windows-enhet (t.ex. "<code>H:\</code>") måste du också ange en underkatalog.      </p>
+
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>Obs:</strong> Före version 0.9.18 använde Rita med Tux även inställningen eller standardinställningen för "<code>savedir</code>" som plats för att söka efter filer med personuppgifter (penslar, stämplar, startbilder och teckensnitt). Från och med version 0.9.18 kan de specificeras separat (se alternativet "<code>datadir</code>" nedan).      </p>
+
+      <p>
+        Exempel: <code>savedir=Z:\tuxpaint\</code>      </p>
+    </dd>
+
+    <dt>
+      <code><b>exportdir=<i>KATALOG</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Använd det här alternativet för att ändra var Rita med Tux exporterar filer - enstaka bilder eller animerade GIF-bildspel - för extern användning.      </p>
+
+      <p>
+        Om du inte åsidosätter den, kommer <b><i>standard</i></b> plats:      </p>
+
+      <ul>
+        <li>Linux &amp; Unix - Om tillgängligt, där din skrivbordsmiljö är konfigurerad för att bilder ska lagras, baserat på din XDG (X Desktop Group)-konfiguration. (Prova att köra kommandoraden "<code style="white-space: nowrap;">xdg-user-dir PICTURES</code>" för att ta reda på det)<br>
+          Vanligtvis (i en engelsk lokal) kommer detta att vara en "<code>Bilder</code>"-underkatalog i din hemkatalog (dvs. <nobr>"<code style='background: #EEE;'>/home/<i>användarnamn</i>/Bilder</code>"</nobr>).<br>
+          Rita med Tux kommer att återgå till att använda den typiska katalogen om ingen XDG-konfiguration kan läsas eller om inget har angetts för "<code>XDG_PICTURES_DIR</code>".        </li>
+        <li>Windows - <nobr>"<code style='background: #EEE;'>My Pictures</code>"</nobr> katalog för varje användare (normalt <nobr>"<code style='background: #EEE;'>C:\Users\användarnamn\My Pictures</code>"</nobr>)<br>Du kan öppna mappen direkt på följande sätt:          <ul>
+            <li>Tryck på tangenten "[Windows]+[R]" för att öppna dialogen "Kör ...".</li>
+            <li>Ange "Shell:My Pictures" i textrutan och tryck på [OK].</li>
+          </ul>
+        </li>
+
+                <li>macOS — TBD! <!-- FIXME -->
+        </li>
+      </ul>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Obs:</strong> När standardinställningarna används kommer en ny underkatalog "<code>TuxPaint</code>" att skapas och användas. (t.ex. <nobr>"<code style='background: #EEE;'>/home/<i>användarnamn</i>/Bilder/TuxPaint</code>"</nobr>) När alternativet "<code>--exportdir</code>" används, kommer den exakta sökvägen som anges att användas (ingen "<code>TuxPaint</code>" underkatalog skapas).      </p>
+      <p>
+        Själva katalogen (t.ex. <nobr>"<code style='background: #EEE;'>/home/<i>användarnamn</i>/Bilder/TuxPaint</code>"</nobr>) kommer att skapas om den inte redan finns.      </p>
+      <p>
+        Om den <em>överordnade</em> katalogen (t.ex. <nobr>"<code style='background: #EEE;'>/home/<i>användarnamn</i>/Bilder</code>"</nobr>) inte heller finns, kommer Rita med Tux att försöka skapa den också (men inte några högre kataloger än så).      </p>
+
+      <p>
+        Exempel: <code>exportdir=/home/penguin/TuxPaintExports</code>      </p>
+    </dd>
+
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Fler alternativ för sparande</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>nosave=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Detta inaktiverar Rita med Tuxs förmåga att spara filer (och inaktiverar därför "Spara"-knappen på skärmen). Det kan användas i situationer där programmet bara används för skojs skull eller i en testmiljö.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>nosave=no</code>" eller "<code>save=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--save</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>autosave=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Detta förhindrar att Rita med Tux frågar om du vill spara den aktuella bilden när du avslutar, och förutsätter att du gör det.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>autosave=no</code>" eller "<code>noautosave=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--noautosave</code>".      </p>
+    </dd>
+
+    <dt>
+      <code><b>reversesort=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Detta ändrar sorteringen i dialogrutorna Öppna och Bildspel, så att de nyaste bilderna hamnar överst i listan.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>reversesort=no</code>" eller "<code>noreversesort=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--noreversesort</code>".      </p>
+    </dd>
+
+  </dl>
+</section>
+  </section>
+    <header>
+    <h2 id="data">Data</h2>
+  </header>
+  <section class="indent">
+    <section>
+  <header>
+    <h3>Låsfil</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>nolockfile=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Som standard använder Rita med Tux en s.k. "lockfile" för att förhindra att programmet startas mer än en gång på 30 sekunder. (Detta för att undvika att flera kopior körs av misstag, t.ex. genom att dubbelklicka på en enkelklicksstartare eller helt enkelt otåligt klicka på ikonen flera gånger)      </p>
+
+      <p>
+        Om du vill att Rita med Tux ska ignorera låsfilen och köra programmet igen, även om det startades för mindre än 30 sekunder sedan, ska du aktivera den här inställningen i konfigurationsfilen eller köra Rita med Tux med alternativet <code>--nolockfile</code> på kommandoraden.      </p>
+
+      <p>
+        Som standard lagras låsfilen i "<code>~/.tuxpaint/</code>" under Linux och Unix, och "<code>userdata\</code>" under Windows.      </p>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>nolockfile=no</code>" eller "<code>lockfile=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--lockfile</code>".      </p>
+    </dd>
+
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Katalog för användardata</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>datadir=<i>KATALOG</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Använd det här alternativet för att ändra var Rita med Tux letar efter personliga datafiler (penslar, stämplar, startbilder, mallar och teckensnitt som är specifika för den aktuella användaren).      </p>
+
+      <p>
+        Rita med Tux söker efter underkataloger/undermappar med namnen "<code>brushes</code>", "<code>stamps</code>", "<code>starters</code>", "<code>templates</code>" och "<code>fonts</code>" under den angivna datakatalogen.      </p>
+
+      <p>
+        Om du inte åsidosätter den, kommer <b><i>standard</i></b> plats:      </p>
+
+      <dl>
+        <dt>Linux / Unix</dt>
+        <dd><nobr><code style='background: #EEE;'>/home/<i>användarnamn</i>/.tuxpaint/</code></nobr></dd>
+
+        <dt>Windows</dt>
+        <dd><nobr><code style='background: #EEE;'>C:\Users\<i>användarnamn</i>\AppData\Roaming\TuxPaint\</code></nobr></dd>
+
+        <dt>macoS</dt>
+        <dd><nobr><code style='background: #EEE;'>/Användare/<i>användarnamn</i>/Bibliotek/Applikationsstöd/TuxPaint/</code></nobr></dd>
+
+              </dl>
+
+      <p class="note">
+        <span title="Version variation">&#128220;</span>        <strong>Obs:</strong> Före version 0.9.18 använde Rita med Tux samma inställning eller standard som för "<code>savedir</code>" för att söka efter datafiler. Från och med version 0.9.18 kan de specificeras separat.      </p>
+
+      <p class="note">
+        <span title="Information">&#128161;</span>        <strong>Obs:</strong> När du anger en Windows-enhet (t.ex. "<code>H:\</code>") måste du också ange en underkatalog.      </p>
+
+      <p>
+        Exempel: <code>datadir=/home/johnny/tuxpaint-data/</code>      </p>
+    </dd>
+
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3 id="colorfile">Färgpalettfil</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>colorfile=<i>FILNAMN</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Du kan åsidosätta Rita med Tuxs standardfärgpalett genom att skapa en ren ASCII-textfil som beskriver de färger du vill ha och peka på den filen med alternativet "<code>colorfile</code>".      </p>
+
+      <p>
+        Filen ska innehålla en färg per rad. Färger definieras med hjälp av värdena för rött, grönt och blått, var och en från 0 (släckt) till 255 (ljusast). (Mer information finns i Wikipedias artikel<a href="http://en.wikipedia.org/wiki/Rgb">"RGB-färgmodell</a>")      </p>
+
+      <p>
+        Färgerna kan anges med tre decimala siffror (t.ex. "<code>255 68 136</code>") eller en sex- eller tresiffrig hexadecimal "triplett" (t.ex. "<code>#ff4488</code>" eller "<code>#F48</code>").      </p>
+
+      <p>
+        Efter färgdefinitionen (på samma rad) kan du ange en text för att beskriva färgen. Tux kommer att visa denna text när färgen klickas på (till exempel "<code>#FFF Vit som snö.</code>")      </p>
+
+      <p>
+        Som ett exempel kan du se de standardfärger som för närvarande används i Rita med Tux i: "<a href="../../default_colors.txt"><code>default_colors.txt</code></a>".      </p>
+
+      <p>
+        OBSERVERA: Du måste separera decimala värden med mellanslag och inleda hexadecimala värden med ett pund-/nummertecken ("<code>#</code>"). I 3-siffrig hexadecimal används varje siffra för både den höga och den låga halvan av byten, så "<code>#FFF</code>" är samma sak som "<code>#FFFFFF</code>", inte "<code>#F0F0F0</code>".      </p>
+    </dd>
+  </dl>
+</section>
+  </section>
+    <header>
+    <h2 id="accessibility">Hjälpmedel</h2>
+  </header>
+  <section class="indent">
+    <section>
+  <header>
+    <h3>Mus</h3>
+  </header>
+
+  <dl>
+    <dt>
+        <code><b>mouse-accessibility=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        I det här läget klickar du inte, drar och släpper (t.ex. för att rita), utan du klickar, flyttar och klickar igen för att avsluta rörelsen.      </p>
+          </dd>
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Tangentbord</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>keyboard=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Detta gör att tangentbordets piltangenter kan användas för att styra muspekaren. (t.ex. för muslösa miljöer eller för funktionshindrade/tillgänglighet)      </p>
+
+      <p>
+        Funktioner:      </p>
+
+      <ul>
+        <li>Fin rörelse inom bildytan, eller grov rörelse om <code>Shift</code> hålls intryckt.        </li>
+
+        <li>Grov rörelse inom verktygsknapparnas områden.        </li>
+
+        <li>Nyckelkontroller:          <ul>
+            <li>[Left]/[Right]/[Up]/[Down], numpad <b>[1]</b> till <b>[9]</b>: Flytta musen            </li>
+
+            <li>[Space]/<b>[5]</b>: Klicka på musen (utom när du använder verktygen "Text" eller "Etikett")            </li>
+
+            <li>[Insert]/<b>[F5]</b>: Klicka på musen (alltid)            </li>
+
+            <li><b>[F4]</b> flytta musen mellan "Verktyg", "Färger" och dukytorna            </li>
+
+            <li>Om musen befinner sig i avsnittet "Verktyg" till vänster eller i avsnittet "Färger" längst ned:              <ul>
+                <li><b>[F7]</b>, <b>[F8]</b>: Flytta nedåt/uppåt mellan knapparna (endast avsnittet Verktyg)                </li>
+
+                <li><b>[F11]</b>, <b>[F12]</b>: Flytta till föregående respektive nästa knapp                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+
+        <li>För att klicka och dra håller du ned en av "klick"-knapparna (t.ex. [Insert]) och använder förflyttningsknapparna (t.ex. [Left]).          <p class="note">
+            <span title="Information">&#128161;</span>            <strong>Obs:</strong> Funktionen "mustillgänglighet" fungerar med tangentbordets muskontroller. När båda alternativen är aktiverade kan du använda målarverktygen för att rita genom att trycka på en "klick"-tangent för att börja klicka, förflyttningstangenter för att flytta runt (vilket ritar) och en annan "klick"-tangent för att avsluta klicket (sluta rita).          </p>
+        </li>
+
+        <li>En vanlig mus och/eller joystick kan fortfarande användas (så att du t.ex. kan flytta med musen och klicka med tangentbordet, eller vice versa)        </li>
+      </ul>
+
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med hjälp av "<code>keyboard=no</code>" eller "<code>mouse=yes</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--mouse</code>".      </p>
+    </dd>
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Tangentbord på skärmen</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>onscreen-keyboard=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Visar ett klickbart tangentbord på skärmen när du använder verktygen <b>Text</b> och <b>Etikett</b>.      </p>
+          </dd>
+
+    <dt>
+      <code><b>onscreen-keyboard-layout=<i>LAYOUTNAME</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Väljer den ursprungliga layouten för tangentbordet på skärmen när du använder verktygen <b>Text</b> och <b>Etikett</b>.<br/>
+        Obs: Om du använder detta alternativ innebär det automatiskt <b>onscreen-keyboard=yes</b>, så det är överflödigt att ställa in båda.      </p>
+    </dd>
+
+    <dt>
+      <code><b>onscreen-keyboard-disable-change=yes</b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Inaktiverar möjligheten att ändra layout på skärmtangentbordet när du använder verktygen <b>Text</b> och <b>Etikett</b>, vilket är användbart för att förenkla för små barn.<br/>
+        Obs: Om du använder detta alternativ innebär det automatiskt <b>onscreen-keyboard=yes</b>, så det är överflödigt att ställa in båda.      </p>
+      <p class="note">
+        <span title="Configuration option">&#9881;</span>        <strong>Obs:</strong> Om den används i en systemomfattande konfigurationsfil kan den åsidosättas av användarens konfigurationsfil med "<code>onscreen-keyboard-disable-change=no</code>". I båda fallen kan det åsidosättas med kommandoradsalternativet "<code>--onscreen-keyboard-disable-change=no</code>".      </p>
+    </dd>
+  </dl>
+</section>
+  </section>
+    <header>
+    <h2 id="joystick">Styrspak</h2>
+  </header>
+  <section class="indent">
+    <section>
+  <header>
+    <h3>Huvudenhet</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>joystick-dev=<i>N</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Ange vilken joystickenhet som ska användas av Rita med Tux. Standardvärdet är 0 (den första joysticken).      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-slowness=<i>HASTIGHET</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Ställer in en fördröjning vid varje axelrörelse, vilket gör det möjligt att sakta ner joysticken. Tillåtna värden är från 0 till 500. Standardvärdet är 15.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-threshold=<i>TRÖSKELVÄRDE</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Ställer in den lägsta nivån av axelrörelse för att börja flytta pekaren. Tillåtna värden är från 0 till 32766. Standardvärdet är 3200.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-maxsteps=<i>STEG</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+      Ställer in det maximala antalet pixlar som pekaren flyttar på en gång. Tillåtna värden är från 1 till 7. Standardvärdet är 7.      </p>
+    </dd>
+
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Hatt</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>joystick-hat-slowness=<i>HASTIGHET</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Ställer in en fördröjning vid varje automatisk rörelse, vilket gör det möjligt att sakta ner hattens hastighet. Tillåtna värden är från 0 till 500. Standardvärdet är 15.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-hat-timeout=<i>MILLISEKUNDER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Ställer in fördröjningen efter vilken pekaren börjar röra sig automatiskt om hatten hålls intryckt. Tillåtna värden är från 0 till 3000. Standardvärdet är 1000.      </p>
+    </dd>
+  </dl>
+</section>
+
+<section>
+  <header>
+    <h3>Knappar som ska inaktiveras</h3>
+  </header>
+
+  <dl>
+    <dt>
+      <code><b>joystick-buttons-ignore=<i>KNAPP1,KNAPP2,...</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        En uppsättning nummer för joystickknappar som SDL ser och som ska ignoreras. Om de inte används av något av alternativen "<code>joystick-btn-</code>" ovan kommer knapparna att uppfattas som ett vänsterklick med musen.      </p>
+    </dd>
+  </dl>
+</blockquote>
+
+<h3>
+  Kortkommandon för knappar</h3>
+
+<blockquote>
+  <dl>
+    <dt>
+      <code><b>joystick-btn-escape=<i>KNAPP NUMMER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Väljer joystickknappens nummer, sett av SDL, som ska användas för att generera en escape-händelse. Användbart för att avfärda dialoger och avsluta.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-brush=<i>KNAPP NUMMER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg till välj penselverktyget.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-stamp=<i>KNAPP NUMMER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg till välj stämpelverktyget.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-lines=<i>KNAPP NUMMER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg till välj linjeverktyget.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-shapes=<i>KNAPP NUMMER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg till välj formverktyget.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-text=<i>KNAPP NUMMER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg till välj textverktyget.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-label=<i>KNAPP NUMMER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg till välj etikettverktyget.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-fill=<i>KNAPP NUMMER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg till välj fyllningsverktyget.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-magic=<i>KNAPP NUMMER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg till välj det magiska verktyget.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-undo=<i>KNAPP NUMMER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg till anropa ångra-verktyget.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-redo=<i>KNAPP NUMMER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Väljer joystickknappens nummer, enligt SDL, som kommer att vara en genväg för att välja återställningsverktyg.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-eraser=<i>KNAPP NUMMER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Väljer joystickknappens nummer, enligt SDL, som kommer att vara en genväg för att välja sudda-verktyget.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-new=<i>KNAPP NUMMER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg för att starta dialogrutan för att skapa en ny ritning.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-open=<i>KNAPP NUMMER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg för att starta dialogrutan för att öppna en befintlig ritning.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-save=<i>KNAPP NUMMER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+      Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg till spara ritningen.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-pgsetup=<i>KNAPP NUMMER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg till starta dialogrutan för sidinställning för utskrift.      </p>
+    </dd>
+
+    <dt>
+      <code><b>joystick-btn-print=<i>KNAPP NUMMER</i></b></code>
+    </dt>
+
+    <dd>
+      <p>
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg till skriv ut.      </p>
+    </dd>
+  </dl>
+</section>
+  </section>
+      </section><!-- H1: Available Options -->
+
+    <section class="outer"><!-- H1: Overriding System Config. Options -->
+      <header>
+        <h1 id="overriding">
+          Åsidosättande av System Config. Alternativ        </h1>
+      </header>
+
+      <p>
+        Om något av ovanstående alternativ är inställt i en systemomfattande konfigurationsfil (t.ex. <nobr>"<code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code>"</nobr> på Linux) kan du åsidosätta dem i din egen personliga konfigurationsfil (t.ex. <nobr>"<code style='background: #EEE;'>/home/<i>användarnamn</i>/.tuxpaintrc</code>"</nobr>)      </p>
+
+      <p>
+        För true/false-alternativ, som "<code>noprint</code>" och "<code>grab</code>", kan du helt enkelt säga att de är lika med "no" i din personliga konfigurationsfil:      </p>
+
+      <blockquote>
+        <code>noprint=no<br>
+        uppercase=no</code>
+      </blockquote>
+
+      <p>
+        Du kan också använda alternativ som liknar de alternativ för kommandoradsöverstyrning som beskrivs nedan. Till exempel:      </p>
+
+      <blockquote>
+        <code>print=yes<br>
+        mixedcase=yes</code>
+      </blockquote>
+    </section><!-- H1: Overriding System Config. Options -->
+
+    <section class="outer"><!-- H1: Command-Line Options -->
+      <header>
+        <h1 id="command_line">
+          Alternativ för kommandoraden        </h1>
+      </header>
+
+      <p>
+        Alternativ kan också anges på kommandoraden när du startar Rita med Tux.      </p>
+      <dl>
+        <dt>
+          <code><b>--fullscreen=yes<br>
+          --fullscreen=native<br>
+          --<i>BREDD</i>x<i>SKÄRMHÖJD</i><br>
+          --orient=portrait<br>
+          --buttonsize=<i>STRL</i><br>
+          --colorsrows=<i>RADER</i><br>
+          --native<br>
+          --allowscreensaver<br>
+          --startblank<br>
+          --nosound<br>
+          --nostereo<br>
+          --noquit<br>
+          --noprint<br>
+          --printdelay=<i>SEKUNDER</i><br>
+          --printcfg<br>
+          --altprintnever<br>
+          --altprintalways<br>
+          --papersize=<i>PAPPERSSTORLEK</i><br>
+          --printcommand=<i>KOMMANDO</i><br>
+          --altprintcommand=<i>KOMMANDO</i><br>
+          --nolockfile<br>
+          --simpleshapes<br>
+          --uppercase<br>
+          --grab<br>
+          --noshortcuts<br>
+          --nowheelmouse<br>
+          --nobuttondistinction<br>
+          --nofancycursors<br>
+          --hidecursor<br>
+          --nooutlines<br>
+          --nostamps<br>
+          --nostampcontrols<br>
+          --nostamprotation<br>
+          --nomagiccontrols<br>
+          --nomagicsizes<br>
+          --noshapecontrols<br>
+          --nolabel<br>
+          --nobrushspacing<br>
+          --newcolorslast<br>
+          --mouse-accessibility<br>
+          --onscreen-keyboard<br>
+          --onscreen-keyboard-layout<br>
+          --onscreen-keyboard-disable-change<br>
+          --joystick-dev<br>
+          --joystick-slowness<br>
+          --joystick-threshold<br>
+          --joystick-maxsteps<br>
+          --joystick-hat-slowness<br>
+          --joystick-hat-timeout<br>
+          --joystick-btn-escape<br>
+          --joystick-btn-brush<br>
+          --joystick-btn-stamp<br>
+          --joystick-btn-lines<br>
+          --joystick-btn-shapes<br>
+          --joystick-btn-text<br>
+          --joystick-btn-label<br>
+          --joystick-btn-magic<br>
+          --joystick-btn-undo<br>
+          --joystick-btn-redo<br>
+          --joystick-btn-eraser<br>
+          --joystick-btn-new<br>
+          --joystick-btn-open<br>
+          --joystick-btn-save<br>
+          --joystick-btn-pgsetup<br>
+          --joystick-btn-print<br>
+          --joystick-buttons-ignore<br>
+          --sysfonts<br>
+          --uifont=<i>TYPSNITTSNAMN</i><br>
+          --alllocalefonts<br>
+          --mirrorstamps<br>
+          --stampsize=<i>STRL</i><br>
+          --keyboard<br>
+          --savedir <i>KATALOG</i><br>
+          --datadir <i>KATALOG</i><br>
+          --exportdir <i>KATALOG</i><br>
+          --saveover<br>
+          --saveovernew<br>
+          --nosave<br>
+          --autosave<br>
+          --reversesort<br>
+          --lang <i>SPRÅK</i><br>
+          --colorfile <i>FIL</i><br></b></code>
+        </dt>
+
+        <dd>
+          <p>
+            Dessa aktiverar eller motsvarar de konfigurationsfilalternativ som beskrivs ovan.          </p>
+        </dd>
+
+        <dt>
+          <code><b>--windowed<br>
+          --800x600<br>
+          --orient=landscape<br>
+          --disablescreensaver<br>
+          --startlast<br>
+          --sound<br>
+          --stereo<br>
+          --quit<br>
+          --print<br>
+          --printdelay=0<br>
+          --noprintcfg<br>
+          --altprintmod<br>
+          --lockfile<br>
+          --complexshapes<br>
+          --mixedcase<br>
+          --dontgrab<br>
+          --shortcuts<br>
+          --wheelmouse<br>
+          --buttondistinction<br>
+          --fancycursors<br>
+          --showcursor<br>
+          --outlines<br>
+          --stamps<br>
+          --stampcontrols<br>
+          --stamprotation<br>
+          --magiccontrols<br>
+          --magicsizes<br>
+          --shapecontrols<br>
+          --label<br>
+          --brushspacing<br>
+          --newcolorsfirst<br>
+          --nosysfonts<br>
+          --currentlocalefont<br>
+          --uifont=default<br>
+          --dontmirrorstamps<br>
+          --stampsize=default<br>
+          --mouse<br>
+          --saveoverask<br>
+          --save<br>
+          --noautosave<br>
+          --noreversesort<br>
+          </b></code>
+        </dt>
+
+        <dd>
+          <p>
+            Dessa alternativ kan användas för att åsidosätta alla inställningar som gjorts i konfigurationsfilen. (Om alternativet inte har angetts i konfigurationsfilen/filerna behövs inget åsidosättandealternativ)          </p>
+        </dd>
+
+        <dt>
+          <code><b>--nosysconfig</b></code>
+        </dt>
+
+        <dd>
+          <p>
+            Detta förhindrar att den systemomfattande konfigurationsfilen (t.ex. <nobr>"<code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code>"</nobr> på Linux) läses.          </p>
+
+          <p>
+            Endast din egen konfigurationsfil (t.ex. <nobr>"<code style='background: #EEE;'>/home/<i>användarnamn</i>/.tuxpaintrc</code>"</nobr> på Linux) - om den finns - kommer att användas.          </p>
+        </dd>
+      </dl>
+
+      <section class="indent"><!-- H2: Command-Line Informational Options -->
+        <header>
+          <h2 id="info-cmd">
+            Alternativ för information på kommandoraden          </h2>
+        </header>
+
+        <p>
+          Följande alternativ visar lite informativ text på skärmen. Rita med Tux startar dock inte upp och körs efteråt.        </p>
+
+        <dl>
+          <dt>
+            <code><b>--version</b></code><br>
+            <code><b>--verbose-version</b></code>
+          </dt>
+
+          <dd>
+            <p>
+              Visar versionsnummer och datum för den kopia av Rita med Tux som du kör. "<code>--verbose-version</code>" visar också vilka kompileringstidsalternativ som ställdes in. (Se <a href="INSTALL.html">INSTALL</a> och <a href="FAQ.html">FAQ</a>).            </p>
+          </dd>
+
+          <dt>
+            <code><b>--copying</b></code>
+          </dt>
+
+          <dd>
+            <p>
+              Visa kortfattad licensinformation om kopiering av Rita med Tux.            </p>
+          </dd>
+
+          <dt>
+            <code><b>--usage</b></code>
+          </dt>
+
+          <dd>
+            <p>
+              Visa listan över tillgängliga kommandoradsalternativ.            </p>
+          </dd>
+
+          <dt>
+            <code><b>--help</b></code>
+          </dt>
+
+          <dd>
+            <p>
+              Visa kortfattad hjälp med att använda Rita med Tux.            </p>
+          </dd>
+
+          <dt>
+            <code><b>--lang help</b></code>
+          </dt>
+
+          <dd>
+            <p>
+              Visa en lista över tillgängliga språk i Rita med Tux.            </p>
+          </dd>
+
+          <dt>
+            <code><b>--joystick-dev list</b></code>
+          </dt>
+
+          <dd>
+            <p>
+              Visa lista över anslutna joysticks som är tillgängliga för Rita med Tux.            </p>
+          </dd>
+        </dl>
+      </section><!-- H2: Command-Line Informational Options -->
+    </section><!-- H1: Command-Line Options -->
+
+    <section class="outer"><!-- H1: Choosing a Different Language -->
+      <header>
+        <h1 id="different_language">
+          Att välja ett annat språk        </h1>
+      </header>
+
+      <p>
+        Rita med Tux har översatts till ett antal olika språk. För att få tillgång till översättningarna kan du använda alternativet "<code>--lang</code>" på kommandoraden för att ställa in språket (t.ex. "<code>--lang spanish</code>") eller använda inställningen "<code>lang=</code>" i konfigurationsfilen (t.ex. "<code>lang=spanish</code>").      </p>
+
+      <p>
+        Rita med Tux tar också hänsyn till din miljös aktuella locale. (Du kan åsidosätta det på kommandoraden med hjälp av alternativet "<code>--locale</code>"; se <a href="#locale">ovan</a>)      </p>
+
+      <p>
+        Använd alternativet "<code>--lang help</code>" för att lista de tillgängliga språkalternativen.      </p>
+
+      <section class="indent"><!-- H2: Available Languages -->
+        <header>
+          <h2 id="available_languages">
+            Tillgängliga språk          </h2>
+        </header>
+
+        <table border="1"
+               cellspacing="0"
+               cellpadding="2"
+               summary=
+               "Locale-värden och de språk de representerar.">
+          <tr>
+            <th>Lokalanpassningskod</th>
+            <th>Språk<br>(modersmål)</th>
+            <th>Språk<br>(engelskt namn)</th>
+            <th>Inmatningsmetod Cykel Nyckelkombination</th>
+          </tr>
+
+            <tr>
+    <td><!-- locale_code --><code>C</code></td>
+    <td></td>
+    <td>English</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ach_UG</code></td>
+    <td>Acoli</td>
+    <td>Acholi</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>af_ZA</code></td>
+    <td></td>
+    <td>Afrikaans</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ak_GH</code></td>
+    <td></td>
+    <td>Akan</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>am_ET</code></td>
+    <td></td>
+    <td>Amharic</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>an_ES</code></td>
+    <td></td>
+    <td>Aragones</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ar_SA</code></td>
+    <td></td>
+    <td>Arabic</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>as_IN</code></td>
+    <td></td>
+    <td>Assamese</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ast_ES</code></td>
+    <td></td>
+    <td>Asturian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>az_AZ</code></td>
+    <td></td>
+    <td>Azerbaijani</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>bm_ML</code></td>
+    <td></td>
+    <td>Bambara</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>bn_IN</code></td>
+    <td></td>
+    <td>Bengali</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>be_BY</code></td>
+    <td>Bielaruskaja</td>
+    <td>Belarusian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>bg_BG</code></td>
+    <td></td>
+    <td>Bulgarian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>bo_CN (*)</code></td>
+    <td></td>
+    <td>Tibetan</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>br_FR</code></td>
+    <td>Brezhoneg</td>
+    <td>Breton</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>brx_IN</code></td>
+    <td></td>
+    <td>Bodo</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>bs_BA</code></td>
+    <td></td>
+    <td>Bosnian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ca_ES</code></td>
+    <td>Català</td>
+    <td>Catalan</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ca_ES@valencia</code></td>
+    <td>Valencia</td>
+    <td>Valencian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>cgg_UG</code></td>
+    <td>Chiga</td>
+    <td>Kiga</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>cs_CZ</code></td>
+    <td>Cesky</td>
+    <td>Czech</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>cy_GB</code></td>
+    <td>Cymraeg</td>
+    <td>Welsh</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>da_DK</code></td>
+    <td>Dansk</td>
+    <td>Danish</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>de_DE</code></td>
+    <td>Deutsch</td>
+    <td>German</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>doi_IN</code></td>
+    <td></td>
+    <td>Dogri</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>et_EE</code></td>
+    <td></td>
+    <td>Estonian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>el_GR (*)</code></td>
+    <td></td>
+    <td>Greek</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>en_AU</code></td>
+    <td></td>
+    <td>Australian English</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>en_CA</code></td>
+    <td></td>
+    <td>Canadian English</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>en_GB</code></td>
+    <td></td>
+    <td>British English</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>en_ZA</code></td>
+    <td></td>
+    <td>South African English</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>eo</code></td>
+    <td></td>
+    <td>Esperanto</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>es_ES</code></td>
+    <td>Español</td>
+    <td>Spanish</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>es_MX</code></td>
+    <td>Español-Mejicano</td>
+    <td>Mexican Spanish</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>eu_ES</code></td>
+    <td>Euskara</td>
+    <td>Basque</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>fa_IR</code></td>
+    <td></td>
+    <td>Persian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ff_SN</code></td>
+    <td>Fulah</td>
+    <td>Fula</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>fi_FI</code></td>
+    <td>Suomi</td>
+    <td>Finnish</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>fo_FO</code></td>
+    <td></td>
+    <td>Faroese</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>fr_FR</code></td>
+    <td>Français</td>
+    <td>French</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ga_IE</code></td>
+    <td>Gàidhlig</td>
+    <td>Irish Gaelic</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>gd_GB</code></td>
+    <td>Ghaidhlig</td>
+    <td>Scottish Gaelic</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>gl_ES</code></td>
+    <td>Galego</td>
+    <td>Galician</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>gos_NL</code></td>
+    <td>Zudelk Veenkelonioals</td>
+    <td>Gronings</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>gu_IN</code></td>
+    <td></td>
+    <td>Gujarati</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>he_IL (*)</code></td>
+    <td></td>
+    <td>Hebrew</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>hi_IN (*)</code></td>
+    <td></td>
+    <td>Hindi</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>hr_HR</code></td>
+    <td>Hrvatski</td>
+    <td>Croatian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>hu_HU</code></td>
+    <td>Magyar</td>
+    <td>Hungarian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>hy_AM</code></td>
+    <td>Hayeren</td>
+    <td>Armenian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>id_ID</code></td>
+    <td>Bahasa Indonesia</td>
+    <td>Indonesian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>is_IS</code></td>
+    <td>Íslenska</td>
+    <td>Icelandic</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>it_IT</code></td>
+    <td>Italiano</td>
+    <td>Italian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>iu_CA</code></td>
+    <td></td>
+    <td>Inuktitut</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ja_JP (*)</code></td>
+    <td></td>
+    <td>Japanese</td>
+    <td>höger [Alt] eller vänster [Alt]</td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ka_GE</code></td>
+    <td></td>
+    <td>Georgian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>kab</code></td>
+    <td></td>
+    <td>Kabyle</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>km_KH</code></td>
+    <td></td>
+    <td>Khmer</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>kn_IN</code></td>
+    <td></td>
+    <td>Kannada</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ko_KR (*)</code></td>
+    <td></td>
+    <td>Korean</td>
+    <td>höger [Alt] eller vänster [Alt]</td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>kok_IN</code></td>
+    <td></td>
+    <td>Konkani (Devanagari)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>kok@roman</code></td>
+    <td></td>
+    <td>Konkani (Roman)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ks_IN@devanagari</code></td>
+    <td></td>
+    <td>Kashmiri (Devanagari)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ks_IN</code></td>
+    <td></td>
+    <td>Kashmiri (Perso-Arabic)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ku_TR</code></td>
+    <td></td>
+    <td>Kurdish</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>lb_LU</code></td>
+    <td>Letzebuergesch</td>
+    <td>Luxembourgish</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>lg_UG</code></td>
+    <td></td>
+    <td>Luganda</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>lt_LT</code></td>
+    <td>Lietuviu</td>
+    <td>Lithuanian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>lv_LV</code></td>
+    <td></td>
+    <td>Latvian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>mk_MK</code></td>
+    <td></td>
+    <td>Macedonian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>mai_IN</code></td>
+    <td></td>
+    <td>Maithili</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ml_IN</code></td>
+    <td></td>
+    <td>Malayalam</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>mn_MN</code></td>
+    <td></td>
+    <td>Mongolian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>mni_IN</code></td>
+    <td></td>
+    <td>Manipuri (Bengali)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>mni@meiteimayek</code></td>
+    <td></td>
+    <td>Manipuri (Meitei Mayek)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>mr_IN</code></td>
+    <td></td>
+    <td>Marathi</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ms_MY</code></td>
+    <td></td>
+    <td>Malay</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>nb_NO</code></td>
+    <td>Norsk (bokmål)</td>
+    <td>Norwegian Bokmål</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ne_NP</code></td>
+    <td>Nepali</td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>nl_NL</code></td>
+    <td></td>
+    <td>Dutch</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>nn_NO</code></td>
+    <td>Norsk (nynorsk)</td>
+    <td>Norwegian Nynorsk</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>nr_ZA</code></td>
+    <td></td>
+    <td>Ndebele</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>nso_ZA</code></td>
+    <td>Sesotho sa Leboa</td>
+    <td>Northern Sotho</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>oc_FR</code></td>
+    <td></td>
+    <td>Occitan</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>oj_CA</code></td>
+    <td>Ojibwe</td>
+    <td>Ojibway</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>pa_IN</code></td>
+    <td></td>
+    <td>Punjabi</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>or_IN</code></td>
+    <td>Odia</td>
+    <td>Oriya</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>pl_PL</code></td>
+    <td>Polski</td>
+    <td>Polish</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>pt_BR</code></td>
+    <td>Portugês Brazileiro</td>
+    <td>Brazilian Portuguese</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>pt_PT</code></td>
+    <td>Portugês</td>
+    <td>Portuguese</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ro_RO</code></td>
+    <td></td>
+    <td>Romanian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ru_RU</code></td>
+    <td>Russkiy</td>
+    <td>Russian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>rw_RW</code></td>
+    <td></td>
+    <td>Kinyarwanda</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>sa_IN</code></td>
+    <td></td>
+    <td>Sanskrit</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>sat_IN</code></td>
+    <td></td>
+    <td>Santali (Devanagari)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>sat@olchiki</code></td>
+    <td></td>
+    <td>Santali (Ol-Chikii)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>shs_CA</code></td>
+    <td>Secwepemctin</td>
+    <td>Shuswap</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>si_LK</code></td>
+    <td></td>
+    <td>Sinhala</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>sd_IN@devanagari</code></td>
+    <td></td>
+    <td>Sindhi (Devanagari)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>sd_IN</code></td>
+    <td></td>
+    <td>Sindhi</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>sk_SK</code></td>
+    <td></td>
+    <td>Slovak</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>sl_SI</code></td>
+    <td></td>
+    <td>Slovenian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>son</code></td>
+    <td></td>
+    <td>Songhay</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>sq_AL</code></td>
+    <td></td>
+    <td>Albanian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>sr_YU</code></td>
+    <td></td>
+    <td>Serbian (cyrillic)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>sr_RS@latin</code></td>
+    <td></td>
+    <td>Serbian (latin)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>su_ID</code></td>
+    <td></td>
+    <td>Sundanese</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>sv_SE</code></td>
+    <td>Svenska</td>
+    <td>Swedish</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>sw_TZ</code></td>
+    <td></td>
+    <td>Swahili</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ta_IN (*)</code></td>
+    <td></td>
+    <td>Tamil</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>te_IN (*)</code></td>
+    <td></td>
+    <td>Telugu</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>th_TH (*)</code></td>
+    <td></td>
+    <td>Thai</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>tl_PH (*)</code></td>
+    <td></td>
+    <td>Tagalog</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>tlh</code></td>
+    <td>tlhIngan</td>
+    <td>Klingon</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>tr_TR</code></td>
+    <td></td>
+    <td>Turkish</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>tw_GH</code></td>
+    <td></td>
+    <td>Twi</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>uk_UA</code></td>
+    <td></td>
+    <td>Ukrainian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ur_IN</code></td>
+    <td></td>
+    <td>Urdu</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>ve_ZA</code></td>
+    <td></td>
+    <td>Venda</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>vec</code></td>
+    <td>Venèto</td>
+    <td>Venetian</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>vi_VN</code></td>
+    <td></td>
+    <td>Vietnamese</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>wa_BE</code></td>
+    <td></td>
+    <td>Walloon</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>wo_SN</code></td>
+    <td></td>
+    <td>Wolof</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>xh_ZA</code></td>
+    <td></td>
+    <td>Xhosa</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>zh_CN (*)</code></td>
+    <td></td>
+    <td>Chinese (Simplified)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>zh_TW (*)</code></td>
+    <td></td>
+    <td>Chinese (Traditional)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>zam</code></td>
+    <td></td>
+    <td>Zapotec (Miahuatlan)</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><!-- locale_code --><code>zu_ZA</code></td>
+    <td></td>
+    <td>Zulu</td>
+    <td></td>
+  </tr>
+          </table>
+
+        <p>
+          <b>(*)</b> - Dessa språk kräver sina egna teckensnitt, eftersom de inte representeras med en latinsk teckenuppsättning, som de andra. Se avsnittet "<a href="#special_fonts"><i>Särskilda teckensnitt</i></a>" avsnittet nedan.        </p>
+
+        <p class="note">
+          <span title="Information">&#128161;</span>          <strong>Obs:</strong> Rita med Tux tillhandahåller en alternativ inmatningsmetod för att mata in tecken med <b>textverktyget</b> på vissa platser. Den eller de tangentkombinationer som anges kan användas för att växla mellan de inmatningsmetoder som stöds medan <b>textverktyget</b> är aktivt.        </p>
+      </section><!-- H2: Available Languages -->
+
+      <section><!-- H2: Setting Your Environment's Locale -->
+        <header>
+          <h2 id="env_locale">
+            Ställa in lokal språkdräkt för din miljö          </h2>
+        </header>
+
+        <p>
+          Om du byter lokal påverkas mycket av din miljö.        </p>
+
+        <p>
+          Som nämnts ovan låter Rita med Tux dig inte bara välja språk under körning med hjälp av kommandoradsalternativ ("<code>--lang</code>" och "<code>--locale</code>"), utan Rita med Tux tar också hänsyn till den globala locale-inställningen i din miljö.        </p>
+
+        <p>
+          Om du inte redan har ställt in din miljös locale, följer här en kort beskrivning av hur du gör:        </p>
+
+        <section class="indent"><!-- H3: Linux/Unix Users -->
+          <header>
+            <h3>Linux/Unix-användare</h3>
+          </header>
+
+          <p>
+            Kontrollera först att det språk du vill använda är aktiverat genom att redigera filen "<code>/etc/locale.gen</code>" på ditt system och sedan köra programmet "<code>locale-gen</code>" som root.          </p>
+
+          <p class="note">
+            <span title="Information">&#128161;</span>            <strong>Obs:</strong> Debian-användare kanske helt enkelt kan köra kommandot "<code>dpkg-reconfigure locales</code>" som root för att få upp en konfigurationsdialog. Ubuntu-användare kan köra "<code>sudo dpkg-reconfigure localeconf</code>" (paketet "localeconf" kan behöva installeras först), eller så kan du behöva redigera filen "<code>/var/lib/locales/supported.d/local</code>" först och lägga till önskade lokaliteter från listan som finns i "<code>/usr/share/i18n/SUPPORTED</code>".          </p>
+
+          <p>
+            Innan du kör Rita med Tux ska du sedan ställa in miljövariabeln "<code>$LANG</code>" till en av de lokala språkversioner som anges ovan. (Om du vill att alla program som kan översättas ska översättas, kan du placera följande i ditt inloggningsskript; t.ex. "<code>~/.profile</code>", "<code>~/.bashrc</code>", "<code>~/.cshrc</code>", etc.)          </p>
+
+          <p>
+            Till exempel i ett Bourne Shell (som BASH):          </p>
+
+          <blockquote>
+            <code>export LANG=es_ES ; \<br>
+            tuxpaint</code>
+          </blockquote>
+
+          <p>
+            Och i ett C Shell (som TCSH):          </p>
+
+          <blockquote>
+            <code>setenv LANG es_ES ; \<br>
+            tuxpaint</code>
+          </blockquote>
+        </section><!-- H3: Linux/Unix Users -->
+
+        <section class="indent"><!-- H3: Windows Users -->
+          <header>
+            <h3>
+              Windows-användare            </h3>
+          </header>
+
+          <p>
+            Rita med Tux känner igen det aktuella språket och använder lämpliga filer som standard. Så det här avsnittet är bara för personer som provar olika språk.          </p>
+
+          <p>
+            Det enklaste är att använda "<code>--lang</code>"-omkopplaren i genvägen (se "INSTALL"). Men genom att använda ett MSDOS Prompt-fönster är det också möjligt att ge ett kommando som detta:          </p>
+
+          <blockquote>
+            <code>set LANG=es_ES</code>
+          </blockquote>
+
+          <p>
+            ...som kommer att bestämma språket för hela DOS-fönstrets livslängd.          </p>
+
+          <p>
+            Om du vill ha något mer permanent kan du ställa in en "miljövariabel" med hjälp av dialogen "Systemets egenskaper" på följande sätt:          </p>
+          <ul>
+            <li>Tryck på tangentkombinationen "<b>[Windows]+[R]</b>" för att öppna dialogen "Kör ...".</li>
+            <li>Skriv in "<code>sysdm.cpl</code>" i textrutan och klicka på knappen "<b>[OK]</b>" för att öppna dialogen "Systemets egenskaper".</li>
+            <li>Välj fliken "Avancerat".</li>
+            <li>Klicka på knappen "Miljövariabler...".</li>
+            <li>Redigera värdet för parametern "<code>LANG</code>" (skapa den om den inte finns).</li>
+          </ul>
+        </section><!-- H3: Windows Users -->
+      </section><!-- H2: Setting Your Environment's Locale -->
+
+      <section class="indent"><!-- H2: Special Fonts -->
+        <header>
+          <h2 id="special_fonts">
+            Särskilda teckensnitt          </h2>
+        </header>
+
+        <p>
+          Vissa språk kräver att särskilda teckensnitt installeras. Dessa teckensnittsfiler (som är i TrueType-format (TTF)) är alldeles för stora för att inkluderas i nedladdningen av Rita med Tux, och finns tillgängliga separat. (Se tabellen ovan, under rubriken "<a href="#different_language"><i>Välja ett annat språk</i></a>" avsnitt.)        </p>
+
+        <p class="note">
+          <span title="Version variation">&#128220;</span>          <strong>Observera:</strong> Från och med version 0.9.18 använder Rita med Tux biblioteket "SDL_Pango", som använder biblioteket "Pango" för att rendera text i användargränssnittet, i stället för att använda "SDL_ttf" direkt. Om inte din kopia av Rita med Tux byggdes utan stöd för Pango, bör speciella teckensnitt <b><i>inte längre vara nödvändiga</i></b>.        </p>
+
+        <p>
+          När Rita med Tux körs på ett språk som kräver ett eget teckensnitt försöker Rita med Tux läsa in teckensnittsfilen från den systemomfattande katalogen "<code><b>fonts</b></code>" (under en underkatalog "<code><b>locale</b></code>"). Filens namn motsvarar de två första bokstäverna i språkets "locale"-kod (t.ex. "ko" för koreanska, "ja" för japanska, "zh_tw" för traditionell kinesiska).        </p>
+
+        <p>
+          Till exempel, under Linux eller Unix, när Rita med Tux körs på koreanska (t.ex. med alternativet "<code>--lang korean</code>"), kommer Rita med Tux att försöka ladda följande teckensnittsfil:        </p>
+
+        <blockquote>
+          <p>
+            <code>/usr/share/tuxpaint/fonts/locale/<b>ko.ttf</b></code>
+          </p>
+        </blockquote>
+
+        <p>
+          Du kan ladda ner teckensnitt för språk som stöds från Rita med Tuxs webbplats, <a href="https://tuxpaint.org/">https://tuxpaint.org/.</a>(Titta i avsnittet "Fonts" under "Download.")        </p>
+
+        <p>
+          Under Unix och Linux kan du använda <code>Makefile</code> som medföljer teckensnittet för att installera teckensnittet på rätt plats.        </p>
+      </section><!-- H2: Special Fonts -->
+    </section><!-- H1: Choosing a Different Language -->
+  </body>
+</html>

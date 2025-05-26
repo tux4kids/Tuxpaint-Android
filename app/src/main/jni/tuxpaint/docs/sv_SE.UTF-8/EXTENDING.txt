@@ -1,0 +1,1145 @@
+                                    Utvidga
+                                   Tux Paint
+                                version 0.9.35
+
+         Copyright © 2002-2025 av olika bidragsgivare; se AUTHORS.txt.
+                             https://tuxpaint.org/
+
+                                  maj 2, 2025
+
++------------------------------------------+
+|                 Innehåll                 |
+|------------------------------------------|
+|   * Vart filerna tar vägen               |
+|       + Standardfiler                    |
+|       + Personliga filer                 |
+|   * Penslar                              |
+|       + Borste Beskrivande text          |
+|       + Alternativ för pensel            |
+|   * Stämplar                             |
+|       + Stämpelbilder                    |
+|       + Stämpel Beskrivande text         |
+|       + Stämpel ljudeffekter             |
+|       + Stämpel Beskrivande ljud         |
+|       + Alternativ för stämplar          |
+|       + Förspeglade och omvända stämplar |
+|   * Typsnitt                             |
+|   * "Startbilder"                        |
+|       + Startbok i målarboksstil         |
+|       + Startbilder i scenformat         |
+|       + Startalternativ                  |
+|   * "Mallar"                             |
+|       + Mallalternativ                   |
+|   * Översättningar                       |
+|   * Alternativa metoder för inmatning    |
+|   * Tangentbord på skärmen               |
+|   * Magiverktyg                          |
++------------------------------------------+
+
+Om du vill lägga till eller ändra saker som Brushes, Startbilder, Rubber Stamps
+och annat innehåll som används av Rita med Tux kan du göra det ganska enkelt
+genom att helt enkelt lägga till, ändra eller ta bort filer där Rita med Tux
+letar efter dem.
+
+💡 Obs: Du måste starta om Rita med Tux för att ändringarna ska träda i kraft.
+
+Vart filerna tar vägen
+
+                             ### Standardfiler ###
+
+Rita med Tux letar efter sina olika datafiler i katalogen"data".
+
+→ Linux och Unix ←
+
+    Var den här katalogen hamnar beror på vilket värde som ställdes in för
+    "DATA_PREFIX" när Rita med Tux byggdes. Se "Installera dokumentation" för
+    mer information.
+
+    Som standard är dock katalogen:
+
+        /usr/local/share/tuxpaint/
+
+    Om du installerade från ett paket är det mer troligt att det är det:
+
+        /usr/share/tuxpaint/
+
+
+     
+→ Windows ←
+
+    Rita med Tux letar efter en katalog som heter"data" i samma katalog som den
+    körbara filen. Detta är den katalog som installationsprogrammet använde när
+    det installerade Rita med Tux, t.ex:
+
+        C:\Programfiler\TuxPaint\data
+
+
+     
+→ macOS ←
+
+    Rita med Tux lagrar sina datafiler i applikationsikonen "Tux Paint" (som
+    faktiskt är en speciell typ av mapp på macOS & Mac OS X före det). Följande
+    steg förklarar hur man kommer till mapparna i den:
+
+     1. Ta fram en "kontextmeny" genom att hålla ned [Kontroll] och klicka på
+        Rita med Tux-ikonen i Finder. (Om du har en mus med mer än en knapp kan
+        du helt enkelt högerklicka på ikonen)
+     2. Välj "Visa innehåll" i menyn som visas. Ett nytt Finder-fönster visas
+        med en mapp inuti som heter "Innehåll".
+     3. Öppna mappen "Contents" och öppna mappen "Resources" som finns i den.
+     4. Där hittar du olika undermappar, t.ex. "startbilder", "stamps",
+        "brushes" osv. Om du lägger till nytt innehåll i dessa mappar blir
+        innehållet tillgängligt för alla användare som startar den här kopian
+        (ikonen) av Rita med Tux.
+
+    💡 Obs: Om du installerar en nyare version av Rita med Tux och ersätter
+    eller kasserar den gamla versionen kommer du att förlora ändringar som
+    gjorts genom att följa instruktionerna ovan, så spara säkerhetskopior av
+    ditt nya innehåll (stämplar, penslar etc.).
+
+    Rita med Tux letar också efter filer i en "TuxPaint"-mapp som du kan
+    placera i systemets "Applikationsstöd"-mapp (finns under "Bibliotek" i
+    roten av ditt filsystem):
+
+        /Bibliotek/Applikationsstöd/TuxPaint/data/
+
+    När du uppgraderar till en nyare version av Rita med Tux kommer innehållet
+    i mappen "TuxPaint" att förbli detsamma och vara tillgängligt för alla
+    användare av Rita med Tux.
+
+
+     
+
+                           ### Personliga filer ###
+
+Du kan också skapa penslar, stämplar, "startbilder", mallar och teckensnitt i
+din egen användarkontokatalog (mapp) som Rita med Tux kan hitta.
+
+→ Windows ←
+
+    Din personliga Rita med Tux-mapp lagras i din personliga "Application
+    Data". Till exempel på nyare Windows:
+
+        C:\Users\användarnamn\AppData\Roaming\TuxPaint\
+
+
+     
+→ macOS ←
+
+    Din personliga Rita med Tux-mapp lagras i din personliga "Applikationsstöd"
+    -mapp:
+
+        /Användare/användarnamn/Bibliotek/Applikationsstöd/TuxPaint/
+
+
+     
+→ Linux och Unix ←
+
+    Dina personliga Rita med Tux-filer hamnar i en "dold katalog" som finns i
+    ditt kontos hemkatalog: "/home/användarnamn/.tuxpaint/".
+
+    Glöm inte punkten (".") före "tuxpaint"!
+
+
+     
+
+Om du vill lägga till egna penslar, stämplar, "startbilder", mallar och
+teckensnitt skapar du underkataloger i din personliga Rita med Tux-katalog med
+namnen "brushes", "stamps", "starters", "templates" respektive "fonts".
+
+(Om du t.ex. skapade en pensel med namnet "blomma.png" skulle du placera den i 
+"/home/användarnamn/.tuxpaint/brushes/" under Linux eller Unix)
+
+Penslar
+
+De penslar som används för att rita med verktygen "Paint" och "Lines" i Rita
+med Tux är helt enkelt PNG-bildfiler.
+
+PNG-bildens alfa (transparens) används för att bestämma penselns form, vilket
+innebär att formen kan vara "anti-aliased" och till och med delvis
+genomskinlig!
+
+Gråskalapixlar i PNG-penseln ritas med den färg som för närvarande är vald i
+Rita med Tux. Färgpixlar kommer att tonas.
+
+                        ### Borste Beskrivande text ###
+
+Rita med Tux kommer att visa beskrivande text när en pensel väljs. Dessa
+placeras i vanliga textfiler med samma namn som PNG-filen, men med
+filnamnstillägget ".txt". (t.ex. lagras beskrivningen av "borste.png" i
+"borste.txt" i samma katalog)
+
+Den första raden i textfilen kommer att användas som den amerikanska engelska
+beskrivningen av penselns bild. Den måste vara kodad i UTF-8.
+
+→ Stöd för lokalisering ←
+
+    Ytterligare rader kan läggas till i textfilen för att ge översättningar av
+    beskrivningen, som ska visas när Rita med Tux körs i en annan språkdräkt
+    (t.ex. franska eller spanska).
+
+    Början av raden ska motsvara språkkoden för det aktuella språket (t.ex.
+    "fr" för franska och "zh_TW" för traditionell kinesiska), följt av ".utf8="
+    och den översatta beskrivningen (Unicode, kodad i UTF-8).
+
+    För Rita med Tux-utvecklare: Det finns skript i katalogen "brushes-po" för
+    att konvertera textfilerna till PO-format (och tillbaka) för enkel
+    översättning till olika språk. Därför bör du aldrig lägga till eller ändra
+    översättningar i filerna ".txt" direkt.
+
+    Om det inte finns någon översättning tillgänglig för det språk som Rita med
+    Tux för närvarande körs på, används den amerikanska engelska texten.
+
+
+     
+→ Windows-användare ←
+
+    Använd NotePad eller WordPad för att redigera/skapa dessa filer. Se till
+    att spara dem som ren text och att de har tillägget ".txt" i slutet av
+    filnamnet.
+
+
+     
+
+                         ### Alternativ för pensel ###
+
+Förutom en grafisk form kan penslar också ges andra attribut. För att göra
+detta måste du skapa en "datafil" för pensel.
+
+En brush's-datafil är helt enkelt en vanlig ASCII-textfil som innehåller
+alternativen för brush.
+
+Filen har samma namn som PNG-bilden, men har tillägget ".dat". (t.ex. är
+datafilen för "borste.png" textfilen "borste.dat", som finns i samma katalog)
+
+→ Penselavstånd ←
+
+    Du kan ange avståndet mellan penslarna, det vill säga hur ofta de dras över
+    en linje eller ett streck. Som standard är avståndet penselns höjd
+    dividerat med 4.
+
+    Lägg till en rad som innehåller raden "spacing=N" i penselns datafil, där "
+    N" är det avstånd du vill ha för penseln. (Ju lägre siffra, desto oftare
+    ritas penseln)
+
+
+     
+→ Animerade penslar ←
+
+    Borstar kan vara animerade. När penseln används ritas varje bildruta i
+    animationen i sekvens.
+
+    Lägg ut varje ram över en bred PNG-bild. Om penseln till exempel är 30x30
+    och det finns 5 ramar, ska bilden vara 150x30.
+
+    Lägg till en rad som innehåller raden "frames=N" i penselns datafil, där "N
+    " är antalet bildrutor i penseln.
+
+    ⚙ Obs: Om du vill att bildrutorna ska bläddras igenom slumpmässigt i
+    stället för sekventiellt kan du också lägga till en rad som innehåller "
+    random" i penselns datafil.
+
+
+     
+→ Riktningsgivande borstar ←
+
+    Penslar kan konfigureras så att de ritar olika former beroende på linjens
+    eller penseldragets riktning. Olika former ritas beroende på vilken av de
+    åtta kompassriktningarna som penseln rör sig i - uppåt (aka norr), uppåt/
+    höger (aka nordost), höger (aka öst), nedåt/höger (aka sydost), etc.) En
+    nionde "mittform" används när det inte sker någon rörelse (t.ex. om du bara
+    klickar/knackar och släpper "Paint"-verktyget utan att dra).
+
+    Riktningsformerna delas in i en 3x3 kvadrat i en PNG-bild. Om din pensel
+    t.ex. är 30x30 ska bilden vara 90x90 och varje riktningsform placeras i ett
+    3x3 rutnät.
+
+    Lägg till en rad som innehåller ordet "directional" i datafilen penselns.
+
+
+     
+→ Roterande borstar ←
+
+    Penslar kan vara konfigurerade att rotera baserat på vinkeln på linjen
+    eller penseldraget. (Till skillnad från Directional Brushes, som beskrivs
+    ovan, kan endast en enda penselform tillhandahållas.
+
+    Lägg till en rad som innehåller ordet "rotate" i datafilen penselns.
+
+
+     
+→ Kaotiska penslar ←
+
+    Penslar kan konfigureras så att de kontinuerligt väljer en slumpmässig
+    riktning när du ritar med dem.
+
+    Lägg till en rad som innehåller ordet "chaotic" i datafilen penselns.
+
+
+     
+→ Animerade riktade, roterande eller kaotiska penslar ←
+
+    Du kan blanda både animerade och riktade, roterande eller kaotiska
+    funktioner i en och samma pensel. Använd båda önskade alternativ ("frames=N
+    " och "directional", "rotate" eller "chaotic") på separata rader i penselns
+    ".dat"-fil.
+
+    För riktade penslar, lägg ut penseln så att varje 3x3 uppsättning riktade
+    former läggs ut över en bred PNG-bild. Om penseln till exempel är 30x30 och
+    det finns 5 ramar blir den 450x90. (De 150x90 pixlarna längst till vänster
+    i bilden representerar till exempel de 9 riktningsformerna för den första
+    bildrutan)
+
+
+     
+
+Placera PNG-filerna med penselbilderna (och eventuella datatextfiler) i
+katalogen "brushes".
+
+💡 Obs: Om alla dina nya penslar ser ut som solida kvadrater eller rektanglar
+beror det på att du glömde att använda alfatransparens! Se
+"PNG-dokumentationen" i Rita med Tux för mer information och tips.
+
+Stämplar
+
+Alla frimärksrelaterade filer hamnar i katalogen "stamps". Det är bra att skapa
+underkataloger och underunderkataloger där för att organisera stämplarna. (Du
+kan t.ex. ha en "helgdagar"-mapp med undermapparna "halloween" och "jul")
+
+                             ### Stämpelbilder ###
+
+Gummistämplar i Rita med Tux kan bestå av ett antal separata filer. Den enda
+fil som krävs är naturligtvis själva bilden.
+
+Frimärken kan vara antingen PNG-bitmappbilder eller SVG-vektorbilder. De kan
+vara i fullfärg eller gråskala. PNG-bildernas alfakanal (transparens) används
+för att bestämma bildens faktiska form (annars stämplar du en stor rektangel på
+dina ritningar).
+
+PNG-filer kan vara hur stora som helst och Rita med Tux (som standard)
+innehåller en uppsättning storleksknappar som låter användaren skala upp
+(större) och ner (mindre) stämpeln.
+
+SVG:er är vektorbaserade och kommer att skalas på lämpligt sätt för den
+dukstorlek som används i Rita med Tux.
+
+💡 Obs: Om alla dina nya Frimärken baserade i PNG ser ut som solida kvadrater
+eller rektanglar beror det på att du glömde att använda alfatransparens! Se
+"PNG-dokumentationen" i Rita med Tux för mer information och tips.
+
+💡 Obs: Om dina nya SVG-stämplar verkar ha mycket blanksteg, se till att
+SVG-"dokumentet" inte är större än formen (erna) inuti. Om de klipps, se till
+att "dokumentet" är tillräckligt stort för att innehålla formen (erna). Se
+"SVG-dokumentationen" i Rita med Tux för mer information och tips.
+
+⚙ Avancerade användare: I dokumentet "Advanced Stamps How-To" beskrivs i detalj
+hur man skapar PNG-bilder som skalas perfekt när de används som stämplar i Rita
+med Tux.
+
+                       ### Stämpel Beskrivande text ###
+
+Rita med Tux visar en beskrivande text när en stämpel väljs. Dessa placeras i
+vanliga textfiler med samma namn som PNG- eller SVG-filen, men med
+filnamnstillägget ".txt". (t.ex. lagras beskrivningen av "stämpel.png" i
+"stämpel.txt" i samma katalog)
+
+Den första raden i textfilen kommer att användas som beskrivning av stämpelts
+bild på US-engelska. Den måste vara kodad i UTF-8.
+
+→ Stöd för lokalisering ←
+
+    Ytterligare rader kan läggas till i textfilen för att ge översättningar av
+    beskrivningen, som ska visas när Rita med Tux körs i en annan språkdräkt
+    (t.ex. franska eller spanska).
+
+    Början av raden ska motsvara språkkoden för det aktuella språket (t.ex.
+    "fr" för franska och "zh_TW" för traditionell kinesiska), följt av ".utf8="
+    och den översatta beskrivningen (Unicode, kodad i UTF-8).
+
+    För Rita med Tux-utvecklare: Det finns skript i katalogen "po" för att
+    konvertera textfilerna till PO-format (och tillbaka) för enkel översättning
+    till olika språk. Därför bör du aldrig lägga till eller ändra
+    översättningar i filerna ".txt" direkt.
+
+    Om det inte finns någon översättning tillgänglig för det språk som Rita med
+    Tux för närvarande körs på, används den amerikanska engelska texten.
+
+
+     
+→ Windows-användare ←
+
+    Använd NotePad eller WordPad för att redigera/skapa dessa filer. Se till
+    att spara dem som ren text och att de har tillägget ".txt" i slutet av
+    filnamnet.
+
+
+     
+
+                         ### Stämpel ljudeffekter ###
+
+Rita med Tux kan spela upp en ljudeffekt när en stämpel väljs. Till exempel
+ljudet av en anka som skakar när man väljer en anka, eller ett kort musikstycke
+när man väljer ett musikinstrument. Filerna kan vara i formaten "WAVE (".wav")"
+eller "OGG Vorbis (".ogg")" och ges samma namn som PNG- eller SVG-bilden.
+(t.ex. är ljudeffekten för "stämpel.svg" ljudfilen "stämpel.ogg" i samma
+katalog)
+
+→ Stöd för lokalisering ←
+
+    För ljud för olika lokala språk (t.ex. om ljudet är någon som säger ett ord
+    och du vill ha översatta versioner av det ord som sägs), skapa också WAV-
+    eller OGG-filer med den lokala etiketten i filnamnet, i formen:
+    "stämpel_LOKALANPASSNING.EXT"
+
+    Den ljudeffekt som spelas upp när stämpeln som motsvarar bildfilen
+    "stämpel.png" väljs, och när Rita med Tux använder den spanska
+    språkversionen, är "stämpel_es.wav". Under fransk språkdräkt är det
+    "stämpel_fr.wav". Under den brasilianska portugisiska locale,
+    "stämpel_pt_BR.wav". Och så vidare...
+
+    Om ingen lokaliserad ljudeffekt kan laddas, försöker Rita med Tux att ladda
+    "standard"-ljudfilen. (t.ex. "stämpel.wav")
+
+
+     
+
+💡 Obs: Överväg också att använda beskrivande ljud, seStämpel Beskrivande ljud
+nedan.
+
+                       ### Stämpel Beskrivande ljud ###
+
+Rita med Tux kan också spela upp ett beskrivande ljud när ett stämpel väljs.
+Till exempel ljudet av någon som säger ordet "anka" när man väljer en anka,
+eller namnet på ett musikinstrument när ett sådant väljs. Filerna kan vara i
+formaten "WAVE (".wav")" eller "OGG Vorbis (".ogg")" och ges samma namn som
+PNG- eller SVG-bilden, med "_desc" i slutet. (t.ex. är det beskrivande ljudet
+för "stämpel.svg" ljudfilen "stämpel_desc.ogg" i samma katalog)
+
+→ Stöd för lokalisering ←
+
+    För beskrivande ljud för olika lokaliteter kan du också skapa WAV- eller
+    OGG-filer med både "_desc" och lokalitetens etikett i filnamnet, i formen:
+    "stämpel_desc_LOKALANPASSNING.EXT"
+
+    Den beskrivande ljud som spelas upp när stämpeln som motsvarar bildfilen
+    "stämpel.png" väljs, och när Rita med Tux använder den spanska
+    språkversionen, är "stämpel_desc_es.wav". Under fransk språkdräkt är det
+    "stämpel_desc_fr.wav". Under den brasilianska portugisiska locale,
+    "stämpel_desc_pt_BR.wav". Och så vidare...
+
+    Om ingen lokaliserad beskrivande ljud kan laddas, försöker Rita med Tux att
+    ladda "standard"-ljudfilen. (t.ex. "stämpel_desc.wav")
+
+
+     
+
+                        ### Alternativ för stämplar ###
+
+Förutom en grafisk form, en textuell beskrivning, en ljudeffekt och ett
+beskrivande ljud kan stämplar också ges andra attribut. För att göra detta
+måste du skapa en "datafil" för stämpel.
+
+En stämplar-datafil är helt enkelt en vanlig ASCII-textfil som innehåller
+alternativen för stämpel.
+
+Filen har samma namn som PNG eller SVG-bilden, men har tillägget ".dat". (t.ex.
+är datafilen för "stämpel.png" textfilen "stämpel.dat", som finns i samma
+katalog)
+
+→ Färgade stämplar ←
+
+    Stämplar kan göras antingen "färgbara" eller "tonbara"
+
+    → Färgbar ←
+
+        "Färgbara" stämplar fungerar ungefär som penslar - du väljer stämpeln
+        för att få formen och väljer sedan den färg du vill ha.
+        (Symbolstämplar, som de matematiska och musikaliska, är ett exempel)
+
+        Ingenting i originalbilden används förutom transparensen (från
+        "alpha"-kanalen). Färgen på stämpeln kommer ut solid.
+
+        Lägg till en rad som innehåller ordet "colorable" i datafilen stämplar.
+
+
+         
+    → Tonad ←
+
+        "Tinted" stämplar liknar "färgbara" stämplar, förutom att detaljerna i
+        originalbilden behålls. (För att uttrycka det tekniskt används
+        originalbilden, men dess nyans ändras, baserat på den aktuella valda
+        färgen)
+
+        Lägg till en rad som innehåller ordet "tintable" i datafilen stämplar.
+
+
+         
+    → Alternativ för toning: ←
+
+        Beroende på innehållet i ditt stämpel kan du låta Rita med Tux använda
+        en av flera olika metoder för att färglägga det. Lägg till en av
+        följande rader i stämpelns datafil:
+
+        → Normal tinter — "tinter=normal" NEJ (STANDARD) ←
+            Detta är det normala färgläggningsläget. Först bestäms stämpelts
+            primära nyans. (Om du t.ex. tar en bild av en blomma med stjälk
+            kommer kronbladets färg att ses som den primära nyansen i hela
+            bilden) Därefter hittas den mest mättade delen av bilden. Med
+            "normal tinter" börjar det nyansområde som används för att göra
+            detta inom ±18° från den primära nyans som hittades i steg 1. (Om
+            ingen kan hittas utökas området med 50% a och försök görs igen.)
+            Slutligen tonas bilden. Allt som faller inom 50% of intervallet
+            (t.ex. ±27°) ändras så att det får samma nyans som den färg som
+            användaren valt.
+             
+        → Smal tinter — "tinter=narrow" ←
+            Detta är som alternativet "normal" som beskrivs ovan, men startar
+            ett smalare nyansintervall på ±6°. Allt som finns inom 50% av
+            intervallet (t.ex. ±9°) färgas. Om för mycket av din stämpel
+            färgas, prova det här alternativet.
+             
+        → "Any hue"-tinter — "tinter=anyhue" ←
+            Detta återskapar alla nyanser i stämpeln. Det fungerar på samma
+            sätt som alternativen "anyhue" och "narrow" som beskrivs ovan, men
+            nyansintervallet är ±180°.
+             
+        → Vektorutstickare — "tinter=vector" ←
+            På så sätt kopplas "svart genom vitt" till "svart genom
+            destination".
+             
+
+         
+
+     
+→ Oföränderliga stämplar ←
+
+    Som standard kan en stämpel vändas upp och ner, visas som en spegelbild
+    eller bådadera. Detta görs med hjälp av kontrollknapparna under
+    frimärksväljaren, längst ned till höger på skärmen i Rita med Tux.
+
+    Ibland är det inte meningsfullt att en stämpel ska kunna vändas eller
+    speglas, t.ex. stämplar med bokstäver eller siffror. Ibland är stämplar
+    symmetriska, och då är det inte meningsfullt att låta användaren vända
+    eller spegla dem.
+
+    För att förhindra en stämpel från att vändas vertikalt, lägg till
+    alternativet "noflip" i stämpelns datafil.
+
+    För att förhindra en stämpel från att speglas horisontellt, lägg till
+    alternativet "nomirror" i stämpelns datafil.
+
+
+     
+→ Initial stämpelstorlek ←
+
+    Som standard antar Rita med Tux att din stämpel har en storlek som är
+    lämplig för oskalad visning på en 608x472-duk. Detta var den ursprungliga
+    Rita med Tux-bildstorleken, som gavs av en 640x480-skärm. Rita med Tux
+    kommer sedan att justera stämpeln enligt den aktuella skärmstorleken och,
+    om aktiverat, användarens kontroller för stämpelstorlek.
+
+    Om din stämpel skulle bli för stor eller för liten kan du ange en
+    skalfaktor. Om din stämpel skulle bli 2,5 gånger så bred (eller hög) som
+    den borde vara, lägger du till ett av följande alternativ, som motsvarar
+    samma justering, i stämpelns datafil. (Ett likhetstecken, "=", kan
+    inkluderas efter ordet "scale")
+
+      o "scale 40%"
+      o "scale 5/2"
+      o "scale 2.5"
+      o "scale 2:5"
+
+     
+→ Windows-användare ←
+
+    Använd NotePad eller WordPad för att redigera/skapa dessa filer. Se till
+    att spara dem som ren text och att de har tillägget ".dat" i slutet av
+    filnamnet.
+
+
+     
+
+                   ### Förspeglade och omvända stämplar ###
+
+I vissa fall kanske du vill tillhandahålla en färdigritad version av ett
+stämpels spegelbild, vändade bild eller till och med båda. Tänk dig till
+exempel en bild av en brandbil med orden"Fire Department" skrivna tvärs över
+sidan. Du vill förmodligen inte att den texten ska visas baklänges när bilden
+vänds!
+
+Om du vill skapa en speglad version av en stämpel som du vill att Rita med Tux
+ska använda, i stället för att spegla den själv, skapar du helt enkelt en andra
+".png" eller ".svg" grafikfil med samma namn, men med "_mirror" före
+filnamnstillägget.
+
+För stämpeln "stämpel.png" kan du t.ex. skapa en annan fil med namnet
+"stämpel_mirror.png", som används när stämpeln speglas (i stället för att
+använda en bakåtversion av "stämpel.png").
+
+Du kan också tillhandahålla en förvänd bild med "_flip" i namnet, och/eller en
+bild som är både speglad och vänd genom att namnge den "_mirror_flip".
+
+💡 Obs: Om användaren vänder och speglar en bild, och ett förritat
+"_mirror_flip" inte finns, men antingen "_flip" eller "_mirror" gör det, kommer
+det att användas och speglas respektive vändas.
+
+Typsnitt
+
+De teckensnitt som används av Rita med Tux är TrueType-teckensnitt (TTF).
+
+Placera dem helt enkelt i katalogen "fonts". När du använder verktygen "Text"
+och "Etikett" kommer Rita med Tux att presentera teckensnittet i
+"Letters"-väljaren till höger, tillsammans med alternativ för att aktivera fet
+och/eller kursiv stil och ändra storleken.
+
+"Startbilder"
+
+"Startbilder" visas i dialogrutan "Ny", tillsammans med val av bakgrund i
+enfärgad färg.
+
+När du använder en "startbild", gör ändringar och sparar den, skrivs inte den
+ursprungliga "startbilden" över. När du redigerar din nya bild kan dessutom
+innehållet i den ursprungliga "startbilden" påverka den.
+
+                       ### Startbok i målarboksstil ###
+
+Den mest grundläggande typen av "starter" kan liknas vid en bild i en målarbok.
+Det är en kontur av en form som du sedan kan färglägga och lägga till detaljer
+i. I Rita med Tux, när du ritar, skriver text eller stämplar stämplar, förblir
+konturen "ovanför" det du ritar. Du kan radera de delar av teckningen som du
+har gjort, men du kan inte radera konturen.
+
+För att skapa den här typen av "startbild" skapar du helt enkelt en svartvit
+bild med konturer i ett färgprogram och sparar den som en PNG-rasterfil eller
+som en SVG-vektor. Om du sparar som en PNG-fil kan du välja att göra bilden
+svart och genomskinlig i stället för svartvit, även om detta inte är
+nödvändigt.
+
+                       ### Startbilder i scenformat ###
+
+Tillsammans med överlägget i "målarboksstil" kan du också tillhandahålla en
+separat bakgrundsbild som en del av en "startbild". Överlägget fungerar på
+samma sätt: det kan inte ritas över, raderas eller påverkas av
+"Magic"-verktygen. Det kan däremot bakgrunden!
+
+När verktyget "Eraser" används på en bild som bygger på den här typen av bild
+"start, återgår den delen av duken till den ursprungliga bakgrundsbilden från
+bild "start i stället för att bli enfärgad, t.ex. vit.
+
+Genom att skapa både ett överlägg och en bakgrund kan du skapa en "starter" som
+simulerar djup. Tänk dig en bakgrund som visar havet och en overlay som är en
+bild av ett rev. Du kan sedan rita (eller stämpla) fiskar i bilden. De kommer
+att dyka upp i havet, men aldrig "framför" revet.
+
+För att skapa den här typen av "startbild" skapar du helt enkelt ett överlägg
+(med transparens) och sparar det som en PNG. Skapa sedan en annan bild (utan
+transparens) och spara den med samma filnamn, men med "-back" (förkortning för
+"bakgrund") som tillägg till namnet. (t.ex. "start-back.png" skulle vara den
+bakgrundsbild som motsvarar överlägget eller förgrunden)
+
+För bästa resultat bör "start" bilder vara minst lika stor som Rita med Tuxs
+ritduk. (Se avsnittet "Ladda andra bilder i Rita med Tux" i Rita med Tuxs
+huvuddokumentation (README) för detaljer om storlek) Om de inte är det kommer
+de att sträckas ut eller skalas. Detta görs utan att påverka formen
+("bildförhållandet"), men kan dock ge upphov till viss utslätning av kanterna.
+
+Placera dem i katalogen "starters". När dialogrutan "New" öppnas i Rita med Tux
+kommer "start" bilder att visas i den skärm som visas, efter de olika
+valmöjligheterna för enfärg.
+
+💡 Obs: "Startbilder" "bifogas" till sparade bilder via en liten textfil som har
+samma namn som den sparade filen, men med ".dat" som tillägg. Detta gör att den
+kan fortsätta att påverka teckningen även efter att Rita med Tux har avslutats,
+eller en annan bild har laddats eller en ny bild har skapats. (Med andra ord,
+om du baserar en teckning på en bild "start, kommer den alltid att påverkas av
+den)
+
+                            ### Startalternativ ###
+
+Förutom en bild kan startbilder också ges andra attribut. För att göra detta
+måste du skapa en "datafil" för startmotor. (Obs: Rita med Tux före version
+0.9.29 hade inte stöd för startalternativ)
+
+En starter's-datafil är helt enkelt en vanlig ASCII-textfil som innehåller
+alternativen för starter.
+
+Filen har samma namn som -bilden, men har tillägget ".dat". (t.ex. är datafilen
+för "start.png" textfilen "start.dat", som finns i samma katalog)
+
+→ tillåta skala ←
+
+    När en startbild har ett annat bildförhållande (proportioner mellan bredd
+    och höjd) än Rita med Tuxs duk, kommer den som standard att skalas så att
+    den helt passar in i duken, utan att startbilden sträcks ut
+    (bildförhållandet ändras); till exempel kommer en kvadratisk startbild på
+    en porträttformad duk att placeras i mitten av duken. Som standard tar Rita
+    med Tux sedan remsan med pixlar i kanterna på startbilden och sträcker ut
+    dem till kanterna på målarduken och "smetar ut" den.
+
+    Om det är acceptabelt att startbilden beskärs i en eller båda riktningarna,
+    kan "tillåta skala" användas för att tala om för Rita med Tux vilket
+    beteende som ska tillåtas:
+
+      o För att börja med där det är okej att beskära vänster och höger
+        -kanterna, men topp och botten -kanterna måste behållas, använd "
+        allowcale=horizontal".
+          # Om startbildens bildförhållande är bredare större än bildytans,
+            skalas den så att den passar in i bildytans höjd och vänster och
+            höger beskärs.
+          # Om startbildens bildförhållande är längre större än bildytans,
+            skalas den så att den passar bildytans höjd, ingen beskärning sker
+            och vänster och höger kanterna blir utsmetade.
+
+      o För att börja med där det är okej att beskära topp och botten -kanterna
+        , men vänster och höger -kanterna måste behållas, använd "allowcale=
+        vertical".
+          # Om startbildens bildförhållande är längre större än bildytans,
+            skalas den så att den passar in i bildytans bredd och topp och
+            botten beskärs.
+          # Om startbildens bildförhållande är bredare större än bildytans,
+            skalas den så att den passar bildytans bredd, ingen beskärning sker
+            och topp och botten kanterna blir utsmetade.
+
+      o Om det är acceptabelt att beskära antingen toppen och botten eller
+        vänster och höger, använd "tillåt skala=båda". Innehåll från startsidan
+        kommer alltid att fylla ut duken, oavsett hur dess bildförhållande
+        förhåller sig till dukens.
+      o Standardbeteendet är att inte tillåta beskärning. Detta kan anges
+        explicit med "tillåter skala=inget".
+
+     
+→ bakgrund ←
+
+    Med det här alternativet kan du ange hur Rita med Tux ska fylla resten av
+    duken när startbilen inte passar i den ena eller den andra riktningen. Som
+    standard, enligt beskrivningen ovan, kommer Rita med Tux att "smeta ut"
+    pixlarna från kanterna på startbilden. (Detta kan specificeras explicit med
+    "bakgrund=utstrykning".)
+
+    Du kan i stället ange en enfärgad bakgrundsfärg (t.ex. vit för en starter i
+    målarboksstil) med "bakgrund=#fff").
+
+    Färgerna kan anges med tre decimala siffror (t.ex. "255 68 136") eller en
+    sex- eller tresiffrig hexadecimal "triplett" (t.ex. "#ff4488" eller "#
+    F48").
+
+    Se avsnittet "Färgpalettfil" i "Dokumentation om alternativ" för mer
+    information.
+
+
+     
+→ gravitation ←
+
+    Med det här alternativet kan du ange hur Rita med Tux ska placera en
+    startbild när den beskärs i den ena eller andra riktningen. Som standard
+    kommer Rita med Tux att placera startbildens mittpunkt inom duken. (Detta
+    kan specificeras explicit med "gravity=center".)
+
+    Om det viktigaste innehållet finns längst upp i mitten av startsidan kan du
+    till exempel ange "gravity=topp". Eller, om den nedre högra delen är
+    viktig, ange "gravity=bottom-right".
+
+    De tillgängliga alternativen är:
+      o center — föredrar mitten (standard)
+      o top — föredrar den övre mitten
+      o bottom — föredrar den nedre mitten
+      o left — föredrar den vänstra mitten
+      o right — föredrar rätt centrum
+      o top-left — föredrar längst upp till vänster
+      o top-right — föredrar längst upp till höger
+      o bottom-left — föredrar längst ner till vänster
+      o bottom-right — föredrar längst ner till höger
+
+    [ Landskapsformad bild av en horisont med solen i mitten och en byggnad
+    till höger. ]
+     
+
+    Fokuserar på center i en startbild som sträcks ut för att passa bredd på
+    duken.
+
+
+    [ Porträttformad bild av en horisont med solen i mitten och den vänstra
+    sidan av en byggnad till höger. ]
+     
+
+    Fokuserar på center i en startbild som sträcks ut för att passa höjd på
+    duken.
+
+
+    [ Landskapsformad bild av himlen med solen längst ner och toppen av en
+    byggnad till höger. ]
+     
+
+    Fokuserar på topp i en startbild som sträcks ut för att passa bredd på
+    duken.
+
+
+    [ Landskapsformad bild av marken med solen högst upp. ]
+     
+
+    Fokuserar på botten i en startbild som sträcks ut för att passa bredd på
+    duken.
+
+
+    [ Porträttformad bild av en horisont med solen till vänster och en byggnad
+    i mitten. ]
+     
+
+    Fokuserar på höger i en startbild som sträcks ut för att passa höjd på
+    duken.
+
+
+
+     
+
+💡 Observera: Mallar (beskrivs nedan) kan också ha alternativfiler och stöder
+för närvarande alla samma alternativ som startbilder.
+
+
+"Mallar"
+
+"Mall"-bilder visas också i "Ny"-dialogen, tillsammans med val av enfärgad
+bakgrund och "Startare".
+
+Till skillnad från bilder som ritats i Rita med Tux av användare och sedan
+öppnats senare, skapas en ny teckning när du öppnar en "mall". När du sparar
+skrivs inte "mall"-bilden över. Till skillnad från "startbilder" finns det
+inget oföränderligt "lager" ovanför duken. Du kan rita över vilken del som
+helst av den.
+
+När verktyget "Eraser" används på en bild som bygger på den här typen av
+"mall"-bild, återgår den delen av duken till den ursprungliga bakgrundsbilden
+från "mall"-bild i stället för att bli enfärgad, t.ex. vit.
+
+"Mallar" är helt enkelt bildfiler (i PNG-, JPEG-, SVG- eller KPX-format
+(KidPix)). Ingen förberedelse eller konvertering ska krävas.
+
+För bästa resultat bör "mall"-bilder vara minst lika stor som Rita med Tuxs
+ritduk. (Se avsnittet "Ladda andra bilder i Rita med Tux" i Rita med Tuxs
+huvuddokumentation (README) för detaljer om storlek) Om de inte är det kommer
+de att sträckas ut eller skalas. Detta görs utan att påverka formen
+("bildförhållandet"), men kan dock ge upphov till viss utslätning av kanterna.
+
+Placera dem i katalogen "templates". När dialogrutan "New" öppnas i Rita med
+Tux kommer "mall"-bilder att visas i den skärm som visas, efter de olika
+valmöjligheterna för enfärg.
+
+💡 Obs: "Mallar" "bifogas" till sparade bilder via en liten textfil som har
+samma namn som den sparade filen, men med ".dat" som tillägg. Detta gör att den
+kan fortsätta att påverka teckningen även efter att Rita med Tux har avslutats,
+eller en annan bild har laddats eller en ny bild har skapats. (Med andra ord,
+om du baserar en teckning på en "mall"-bild, kommer den alltid att påverkas av
+den)
+
+
+                            ### Mallalternativ ###
+
+Precis som för "Startbilder" kan en konfigurationsfil anges som definierar hur
+Rita med Tux ska bete sig när "mallbilder" appliceras på duken när de inte har
+identiska proportioner (bildförhållande). Se"Startalternativ" ovan. (Obs: Rita
+med Tux före version 0.9.29 hade inte stöd för startalternativ)
+
+💡 Det är också möjligt att skapa enkla mallar (utan alternativ) från befintliga
+sparade ritningar direkt i Rita med Tux, från dialogrutan"Öppna". De kommer att
+placeras i användarens personliga mallmapp. (Obs: Rita med Tux före version
+0.9.31 hade inte stöd för Skapa mallar från dialogrutan Öppna)
+
+Översättningar
+
+Rita med Tux stöder många språk tack vare användningen av
+lokaliseringsbiblioteket "gettext". (Se avsnittet "Språk" i "Dokumentation om
+alternativ" för information om hur du ändrar lokalspråk i Rita med Tux)
+
+För att översätta Rita med Tux till ett nytt språk kopierar du
+översättningsmallfilen "tuxpaint.pot" (finns i Rita med Tuxs källkod, i mappen
+"src/po/"). Byt namn på kopian till en ".po"-fil, med ett lämpligt namn för det
+språk du översätter till (t.ex. "es.po" för spanska; eller "pt_BR.po" för
+brasiliansk portugisiska, jämfört med "pt.po" eller "pt_PT.po" för portugisiska
+som talas i Portugal)
+
+Öppna den nyskapade filen ".po" - du kan redigera den i en vanlig texteditor,
+t.ex. Emacs, Pico eller VI på Linux, eller NotePad på Windows. Den engelska
+originaltexten som används i Rita med Tux listas på rader som börjar med
+"msgid". Skriv in dina översättningar av var och en av dessa textstycken i de
+tomma "msgstr" raderna direkt under motsvarande "msgid" rader.(Obs: Ta inte
+bort citattecknen.)
+
+Exempel:
+
+    msgid "Smudge"
+    msgstr "Manchar"
+
+    msgid "Click and drag to draw large bricks."
+    msgstr "Haz clic y arrastra para dibujar ladrillos grandes."
+
+Det finns olika verktyg för att hantera gettext-översättningskataloger, så att
+du inte behöver redigera dem för hand i en textredigerare. Här är några av dem:
+
+  * Poedit
+  * Gtranslator (GNOME Translator)
+  * Virtraal
+  * Lokalize
+
+💡 Observera: Det är bäst att alltid arbeta utifrån den senaste mallen för Rita
+med Tux-textkatalogen ("tuxpaint.pot"), eftersom ny text läggs till och gammal
+text ibland ändras. Textkatalogen för den kommande, outgivna versionen av Rita
+med Tux finns i Rita med Tuxs Git-repository (se: https://tuxpaint.org/download
+/source/git/) och på Rita med Tuxs webbplats på https://tuxpaint.org/help/po/.
+
+Om du vill redigera en befintlig översättning laddar du ner den senaste
+".po"-filen för det aktuella språket och redigerar den enligt beskrivningen
+ovan.
+
+Du kan skicka nya eller redigerade översättningsfiler till Bill Kendrick,
+huvudutvecklare av Rita med Tux, på: bill@newbreedsoftware.com, eller posta dem
+till e-postlistan "tuxpaint-i18n" (se: https://tuxpaint.org/lists/).
+
+Alternativt, om du har ett konto hos SourceForge.net, kan du begära att bli
+tillagd till "tuxpaint"-projektet och få skrivåtkomst till Git-källkodsarkivet
+så att du kan göra dina ändringar direkt.
+
+💡 Obs: Stöd för nya lokalanpassningar kräver tillägg till Rita med Tuxs källkod
+(/src/i18n.h; uppdaterad /src/i18n.c), och kräver uppdateringar av Makefile,
+för att säkerställa att ".po"-filerna kompileras till ".mo"-filer och är
+tillgängliga för användning vid körning.
+
+Alternativa metoder för inmatning
+
+Verktygen "Text" och "Etikett" i Rita med Tux kan ge alternativa
+inmatningsmetoder för vissa språk. När Rita med Tux körs med ett japanskt språk
+kan du t.ex. trycka på tangenten höger [Alt] för att växla mellan lägena Latin,
+Romaniserad Hiragana och Romaniserad Katakana. Detta gör det möjligt att skriva
+in inhemska tecken och ord i verktygen "Text" och "Etikett" genom att trycka på
+en eller flera tangenter på ett tangentbord med latinska tecken (t.ex. ett US
+QWERTY-tangentbord).
+
+Om du vill skapa en inmatningsmetod för en ny språkdräkt skapar du en textfil
+med ett namn som baseras på språkdräkten (t.ex. "ja" för japanska), med ".im"
+som tillägg (t.ex. "ja.im").
+
+Filen ".im" kan innehålla flera teckenmappningssektioner för olika
+teckenmappningslägen. Om du till exempel skriver [K] [A] i Hiragana-läge på ett
+japanskt typsystem genereras ett annat Unicode-tecken ("か") än om du skriver
+[K] [A] i Katakana-läge ("カ").
+
+Lista teckenmappningarna i denna fil, en per rad. Varje rad ska innehålla
+(åtskilda av blanksteg):
+
+  * teckenets Unicode-värde, i hexadecimal (mer än ett tecken kan anges,
+    åtskilda av ett kolon (':'), vilket gör att vissa sekvenser kan mappas till
+    ord)
+  * nyckelkodsekvensen (de ASCII-tecken som måste anges för att generera
+    Unicode-tecknet)
+  * en flagga (eller "-" om ingen flagga finns)
+
+Starta ytterligare teckenmappningsavsnitt med en rad som innehåller ordet
+"section".
+
+Exempel:
+
+    # Hiragana
+    304B ka -
+    304C ga -
+    304D ki -
+    304E gi -
+    304D:3083 kya -
+    3063:305F tta -
+
+    # Katakana
+    section
+    30AB ka -
+    30AC ga -
+    30AD ki -
+    30AE gi -
+
+⚙ Anmärkning: Tomma rader i filen ".im" ignoreras, liksom all text som följer
+efter tecknet "#" (pund/hash) - det kan användas för att ange kommentarer, som
+i exemplet ovan.
+
+💡 Obs: Betydelsen av flaggorna är lokalspecifik och behandlas av den
+språkspecifika källkoden i "src/im.c". Till exempel används "b" på koreanska
+för att hantera Batchim, som kan överföras till nästa tecken.
+
+💡 Obs: Stöd för nya inmatningsmetoder kräver tillägg till Rita med Tuxs källkod
+("/src/im.c"), och kräver uppdateringar av Makefile, för att säkerställa att
+".im"-filerna är tillgängliga för användning vid körning.
+
+Tangentbord på skärmen
+
+Rita med Tux-verktygen "Text" och "Label" kan visa ett tangentbord på skärmen
+som gör att pekaren (via en mus, pekskärm, ögonspårningssystem etc.) kan
+användas för att mata in tecken. Filer som beskriver layouten och tillgängliga
+tangenter lagras i Rita med Tux-katalogen "osk". Varje tangentbordslayout
+definieras av ett antal filer (varav vissa kan delas av olika layouter).
+
+Vi använder QWERTY-tangentbordet som exempel:
+
+               ### Översiktsfil för layout ("qwerty.layout") ###
+
+Detta är en textfil som specificerar de andra filer som används för att
+beskriva layout och tangentmappningar.
+
+    layout qwerty.h_layout
+    keymap us-intl-altgr-dead-keys.keymap
+    composemap en_US.UTF-8_Compose
+    keysymdefs keysymdef.h
+    keyboardlist qwerty.layout default.layout
+
+⚙ Anmärkning: Tomma rader i filen ".layout" ignoreras, liksom all text som
+följer efter tecknet "#" (pund/hash) - det kan användas för att ange
+kommentarer, som i exemplet nedan.
+
+Raden "keyboardlist" beskriver vilka layouter som ska växlas till när
+användaren klickar på vänster- och högerknapparna på tangentbordet. (Se nedan.)
+
+            ### Fil för tangentbordslayout ("qwerty.h_layout") ###
+
+Detta beskriver hur stort tangentbordet är (som ett "bredd × höjd"-raster) och
+listar varje tangent med dess numeriska tangentkod (se filen "keymap" nedan),
+bredden den ska ritas på (vanligtvis "1.0", för att ta ett utrymme på
+tangentbordet, men i exemplet nedan är tangenterna "TAB" och "SPACE" mycket
+bredare), tecknet eller texten som ska visas på tangenten, beroende på vilka
+modifieringstangenter som har tryckts in (en vardera för: inga modifierare,
+[Skift], [AltGr] och [Skift] + [AltGr]), och slutligen om tangenten påverkas av
+tangenten [CapsLock] (använd "1") eller [AltGr] (alternativ grafik) (använd
+"2"), eller inte alls (använd "0").
+
+Nyckelordet "NEWLINE" används för att ange slutet på en rad på tangentbordet,
+och därmed kommer efterföljande tangentlayoutbeskrivningar att börja på en ny
+rad.
+
+    WIDTH 15
+    HEIGHT 5
+
+    KEY 49 1.0 ` ~ ` ~ 0
+    KEY 10 1.0 1 ! ¡ ¹ 0
+    KEY 11 1.0 2 @ ² ˝ 0
+    KEY 12 1.0 3 # · ³ 0
+    KEY 13 1.0 4 $ ¤ £ 0
+    KEY 14 1.0 5 % € ¸ 0
+    KEY 15 1.0 6 ^ ¼ ^ 0
+    ...
+    KEY 21 1.0 = + × ÷ 0
+    KEY 22 2.0 DELETE DELETE DELETE DELETE 0
+
+    NEWLINE
+
+    KEY 23 1.5 TAB TAB TAB TAB 0
+    KEY 24 1.0 q Q ä Ä 1
+    KEY 25 1.0 w W å Å 1
+    KEY 26 1.0 e E é É 1
+    KEY 27 1.0 r R ® ® 1
+    ...
+
+    NEWLINE
+
+    # Pil till vänster växlar till föregående tangentbord
+    KEY 2 1.0 <- <- <- <- 0
+
+    KEY 133 2.0 Cmp Cmp Cmp Cmp 0
+
+    # Knapparna ALT eller ALTGR används i "im" (inmatningsmetoder) för att
+    växla inmatningsläge
+    KEY 64 2.0 Alt Alt Alt Alt 0
+
+    # Mellanslag
+    KEY 65 5.0 SPACE SPACE SPACE SPACE 0
+
+    # AltGr
+    KEY 108 2.0 AltGr AltGr AltGr AltGr 0
+
+    # Klistra in
+    KEY 143 2.0 Paste Paste Paste Paste 0
+
+    # Pil till höger växlar till nästa tangentbord
+    KEY 1 1.0 -> -> -> -> 0
+
+Observera här att alfabetiska tangenter ([Q], [W], etc.) påverkas av [CapsLock]
+, medan numeriska tangenter ([1], [2], etc.), [Mellanslag], etc. inte gör det.
+
+Nyckelkoder upp till "8" är reserverade för internt bruk. De som används för
+närvarande beskrivs nedan.
+
+  * 0 — tom knapp
+  * 1 — nästa layout (enligt layoutfilens "keyboardlist"-inställning)
+  * 2 — tidigare layout (enligt layoutfilens "keyboardlist"-inställning)
+
+📜 Från och med Rita med Tux 0.9.35 kan tangentsymbolen XF86Paste (värde 143)
+användas för att initiera en "klistra in"-händelse i klippbordsbufferten för
+kopiera/klistra in. Se tangenten "Paste" i filerna för tangentbordslayout.
+(Inklistring via ett fysiskt tangentbord initieras med tangentkombinationen
+[Control] + [V].
+
+             ### Keymap-fil ("us-intl-altgr-dead-keys.keymap") ###
+
+Den här filen definierar vilka numeriska tangentkoder (som finns i
+tangentbordslayoutfilerna, t.ex. "qwerty.h_layout" som beskrivs ovan) som ska
+mappas till de faktiska tecken som ett program som Rita med Tux förväntar sig
+att få när tangenterna (t.ex. på ett riktigt tangentbord) trycks ned.
+
+Om du använder ett operativsystem som Linux, som kör X-Window och har
+kommandoradsverktyget "xmodmap" tillgängligt, kan du köra det med alternativet
+("print keymap expressions", "-pke", för att generera en keymap-fil.
+
+    keycode 9 = Escape NoSymbol Escape Escape
+    keycode 10 = 1 exclam exclamdown onesuperior 1 exclam 1 exclam NoSymbol
+    onesuperior
+    keycode 11 = 2 at twosuperior dead_doubleacute 2 at 2 at onehalf
+    twosuperior
+    keycode 12 = 3 numbersign periodcentered threesuperior dead_macron
+    periodcentered
+    ...
+    keycode 52 = z Z ae AE Arabic_hamzaonyeh asciitilde guillemotright NoSymbol
+    Greek_zeta Greek_ZETA U037D U03FF
+    keycode 53 = x X x X Arabic_hamza Arabic_sukun guillemotleft NoSymbol
+    Greek_chi Greek_CHI rightarrow leftarrow
+    keycode 54 = c C copyright cent Arabic_hamzaonwaw braceright Greek_psi
+    Greek_PSI copyright
+    keycode 55 = v V v V Arabic_ra braceleft Greek_omega Greek_OMEGA U03D6
+    keycode 56 = b B b B UFEFB UFEF5 Greek_beta Greek_BETA U03D0
+    keycode 57 = n N ntilde Ntilde Arabic_alefmaksura Arabic_maddaonalef
+    Greek_nu Greek_NU U0374 U0375
+    keycode 58 = m M mu mu Arabic_tehmarbuta apostrophe Greek_mu Greek_MU U03FB
+    U03FA
+    keycode 59 = comma less ccedilla Ccedilla Arabic_waw comma comma less
+    guillemotleft
+    keycode 60 = period greater dead_abovedot dead_caron Arabic_zain period
+    period greater guillemotright periodcentered
+    keycode 61 = slash question questiondown dead_hook Arabic_zah
+    Arabic_question_mark slash question
+    keycode 62 = Shift_R NoSymbol Shift_R Shift_R
+    ...
+
+                ### Composemap-fil ("en_US.UTF-8_Compose") ###
+
+Den här filen beskriver enstaka tecken som kan sättas samman av flera
+inmatningar. Till exempel kan "[Skriv nytt]" följt av "[A]" och "[E]" användas
+för att skapa tecknet "æ".
+
+Filen som medföljer Rita med Tux är baserad på den amerikanska engelska UTF-8
+(Unicode) composemap som medföljer X.Org:s X Window-system. Den aktuella
+versionen från Xlib-biblioteket har en webbsida på https://www.x.org/releases/
+current/doc/libX11/i18n/compose/en_US.UTF-8.html.
+
+                 ### Keysym definitionsfil ("keysymdef.h") ###
+
+Denna fil (som är en header-fil för programmeringsspråket C) kommer också från
+X Window System. Den definierar Unicode-värdena för varje knappsats (t.ex.
+motsvarar "XK_equal" "U+003D", för tecknet "=" ("EQUALS SIGN").
+
+💡 Obs: Den här filen kompileras inte till Rita med Tux, utan läses och
+analyseras vid körning.
+
+Det är osannolikt att någon ändring kommer att krävas av denna fil.
+
+Magiverktyg
+
+Rita med Tux's Magic-verktyg är programdelar som ligger utanför huvudprogrammet
+Rita med Tux och som laddas som "plugins" vid körning och interagerar med
+programmet med hjälp av ett definierat API (Application Programming Interface).
+De plugins som levereras med Rita med Tux (liksom Rita med Tux självt) är
+skrivna i programmeringsspråket C.
+
+Läs API-dokumentationen för Magic Tool Plugin om du vill veta hur du skriver
+din egen.
+

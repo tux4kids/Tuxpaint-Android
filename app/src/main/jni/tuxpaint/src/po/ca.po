@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tuxpaint cvs 2009-06-21\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-06 01:18-0800\n"
+"POT-Creation-Date: 2025-05-26 12:04+0100\n"
 "PO-Revision-Date: 2025-03-19 23:05+0100\n"
 "Last-Translator: Pere Pujal i Carabantes <perepujal@gmail.com>\n"
 "Language-Team: Català <linux-ca@chanae.alphanet.ch>\n"
@@ -155,7 +155,7 @@ msgstr "QX"
 # Tots els tests valen 1 punt excepte els que comencen per <9> que valen 9 punts. (això pot canviar en futures versions)
 #
 #. distinct uppercase and lowercase (e.g., 'o' vs. 'O')
-#: ../dirwalk.c:225
+#: ../dirwalk.c:226
 msgid "oO"
 msgstr "oO"
 
@@ -163,7 +163,7 @@ msgstr "oO"
 # punt volat ·, apóstrof ', guionet -
 #
 #. common punctuation (e.g., '?', '!', '.', ',', etc.)
-#: ../dirwalk.c:230
+#: ../dirwalk.c:231
 msgid ",.?!"
 msgstr " ·'-,.?!"
 
@@ -180,7 +180,7 @@ msgstr " ·'-,.?!"
 # substitueixen els caracters que no tenen per espais.
 #
 #. uncommon punctuation (e.g., '@', '#', '*', etc.)
-#: ../dirwalk.c:234
+#: ../dirwalk.c:235
 msgid "`%_@$~#{<(^&*"
 msgstr "·€¿¡ñæ`\\%_@$~#{<«ª^&*"
 
@@ -190,12 +190,12 @@ msgid "017"
 msgstr "017"
 
 #. distinct circle-like characters (e.g., 'O' (capital oh) vs. '0' (zero))
-#: ../dirwalk.c:242
+#: ../dirwalk.c:241
 msgid "O0"
 msgstr "O0"
 
 #. distinct line-like characters (e.g., 'l' (lowercase elle) vs. '1' (one) vs. 'I' (capital aye))
-#: ../dirwalk.c:246
+#: ../dirwalk.c:245
 msgid "1Il|"
 msgstr "1Il|"
 
@@ -208,20 +208,20 @@ msgstr "1Il|"
 #.
 #. You can use two different weight for scoring, 1 or 9, according
 #. to the importance.
-#: ../dirwalk.c:257
+#: ../dirwalk.c:256
 msgid "<1>spare-1a"
 msgstr "aa"
 
-#: ../dirwalk.c:258
+#: ../dirwalk.c:257
 msgid "<1>spare-1b"
 msgstr "aa"
 
 # Aquest dos compten 9 punts.
-#: ../dirwalk.c:259
+#: ../dirwalk.c:258
 msgid "<9>spare-9a"
 msgstr "eèéëcç"
 
-#: ../dirwalk.c:260
+#: ../dirwalk.c:259
 msgid "<9>spare-9b"
 msgstr "EÉÈËCÇ"
 
@@ -444,7 +444,9 @@ msgstr "Text i Etiquetes poden rebre text del porta-retalls"
 msgid ""
 "Text and Label tools attempt to load fonts in locations specified in "
 "FontConfig &lt;dir&gt; entries now, too"
-msgstr "Text i Etiquetes proven de carregar lletres especificades en els &lt;directoris&gt; de FontConfig"
+msgstr ""
+"Text i Etiquetes proven de carregar lletres especificades en els &lt;"
+"directoris&gt; de FontConfig"
 
 #: ../org.tuxpaint.Tuxpaint.appdata.xml.in:60
 msgid "New Fill mode: \"Eraser\" flood fill."
@@ -1201,7 +1203,7 @@ msgstr "Nou"
 #. Open a saved picture
 #. Buttons for the file open dialog
 #. Open dialog: 'Open' button, to load the selected picture
-#: ../tools.h:97 ../tuxpaint.c:9955
+#: ../tools.h:97 ../tuxpaint.c:9972
 msgid "Open"
 msgstr "Obre"
 
@@ -1609,88 +1611,88 @@ msgid "Sound unmuted."
 msgstr "S'ha activat el so."
 
 #. Wait while Text tool finishes loading fonts
-#: ../tuxpaint.c:3764
+#: ../tuxpaint.c:3769
 msgid "Please wait…"
 msgstr "Espereu, si us plau…"
 
 #. Open dialog: 'Erase' button, to erase/deleted the selected picture
-#: ../tuxpaint.c:9958
+#: ../tuxpaint.c:9975
 msgid "Erase"
 msgstr "Esborra"
 
 #. Open dialog: 'Slides' button, to switch to slide show mode
-#: ../tuxpaint.c:9961
+#: ../tuxpaint.c:9978
 msgid "Slides"
 msgstr "Diapo­sitives"
 
 #. Open dialog: 'Template' button, to make a template out of a drawing
-#: ../tuxpaint.c:9964
+#: ../tuxpaint.c:9981
 msgid "Template"
 msgstr "Plantilla de fons"
 
 #. Open dialog: 'Export' button, to copy an image to an easily-accessible location
-#: ../tuxpaint.c:9967
+#: ../tuxpaint.c:9984
 msgid "Export"
 msgstr "Exporta"
 
 #. Open dialog: 'Back' button, to dismiss Open dialog without opening a picture
-#: ../tuxpaint.c:9970
+#: ../tuxpaint.c:9987
 msgid "Back"
 msgstr "Endarrere"
 
 #. Slideshow: 'Play' button, to begin a slideshow sequence
-#: ../tuxpaint.c:9973
+#: ../tuxpaint.c:9990
 msgid "Play"
 msgstr "Repro­dueix"
 
 #. Slideshow: 'GIF Export' button, to create an animated GIF
-#: ../tuxpaint.c:9976
+#: ../tuxpaint.c:9993
 msgid "GIF Export"
 msgstr "Exporta a GIF"
 
 #. Slideshow: 'Next' button, to load next slide (image)
-#: ../tuxpaint.c:9979
+#: ../tuxpaint.c:9996
 msgid "Next"
 msgstr "Següent"
 
 #. Color mixer dialog: 'Clear' button, to reset the mixed color
-#: ../tuxpaint.c:9982
+#: ../tuxpaint.c:9999
 msgid "Clear"
 msgstr "Re-comença"
 
 #. Use the localized label string (e.g., "あぁ" in Japanese)
-#: ../tuxpaint.c:10917 ../tuxpaint.c:10920 ../tuxpaint.c:10921
+#: ../tuxpaint.c:10936 ../tuxpaint.c:10939 ../tuxpaint.c:10940
 msgid "Aa"
 msgstr "Aà"
 
 #. Admittedly stupid way of determining which keys can be used for
 #. positive and negative responses in dialogs (e.g., [Y] (for 'yes') in English)
-#: ../tuxpaint.c:14954
+#: ../tuxpaint.c:14987
 msgid "Yes"
 msgstr "Sí"
 
-#: ../tuxpaint.c:14957
+#: ../tuxpaint.c:14990
 msgid "No"
 msgstr "No"
 
 #. Prompt to ask whether user wishes to save over old version of their file
-#: ../tuxpaint.c:16234
+#: ../tuxpaint.c:16267
 msgid "Replace the picture with your changes?"
 msgstr "Substitueixo el dibuix amb els vostres canvis?"
 
 #. Positive response to saving over old version
 #. (like a 'File:Save' action in other applications)
-#: ../tuxpaint.c:16238
+#: ../tuxpaint.c:16271
 msgid "Yes, replace the old one!"
 msgstr "Sí, substitueix l'antic!"
 
 #. Negative response to saving over old version (saves a new image)
 #. (like a 'File:Save As...' action in other applications)
-#: ../tuxpaint.c:16242
+#: ../tuxpaint.c:16275
 msgid "No, save a new file!"
 msgstr "No, desa en un fitxer nou!"
 
-#: ../tuxpaint.c:17515
+#: ../tuxpaint.c:17548
 msgid ""
 "Choose a picture and then click “Open”, “Export”, “Template“, or “Erase”. "
 "Click “Slides” to create a slideshow animation or “Back“ to return to your "
@@ -1701,7 +1703,7 @@ msgstr ""
 "Feu clic a «Diapositives» per crear una presentació o «Endarrere» per tornar "
 "al dibuix actual."
 
-#: ../tuxpaint.c:17521
+#: ../tuxpaint.c:17554
 msgid ""
 "Choose a picture and then click “Open”, “Export”, or “Erase”. Click “Slides” "
 "to create a slideshow animation or “Back“ to return to your current picture."
@@ -1713,64 +1715,64 @@ msgstr ""
 #. None selected? Too dangerous to automatically select all (like we do for slideshow playback).
 #. Only 1 selected?  No point in saving as GIF.
 #.
-#: ../tuxpaint.c:19211
+#: ../tuxpaint.c:19247
 msgid "Select 2 or more drawings to turn into an animated GIF."
 msgstr "Seleccioneu 2 o més dibuixos per exportar-los a GIF."
 
 #. Descriptions (names) of the color mixer tool's primary colors and shades
-#: ../tuxpaint.c:25513
+#: ../tuxpaint.c:25562
 msgid "red"
 msgstr "magenta"
 
-#: ../tuxpaint.c:25514
+#: ../tuxpaint.c:25563
 msgid "yellow"
 msgstr "groc"
 
-#: ../tuxpaint.c:25515
+#: ../tuxpaint.c:25564
 msgid "blue"
 msgstr "cian"
 
-#: ../tuxpaint.c:25516
+#: ../tuxpaint.c:25565
 msgid "white"
 msgstr "blanc"
 
-#: ../tuxpaint.c:25517
+#: ../tuxpaint.c:25566
 msgid "grey"
 msgstr "gris"
 
-#: ../tuxpaint.c:25518
+#: ../tuxpaint.c:25567
 msgid "black"
 msgstr "negre"
 
 #. Tool tip text describing a mixed color (e.g., "1/3 red and 1/2 yellow", or "1/3 blue and 2/3 white", etc.)
-#: ../tuxpaint.c:25523
+#: ../tuxpaint.c:25572
 #, c-format
 msgid "Your color is %1$s %2$s."
 msgstr "El vostre color és %1$s %2$s."
 
-#: ../tuxpaint.c:25524
+#: ../tuxpaint.c:25573
 #, c-format
 msgid "Your color is %1$s %2$s and %3$s %4$s."
 msgstr "El vostre color és %1$s %2$s i %3$s %4$s."
 
-#: ../tuxpaint.c:25525
+#: ../tuxpaint.c:25574
 #, c-format
 msgid "Your color is %1$s %2$s, %3$s %4$s, and %5$s %6$s."
 msgstr "El vostre color és %1$s %2$s, %3$s %4$s i %5$s %6$s."
 
-#: ../tuxpaint.c:25526
+#: ../tuxpaint.c:25575
 #, c-format
 msgid "Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, and %7$s %8$s."
 msgstr "El vostre color és %1$s %2$s, %3$s %4$s, %5$s %6$s i %7$s %8$s."
 
-#: ../tuxpaint.c:25527
+#: ../tuxpaint.c:25576
 #, c-format
 msgid ""
 "Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, %7$s %8$s, and %9$s %10$s."
 msgstr ""
 "El vostre color és %1$s %2$s, %3$s %4$s, %5$s %6$s, %7$s %8$s i %9$s %10$s."
 
-#: ../tuxpaint.c:25528
+#: ../tuxpaint.c:25577
 #, c-format
 msgid ""
 "Your color is %1$s %2$s, %3$s %4$s, %5$s %6$s, %7$s %8$s, %9$s %10$s, and "
@@ -1780,16 +1782,16 @@ msgstr ""
 "%11$s %12$s."
 
 #. Color mixer; e.g., "Your color is entirely grey."
-#: ../tuxpaint.c:26308 ../tuxpaint.c:26313
+#: ../tuxpaint.c:26357 ../tuxpaint.c:26362
 msgid "entirely"
 msgstr "totalment"
 
 #. Add "Color Select" color:
-#: ../tuxpaint.c:29515
+#: ../tuxpaint.c:29570
 msgid "Select a color from your drawing."
 msgstr "Seleccioneu un color del vostre dibuix."
 
-#: ../tuxpaint.c:29526
+#: ../tuxpaint.c:29581
 msgid ""
 "Pick a color. Hues go top to bottom. Saturation/intensity goes left (pale) "
 "to right (pure). Value (lightness/darkness): grey bar."
@@ -1798,7 +1800,7 @@ msgstr ""
 "saturació o intensitat, d'esquerra(pàlid) a dreta(pur), trieu el valor "
 "(lluminositat/foscor) a la barra de grisos."
 
-#: ../tuxpaint.c:29540
+#: ../tuxpaint.c:29595
 msgid ""
 "Click the primary colors (red, yellow, and blue), white (to tint), grey (to "
 "tone), and black (to shade), to mix together a new color."
@@ -1844,7 +1846,7 @@ msgstr "Ordinador Color"
 msgid "ASCII %s"
 msgstr "ASCII %s"
 
-#: ../../magic/src/ascii.c:344
+#: ../../magic/src/ascii.c:346
 #, c-format
 msgid ""
 "Click and drag to transform parts of your drawing to ASCII art (%s style)."
@@ -1852,16 +1854,16 @@ msgstr ""
 "Feu clic i arrossegueu per transformar parts del dibuix en text ACII (estil "
 "%s)."
 
-#: ../../magic/src/ascii.c:347
+#: ../../magic/src/ascii.c:351
 #, c-format
 msgid "Click to transform your entire drawing to ASCII art (%s style)."
 msgstr "Feu clic per transformar el dibuix en text ASCII. (estil %s)."
 
-#: ../../magic/src/blind.c:127
+#: ../../magic/src/blind.c:129
 msgid "Blind"
 msgstr "Persiana"
 
-#: ../../magic/src/blind.c:144
+#: ../../magic/src/blind.c:146
 msgid ""
 "Click towards the edge of your picture to pull window blinds over it. Move "
 "perpendicularly to open or close the blinds."
@@ -1908,18 +1910,18 @@ msgstr "Feu clic i arrossegueu el ratolí per fer gotejar la imatge."
 msgid "Click to make the entire picture drip."
 msgstr "Feu clic per fer gotejar el dibuix."
 
-#: ../../magic/src/bloom.c:108
+#: ../../magic/src/bloom.c:109
 msgid "Bloom"
 msgstr "Bloom"
 
-#: ../../magic/src/bloom.c:125
+#: ../../magic/src/bloom.c:126
 msgid ""
 "Click and drag to apply a glowing \"bloom\" effect to parts of your image."
 msgstr ""
 "Feu clic i arrossegueu el ratolí per afegir un efecte de brillantor de "
 "contrallum a parts del dibuix."
 
-#: ../../magic/src/bloom.c:129
+#: ../../magic/src/bloom.c:130
 msgid "Click to apply a glowing \"bloom\" effect to your entire image."
 msgstr "Feu clic per afegir un efecte de brillantor de contrallum al dibuix."
 
@@ -1973,11 +1975,11 @@ msgstr ""
 msgid "Click to turn the entire picture into a cartoon."
 msgstr "Feu clic per convertir la imatge a colors sòlids."
 
-#: ../../magic/src/checkerboard.c:115
+#: ../../magic/src/checkerboard.c:120
 msgid "Checkerboard"
 msgstr "Escacs"
 
-#: ../../magic/src/checkerboard.c:131
+#: ../../magic/src/checkerboard.c:136
 msgid "Click and drag to fill the canvas with a checkerboard pattern."
 msgstr "Feu clic i arrossegueu per dibuixar un tauler d'escacs."
 
@@ -2043,11 +2045,11 @@ msgstr "Feu clic i arrossegueu per dibuixar un patró de punts en la imatge."
 msgid "Click to apply a dot pattern on your entire picture"
 msgstr "Feu clic per aplicar un patró de punts al dibuix."
 
-#: ../../magic/src/confetti.c:102
+#: ../../magic/src/confetti.c:104
 msgid "Confetti"
 msgstr "Confeti"
 
-#: ../../magic/src/confetti.c:117
+#: ../../magic/src/confetti.c:119
 msgid "Click to throw confetti!"
 msgstr "Feu clic per llançar paperets!"
 
@@ -2122,31 +2124,31 @@ msgstr "Feu clic i arrossegueu el ratolí per obtenir un relleu de la imatge."
 msgid "Click to emboss the entire picture."
 msgstr "Feu clic per fer el relleu del dibuix."
 
-#: ../../magic/src/emitter.c:51
+#: ../../magic/src/emitter.c:52
 msgid "Hearts"
 msgstr "Cors"
 
-#: ../../magic/src/emitter.c:52
+#: ../../magic/src/emitter.c:53
 msgid "Sparkles"
 msgstr "Guspires"
 
-#: ../../magic/src/emitter.c:53
+#: ../../magic/src/emitter.c:54
 msgid "Stars"
 msgstr "Estrelles"
 
-#: ../../magic/src/emitter.c:58
+#: ../../magic/src/emitter.c:59
 msgid "hearts"
 msgstr "cors"
 
-#: ../../magic/src/emitter.c:59
+#: ../../magic/src/emitter.c:60
 msgid "sparkles"
 msgstr "guspires"
 
-#: ../../magic/src/emitter.c:60
+#: ../../magic/src/emitter.c:61
 msgid "stars"
 msgstr "estrelles"
 
-#: ../../magic/src/emitter.c:279
+#: ../../magic/src/emitter.c:280
 #, c-format
 msgid "Click and drag to draw a trail of %s on your picture."
 msgstr "Feu clic i arrossegueu per dibuixar un rastre de %s al dibuix."
@@ -2239,11 +2241,11 @@ msgstr ""
 "Feu clic per dessaturar tot allò del dibuix que no correspongui amb el color "
 "triat.."
 
-#: ../../magic/src/fisheye.c:112
+#: ../../magic/src/fisheye.c:114
 msgid "Fisheye"
 msgstr "Ull de peix"
 
-#: ../../magic/src/fisheye.c:127
+#: ../../magic/src/fisheye.c:129
 msgid "Click on part of your picture to create a fisheye effect."
 msgstr "Feu clic per aconseguir un efecte d'ull de peix."
 
@@ -2265,11 +2267,11 @@ msgstr "Escuma"
 msgid "Click and drag the mouse to cover an area with foamy bubbles."
 msgstr "Feu clic i arrossegueu el ratolí per cobrir la imatge d'escuma."
 
-#: ../../magic/src/fold.c:116
+#: ../../magic/src/fold.c:118
 msgid "Fold"
 msgstr "Full"
 
-#: ../../magic/src/fold.c:131
+#: ../../magic/src/fold.c:133
 msgid ""
 "Choose a background color and click to turn the corner of the page over."
 msgstr "Trieu un color de fons i feu clic per aixecar la cantonada."
@@ -2279,7 +2281,7 @@ msgstr "Trieu un color de fons i feu clic per aixecar la cantonada."
 msgid "Fractal #%d"
 msgstr "Fractal %d"
 
-#: ../../magic/src/fractal.c:157
+#: ../../magic/src/fractal.c:158
 #, c-format
 msgid ""
 "Click and drag to sketch a shape. It will repeat, %1$s %2$d%% and rotating "
@@ -2288,35 +2290,35 @@ msgstr ""
 "Feu clic i arrossegueu per dibuixar una forma, es repetirà, %1$s %2$d%% "
 "girant %3$d graus."
 
-#: ../../magic/src/fractal.c:158 ../../magic/src/fractal.c:164
+#: ../../magic/src/fractal.c:160 ../../magic/src/fractal.c:169
 msgid "scaling up"
 msgstr "augmentant"
 
-#: ../../magic/src/fractal.c:158 ../../magic/src/fractal.c:164
+#: ../../magic/src/fractal.c:160 ../../magic/src/fractal.c:169
 msgid "scaling down"
 msgstr "disminuint"
 
-#: ../../magic/src/fractal.c:163
+#: ../../magic/src/fractal.c:167
 #, c-format
 msgid "Click and drag to sketch a shape. It will repeat, %1$s %2$d%%."
 msgstr ""
 "Feu clic i arrossegueu per dibuixar una forma, es repetirà , %1$s %2$d%%."
 
-#: ../../magic/src/fractal.c:170
+#: ../../magic/src/fractal.c:175
 #, c-format
 msgid "Click and drag to sketch a shape. It will repeat, rotating %d degrees."
 msgstr ""
 "Feu clic i arrossegueu per dibuixar una forma, es repetirà girada %d graus."
 
-#: ../../magic/src/fretwork.c:222
+#: ../../magic/src/fretwork.c:223
 msgid "Fretwork"
 msgstr "Sanefa"
 
-#: ../../magic/src/fretwork.c:228
+#: ../../magic/src/fretwork.c:229
 msgid "Click and drag to draw repetitive patterns."
 msgstr "Feu clic i arrossegueu per dibuixar una sanefa."
 
-#: ../../magic/src/fretwork.c:230
+#: ../../magic/src/fretwork.c:231
 msgid "Click to surround your picture with repetitive patterns."
 msgstr "Feu clic per envoltar la imatge amb una sanefa."
 
@@ -2494,19 +2496,19 @@ msgstr "Metall pintat"
 msgid "Click and drag the mouse to paint with a metallic color."
 msgstr "Feu clic i arrossegueu el ratolí per fer un efecte de metall pintat."
 
-#: ../../magic/src/mirror_f.c:117
+#: ../../magic/src/mirror_f.c:118
 msgid "Mirror"
 msgstr "Mirall"
 
-#: ../../magic/src/mirror_f.c:119
+#: ../../magic/src/mirror_f.c:120
 msgid "Flip"
 msgstr "Mirall vertical"
 
-#: ../../magic/src/mirror_f.c:140
+#: ../../magic/src/mirror_f.c:141
 msgid "Click to make a mirror image."
 msgstr "Feu clic per invertir la imatge horitzontalment."
 
-#: ../../magic/src/mirror_f.c:142
+#: ../../magic/src/mirror_f.c:143
 msgid "Click to flip the picture upside-down."
 msgstr "Feu clic per invertir la imatge verticalment."
 
@@ -2858,11 +2860,11 @@ msgstr "Feu clic en la part del dibuix que vulgueu barrejar."
 msgid "Click to make a puzzle in fullscreen mode."
 msgstr "Feu clic per barrejar la imatge."
 
-#: ../../magic/src/rails.c:172
+#: ../../magic/src/rails.c:174
 msgid "Rails"
 msgstr "Rails"
 
-#: ../../magic/src/rails.c:187
+#: ../../magic/src/rails.c:189
 msgid "Click and drag to draw train track rails on your picture."
 msgstr "Feu clic i arrossegueu per dibuixar una via de tren."
 
@@ -2936,19 +2938,19 @@ msgstr ""
 "Feu clic per provocar ondulacions en la imatge. (com gotes d'aigua sobre un "
 "llac)."
 
-#: ../../magic/src/rosette.c:129
+#: ../../magic/src/rosette.c:131
 msgid "Rosette"
 msgstr "Rosetó"
 
-#: ../../magic/src/rosette.c:131
+#: ../../magic/src/rosette.c:133
 msgid "Picasso"
 msgstr "Picasso"
 
-#: ../../magic/src/rosette.c:147
+#: ../../magic/src/rosette.c:149
 msgid "Click and start drawing your rosette."
 msgstr "Feu clic i comenceu a dibuixar el rosetó."
 
-#: ../../magic/src/rosette.c:149
+#: ../../magic/src/rosette.c:151
 msgid "You can draw just like Picasso!"
 msgstr "Podeu dibuixar com en Picasso!"
 
@@ -3110,28 +3112,28 @@ msgstr "Esprai"
 msgid "Click and drag to add a random spray of color onto your image."
 msgstr "Feu clic i arrossegueu per pintar amb un esprai."
 
-#: ../../magic/src/stretch.c:119
+#: ../../magic/src/stretch.c:121
 msgid "Stretch"
 msgstr "Estira"
 
-#: ../../magic/src/stretch.c:134
+#: ../../magic/src/stretch.c:136
 msgid ""
 "Click and drag to stretch part of your picture vertically or horizontally."
 msgstr "Feu clic i arrossegueu per estirar el dibuix."
 
-#: ../../magic/src/string.c:137
+#: ../../magic/src/string.c:141
 msgid "String edges"
 msgstr "Fils vores"
 
-#: ../../magic/src/string.c:140
+#: ../../magic/src/string.c:144
 msgid "String corner"
 msgstr "Fils rectes"
 
-#: ../../magic/src/string.c:143
+#: ../../magic/src/string.c:147
 msgid "String 'V'"
 msgstr "Fils angle"
 
-#: ../../magic/src/string.c:175
+#: ../../magic/src/string.c:179
 msgid ""
 "Click and drag to draw string art. Drag top-bottom to draw less or more "
 "lines, left or right to make a bigger hole."
@@ -3140,12 +3142,12 @@ msgstr ""
 "per tenir més o menys fils, acosteu la busca al centre perquè els fils s'hi "
 "apropin."
 
-#: ../../magic/src/string.c:178
+#: ../../magic/src/string.c:182
 msgid "Click and drag to draw arrows made of string art."
 msgstr ""
 "Feu clic i arrossegueu per fer un dibuix de fils alineat amb les vores."
 
-#: ../../magic/src/string.c:181
+#: ../../magic/src/string.c:185
 msgid "Draw string art arrows with free angles."
 msgstr ""
 "Feu clic i arrossegueu com si dibuixéssiu una V: Feu clic en un dels "
@@ -3372,15 +3374,15 @@ msgstr ""
 "fer canviar la mida del cercle fix, i en vertical per la mida del cercle que "
 "roda al seu interior. El llàpis és a l'exterior del cercle que roda."
 
-#: ../../magic/src/tv.c:123
+#: ../../magic/src/tv.c:125
 msgid "TV"
 msgstr "TV"
 
-#: ../../magic/src/tv.c:125
+#: ../../magic/src/tv.c:127
 msgid "TV (Bright)"
 msgstr "TV (Brillant)"
 
-#: ../../magic/src/tv.c:141
+#: ../../magic/src/tv.c:143
 msgid ""
 "Click and drag to make parts of your picture look like they are on "
 "television."
@@ -3388,7 +3390,7 @@ msgstr ""
 "Feu clic i arrossegueu per pintar parts de la imatge com si estès en el "
 "televisor."
 
-#: ../../magic/src/tv.c:143
+#: ../../magic/src/tv.c:145
 msgid "Click to make your picture look like it's on television."
 msgstr "Feu clic per convertir la imatge com si estès en el televisor."
 

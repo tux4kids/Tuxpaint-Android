@@ -1,0 +1,932 @@
+                                   Tux Paint
+                                version 0.9.35
+                        Dokumentation för installation
+
+         Copyright © 2002-2025 av olika bidragsgivare; se AUTHORS.txt.
+                             https://tuxpaint.org/
+
+                                  maj 2, 2025
+
++-------------------------------------------------------+
+|                       Innehåll                        |
+|-------------------------------------------------------|
+|   * Krav                                              |
+|       + Biblioteket Simple DirectMedia Layer (libSDL) |
+|       + Andra bibliotek                               |
+|   * Kompilering och installation                      |
+|       + Fönster                                       |
+|       + Linux/Unix                                    |
+|       + macOS                                         |
+|       + Android                                       |
+|       + Haiku                                         |
+|   * Felsökning                                        |
+|   * Avinstallera Rita med Tux                         |
+|       + Fönster                                       |
+|       + macOS                                         |
+|       + Linux                                         |
++-------------------------------------------------------+
+
+Krav
+
+             ### Biblioteket Simple DirectMedia Layer (libSDL) ###
+
+Rita med Tux kräver Simple DirectMedia Layer Library (libSDL), ett
+multimediaprogrammeringsbibliotek med öppen källkod som är tillgängligt under
+GNU Lesser General Public License (LGPL).
+
+Tillsammans med libSDL är Rita med Tux beroende av ett antal andra
+SDL-hjälpbibliotek: SDL_Image (för grafikfiler), SDL_gfx (för vissa grafiska
+funktioner, t.ex. rotation), SDL_TTF och SDL2_Pango (för stöd för True Type
+Font) och, eventuellt, SDL_Mixer (för ljudeffekter).
+
+SDL-biblioteken finns tillgängliga som källkod, eller som RPM- eller
+Debian-paket för olika Linux-distributioner. De kan laddas ner från:
+
+  * libSDL: http://www.libsdl.org/
+  * SDL_image: https://github.com/libsdl-org/SDL_image
+  * SDL_gfx: https://www.ferzkopp.net/wordpress/2016/01/02/sdl_gfx-sdl2_gfx/ (
+    https://sourceforge.net/projects/sdlgfx/)
+  * SDL_ttf: https://github.com/libsdl-org/SDL_ttf
+  * SDL2_Pango: https://github.com/markuskimius/SDL2_Pango
+  * SDL_mixer: https://github.com/libsdl-org/SDL_mixer (valfritt)
+
+De är också vanligtvis tillgängliga tillsammans med din Linux-distribution
+(t.ex. på ett installationsmedium eller tillgängliga via programvara för
+paketunderhåll som Debians"apt").
+
+💡 Observera: När du installerar bibliotek från paket ska du se till att du även
+installerar utvecklingsversionerna av paketen. (Installera till exempel
+både"SDL2-2.24.0.rpm" och"SDL2-devel-2.24.0.rpm")
+
+## Andra bibliotek ##
+
+Rita med Tux utnyttjar också ett antal andra kostnadsfria LGPL-bibliotek. Under
+Linux, precis som SDL, bör de antingen redan vara installerade eller vara lätt
+tillgängliga för installation som en del av din Linux-distribution.
+
+→ libPNG ←
+
+    Rita med Tux använder PNG-format (Portable Network Graphics) för sina
+    datafiler. SDL_image kräver att libPNG installeras.
+
+    http://www.libpng.org/pub/png/libpng.html
+
+
+     
+→ gettext ←
+
+    Rita med Tux använder ditt systems locale-inställningar tillsammans med
+    biblioteket "gettext" för att stödja olika språk (t.ex. spanska). Du
+    behöver ha biblioteket gettext installerat.
+
+    http://www.gnu.org/software/gettext/
+
+
+     
+→ libpaper (endast Linux/Unix) ←
+
+    Rita med Tux kan bestämma systemets standardpappersstorlek (t.ex. A4 eller
+    Letter), eller kan uppmanas att använda en viss pappersstorlek, tack vare
+    "libpaper".
+
+    https://github.com/naota/libpaper
+
+
+     
+→ FriBiDi ←
+
+    Rita med Tuxs verktyg "Text" och även "Label" stöder dubbelriktade språk
+    tack vare biblioteket "FriBiDi".
+
+    http://fribidi.org/
+
+
+     
+→ Stöd för SVG-grafik ←
+
+    Rita med Tux kan ladda SVG-bilder (Scalable Vector Graphics) som stämplar.
+    Två uppsättningar bibliotek stöds och SVG-stödet kan avaktiveras helt (via
+    "make SVG_LIB:=")
+
+    → librsvg-2 & libCairo2 (nyare bibliotek) ←
+          @ libRSVG 2: http://librsvg.sourceforge.net/
+          @ Cairo 2: http://www.cairographics.org/
+          @ Dessa beror också på följande:
+              - GdkPixbuf & GLib: http://www.gtk.org/
+              - Pango: http://www.pango.org/
+
+         
+    → Äldre SVG-bibliotek ←
+          @ libcairo1, libsvg1, & libsvg-cairo1: http://www.cairographics.org/
+          @ Dessa beror också på följande:
+              - libxml2: https://gitlab.gnome.org/GNOME/libxml2
+
+         
+
+     
+→ Funktion för export av animerad GIF ←
+
+    För att stödja export av animerade GIF-filer (bildspel) krävs biblioteket
+    "libimagequant" (från projektet "pngquant2").
+
+    https://github.com/ImageOptim/libimagequant
+
+
+     
+→ NetPBM Verktyg (valfritt) Används inte längre, som standard ←
+
+    📜 Under Linux och Unix använde tidigare versioner av Rita med Tux
+    NetPBM-verktygen för att hjälpa till med utskriften. (En PNG genereras av
+    Rita med Tux och konverteras till en PostScript med hjälp av NetPBM:s
+    kommandoradsverktyg"pngtopnm" och"pnmtops")
+
+    http://netpbm.sourceforge.net/
+
+
+     
+
+Kompilering och installation
+
+Rita med Tux släpps under GNU General Public License (GPL) (se "COPYING.txt"
+för detaljer), och därför är "källkoden" till programmet fritt tillgänglig.
+
+    -----------------------------------------------------------------------
+
+                                ### Fönster ###
+
+juli 10, 2022 Shin-ichi TOYAMA <dolphin6k@wmail.plala.or.jp>
+
+## Uppsättning av kompilering ##
+
+I "Makefile" ingår stöd för att bygga på ett Windows-system med MinGW/MSYS (
+https://sourceforge.net/projects/msys2/).
+
+Många verktyg och bibliotek krävs för att bygga Rita med Tux.
+Pakethanteringssystemet "pacman" hjälper dig att installera dem automatiskt och
+lösa komplicerade beroenden.
+
+# MYSYS2 #
+
+Ladda ner den senaste MSYS2-miljön från https://www.msys2.org/ och installera
+den där du vill (standard är "C:\msys64")
+
+Öppna MSYS2-skalet från "Start Menu" → "MSYS2 64bit" → "MSYS2 MSYS" och kör
+följande kommando:
+
+    $ yes "" | pacman -Syu
+
+Detta uppdaterar kärnsystemet och fönstret stängs automatiskt. Öppna
+msys2-skalet igen och kör följande kommando för att avsluta den återstående
+uppdateringsprocessen.
+
+    $ yes "" | pacman -Syu
+
+I MSYS2-skalet kör du följande kommando för att installera grundläggande
+utvecklingsverktyg:
+
+    $ yes "" | pacman -S make automake-wrapper autoconf-wrapper libtool git zip
+    patch gperf dos2unix
+
+Fortsätt till nästa avsnitt"MinGW 64bit (x86_64) toolchains", eller hoppa till
+avsnittet"MinGW 32bit (i686) toolchains" om du bara behöver en 32bit byggmiljö.
+
+          -----------------------------------------------------------
+
+# MinGW 64bit (x86_64)-kompilator och verktyg #
+
+I MSYS2-skalet kör du följande kommando för att installera 64bitkompilator och
+grundläggande utvecklingsverktyg:
+
+    $ yes "" | pacman -S mingw-w64-x86_64-{gcc,pkgconf,ntldd-git}
+
+"ntldd" är ett litet verktyg som undersöker Windows-körbara filer för att lista
+Dynamic Link Library (.dll)-filer som de är beroende av. Rita med Tux's
+paketeringsprocess för binär distribution använder det för att hitta nödvändiga
+.dll-filer.
+
+# 64bit (x86_64) beroendebibliotek för Rita med Tux och Konfigurera Rita med
+Tux #
+
+Du kan installera verktyg och bibliotek som krävs för att kompilera Rita med
+Tux och Konfigurera Rita med Tux på MSYS2/MINGW med hjälp av "pacman" förutom
+SDL2_Pango och libunibreak.
+
+FLTK är en plattformsoberoende GUI-verktygslåda som används av "Konfigurera
+Rita med Tux". Du kan hoppa över att installera det om du bara bygger "Rita med
+Tux".
+
+    $ pacman -S mingw-w64-x86_64-SDL_{image,ttf,gfx}
+    $ pacman -S mingw-w64-x86_64-{librsvg,fribidi,libimagequant,fltk}
+
+💡 Obs: Stäng skalet innan du går vidare till den återstående processen.
+
+# Installera SDL2_Pango och libunibreak i 64bit-miljön #
+
+SDL2_Pango och libunibreak bör installeras manuellt.
+
+Den här gången använder du MinGW "64bit"-skalet. Öppna skalet från "Startmenyn"
+→ "MSYS2 64bit" → "MSYS2 MinGW 64-bit"
+
+SDL2_Pango
+
+Du kan hämta källkoden från Mark K. Kims git-repository, kompilera och
+installera den enligt följande.
+
+    $ git clone https://github.com/markuskimius/SDL2_Pango
+    $ cd SDL2_Pango
+    $ ./configure --prefix=/mingw64 && make && make install
+
+libunibreak
+
+libunibreak krävs för att kompilera Konfigurera Rita med Tux Du kan hoppa över
+att installera det om du bara bygger "Rita med Tux".
+
+Du kan hämta källkoden från git repositry och kompilera den enligt följande.
+
+    $ git clone https://github.com/adah1972/libunibreak libunibreak
+    $ cd libunibreak
+    $ ./augogen.sh --prefix=/mingw64 && make && make install
+
+Fortsätt till nästa avsnitt"MinGW 32bit (i686) toolchains", eller hoppa till
+avsnittet"ImageMagick" om du bara behöver en 64bit byggmiljö.
+
+          -----------------------------------------------------------
+
+# MinGW 32bit (i686)-kompilator och verktyg #
+
+I MSYS2-skalet kör du följande kommando för att installera 32bitkompilator och
+grundläggande utvecklingsverktyg:
+
+    $ yes "" | pacman -S mingw-w64-i686-{gcc,pkgconf,ntldd-git}
+
+"ntldd" är ett litet verktyg som undersöker Windows-körbara filer för att lista
+Dynamic Link Library (.dll)-filer som de är beroende av. Rita med Tux's
+paketeringsprocess för binär distribution använder det för att hitta nödvändiga
+.dll-filer.
+
+# 32bit (i686) beroendebibliotek för Rita med Tux och Konfigurera Rita med Tux
+#
+
+Du kan installera verktyg och bibliotek som krävs för att kompilera Rita med
+Tux och Konfigurera Rita med Tux på MSYS2/MINGW med hjälp av "pacman" förutom
+SDL2_Pango och libunibreak.
+
+FLTK är en plattformsoberoende GUI-verktygslåda som används av "Konfigurera
+Rita med Tux". Du kan hoppa över att installera det om du bara bygger "Rita med
+Tux".
+
+    $ pacman -S mingw-w64-i686-SDL_{image,ttf,gfx}
+    $ pacman -S mingw-w64-i686-{librsvg,fribidi,libimagequant,fltk}
+
+💡 Obs: Stäng skalet innan du går vidare till den återstående processen.
+
+# Installera SDL2_Pango och libunibreak i 32bit-miljön #
+
+SDL2_Pango och libunibreak bör installeras manuellt.
+
+Den här gången använder du MinGW "32bit"-skalet. Öppna skalet från "Startmenyn"
+→ "MSYS2 64bit" → "MSYS2 MinGW 32-bit"
+
+SDL2_Pango
+
+Du kan hämta källkoden från Mark K. Kims git-repository, kompilera och
+installera den enligt följande.
+
+    $ git clone https://github.com/markuskimius/SDL2_Pango
+    $ cd SDL2_Pango
+    $ ./configure --prefix=/mingw32 && make && make install
+
+libunibreak
+
+libunibreak krävs för att kompilera Konfigurera Rita med Tux Du kan hoppa över
+att installera det om du bara bygger "Rita med Tux".
+
+Du kan hämta källkoden från git repositry och kompilera den enligt följande.
+
+    $ git clone https://github.com/adah1972/libunibreak libunibreak
+    $ cd libunibreak
+    $ ./augogen.sh --prefix=/mingw32 && make && make install
+
+## ImageMagick ##
+
+ImageMagick är en samling kommandoradsverktyg för att skapa, redigera,
+komponera eller konvertera bitmappsbilder med stöd för ett stort antal
+bildformat. Rita med Tux använder två funktioner ("convert" och "composite")
+för att generera miniatyrbilder för startbilder och mallar under byggprocessen.
+
+Att använda den officiella binära versionen som finns tillgänglig från"Windows
+Binary Release" rekommenderas, på grund av att kommandona installerade med
+"pacman" på MinGW / MSYS inte fungerar som förväntat!
+
+Glöm inte att aktivera "Installera äldre verktyg (t.ex. convert)" när du
+installerar det, eftersom Rita med Tux's byggprocess använder dem.
+
+Lägg till sökvägen till den katalog där ImageMagick är installerat längst upp i
+din miljövariabel "PATH". Till exempel: "PATH":
+
+    $ export PATH=/c/Program\ Files/ImageMagick-7.0.10-Q16-HDRI:$PATH
+
+Du kan göra detta permanent genom att lägga till ovanstående i
+konfigurationsfilen för BASH-skalet, "~/.bash_profile".
+
+## Tux Paint & Tux Paint Config. ##
+
+Du kan kompilera 64-bitars binära filer med hjälp av skalet "MSYS2 64bit"
+respektive 32-bitars binära filer med hjälp av skalet "MSYS2 32bit".
+
+  * Välj "MSYS2 64bit" → "MSYS2 MinGW 64-bit" från "Start Menu" för att öppna
+    64bit-skalet.
+  * Välj "MSYS2 64bit" → "MSYS2 MinGW 32-bit" från "Start Menu" för att öppna
+    32bit-skalet.
+
+# Tux Paint Config. #
+
+"Konfigurera Rita med Tux" är ett användbart grafiskt verktyg för att justera
+Rita med Tux's beteende. Du måste bygga den här komponenten innan du kompilerar
+Rita med Tux om du vill att den ska ingå i ditt paket.
+
+Du kan använda antingen (a) en stabil tar-ball-version eller (b) källkodsträdet
+under utveckling.
+
+ a. Använda stabil tar-ball release:
+      + Ladda ner en tar-ball med källkod
+      + Expandera tar-bollen och ändra katalognamnet så att den slutliga
+        paketeringsprocessen kan hitta relaterade filer.
+
+            $ tar zxvf tuxpaint-config-A.B.C.tar.gz
+            $ mv tuxpaint-config-A.B.C tuxpaint-config
+
+ b. Använda källkodsträdet för utveckling:
+      + Hämta det utvecklande källträdet från git-repository:
+
+            $ git clone https://git.code.sf.net/p/tuxpaint/tuxpaint-config
+            tuxpaint-config
+
+Nu kan du bygga Tux Paint Config. på följande sätt:
+
+    $ cd tuxpaint-config
+    $ make win32
+
+# Tux Paint #
+
+Du kan använda antingen (a) en stabil tar-ball-version eller (b) källkodsträdet
+under utveckling.
+
+ a. Använda stabil tar-ball release:
+      + Ladda ner en tar-ball med källkod
+      + Expandera tar-bollen och ändra katalognamnet så att den slutliga
+        paketeringsprocessen kan hitta relaterade filer.
+
+            $ tar zxvf tuxpaint-A.B.C.tar.gz
+            $ mv tuxpaint-A.B.C tuxpaint
+
+ b. Använda källkodsträdet för utveckling:
+      + Hämta det utvecklande källträdet från git-repository:
+
+            $ git clone https://git.code.sf.net/p/tuxpaint/tuxpaint tuxpaint
+
+Nu kan du bygga Tux Paint på följande sätt:
+
+    $ cd tuxpaint
+    $ make bdist-win32
+
+Alla filer som behövs för att starta Rita med Tux (och Konfigurera Rita med
+Tux) finns samlade i katalogen för binär distribution "bdist" under "win32". Du
+kan starta dem genom att dubbelklicka på deras körbara (.exe) filer i katalogen
+"bdist".
+
+## Bygga installationsprogrammet för Rita med Tux Windows ##
+
+Inno Setup används för att bygga ett körbart installationsprogram för Rita med
+Tux. Därför måste du installera det i första hand.
+
+Inno Setup stöder officiellt översättningar för endast cirka 20 språk. En av de
+stora poängerna med Rita med Tux är dock att det stöder så många språk. Därför
+är installationsskriptet "tuxpaint.iss" för att bygga installationsprogrammet
+skrivet för att använda mycket fler översättningar inklusive inofficiella som
+finns tillgängliga på "InnoSetup Translations". Du måste ladda ner
+översättningsfilerna (.isl) som krävs och lägga dem i katalogen "Languages"
+under katalogen där Inno Setup är installerat.
+
+Innan du bygger ett installationsprogram ska du redigera filen "tuxpaint.iss"
+och aktivera en av raderna som börjar med "#define BuildTarget=", beroende på
+arkitekturen för det installationsprogram du vill skapa.
+
+Sedan kan du enkelt bygga ett körbart installationsprogram genom att
+högerklicka på ikonen "tuxpaint.iss" i katalogen "win32" och välja "Compile" i
+listan. Det kommer att köra ett tag och så småningom hittar du en "tuxpaint-
+X.Y.Z-windows-<arch>-installer.exe"-fil i samma katalog.
+
+## Kör Windows-installationsprogrammet för Rita med Tux ##
+
+Dubbelklicka på den körbara installationsfilen för Rita med Tux (.EXE-filen)
+och följ instruktionerna.
+
+Först kommer du att bli ombedd att läsa licensen. (Det är GNU General Public
+License (GPL), som också finns tillgänglig som "COPYING.txt")
+
+Du kommer sedan att få frågan om du vill installera genvägar till Rita med Tux
+i Windows Startmeny och på Windows Skrivbord. (Båda alternativen är inställda
+som standard.)
+
+Sedan kommer du att bli tillfrågad om var du vill installera Rita med Tux.
+Standardinställningen bör vara lämplig, så länge det finns ledigt utrymme.
+Annars väljer du en annan plats.
+
+Vid denna punkt kan du klicka på "Installera" för att installera Rita med Tux!
+
+💡 Installationsprogrammen för både Rita med Tux (plus Konfigurera Rita med Tux)
+(tuxpaint-X.Y.Z-windows-ARCH-installer.exe) och Rita med Tux Stamps
+(tuxpaint-stamps-YYYY.MM.DD-windows-installer.exe) accepterar
+kommandoradsalternativen "/SILENT" ("tyst") eller "/VERYSILENT" ("mycket tyst")
+som kan användas för att installera och avinstallera deras komponenter utan att
+använda ett interaktivt installationsfönster. Detta kan vara användbart för att
+automatisera installationen på en samling datorer, t.ex. med hjälp av Microsoft
+Intune molnbaserad lösning för slutpunktshantering (se https://
+learn.microsoft.com/mem/intune/).
+
+## Ändra inställningar med hjälp av genväg ##
+
+Om du vill ändra programinställningarna högerklickar du på genvägen till
+TuxPaint och väljer "Egenskaper" (längst ner).
+
+Kontrollera att fliken "Genväg" är markerad i det fönster som visas och
+undersök fältet "Mål:". Du bör se något liknande detta:
+
+    "C:\Programfiler\TuxPaint\TuxPaint.exe"
+
+Du kan nu lägga till kommandoradsalternativ som aktiveras när du dubbelklickar
+på ikonen.
+
+Till exempel, för att få spelet att köras i helskärmsläge, med enkla former
+(inget rotationsalternativ) och på franska, lägg till alternativen (efter
+"TuxPaint.exe"), så här:
+
+    "C:\Programfiler\TuxPaint\TuxPaint.exe" -f -s --lang french
+
+(Se huvuddokumentationen för en fullständig lista över tillgängliga
+kommandoradsalternativ)
+
+Om du gör ett misstag eller om allt försvinner, använd [Kontroll] + [Z] för att
+ångra eller tryck bara på [Esc] så stängs rutan utan att några ändringar har
+gjorts (om du inte tryckte på knappen "Apply"!).
+
+När du är klar klickar du på "OK"
+
+## Om något går fel ##
+
+Om det inte händer något när du dubbelklickar på genvägen för att köra Rita med
+Tux beror det förmodligen på att några av kommandoradsalternativen är
+felaktiga. Öppna en Explorer och leta efter en fil som heter "stderr.txt" i din
+personliga sparmapp för TuxPaint, som normalt är 
+"C:\Users\användarnamn\AppData\Roaming\TuxPaint\".
+
+Det kommer att innehålla en beskrivning av vad som var fel. Vanligtvis beror
+det bara på felaktig teckenstorlek (stort "Z" i stället för litet "z") eller
+ett saknat (eller extra) "-" (bindestreck).
+
+    -----------------------------------------------------------------------
+
+                              ### Linux/Unix ###
+
+## Kompilera: ##
+
+💡 Obs: Rita med Tux använder inte autoconf/automake, så det finns inget "./
+configure"-skript att köra. Kompileringen bör dock vara enkel, förutsatt att
+allt som Rita med Tux behöver är installerat.
+
+För att kompilera programmet från källkoden kör du bara följande kommando från
+en shell-prompt (t.ex. "$"):
+
+    $ make
+
+## Inaktiverar SVG-stöd (och därmed Cairo, libSVG och svg-cairo-beroenden): ##
+
+Om du vill inaktivera SVG-stödet (t.ex. om ditt system för närvarande inte
+stöds av Kairobiblioteket eller andra SVG-relaterade beroenden) kan du köra
+"make" med tillägget "SVG_LIB= SVG_CFLAGS= NOSVGFLAG=NOSVG":
+
+    $ make SVG_LIB= SVG_CFLAGS=
+
+## Inaktivera ljud vid kompilering ##
+
+Om du inte har något ljudkort eller föredrar att bygga programmet utan ljudstöd
+(och därmed utan SDL_mixer-beroendet ) kan du köra "make" med "SDL_MIXER_LIB="
+tillagt:
+
+    $ make SDL_MIXER_LIB=
+
+## Andra alternativ ##
+
+Flera andra alternativ (t.ex. installationssökvägar) kan åsidosättas; se dem i
+"Makefile" för mer information.
+
+## Om du får felmeddelanden ##
+
+Om du får några fel under kompileringstiden, kontrollera att du har installerat
+rätt bibliotek (se ovan). Om du använder paketerade versioner av biblioteken
+(t.ex. RPM:er under RedHat eller DEB:er under Debian), se till att du också får
+motsvarande "-dev"- eller "-devel"-paket, annars kommer du inte att kunna
+kompilera Rita med Tux (och andra program) från källan!
+
+## Installation ##
+
+Förutsatt att inga fel inträffar kan du nu installera programmet så att det kan
+köras av användare i systemet. Som standard måste detta göras av användaren
+"root" ("superuser"). Byt till "root" genom att skriva kommandot:
+
+    $ su
+
+Ange "root"s lösenord vid prompten. Du bör nu vara "root" (med en prompt som "#
+"). För att installera programmet och dess datafiler, skriv:
+
+    # make install
+
+Slutligen kan du växla tillbaka till din vanliga användare genom att avsluta
+superanvändarläget:
+
+    # exit
+
+Alternativt kan du kanske helt enkelt använda kommandot "sudo" (t.ex. på Ubuntu
+Linux):
+
+    $ sudo make install
+
+💡 Obs: Som standard placeras "tuxpaint", det körbara programmet, i "/usr/local/
+bin/". Datafilerna (bilder, ljud, etc.) placeras i "/usr/local/share/tuxpaint/
+".
+
+# Ändra vart saker och ting tar vägen #
+
+Du kan ändra vart saker och ting ska gå genom att ange "Makefile"-variabler på
+kommandoraden. "DESTDIR" används för att placera utdata i ett mellanområde för
+paketskapande. "PREFIX" är grunden för var alla andra filer hamnar och är som
+standard inställd på "/usr/local".
+
+Andra variabler är:
+
+→ BIN_PREFIX ←
+    Där "tuxpaint"-binärfilen ska installeras. (inställd på "$(PREFIX)/bin" som
+    standard - t.ex. "/usr/local/bin")
+     
+→ DATA_PREFIX ←
+    Var datafilerna (ljud, grafik, penslar, stämplar, teckensnitt) ska placeras
+    och var Rita med Tux ska leta efter dem när programmet körs. (Ställs in på
+    "$(PREFIX)/share/tuxpaint")
+     
+→ DOC_PREFIX ←
+    Där dokumentationens textfiler (katalogen "docs") ska placeras. (Ställ in
+    till "$(PREFIX)/share/doc/tuxpaint")
+     
+→ MAN_PREFIX ←
+    Där kommer manualsidan för Rita med Tux att hamna. (Ställ in till "$
+    (PREFIX)/share/man")
+     
+→ ICON_PREFIX — $(PREFIX)/share/pixmaps ←
+→ X11_ICON_PREFIX — $(PREFIX)/X11R6/include/X11/pixmaps ←
+→ GNOME_PREFIX — $(PREFIX)/share/gnome/apps/Graphics ←
+→ KDE_PREFIX — $(PREFIX)/share/applnk/Graphics ←
+    Där ikonerna och startprogrammen (för GNOME och KDE) kommer att placeras.
+     
+→ LOCALE_PREFIX ←
+    Var översättningsfilerna för Rita med Tux ska placeras och var Rita med Tux
+    ska leta efter dem. (Ställ in till "$(PREFIX)/share/locale/") (Den slutliga
+    platsen för en översättningsfil kommer att vara under den lokala katalogen
+    (t.ex. "es" för spanska), i underkatalogen "LC_MESSAGES")
+     
+
+💡 Obs: Denna lista är föråldrad. Se "Makefile" och "Makefile-i18n" för en
+fullständig lista.
+
+    -----------------------------------------------------------------------
+
+                                 ### macOS ###
+
+juni 5, 2022 Mark Kim <markuskimius@gmail.com>
+
+Från och med Rita med Tux 0.9.23 är Rita med Tux för macOS byggt som om det
+vore ett Linux-program.
+
+## Förutsättningar ##
+
+Även om Rita med Tux är byggt utan Xcode IDE krävs ändå Xcode för att bygga
+Rita med Tux. Ladda ner det från App Store och starta det en gång för att
+acceptera dess licensavtal. Du kan också behöva installera
+kommandoradsverktygen för Xcode med kommandot:
+
+    $ xcode-select --install
+
+För att bygga Rita med Tux krävs också olika bibliotek. Vi installerar dem från
+MacPorts där det är möjligt, annars från källkoden. Installera MacPorts till
+standardsökvägen /opt/local enligt instruktionerna på deras webbplats: https://
+www.macports.org/
+
+  * ImageMagick
+  * cairo
+  * fribidi
+  * lbzip2
+  * libimagequant^*
+  * libpaper
+  * libpng
+  * librsvg
+  * libsdl2
+  * libsdl2_image
+  * libsdl2_mixer
+  * libsdl2_pango^*
+  * libsdl2_ttf
+  * libsdl2_gfx
+  * pkgconfig
+  * zlib
+
+... men du bör installera alla paket som krävs av den senaste versionen av Rita
+med Tux.
+
+^* Inte tillgängligt från MacPorts i skrivande stund, se nedan.
+
+# libimagequant #
+
+libimagequant är inte tillgängligt från MacPorts när detta skrivs. Det kan
+installeras från källkoden på följande sätt. Det bör installeras till /opt/
+local (samma som MacPorts) för att biblioteket ska inkluderas i TuxPaint.dmg.
+
+    $ sudo port install rust cargo
+    $ git clone https://github.com/ImageOptim/libimagequant.git
+    $ cd libimagequant/imagequant-sys
+    $ cargo build --release # Måste använda last från MacPorts
+    $ sudo make PREFIX=/opt/local install
+
+# sdl2_pango #
+
+sdl2_pango är inte tillgängligt från MacPorts när detta skrivs. Det kan
+installeras från källkoden på följande sätt. Det bör installeras till /opt/
+local (samma som MacPorts) för att biblioteket ska inkluderas i TuxPaint.dmg.
+
+    $ git clone https://github.com/markuskimius/SDL2_Pango.git
+    $ cd SDL2_Pango
+    $ export MACOSX_DEPLOYMENT_TARGET=11.0 # on Apple Silicon CPU; use "10.10"
+    on Intel CPU
+    $ ./configure --prefix=/opt/local && make && sudo make install
+
+VARNING: Om du har någon UNIX-liknande verktygssats installerad på din Mac
+utöver MacPorts och Xcode, till exempel Fink eller Brew, kommer din appbunt
+inte att vara portabel. Se till att Fink och Brew inte är åtkomliga från din
+byggmiljö.
+
+## Hur man bygger ##
+
+Helt enkelt, kör:
+
+    % make
+    % make install
+
+... för att skapa programpaketet TuxPaint.app som kan köras på plats eller
+kopieras till /Applications. För att skapa DMG-filen för distribution, använd
+"make TuxPaint.dmg".
+
+Ytterligare steg krävs när du bygger en universell binär fil. Se "Bygga en
+universell binär fil" nedan.
+
+## Kända problem ##
+
+  * En macOS-binärfil som byggts på en specifik version av macOS körs bara på
+    den versionen av macOS eller senare. För att säkerställa att Rita med Tux
+    kan köras på den äldsta möjliga versionen av macOS, bygg den på den äldsta
+    tillgängliga versionen av macOS. När detta skrivs vet vi att Rita med Tux
+    inte kan byggas för att köras på macOS 10.7 eller tidigare.
+
+    Se "Gamla versioner av macOS" nedan för bästa möjliga instruktioner om hur
+    du skaffar, installerar och bygger Rita med Tux på en gammal version av
+    macOS.
+
+    Alternativt kan Rita med Tux och alla dess biblioteksberoenden kompileras
+    med lämpliga alternativ för att kunna köras på äldre versioner av macOS.
+    Dessa alternativ är redan inställda på Rita med Tux, så det är bara dess
+    beroenden (från MacPorts) som behöver kompileras om. Se "Omkompilering av
+    MacPorts" nedan för instruktioner.
+
+## Gamla versioner av macOS ##
+
+Vissa gamla versioner av macOS kan laddas ner från Apples supportsida: https://
+support.apple.com/en-us/HT211683
+
+macOS för Intel CPU tillåter dubbelstart av flera versioner av
+operativsystemet, men det är säkrare och enklare att installera det gamla macOS
+på ett USB-minne. Oavsett var du installerar det måste målenhetens
+partitioneringsschema och partitionstyp matcha vad det gamla macOS förväntar
+sig, så använd Diskverktyget för att partitionera och formatera flash-enheten i
+enlighet med detta.
+
+Att dubbelstarta flera versioner av macOS för Apple Silicon har hittills inte
+fungerat. Istället för att installera en äldre version av macOS för Apple
+Silicon för att bygga Rita med Tux så att det kan köras på den gamla versionen
+av macOS för Apple Silicon, använd instruktionerna i avsnittet "Omkompilering
+av MacPorts" för att bygga Rita med Tux så att det kan köras på äldre versioner
+av macOS för Apple Silicon.
+
+I skrivande stund är den äldsta versionen av macOS som finns på Apples
+supportsida Yosemite 10.10, som förväntar sig "GPT (GUID Partition Table)
+"-partitioneringsschema istället för det äldre MBR-schemat och "Mac OS Extended
+(Journaled)" som partitionstyp istället för den nyare APFS-partitionstypen.
+
+Om du får en popup om att macOS är för gammalt eller nytt för att installeras
+när du startar installationsprogrammet kan du skapa ett startbart
+installationsprogram med hjälp av instruktionerna här: https://
+support.apple.com/en-mide/HT201372
+
+När den gamla macOS är installerad kan du upptäcka att Xcode på App Store är
+för ny för att köras på versionen av den gamla macOS. Gamla versioner av Xcode
+kan hämtas från Apples webbplats för utvecklare i ett område som är
+tillgängligt med gratis registrering: https://developer.apple.com/download/more
+/
+
+Listan över macOS-versioner och den senaste versionen av Xcode som är
+kompatibel med dem är snyggt upplagd på Wikipedia-sidan om Xcode: https://
+en.wikipedia.org/wiki/Xcode#Version_comparison_table
+
+Eftersom Xcode installeras manuellt kan du hoppa över steget för att installera
+Xcodes kommandoradsverktyg (kör inte "xcode-select --install") men i övrigt
+bygga Rita med Tux med samma steg som beskrivs i den tidigare delen av det här
+dokumentet.
+
+## Omkompilering av MacPorts ##
+
+Om du vill kompilera om MacPorts så att den kan användas på äldre versioner av
+macOS ställer du in följande alternativ i /opt/local/etc/macports/
+macports.conf:
+
+    buildfromsource always
+    macosx_deployment_target 10.10
+
+Avinstallera sedan alla MacPorts-paket:
+
+    $ sudo port -fp uninstall installed
+
+Installera sedan om alla MacPorts-paket som behövs för Rita med Tux. Bygg även
+om libimagequant med hjälp av det uppdaterade Cargo-paketet från MacPorts.
+
+I skrivande stund kan alla bibliotek som Rita med Tux kräver från MacPorts
+kompileras om på det här sättet för att köras på macOS 10.10 Yosemite och
+senare på Intel-processorer och macOS 11.0 Big Sur och senare på Apple Silicon.
+Även om MacPorts har möjlighet att aktivera byggandet av universella bibliotek,
+kan tyvärr flera bibliotek som Rita med Tux kräver inte byggas som universella
+bibliotek, så de kan bara byggas för att köras nativt på den maskinvara som de
+byggdes på. Se "Bygga en universell binärfil" nedan för instruktioner om hur du
+bygger Rita med Tux som en universell binärfil.
+
+## Bygga en universell binär kod ##
+
+För att bygga Rita med Tux som en Universal Binary, kompilera först Rita med
+Tux för Intel CPU och Apple Silicon separat. Byt sedan namn på appbunten för
+Intel CPU till TuxPaint-x86_64.app och bunten för Apple Silicon till
+TuxPaint-arm64.app, kopiera appbunten från Intel-maskinen till Apple
+Silicon-maskinen och använd sedan det medföljande build-universal.sh-skriptet
+för att kombinera de två applikationsbuntarna enligt nedan. DMG-filen kan
+byggas i efterhand:
+
+    $ macos/build-universal.sh
+    $ make TuxPaint.dmg
+
+    -----------------------------------------------------------------------
+
+                                ### Android ###
+
+mars 29, 2023 Pere Pujal i Carabantes <perepujal@gmail.com> (Edited by Bill
+Kendrick)
+
+Från och med mars 2023 underhålls Android-versionen av Rita med Tux i ett
+separat kodförvar på GitHub: https://github.com/tux4kids/Tuxpaint-Android.
+Detaljerade instruktioner finns där; detta fungerar som en översikt.
+
+## Förutsättningar ##
+
+Du kommer att behöva senaste versioner av:
+
+  * Gradle - verktyg för byggautomatisering
+  * Android Studio (Software Development Kit (SDK) ) - för att stödja
+    utveckling av Android-appar (Java)
+  * Android Native Development Kit (NDK) - för att stödja inbyggd utveckling i
+    C/C++
+
+För att kompilera den senaste Rita med Tux måste man synkronisera huvud
+SourceForge-projektets tuxpaint Git-förvar med GitHub-projektets
+TuxPaint-Android Git-förvar. (Pere använder ett skalskript som
+säkerhetskopierar katalogen app/src/main/jni/tuxpaint i Tuxpaint-Android
+GitHub-arkivet och gör en byggnad av SourceForges tuxpaint för att generera
+översättningar och andra saker som inte autogenereras i Android-byggnaderna,
+och sedan kopierar SourceForge tuxpaint tillbaka till Tuxpaint-Android) (FIXME:
+Det bör checkas in någonstans. För tillfället, se https://sourceforge.net/p/
+tuxpaint/feature-requests/224/)
+
+För att det ska fungera behöver du källorna tuxpaint och Tuxpaint-Android
+bredvid varandra och skriptet i den katalog som innehåller båda.
+
+Fyll katalogen app/src/main/assets genom att köra cd app/src/main/jni/tuxpaint
+&& ./mkzip_assets.sh
+
+## Byggnad ##
+
+Gradle-bygget genererar några varianter: PlayStore, debugPlayStore,
+offPlayStore och debugoffPlayStore. Du måste signera de som inte är debuggar
+för att kunna installera dem. (FIXME: Länk till information om hur man
+signerar.) (Obs: "playStore"-varianterna är avsedda att laddas upp till Google
+Play; detta hanteras för närvarande av Terrence Sheflin - mars 2023.
+"offPlayStore" är den smak som vi distribuerar som APK-filer på Rita med
+Tux-webbplatsen och SourceForge-filhosting, och är den variant som byggs av
+F-Droid app. repository.)
+
+För att utlösa en build från F-droid räcker det att tagga en commit och skjuta
+den till GitHub. Det garanterar dock inte att byggnaden kommer att lyckas, så
+Pere kör vanligtvis en lokal F-droid-server för att testa byggnaden och så
+småningom anpassa F-droids byggkvitto innan han skjuter taggen till GitHub.
+
+De byggnader som Pere distribuerar är alla gjorda med den lokala
+F-droid-servern. Det har fördelen att packa källorna och loggarna och signera
+APK. Viktigast av allt, det använder samma verktyg som F-Droid kommer att
+använda för att bygga Rita med Tux, så att du kan upptäcka problem i förväg.
+
+Det kvitto som Pere använder för F-Droid-byggnationer finns i
+metadatadirektiven på https://gitlab.com/fdroid/fdroiddata. F-Droid-serverkoden
+finns på https://gitlab.com/fdroid/fdroidserver. För att generera servern
+behöver du 1 GB ledigt på disken. Kör makebuildserver-verktyget de
+tillhandahåller, sedan, från roten till fdroiddata, kör ../fdroidserver/fdroid
+build --server org.tuxpaint:N NNN (NNNN = version, t. ex. 9288)
+
+    -----------------------------------------------------------------------
+
+                                 ### Haiku ###
+
+maj 7, 2023 Luc Schrijvers <begasus@gmail.com> (Edited by Bill Kendrick)
+
+## Förutsättningar ##
+
+Installera de nödvändiga utvecklingspaketen i Terminal:
+
+→ 32-bitars: ←
+    pkgman install xcairo_x86_devel fribidi_x86_devel gdk_pixbuf_x86_devel
+    libiconv_x86_devel libimagequant_x86_devel gettext_x86_libintl
+    libpaper_x86_devel pango_x86_devel libpng16_x86_devel librsvg_x86_devel
+    libsdl2_x86_devel sdl2_image_x86_devel sdl2_gfx_x86_devel
+    sdl2_mixer_x86_devel sdl2_pango_x86_devel sdl2_ttf_x86_devel zlib_x86_devel
+     
+→ 64-bitars: ←
+    pkgman install xcairo_devel fribidi_devel gdk_pixbuf_devel libiconv_devel
+    libimagequant_devel gettext_libintl libpaper_devel pango_devel
+    libpng16_devel librsvg_devel libsdl2_devel sdl2_image_devel sdl2_gfx_devel
+    sdl2_mixer_devel sdl2_pango_devel sdl2_ttf_devel zlib_devel
+     
+←
+
+För 32-bitars måste du byta till den nya kompilatorn (för närvarande gcc
+11.2.0) med setarch x86
+
+## Byggnad ##
+
+make PREFIX=/boot/home/config/non-packaged
+
+## Rita med Tux stämplar ##
+
+make install-all DATA_PREFIX=/boot/home/config/non-packaged/share/tuxpaint/
+
+Felsökning
+
+⚙ Felsökningsutdata - till "STDOUT" på Linux och Unix, till en "stdout.txt"-fil
+på Windows och till filen "/tmp/tuxpaint.log" på macOS - kan aktiveras genom
+att ställa in "DEBUG" (och, om verbose-loggning önskas, "VERBOSE") #definesi
+"src/debug.h" och (om)kompilera Rita med Tux.
+
+Avinstallera Rita med Tux
+
+                                ### Fönster ###
+
+## Använda avinstallationsprogrammet ##
+
+Om du installerade genvägarna i Start-menyn (standard), gå till TuxPaint-mappen
+och välj "Avinstallera". En ruta visas som bekräftar att du är på väg att
+avinstallera Rita med Tux och om du är säker på att du vill ta bort Rita med
+Tux permanent klickar du på knappen "Avinstallera".
+
+När det är klart klickar du på knappen Stäng.
+
+## Använda kontrollpanelen ##
+
+Det är också möjligt att använda posten "TuxPaint (endast ta bort)" i avsnittet
+Lägg till / ta bort program i kontrollpanelen.
+
+                                 ### macOS ###
+
+Ta bort "TuxPaint.app" från mappen "/Applications". Datafiler, inklusive
+konfigurationsfiler, stämplar och sparade bilder, finns i 
+"/Bibliotek/Applikationsstöd/TuxPaint/" (alla användare) och 
+"/Användare/användarnamn/Bibliotek/Applikationsstöd/TuxPaint/" (enskilda
+användare).
+
+                                 ### Linux ###
+
+I källkatalogen för Rita med Tux (där du kompilerade Rita med Tux) kan du
+använda målet "make uninstall" för att avinstallera Rita med Tux. Som standard
+måste detta göras av "root"-användaren ("superuser"), men om du installerade
+Rita med Tux någon annanstans (t.ex. med en "PREFIX=..."-inställning till
+"make" och "make install"), kanske du inte gör det och vill ange samma
+inställningar här. (Se installationsanvisningarna ovan för ytterligare
+information)
+

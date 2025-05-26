@@ -8,9 +8,9 @@ Group: Multimedia/Graphics
 URL: https://tuxpaint.org/
 Source0: https://downloads.sourceforge.net/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-Requires: SDL2 >= 2.0 SDL2_image SDL2_mixer SDL2_ttf SDL2_Pango SDL2_gfx libpaper fribidi xdg-utils libimagequant
+Requires: SDL2 >= 2.0 SDL2_image SDL2_mixer SDL2_ttf SDL2_Pango SDL2_gfx libpaper fribidi xdg-utils libimagequant libxml2
 BuildRequires: SDL2-devel >= 2.0 SDL2_image-devel SDL2_mixer-devel SDL2_ttf-devel SDL2_Pango-devel SDL2_gfx-devel
-BuildRequires: librsvg2-devel libpaper-devel fribidi-devel gperf gettext >= 0.19.7 ImageMagick xdg-utils libimagequant-devel
+BuildRequires: librsvg2-devel libpaper-devel fribidi-devel gperf gettext >= 0.19.7 ImageMagick xdg-utils libimagequant-devel libxml2-devel
 
 %description
 "Tux Paint" is a drawing program for young children.
@@ -92,6 +92,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/tuxpaint/*/html/tp_magic_example.c
 
 %changelog
+* Wed Apr 02 2025 <dolphin6k@wmail.plala.or.jp> -
+- Set version number 0.9.35
+
 * Fri Nov 15 2024 <nbs@sonic.net> -
 - Set version number 0.9.35
 

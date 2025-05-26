@@ -1,0 +1,105 @@
+                                   Tux Paint
+                                version 0.9.35
+                        Dokumentation om miljövariabler
+
+         Copyright © 2021-2025 av olika bidragsgivare; se AUTHORS.txt.
+                             https://tuxpaint.org/
+
+                                  maj 2, 2025
+
+-------------------------------------------------------------------------------
+
+Rita med Tux förstår ett antal miljövariabler, antingen direkt eller indirekt
+genom de bibliotek som den använder.
+
+                   ### Lagringsrelaterade miljövariabler ###
+
+→ HOME ←
+
+    Anger användarens "hemkatalog", som används för att hitta många andra filer
+    eller kataloger. I vissa fall används den som en del av en reservplats, när
+    andra miljövariabler (på andra ställen i den här dokumentationen) inte är
+    inställda. Ibland kan den plats som ska användas åsidosättas genom
+    alternativ som anges på kommandoraden eller via Rita med Tuxs
+    konfigurationsfil. Se dokumentationen "OPTIONS" för mer information.
+
+    Några exempel på när "$HOME" används är bl.a:
+
+      o Platsen för Rita med Tuxs konfigurationsfil
+      o Grunden för var Rita med Tux sparar och laddar användarnas ritningar
+      o Platsen för en användares privata samling av datafiler - stämplar,
+        penslar etc. - (jämfört med de som finns tillgängliga i hela systemet)
+
+     
+→ XDG_CONFIG_HOME ←
+
+    På Linux och andra plattformar där X Desktop Group-standarderna används,
+    platsen för användarens konfigurationsfiler. Specifikt var man hittar
+    "user-dirs.dirs", var "XDG_PICTURES_DIR" kan definieras. Den används för
+    att exportera ritningar och animerade GIF-filer. I allmänhet är den
+    inställd på något i stil med "$HOME/Pictures/". Om inget anges kontrollerar
+    Rita med Tux i katalogen "$HOME/.config/". Om konfigurationen inte kan
+    hittas exporterar Rita med Tux helt enkelt ritningar och GIF-filer till
+    "$HOME".
+
+
+     
+→ XDG_DATA_HOME ←
+
+    På Linux och andra plattformar där X Desktop Group-standarderna används,
+    platsen för användarens datakataloger. Specifikt var du hittar katalogen
+    "Trash". Den används när man tar bort bilder från Rita med Tuxs
+    "Öppna"-dialog. Om den inte anges används platsen "$HOME/.local/share/Trash
+    /", om den finns tillgänglig. Om inte, raderas bilderna helt enkelt,
+    snarare än att flyttas någonstans.
+
+
+     
+→ TEMP ←
+
+    Anger den plats där tillfälliga filer kan skapas. Används endast av Rita
+    med Tux på Microsoft Windows operativsystem. Använder "userdata" om den
+    inte anges.
+
+                    ### Språkrelaterade miljövariabler ###
+
+→ LANG ←
+→ LANGUAGE ←
+→ LC_ALL ←
+→ LC_MESSAGES ←
+
+    Ange vilket språk som Rita med Tux ska använda i sitt användargränssnitt.
+    Åsidosätts av kommandoradsalternativen "--lang" och "--locale" eller deras
+    motsvarigheter i konfigurationsfilen. Miljövariabeln "LANGUAGE" används om
+    den är inställd. Om så inte är fallet används "LC_ALL" som reserv. Sedan
+    "LC_MESSAGES" och slutligen "LANG".
+
+
+     
+
+                   ### Displayrelaterade miljövariabler ###
+
+Här följer några av de miljövariabler som stöds av Simple DirectMedia Layer
+(libSDL) - som Rita med Tux använder för att visa grafik, spela upp ljud och ta
+emot mus-, tangentbords- och joystickinmatning - och som kan vara användbara
+för användare av Rita med Tux.
+→ SDL_VIDEO_ALLOW_SCREENSAVER ←
+
+    Anger om Rita med Tux ska tillåta att en skärmsläckare körs. Kan sättas
+    till '1' (true) av Rita med Tux själv genom att ange
+    kommandoradsalternativet "--allowscreensaver" eller dess motsvarighet i
+    konfigurationsfilen.
+
+
+     
+→ SDL_VIDEO_WINDOW_POS ←
+
+    Begär var Rita med Tux-fönstret ska placeras och kan användas för att ange
+    vilken skärm som ska användas för att placera Rita med Tux i fullskärm i en
+    konfiguration med flera skärmar. Om den inte är inställd, eller är inställd
+    på "nopref" (vilket betyder "ingen preferens"), bestämmer Simple
+    DirectMedia Layer (libSDL). Kan ställas in på en X,Y-koordinat (t.ex.
+    200,100) eller "center" (vilket betyder "mitt").
+
+
+     

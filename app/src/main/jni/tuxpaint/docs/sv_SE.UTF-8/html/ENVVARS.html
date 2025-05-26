@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>
+      Dokumentation av miljövariabler för Rita med Tux    </title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=utf-8">
+    <style>
+  body { font-size: large; }
+  table { font-size: large; }
+  div.screenshot-center {
+    text-align: center;
+  }
+  div.screenshot-right {
+    float: right;
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+  div.screenshot-right-after {
+    clear: both;
+  }
+  div.keeptogether { page-break-inside: avoid; }
+  section h1 { font-size: 2em; }
+  h1, h2, h3, h4, h5 { font-family: sans; }
+  h1 { color: #800; page-break-before: always; break-before: always; }
+  h2 { color: #440; page-break-after: avoid; break-after: avoid; }
+  h3 { color: #080; page-break-after: avoid; break-after: avoid; }
+  h4 { color: #008; page-break-after: avoid; break-after: avoid; }
+  h5 { color: #808; page-break-after: avoid; break-after: avoid; }
+  h1 + p { page-break-inside: avoid; }
+  h2 + p { page-break-inside: avoid; }
+  h3 + p { page-break-inside: avoid; }
+  h4 + p { page-break-inside: avoid; }
+  h5 + p { page-break-inside: avoid; }
+  dt {
+    font-size: large;
+    color: #404;
+    font-family: sans;
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+  }
+  dd, blockquote {
+    border-left: 1px solid #888;
+    padding-left: 1em;
+    border-radius: 0 0 0 1em;
+  }
+  p.note {
+    border: 1px solid #000;
+    background-color: #eee;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    display: inline-block;
+    margin-right: 3em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  section.outer {
+    padding-bottom: 1em;
+    border-bottom: 2px solid #000;
+  }
+  section.indent p,dl {
+    margin-left: 2em;
+  }
+  section.indent dl p {
+    margin-left: 0;
+  }
+  p + ul, p + ol {
+    margin-left: 2em;
+  }
+
+  @media print {
+    p {
+      orphans: 3;
+      widows: 3;
+    }
+  }
+</style>
+  </head>
+  <body bgcolor="#FFFFFF"
+        text="#000000"
+        link="#0000FF"
+        vlink="#FF0000"
+        alink="#FF00FF">
+    <center>
+      <h1>
+        <img src="../../html/images/tuxpaint-title.png"
+            width="205"
+            height="210"
+            alt="Tux Paint"><br>
+        version 0.9.35<br/>
+        Dokumentation om miljövariabler      </h1>
+
+      <p>
+        Copyright © 2021-2025 av olika bidragsgivare; se <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+        <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
+      </p>
+
+      <p>
+        maj  2, 2025      </p>
+    </center>
+
+    <hr>
+
+    <p>
+      Rita med Tux förstår ett antal miljövariabler, antingen direkt eller indirekt genom de bibliotek som den använder.    </p>
+
+    <h2>
+      Lagringsrelaterade miljövariabler    </h2>
+    <dl>
+      <dt>
+        <code>HOME</code>
+      </dt>
+
+      <dd>
+        <p>
+          Anger användarens "hemkatalog", som används för att hitta många andra filer eller kataloger. I vissa fall används den som en del av en reservplats, när andra miljövariabler (på andra ställen i den här dokumentationen) inte är inställda. Ibland kan den plats som ska användas åsidosättas genom alternativ som anges på kommandoraden eller via Rita med Tuxs konfigurationsfil. Se dokumentationen "OPTIONS" för mer information.        </p>
+
+        <p>
+          Några exempel på när "<code>$HOME</code>" används är bl.a:        </p>
+
+        <ul>
+          <li>Platsen för Rita med Tuxs konfigurationsfil</li>
+          <li>Grunden för var Rita med Tux sparar och laddar användarnas ritningar</li>
+          <li>Platsen för en användares privata samling av datafiler - stämplar, penslar etc. - (jämfört med de som finns tillgängliga i hela systemet)</li>
+        </ul>
+      </dd>
+
+      <dt>
+        <code>XDG_CONFIG_HOME</code>
+      </dt>
+
+      <dd>
+        <p>
+          På Linux och andra plattformar där X Desktop Group-standarderna används, platsen för användarens konfigurationsfiler. Specifikt var man hittar "<code>user-dirs.dirs</code>", var "<code>XDG_PICTURES_DIR</code>" kan definieras. Den används för att exportera ritningar och animerade GIF-filer. I allmänhet är den inställd på något i stil med "<code>$HOME/Pictures/</code>". Om inget anges kontrollerar Rita med Tux i katalogen "<code>$HOME/.config/</code>". Om konfigurationen inte kan hittas exporterar Rita med Tux helt enkelt ritningar och GIF-filer till "<code>$HOME</code>".        </p>
+      </dd>
+
+      <dt>
+        <code>XDG_DATA_HOME</code>
+      </dt>
+
+      <dd>
+        <p>
+          På Linux och andra plattformar där X Desktop Group-standarderna används, platsen för användarens datakataloger. Specifikt var du hittar katalogen "<code>Trash</code>". Den används när man tar bort bilder från Rita med Tuxs "Öppna"-dialog. Om den inte anges används platsen "<code>$HOME/.local/share/Trash/</code>", om den finns tillgänglig. Om inte, raderas bilderna helt enkelt, snarare än att flyttas någonstans.        </p>
+      </dd>
+
+      <dt>
+        <code>TEMP</code>
+      </dt>
+
+      <dd>
+        <p>
+          Anger den plats där tillfälliga filer kan skapas. Används endast av Rita med Tux på Microsoft Windows operativsystem. Använder "<code>userdata</code>" om den inte anges.        </p>
+    </dl>
+
+
+    <h2>
+      Språkrelaterade miljövariabler    </h2>
+    <dl>
+      <dt>
+        <code>LANG</code>
+      </dt>
+      <dt>
+        <code>LANGUAGE</code>
+      </dt>
+      <dt>
+        <code>LC_ALL</code>
+      </dt>
+      <dt>
+        <code>LC_MESSAGES</code>
+      </dt>
+
+      <dd>
+        <p>
+          Ange vilket språk som Rita med Tux ska använda i sitt användargränssnitt. Åsidosätts av kommandoradsalternativen "<code>--lang</code>" och "<code>--locale</code>" eller deras motsvarigheter i konfigurationsfilen. Miljövariabeln "<code>LANGUAGE</code>" används om den är inställd. Om så inte är fallet används "<code>LC_ALL</code>" som reserv. Sedan "<code>LC_MESSAGES</code>" och slutligen "<code>LANG</code>".        </p>
+      </dd>
+
+    </dl>
+
+    <h2>
+      Displayrelaterade miljövariabler    </h2>
+
+    <p>
+      Här följer några av de miljövariabler som stöds av Simple DirectMedia Layer (libSDL) - som Rita med Tux använder för att visa grafik, spela upp ljud och ta emot mus-, tangentbords- och joystickinmatning - och som kan vara användbara för användare av Rita med Tux.
+    <dl>
+      <dt>
+        <code>SDL_VIDEO_ALLOW_SCREENSAVER</code>
+      </dt>
+      <dd>
+        <p>
+          Anger om Rita med Tux ska tillåta att en skärmsläckare körs. Kan sättas till '1' (true) av Rita med Tux själv genom att ange kommandoradsalternativet "<code>--allowscreensaver</code>" eller dess motsvarighet i konfigurationsfilen.        </p>
+      </dd>
+      <dt>
+        <code>SDL_VIDEO_WINDOW_POS</code>
+      </dt>
+      <dd>
+        <p>
+          Begär var Rita med Tux-fönstret ska placeras och kan användas för att ange vilken skärm som ska användas för att placera Rita med Tux i fullskärm i en konfiguration med flera skärmar. Om den inte är inställd, eller är inställd på "<code>nopref</code>" (vilket betyder "ingen preferens"), bestämmer Simple DirectMedia Layer (libSDL). Kan ställas in på en <code>X,Y</code>-koordinat (t.ex. <code>200,100</code>) eller "<code>center</code>" (vilket betyder "mitt").        </p>
+      </dd>
+
+    </dl>
+
+  </body>
+</html>
+

@@ -1,0 +1,924 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>
+      Vanliga frågor om Rita med Tux    </title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=utf-8">
+    <style>
+  body { font-size: large; }
+  table { font-size: large; }
+  div.screenshot-center {
+    text-align: center;
+  }
+  div.screenshot-right {
+    float: right;
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+  div.screenshot-right-after {
+    clear: both;
+  }
+  div.keeptogether { page-break-inside: avoid; }
+  section h1 { font-size: 2em; }
+  h1, h2, h3, h4, h5 { font-family: sans; }
+  h1 { color: #800; page-break-before: always; break-before: always; }
+  h2 { color: #440; page-break-after: avoid; break-after: avoid; }
+  h3 { color: #080; page-break-after: avoid; break-after: avoid; }
+  h4 { color: #008; page-break-after: avoid; break-after: avoid; }
+  h5 { color: #808; page-break-after: avoid; break-after: avoid; }
+  h1 + p { page-break-inside: avoid; }
+  h2 + p { page-break-inside: avoid; }
+  h3 + p { page-break-inside: avoid; }
+  h4 + p { page-break-inside: avoid; }
+  h5 + p { page-break-inside: avoid; }
+  dt {
+    font-size: large;
+    color: #404;
+    font-family: sans;
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+  }
+  dd, blockquote {
+    border-left: 1px solid #888;
+    padding-left: 1em;
+    border-radius: 0 0 0 1em;
+  }
+  p.note {
+    border: 1px solid #000;
+    background-color: #eee;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    display: inline-block;
+    margin-right: 3em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  section.outer {
+    padding-bottom: 1em;
+    border-bottom: 2px solid #000;
+  }
+  section.indent p,dl {
+    margin-left: 2em;
+  }
+  section.indent dl p {
+    margin-left: 0;
+  }
+  p + ul, p + ol {
+    margin-left: 2em;
+  }
+
+  @media print {
+    p {
+      orphans: 3;
+      widows: 3;
+    }
+  }
+</style>
+  </head>
+  <body bgcolor="#FFFFFF"
+        text="#000000"
+        link="#0000FF"
+        vlink="#FF0000"
+        alink="#FF00FF">
+    <center>
+      <h1>
+        <img src="../../html/images/tuxpaint-title.png"
+            width="205"
+            height="210"
+            alt="Tux Paint"><br>
+        version 0.9.35<br/>
+        Frågor och svar      </h1>
+
+      <p>
+        Copyright © 2002-2025 av olika bidragsgivare; se <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+        <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
+      </p>
+
+      <p>
+        maj  2, 2025      </p>
+    </center>
+
+    <table border="2"
+           cellspacing="0"
+           cellpadding="2"
+           summary="Innehåll"
+           align="center"
+           style="page-break-inside: avoid;">
+      <tr>
+        <th>
+          Innehåll        </th>
+      </tr>
+
+      <tr>
+        <td>
+          <ul>
+            <li><a href="#drawing">Ritningsrelaterade</a></li>            <li><a href="#interface">Problem med gränssnittet</a></li>            <li><a href="#printing">Skriver ut</a></li>            <li><a href="#saving">Sparar</a></li>            <li><a href="#audio">Ljudproblem</a></li>            <li><a href="#fullscreen">Problem med helskärmsläget</a></li>            <li><a href="#other">Andra problem</a></li>            <li><a href="#contact">Hjälp / Kontakt</a></li>          </ul>
+        </td>
+      </tr>
+    </table>
+
+    <hr size="2"
+        noshade>
+
+    <h2>
+      <a name="drawing" id="drawing">
+        Ritningsrelaterade      </a>
+    </h2>
+
+    <dl>
+      <dt>
+        Typsnitt som jag lagt till i Rita med Tux visar bara rutor      </dt>
+
+      <dd>
+        TrueType-teckensnittet som du använder kan ha fel kodning. Om det till exempel är "custom"-kodat kan du försöka köra det genom FontForge (<a href="http://fontforge.sourceforge.net/">http://fontforge.sourceforge.net/</a>) för att konvertera det till ett ISO-8859-format. (Mejla oss om du behöver hjälp med speciella teckensnitt)      </dd>
+
+      <dt>
+        Stämpelverktyget är gråmarkerat!      </dt>
+
+      <dd>
+        <p>
+          Detta innebär att Rita med Tux antingen inte kunde hitta några frimärksbilder eller ombads att inte ladda dem.        </p>
+
+        <p>
+          Om du har installerat Rita med Tux, men inte den separata, valfria samlingen "Stamps", avsluta Rita med Tux och installera den nu. Den bör finnas tillgänglig på samma ställe som du fick huvudprogrammet Rita med Tux. <i>(Obs: Rita med Tux levereras med en mycket liten samling exempelstämplar)</i>        </p>
+
+        <p>
+          Om du inte vill installera standardsamlingen av stämplar kan du bara skapa dina egna. Se dokumentationen "Extending Rita med Tux" för mer information om hur du skapar PNG- och SVG-bildfiler, TXT-textbeskrivningsfiler, Ogg Vorbis-, MP3- eller WAV-ljudfiler och DAT-textdatafiler som utgör stämplar.        </p>
+
+        <p>
+          Slutligen, om du har installerat stämplar och tycker att de borde laddas, kontrollera att alternativet "nostamps" inte är inställt. (Antingen via ett "<code>--nostamps</code>"-alternativ på Rita med Tuxs kommandorad eller "<code>nostamps=yes</code>" i konfigurationsfilen)        </p>
+
+        <p>
+          Antingen kan du ändra/ta bort alternativet "nostamps", eller så kan du åsidosätta det med "<code>--stamps</code>" på kommandoraden eller antingen "<code>nostamps=no</code>" eller "<code>stamps=yes</code>" i en konfigurationsfil.        </p>
+      </dd>
+
+      <dt>
+        Frimärkets konturer är alltid rektanglar      </dt>
+
+      <dd>
+        <p>
+          Rita med Tux byggdes med lågkvalitativa (men snabbare) frimärksskisser.        </p>
+
+        <p>
+          För att ändra detta måste du bygga om Rita med Tux från källan. Var noga med att ta bort eller kommentera alla rader som säger:        </p>
+
+        <blockquote>
+          <p>
+            <code>#define LOW_QUALITY_STAMP_OUTLINE</code>
+          </p>
+        </blockquote>
+
+        <p>
+          i filen "tuxpaint.c" i katalogen "src".        </p>
+      </dd>
+    </dl>
+
+    <hr size="2"
+        noshade>
+
+    <h2>
+      <a name="interface" id="interface">
+        Problem med gränssnittet      </a>
+    </h2>
+
+    <dl>
+      <dt>
+        Miniatyrbilder av stämplar i frimärksväljaren ser dåliga ut      </dt>
+
+      <dd>
+        <p>
+          Rita med Tux kompilerades förmodligen med den snabbare, lägre kvalitetskoden för miniatyrbilder aktiverad. Kör kommandot: "<code>tuxpaint --verbose-version</code>" från en kommandorad. Om du bland de andra utdata ser texten: "Low Quality Thumbnails enabled", då är det detta som händer.        </p>
+
+        <p>
+          För att ändra detta måste du bygga om Rita med Tux från källan. Var noga med att ta bort eller kommentera alla rader som säger:        </p>
+
+        <blockquote>
+          <p>
+            <code>#define LOW_QUALITY_THUMBNAILS</code>
+          </p>
+        </blockquote>
+
+        <p>
+          i filen "tuxpaint.c" i katalogen "src".        </p>
+      </dd>
+
+      <dt>
+        Bilder i dialogrutan "Öppna" ser dåliga ut      </dt>
+
+      <dd>
+        "Miniatyrbilder av låg kvalitet" är förmodligen aktiverat. Se vidare: "Miniatyrbilderna i frimärksväljaren ser dåliga ut", ovan.      </dd>
+
+      <dt>
+        All text är skriven med versaler!      </dt>
+
+      <dd>
+        <p>
+          Alternativet "versaler" är aktiverat.        </p>
+
+        <p>
+           Antingen kan du ändra/ta bort alternativet "uppercase", eller så kan du åsidosätta det med "<code>--mixedcase</code>" på kommandoraden eller antingen "<code>uppercase=no</code>" eller "<code>mixedcase=yes</code>" i en konfigurationsfil.      </dd>
+
+      <dt>
+        Rita med Tux är på ett annat språk      </dt>
+
+      <dd>
+        Kontrollera att din språkinställning är korrekt. Se "Rita med Tux vill inte byta till mitt språk" nedan.      </dd>
+
+      <dt>
+        Rita med Tux vill inte byta till mitt språk      </dt>
+
+      <dd>
+        <ul>
+          <li>
+            <i>Linux- och Unix-användare: Kontrollera att språkversionen är tillgänglig</i>
+            <p>
+              Kontrollera att det önskade språket finns tillgängligt. Kontrollera din "/etc/locale.gen"-fil. Se "Options Documentation" för de lokala språk som Rita med Tux använder (särskilt när du använder alternativet "<code>--lang</code>").            </p>
+
+            <p>
+              Observera: Användare av Debian och dess derivat (t.ex. Ubuntu) kan helt enkelt köra "<code>dpkg-reconfigure locales</code>" om locales hanteras av "dpkg".            </p>
+          </li>
+
+          <li>Om du använder kommandoradsalternativet "<code>--lang</code>"            <p>
+              Försök att använda kommandoradsalternativet "<code>--locale</code>" eller ditt operativsystems lokala inställningar (t.ex. miljövariabeln "<code>$LANG</code>") och skicka ett e-postmeddelande till oss om dina problem.            </p>
+          </li>
+
+          <li>Om du använder kommandoradsalternativet "<code>--locale</code>"            <p>
+              Om detta inte fungerar, vänligen skicka ett e-postmeddelande till oss om ditt problem.            </p>
+          </li>
+
+          <li>Om du försöker använda ditt operativsystems locale            <p>
+              Om detta inte fungerar, vänligen skicka ett e-postmeddelande till oss om ditt problem.            </p>
+          </li>
+
+          <li>Se till att du har det nödvändiga teckensnittet            <p>
+              Vissa översättningar kräver ett eget teckensnitt. Kinesiska och koreanska, till exempel, kräver att TrueType-teckensnitt för kinesiska respektive koreanska installeras och placeras på rätt plats.            </p>
+
+            <p>
+              Lämpliga teckensnitt för sådana platser kan laddas ner från Rita med Tux-webbplatsen:            </p>
+
+            <blockquote>
+              <p>
+                <a href=
+                "https://tuxpaint.org/download/fonts/">https://tuxpaint.org/download/fonts/</a>
+              </p>
+            </blockquote>
+          </li>
+        </ul>
+      </dd>
+    </dl>
+
+    <hr size="2"
+        noshade>
+
+    <h2>
+      <a name="printing" id="printing">
+        Skriver ut      </a>
+    </h2>
+
+    <dl>
+      <dt>
+        Rita med Tux skriver inte ut, ger ett felmeddelande eller skriver ut skräp (Unix/Linux)      </dt>
+
+      <dd>
+        <p>
+          Rita med Tux skriver ut genom att skapa en PostScript-återgivning av bilden och skicka den till ett externt kommando. Som standard är detta kommando utskriftsverktyget "<code>lpr</code>".        </p>
+
+        <p>
+          Om det programmet inte är tillgängligt (t.ex. om du använder CUPS, Common Unix Printing System, och inte har "<code>cups-lpr</code>" installerat) måste du ange ett lämpligt kommando med hjälp av alternativet "<code>printcommand</code>" i Rita med Tuxs konfigurationsfil. (Se "Dokumentation av alternativ")        </p>
+      </dd>
+
+      <dt>
+        Jag får meddelandet "Du kan inte skriva ut än!" när jag går för att skriva ut      </dt>
+
+      <dd>
+        <p>
+          Alternativet "utskriftsfördröjning" är aktiverat. Du kan bara skriva ut en gång var <i>X</i>:e sekund.        </p>
+
+        <p>
+          Om du kör Rita med Tux från en kommandorad, se till att du inte ger den ett "<code>--printdelay=...</code>"-alternativ.        </p>
+
+        <p>
+          Om du kör Rita med Tux genom att dubbelklicka på en ikon ska du kontrollera ikonens egenskaper för att se om "<code>--printdelay=...</code>" anges som ett kommandoradsargument.        </p>
+
+        <p>
+          Om ett "<code>--printdelay=...</code>"-alternativ inte skickas på kommandoraden, kontrollera Rita med Tuxs konfigurationsfil för en rad som läser: "<code>printdelay=...</code>".        </p>
+
+        <p>
+          Ta antingen bort raden, sätt fördröjningsvärdet till 0 (ingen fördröjning) eller minska fördröjningen till ett värde som du föredrar. (Se "Dokumentation av alternativ")        </p>
+
+        <p>
+          Eller så kan du helt enkelt köra Rita med Tux med kommandoradsargumentet: "<code>--printdelay=0</code>", vilket åsidosätter konfigurationsfilens inställning och tillåter obegränsad utskrift. (Du behöver inte vänta mellan utskrifterna.)        </p>
+      </dd>
+
+      <dt>
+        Jag kan helt enkelt inte skriva ut! Knappen är gråtonad!      </dt>
+
+      <dd>
+        <p>
+          Alternativet "ingen utskrift" är aktiverat.        </p>
+
+        <p>
+          Om du kör Rita med Tux från en kommandorad, se till att du inte ger den ett "<code>--noprint</code>"-alternativ.        </p>
+
+        <p>
+          Om du kör Rita med Tux genom att dubbelklicka på en ikon ska du kontrollera ikonens egenskaper för att se om "<code>--noprint</code>" anges som ett kommandoradsargument.        </p>
+
+        <p>
+          Om ett "<code>--noprint</code>"-alternativ inte skickas på kommandoraden, kontrollera Rita med Tuxs konfigurationsfil för en rad som läser: "<code>noprint=yes</code>".        </p>
+
+        <p>
+          Ta antingen bort den raden, eller kör helt enkelt Rita med Tux med kommandoradsargumentet: "<code>--print</code>", vilket kommer att åsidosätta konfigurationsfilens inställning.        </p>
+
+        <p>
+          Eller använd Konfigurera Rita med Tux och se till att "Tillåt utskrift" (under "Skriver ut") är markerad.        </p>
+      </dd>
+    </dl>
+
+    <hr size="2"
+        noshade>
+
+    <h2>
+      <a name="saving" id="saving">
+        Sparar      </a>
+    </h2>
+
+    <dl>
+      <dt>
+        Var sparar Rita med Tux mina ritningar?      </dt>
+
+      <dd>
+        <p>
+          Om du inte har bett Rita med Tux att spara på en viss plats (med alternativet "savedir"), sparar Rita med Tux på en standardplats på din lokala enhet:        </p>
+
+        <dl>
+  <dt>
+    <cite>Windows Windows 8, Windows 10, Windows 11</cite>
+  </dt>
+
+  <dd>
+    I användarens mapp "AppData":<br> t.ex, <nobr>"<code style='background: #EEE;'>C:\Users\<i>användarnamn</i>\AppData\Roaming\TuxPaint\saved\</code>"</nobr>    <br/>
+    <br/>
+    (Obs: Mappen "<nobr><code style='background: #EEE;'>AppData</code></nobr>" är dold (inte synlig) som standard. Du kan ange sökvägen manuellt i platsfältet i din filbläddrare (t.ex. <cite>File Explorer</cite>)    <br/>
+    <br/>
+    Du kan använda variabeln <nobr><code style='background: #EEE;'>%APPDATA%</code></nobr> som en förkortning, dvs. <nobr>"<code style='background: #EEE;'>%APPDATA%\Tuxpaint\Saved</code>"</nobr>.    <br/>
+    <br/>
+    Du kan använda tangentkombinationen <b><code>[&#8862; (Windows)]</code></b> + <b><code>[R]</code></b> för att få fram kommandofönstret <cite>Kör</cite> och sedan skriva in sökvägen och trycka på <b><code>[Enter / Return]</code></b>.  </dd>
+
+  <dt>
+    <cite>macOS</cite>
+  </dt>
+
+  <dd>
+    I användarens mapp "Application Support":<br> t.ex, <nobr>"<code style='background: #EEE;'>/Användare/<i>användarnamn</i>/Bibliotek/Applikationsstöd/TuxPaint/saved/</code>"</nobr>  </dd>
+
+  <dt>
+    <cite>Linux / Unix</cite>
+  </dt>
+
+  <dd>
+    I användarens mapp "hemkatalog":<br> t.ex, <nobr>"<code style='background: #EEE;'>/home/<i>användarnamn</i>/.tuxpaint/saved/</code>"</nobr>    <br/>
+    <br/>
+    (Obs: Mappen ".tuxpaint" är dold (inte synlig) som standard. Du kan ange sökvägen manuellt i platsfältet i din filbläddrare (t.ex. <cite>GNOME-filer</cite> eller <cite>Dolphin</cite>)    <br/>
+    <br/>
+    Du kan använda variabeln <nobr><code style='background: #EEE;'>$HOME</code></nobr> som en förkortning, dvs. <nobr>"<code style='background: #EEE;'>$HOME/.tuxpaint/saved</code>"</nobr>.  </dd>
+
+  <dt>
+    <cite>Haiku</cite>
+  </dt>
+
+  <dd>
+    I användarens mapp "settings":<br> t.ex, <nobr>"<code style='background: #EEE;'>/boot/home/config/settings/TuxPaint/saved/</code>"</nobr>  </dd>
+</dl>
+
+        <p>
+          Bilderna lagras som PNG-bitmappar, som de flesta moderna program bör kunna läsa in (bildredigerare, ordbehandlare, webbläsare etc.)        </p>
+      </dd>
+
+      <dt>
+        Rita med Tux sparar alltid över min gamla bild      </dt>
+
+      <dd>
+        <p>
+          Alternativet "save over" är aktiverat. (Detta inaktiverar prompten som visas när du klickar på "Spara")        </p>
+
+        <p>
+          Om du kör Rita med Tux från en kommandorad, se till att du inte ger den ett "<code>--saveover</code>"-alternativ.        </p>
+
+        <p>
+          Om du kör Rita med Tux genom att dubbelklicka på en ikon ska du kontrollera ikonens egenskaper för att se om "<code>--saveover</code>" anges som ett kommandoradsargument.        </p>
+
+        <p>
+          Om ett "--saveover"-alternativ inte skickas på kommandoraden, kontrollera Rita med Tuxs konfigurationsfil för en rad som läser: "saveover=yes".        </p>
+
+        <p>
+          Ta antingen bort den raden, eller kör helt enkelt Rita med Tux med kommandoradsargumentet: "<code>--saveoverask</code>", vilket kommer att åsidosätta konfigurationsfilens inställning.        </p>
+
+        <p>
+          Eller använd Konfigurera Rita med Tux och se till att "Fråga innan du skriver över" (under "Sparar") är markerad.        </p>
+
+        <p>
+          Se även "Rita med Tux sparar alltid en ny bild!" nedan.        </p>
+      </dd>
+
+      <dt>
+        Rita med Tux sparar alltid en ny bild!      </dt>
+
+      <dd>
+        <p>
+          Alternativet "never save over" är aktiverat. (Detta inaktiverar prompten som visas när du klickar på "Spara")        </p>
+
+        <p>
+          Om du kör Rita med Tux från en kommandorad, se till att du inte ger den ett "<code>--saveovernew</code>"-alternativ.        </p>
+
+        <p>
+          Om du kör Rita med Tux genom att dubbelklicka på en ikon ska du kontrollera ikonens egenskaper för att se om "<code>--saveovernew</code>" anges som ett kommandoradsargument.        </p>
+
+        <p>
+          Om ett "<code>--saveovernew</code>"-alternativ inte skickas på kommandoraden, kontrollera Rita med Tuxs konfigurationsfil för en rad som läser: "<code>saveover=new</code>".        </p>
+
+        <p>
+          Ta antingen bort den raden, eller kör helt enkelt Rita med Tux med kommandoradsargumentet: "<code>--saveoverask</code>", vilket kommer att åsidosätta konfigurationsfilens inställning.        </p>
+
+        <p>
+          Eller använd Konfigurera Rita med Tux och se till att "Fråga innan du skriver över" (under "Sparar") är markerad.        </p>
+
+        <p>
+          Se även "Rita med Tux sparar alltid över min gamla bild!", ovan.        </p>
+      </dd>
+    </dl>
+
+    <hr size="2"
+        noshade>
+
+    <h2>
+      <a name="audio" id="audio">
+        Ljudproblem      </a>
+    </h2>
+
+    <dl>
+      <dt>
+        Det finns inget ljud!      </dt>
+
+      <dd>
+        <ul>
+          <li>
+            <em>Kontrollera först det uppenbara:</em>
+            <ul>
+              <li>Är dina högtalare anslutna och påslagna?</li>
+
+              <li>Är volymen uppskruvad på högtalarna?</li>
+
+              <li>Är volymen uppskruvad i operativsystemets "mixerbord"?</li>
+
+              <li>Är du säker på att du använder en dator med ett ljudkort?</li>
+
+              <li>Körs några andra program som använder ljud? (De kan "blockera" Rita med Tux från att få tillgång till din ljudenhet)</li>
+
+              <li>(Unix/Linux) Använder du ett ljudsystem som t.ex. aRts, ESD eller GStreamer? Om så är fallet kan du försöka ställa in miljövariabeln "SDL_AUDIODRIVER" innan du kör Rita med Tux (t.ex. "<code>export SDL_AUDIODRIVER=arts</code>"). Du kan också köra Rita med Tux via systemets router (t.ex. köra "<code>artsdsp tuxpaint</code>" eller "<code>esddsp tuxpaint</code>" i stället för bara "<code>tuxpaint</code>").              </li>
+            </ul>
+          </li>
+
+          <li>
+            <em>Är ljudet inaktiverat i Rita med Tux?</em>
+            <p>
+              Om ljudet verkar fungera på annat sätt (och du är säker på att inget annat program "blockerar" ljudenheten), kan det hända att Rita med Tux körs med alternativet "inget ljud".            </p>
+
+            <p>
+              Om du kör Rita med Tux från en kommandorad, se till att du inte ger den ett "--nosound"-alternativ.            </p>
+
+            <p>
+              Om du kör Rita med Tux genom att dubbelklicka på en ikon ska du kontrollera ikonens egenskaper för att se om "--nosound" anges som ett kommandoradsargument.            </p>
+
+            Om ett "<code>--nosound</code>"-alternativ inte skickas på kommandoraden, kontrollera Rita med Tuxs konfigurationsfil för en rad som läser: "<code>nosound=yes</code>".            </p>
+
+            <p>
+              Ta antingen bort den raden, eller kör helt enkelt Rita med Tux med kommandoradsargumentet: "<code>--sound</code>", vilket kommer att åsidosätta konfigurationsfilens inställning.            </p>
+
+            <p>
+              Eller så kan du helt enkelt köra Rita med Tux med kommandoradsargumentet: "Aktivera ljudeffekter", vilket åsidosätter konfigurationsfilens inställning och tillåter obegränsad utskrift. (Du behöver inte vänta mellan utskrifterna.)            </p>
+          </li>
+
+          <li>
+            <em>Var ljud tillfälligt funktionshindrade?</em>
+            <p>
+              Även om ljuden är aktiverade i Rita med Tux går det att tillfälligt inaktivera och återaktivera dem med hjälp av tangentsekvensen <b>[Alt]</b> + <b>[S]</b>. Prova att trycka på dessa tangenter för att se om ljuden börjar fungera igen.            </p>
+          </li>
+
+          <li>
+            <em>Byggdes Rita med Tux utan ljudstöd?</em>
+            <p>
+              Rita med Tux kan ha kompilerats med ljudstödet inaktiverat. För att testa om ljudstöd var aktiverat när Rita med Tux kompilerades, kör Rita med Tux från en kommandorad, så här:            </p>
+
+            <blockquote>
+              <p>
+                <code>tuxpaint --verbose-version</code>
+              </p>
+            </blockquote>
+
+            <p>
+              Om du bland den övriga informationen ser "Sound disabled", så har den version av Rita med Tux som du kör ljudet inaktiverat. Kompilera om Rita med Tux och se till att INTE bygga "nosound"-målet. (dvs. kör inte "<code>make nosound</code>") Se till att SDL_mixer-biblioteket och dess utvecklingsheaders finns tillgängliga!            </p>
+          </li>
+        </ul>
+      </dd>
+
+      <dt>
+        Rita med Tux gör för mycket ljud! Kan jag stänga av dem?      </dt>
+
+      <dd>
+        <p>
+          Ja, det finns ett antal sätt att inaktivera ljud i Rita med Tux:        </p>
+
+        <ul>
+          <li>Tryck på <b>[Alt]</b> + <b>[S]</b> i Rita med Tux för att tillfälligt avaktivera ljud. (Tryck på samma tangentsekvens igen för att aktivera ljudet igen)          </li>
+
+          <li>Kör Rita med Tux med alternativet "inget ljud":            <ul>
+              <li>Kör "<code>tuxpaint --nosound</code>" från kommandoraden, en genväg eller en skrivbordsikon.              </li>
+
+              <li>Redigera Rita med Tuxs konfigurationsfil (se "Dokumentation av alternativ" för mer information) och lägg till en rad som innehåller "<code>nosound=yes</code>".              </li>
+
+              <li>
+                  Eller använd Konfigurera Rita med Tux och se till att "Aktivera ljudeffekter" (under "Video &amp; Ljud") är inte markerad.              </li>
+
+              <li>
+                  Alternativt kan du kompilera Rita med Tux på nytt med ljudstödet inaktiverat. (Se ovan och "Install"-dokumentationen)              </li>
+            </ul>
+          </li>
+        </ul>
+      </dd>
+
+      <dt>
+        Stereopaneringen av ljudeffekter är besvärande; kan ljudeffekter vara monofoniska?      </dt>
+
+      <dd>
+        <p>
+          Kör Rita med Tux med alternativet "ingen stereo":        </p>
+
+        <ul>
+          <li>Kör "<code>tuxpaint --nostereo</code>" från kommandoraden, en genväg eller en skrivbordsikon.          </li>
+
+          <li>Redigera Rita med Tuxs konfigurationsfil (se "Dokumentation av alternativ" för mer information) och lägg till en rad som innehåller "<code>nostereo=yes</code>".          </li>
+
+          <li>
+              Eller använd Konfigurera Rita med Tux och se till att "Aktivera stereoeffekter" (under "Video &amp; Ljud") är inte markerad.          </li>
+        </ul>
+      </dd>
+
+      <dt>
+        Ljudeffekterna låter konstiga      </dt>
+
+      <dd>
+        <p>
+          Detta kan ha att göra med hur SDL och SDL_mixer initialiserades. (Den valda buffertstorleken.)        </p>
+
+        <p>
+          Skicka oss ett e-postmeddelande med information om ditt datorsystem. (Operativsystem och version, ljudkort, vilken version av Rita med Tux du kör (kör "<code>tuxpaint --version</code>" för att verifiera), och så vidare)        </p>
+      </dd>
+    </dl>
+
+    <hr size="2"
+        noshade>
+
+    <h2>
+      <a name="fullscreen" id="fullscreen">
+        Problem med helskärmsläget      </a>
+    </h2>
+
+    <dl>
+      <dt>
+        När jag kör Rita med Tux i helskärm och <b>[Alt]</b> + <b>[Flik]</b> ut, blir fönstret svart!      </dt>
+
+      <dd>
+        Detta är tydligen en bugg i SDL-biblioteket. Jag ber om ursäkt för detta.      </dd>
+
+      <dt>
+        När jag kör Rita med Tux i helskärm har den stora ramar runt sig      </dt>
+
+      <dd>
+        <p>
+          Linux-användare - Din X-Window-server är förmodligen inte inställd med möjlighet att växla till önskad upplösning: 800 × 600. (eller vilken upplösning du än har ställt in Rita med Tux att köra på.) (Detta görs vanligtvis manuellt under X-Window-servern genom att trycka på <span style="white-space: nowrap;"><b><code>[Kontroll]</code></b> + <b><code>[Alt]</code></b> + <b><code>[<span style="white-space: nowrap;">Keypad Plus (+)</span>]</code></b></span> och <span style="white-space: nowrap;"><b><code>[Kontroll]</code></b> + <b><code>[Alt]</code></b> + <b><code>[<span style="white-space: nowrap;">Keypad Minus (-)</span>]</code></b></span>)        </p>
+
+        <p>
+          För att detta ska fungera måste din bildskärm stödja den upplösningen och du måste ha den listad i din X-serverkonfiguration.        </p>
+
+        <p>
+          Kontrollera underavsnittet "Display" i avsnittet "Screen" i konfigurationsfilen för XFree86 eller X.org (vanligtvis "<code>/etc/X11/XF86Config-4</code>" eller "<code>/etc/X11/XF86Config</code>", beroende på vilken version av XFree86 du använder; 3.x respektive 4.x, eller "<code>/etc/X11/xorg.conf</code>" för X.org).        </p>
+
+        <p>
+          Lägg till<code>"800x600</code>" (eller den eller de upplösningar du vill ha) på lämplig rad i "Modes". (t.ex. i underavsnittet "Display" som innehåller 24-bitars färgdjup ("Depth 24"), vilket är vad Rita med Tux försöker använda)        </p>
+
+        <blockquote>
+          <p>
+            <code>Modes "1280x1024" "1024x768" "800x600" "640x480"</code>
+          </p>
+        </blockquote>
+
+        <p>
+          Observera att vissa Linux-distributioner har verktyg som kan göra dessa ändringar åt dig. Debian-användare kan t.ex. köra kommandot "<code>dpkg-reconfigure xserver-xfree86</code>" som root.        </p>
+      </dd>
+
+      <dt>
+        Rita med Tux körs hela tiden i helskärmsläge - jag vill ha det i fönsterläge!      </dt>
+
+      <dd>
+        <p>
+          Alternativet "fullskärm" är inställt.        </p>
+
+        <p>
+          Om du kör Rita med Tux från en kommandorad, se till att du inte ger den ett "<code>--fullscreen=...</code>"-alternativ.        </p>
+
+        <p>
+          Om du kör Rita med Tux genom att dubbelklicka på en ikon ska du kontrollera ikonens egenskaper för att se om "<code>--fullscreen=yes</code>" eller "<code>--fullscreen=native</code>" anges som ett kommandoradsargument.        </p>
+
+        <p>
+          Om alternativen "<code>--fullscreen=yes</code>" eller "<code>--fullscreen=native</code>" inte skickas på kommandoraden, kontrollera Rita med Tuxs konfigurationsfil för en rad som läser: "<code>fullscreen=yes</code>" eller "<code>fullscreen=native</code>".        </p>
+
+        <p>
+          Ta antingen bort den raden, eller kör helt enkelt Rita med Tux med kommandoradsargumentet: "<code>--windowed</code>" eller "<code>--fullscreen=no</code>", vilket kommer att åsidosätta konfigurationsfilens inställning.        </p>
+
+        <p>
+          Eller använd Konfigurera Rita med Tux och se till att "Helskärm" (under "Video &amp; Ljud") är inte markerad.        </p>
+      </dd>
+
+      <dt>
+        Hur kommer jag åt andra program när Rita med Tux körs i helskärm?      </dt>
+
+      <dd>
+        <ul>
+          <li>
+            Windows- och Linux-användare kan använda tangentkombinationen <b><code>[Alt]</code></b> + <b><code>[Flik]</code></b> för att växla mellan olika program.          </li>
+          <li>
+            macOS-användare, växla till andra program med <b><code>[Kontroll]</code></b> + <b><code>[Vänsterpil]</code></b> och sedan tillbaka till Rita med Tux med <b><code>[Kontroll]</code></b> + <b><code>[Pil höger]</code></b>.          </li>
+        </ul>
+      </dd>
+    </dl>
+
+    <hr size="2"
+        noshade>
+
+    <h2>
+      <a name="other" id="other">
+        Andra problem      </a>
+    </h2>
+
+    <dl>
+      <dt>
+        Rita med Tux går inte att köra      </dt>
+
+      <dd>
+        <p>
+          Om Rita med Tux avbryts med meddelandet: "You're already running a copy of Tux Paint!", betyder det att programmet har startats under de senaste 30 sekunderna. (På Unix/Linux skulle detta meddelande visas i en terminalkonsol om du körde Rita med Tux från en kommandorad. I Windows visas meddelandet i en fil med namnet "<code>stdout.txt</code>" i samma mapp där <code>TuxPaint.exe</code> finns (t.ex. i <nobr>"<code style='background: #EEE;'>C:\Programfiler\TuxPaint\</code>"</nobr>).        </p>
+
+        <p>
+          En lockfile (t.ex. <nobr>"<code style='background: #EEE;'>/home/<i>användarnamn</i>/.tuxpaint/lockfile.dat</code>"</nobr> på Linux och Unix, <nobr>"<code style='background: #EEE;'>userdata\lockfile.dat</code>"</nobr> på Windows) används för att se till att Rita med Tux inte körs för många gånger samtidigt (t.ex. på grund av att ett barn otåligt klickar på dess ikon mer än en gång).        </p>
+
+        <p>
+          Även om lockfilen finns innehåller den den "tid" då Rita med Tux senast kördes. Om det har gått mer än 30 sekunder bör Rita med Tux fungera bra och helt enkelt uppdatera lockfilen med aktuell tid.        </p>
+
+        <p>
+          Om flera användare delar katalogen där den här filen lagras (t.ex. på en delad nätverksenhet) måste du inaktivera den här funktionen.        </p>
+
+        <p>
+          Om du vill inaktivera låsfilen lägger du till argumentet "<code>--nolockfile</code>" på Rita med Tuxs kommandorad eller "<code>nolockfile=yes</code>" i konfigurationsfilen.        </p>
+      </dd>
+
+      <dt>
+        Rita med Tux startar mycket långsamt      </dt>
+
+      <dd>
+        <p>
+          Första gången Rita med Tux startas (för en viss användare) kan det ta en minut eller mer att svara. Det teckensnittssystem som används av Rita med Tux (FontConfig, via Pango) skapar en "cache" med information om teckensnitten på ditt system. Efterföljande starter av Rita med Tux bör vara snabba.        </p>
+
+        <p>
+          Medan teckensnittscachen genereras bakom kulisserna bör Rita med Tux förbli interaktiv (visa en animerad "vänta"-animering) medan denna process körs.        </p>
+
+        <p>
+          Om denna fördröjning kvarstår eller återkommer kan det bero på att cacheminnet raderas - t.ex. i en miljö (t.ex. en datorsal i en skola) där systemet återställs till standardläget när användaren slutar använda programmet. Vissa versioner av Rita med Tux levereras med en fil, <nobr>"<code style='background: #EEE;'>fonts.conf</code>"</nobr> <a href="https://fontconfig.pages.freedesktop.org/fontconfig/fontconfig-user.html">(dokumenterad på freedesktop.org)</a>, som kan modifieras så att FontConfig lagrar filen någon annanstans, t.ex:          <blockquote>
+            <code>&lt;cachedir&gt;C:\Documents and Settings\All Users\Application Data\fontconfig\cache&lt;/cachedir&gt;</code>
+          </blockquote>
+        </p>
+      </dd>
+
+      <dt>
+        Jag kan inte sluta med Rita med Tux      </dt>
+
+      <dd>
+        <p>
+          Alternativet "no quit" är inställt. Detta inaktiverar "Avsluta"-knappen i Rita med Tuxs verktygsfält (den blir grå) och förhindrar att Rita med Tux avslutas med tangenten <b>[Avsluta meny]</b>.        </p>
+
+        <p>
+          Om Rita med Tux inte är i helskärmsläge klickar du bara på knappen för att stänga fönstret i Rita med Tuxs titelrad (dvs. "&#9447;" längst upp till höger)        </p>
+
+        <p>
+          Om Rita med Tux är i fullskärmsläge måste du använda <b>[Skift]</b> + <b>[Kontroll]</b> + <b>[Avsluta meny]</b>-sekvensen på tangentbordet för att avsluta Rita med Tux.        </p>
+
+        <p>
+          (Obs: med eller utan "no quit" inställt kan du alltid använda <b>[Alt]</b> + <b>[F4]</b>-kombinationen på tangentbordet för att avsluta Rita med Tux)        </p>
+      </dd>
+
+      <dt>
+        Jag vill inte att "no quit"-läget ska vara aktiverat!      </dt>
+
+      <dd>
+        <p>
+          Om du kör Rita med Tux från en kommandorad, se till att du inte ger den ett "--noquit"-alternativ.        </p>
+
+        <p>
+          Om du kör Rita med Tux genom att dubbelklicka på en ikon ska du kontrollera ikonens egenskaper för att se om "<code>--noquit</code>" anges som ett kommandoradsargument.        </p>
+
+        <p>
+          Om ett "<code>--noquit</code>"-alternativ inte skickas på kommandoraden, kontrollera Rita med Tuxs konfigurationsfil för en rad som läser: "<code>noquit=yes</code>".        </p>
+
+        <p>
+          Ta antingen bort den raden, eller kör helt enkelt Rita med Tux med kommandoradsargumentet: "<code>--quit</code>", vilket kommer att åsidosätta konfigurationsfilens inställning.        </p>
+
+        <p>
+          Eller använd Konfigurera Rita med Tux och se till att "Inaktivera Quit-knappen och [Escape]-tangenten" (under "Förenkling") är inte markerad.        </p>
+      </dd>
+
+      <dt>
+        Rita med Tux fortsätter att skriva konstiga meddelanden till skärmen / till en textfil      </dt>
+
+      <dd>
+        <p>
+          Några få meddelanden är normalt, men om Rita med Tux är extremt utförlig (som att lista namnet på varje stämpelbild som den hittar när den laddar dem), så har den förmodligen kompilerats med felsökningsutmatning aktiverad.        </p>
+
+        <p>
+          För att ändra detta måste du bygga om Rita med Tux från källan. Var noga med att ta bort eller kommentera alla rader som säger:        </p>
+
+        <blockquote>
+          <p>
+            <code>#define DEBUG</code>
+          </p>
+        </blockquote>
+
+        <p>
+          i filen "tuxpaint.c" i katalogen "src".        </p>
+      </dd>
+
+      <dt>
+        Rita med Tux använder alternativ som jag inte angav!      </dt>
+
+      <dd>
+        <p>
+          Som standard tittar Rita med Tux först i konfigurationsfilerna efter alternativ.        </p>
+
+        <ul>
+
+          <li>
+            <cite>Windows</cite>
+            <p>
+              Under Windows undersöks först den systemomfattande konfigurationsfilen, som finns här:            </p>
+
+            <blockquote>
+              <p>
+                <nobr><code style='background: #EEE;'>C:\Programfiler\TuxPaint\tuxpaint.cfg</code></nobr>              </p>
+            </blockquote>
+
+            <p>
+              Därefter undersöks användarens personliga konfigurationsfil:            </p>
+
+            <blockquote>
+              <p>
+                <nobr><code style='background: #EEE;'>C:\Users\<i>användarnamn</i>\AppData\Roaming\TuxPaint\tuxpaint.cfg</code></nobr>              </p>
+            </blockquote>
+
+            <p>
+              Slutligen används alla alternativ som skickas som kommandoradsargument.            </p>
+          </li>
+
+          <li>
+            <cite>macOS</cite>
+            <p>
+              Under macOS undersöks först den systemomfattande konfigurationsfilen, som finns här:            </p>
+
+            <blockquote>
+              <p>
+                <nobr><code style='background: #EEE;'>/Bibliotek/Applikationsstöd/TuxPaint/tuxpaint.cfg</code></nobr>              </p>
+            </blockquote>
+
+            <p>
+              Därefter undersöks användarens personliga konfigurationsfil:            </p>
+
+            <blockquote>
+              <p>
+                <nobr><code style='background: #EEE;'>/Användare/<i>användarnamn</i>/Bibliotek/Applikationsstöd/TuxPaint/tuxpaint.cfg</code></nobr>              </p>
+            </blockquote>
+
+            <p>
+              Slutligen används alla alternativ som skickas som kommandoradsargument.            </p>
+          </li>
+
+          <li>
+            <cite>Linux / Unix</cite>
+            <p>
+              Under Unix och Linux undersöker den först den systemomfattande konfigurationsfilen, som finns här:            </p>
+
+            <blockquote>
+              <p>
+                <nobr><code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code></nobr>              </p>
+            </blockquote>
+
+            <p>
+              Därefter undersöks användarens personliga konfigurationsfil:            </p>
+
+            <blockquote>
+              <p>
+                <nobr><code style='background: #EEE;'>/home/<i>användarnamn</i>/.tuxpaintrc</code></nobr>              </p>
+            </blockquote>
+
+            <p>
+              Slutligen används alla alternativ som skickas som kommandoradsargument.            </p>
+          </li>
+
+          <li>
+            <cite>Haiku</cite>
+            <p>
+              Under Haiku undersöker Rita med Tux först konfigurationsfilen:            </p>
+
+            <blockquote>
+              <p>
+                <nobr><code style='background: #EEE;'>/boot/home/config/settings/TuxPaint/tuxpaint.conf</code></nobr>              </p>
+            </blockquote>
+
+            <p>
+              Slutligen används alla alternativ som skickas som kommandoradsargument.            </p>
+          </li>
+        </ul>
+
+        <p>
+          Det innebär att om något är inställt i en konfigurationsfil som du inte vill ska vara inställt, måste du antingen ändra konfigurationsfilen (om du kan) eller åsidosätta alternativet på kommandoraden.        </p>
+
+        <p>
+          Till exempel, på Linux och Unix, om <nobr>"<code style='background: #EEE;'>/etc/tuxpaint/tuxpaint.conf</code>"</nobr> innehåller detta alternativ för att inaktivera ljud ...        </p>
+
+        <blockquote>
+          <p>
+            <code>nosound=yes</code>
+          </p>
+        </blockquote>
+
+        <p>
+          ...då kan du återaktivera ljudet genom att antingen lägga till detta alternativ i din egen <nobr>"<code style='background: #EEE;'>/home/<i>användarnamn</i>/.tuxpaintrc</code>"</nobr>-fil:        </p>
+
+        <blockquote>
+          <p>
+            <code>sound=yes</code>
+          </p>
+        </blockquote>
+
+        <p>
+          ...eller genom att använda detta kommandoradsargument:        </p>
+
+        <blockquote>
+          <p>
+            <code>--sound</code>
+          </p>
+        </blockquote>
+
+        <p>
+          På plattformar där Rita med Tux erbjuder en systemomfattande konfigurationsfil kan inställningarna i den filen hoppas över (så att endast användarkonfigurationsfilen och andra kommandoradsargument används) genom att inkludera följande kommandoradsargument:        </p>
+
+        <blockquote>
+          <p>
+            <code>--nosysconfig</code>
+          </p>
+        </blockquote>
+      </dd>
+
+      <dt>
+        Jag behöver distribuera Rita med Tux på många Windows-system samtidigt      </dt>
+
+      <dd>
+        Installationsprogrammen för både Rita med Tux (plus Konfigurera Rita med Tux) (<code>tuxpaint-X.Y.Z-windows-ARCH-installer.exe</code>) och Rita med Tux Stamps (<code>tuxpaint-stamps-YYYY.MM.DD-windows-installer.exe</code>) accepterar kommandoradsalternativen "<code>/SILENT</code>" ("tyst") eller "<code>/VERYSILENT</code>" ("mycket tyst") som kan användas för att installera och avinstallera deras komponenter utan att använda ett interaktivt installationsfönster.  Detta kan vara användbart för att automatisera installationen på en samling datorer, t.ex. med hjälp av Microsoft <cite>Intune</cite> molnbaserad lösning för slutpunktshantering (se <a href="https://learn.microsoft.com/mem/intune/">https://learn.microsoft.com/mem/intune/</a>).      </dd>
+
+    </dl>
+
+    <hr size="2"
+        noshade>
+
+    <h2>
+      <a name="contact" id="contact">
+        Hjälp / Kontakt      </a>
+    </h2>
+
+    <p>
+      Några frågor som du inte ser besvarade? Vänligen låt oss veta! Du kan prenumerera och posta till vår "tuxpaint-users"-mailinglista:    </p>
+
+    <blockquote>
+      <p>
+        <a href="https://tuxpaint.org/lists/">https://tuxpaint.org/lists/</a>
+      </p>
+    </blockquote>
+
+    <p>
+      Eller så kan du kontakta huvudutvecklaren Bill Kendrick direkt:    </p>
+
+    <blockquote>
+      <p>
+        <a href=
+        "mailto:bill@newbreedsoftware.com">bill@newbreedsoftware.com</a>
+      </p>
+    </blockquote>
+  </body>
+</html>

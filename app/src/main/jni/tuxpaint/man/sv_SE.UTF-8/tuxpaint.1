@@ -1,0 +1,1711 @@
+.\" tuxpaint.1 - 2025.05.26
+.TH TUXPAINT 1 "maj 26, 2025" "0.9.35" "Tux Paint"
+.SH NAMN
+tuxpaint -- "Rita med Tux", ett ritprogram för små barn.
+
+.SH SYNOPSYS
+.B tuxpaint
+[\-\-help \-\-version \-\-verbose\-version \-\-usage \-\-copying]
+
+.TP 9
+.B tuxpaint
+[\-\-fullscreen {yes|native|no}]
+.br
+[\-\-allowscreensaver]
+.br
+[\-\-\fIBREDD\fPx\fISKÄRMHÖJD\fP]
+.br
+[\-\-native]
+.br
+[\-\-orient=portrait]
+.br
+[\-\-buttonsize \fISTRL\fP | \-\-buttonsize auto]
+.br
+[\-\-startblank]
+.br
+[\-\-nosound]
+.br
+[\-\-nostereo]
+.br
+[\-\-noquit]
+.br
+[\-\-noprint]
+.br
+[\-\-printdelay=\fISEKUNDER\fP]
+.br
+[\-\-printcfg]
+.br
+[\-\-altprintalways | \-\-altprintnever]
+.br
+[\-\-papersize \fIPAPPERSSTORLEK\fP | \-\-papersize help]
+.br
+[\-\-printcommand \fIKOMMANDO\fP]
+.br
+[\-\-altprintcommand \fIKOMMANDO\fP]
+.br
+[\-\-simpleshapes]
+.br
+[\-\-uppercase]
+.br
+[\-\-grab]
+.br
+[\-\-noshortcuts]
+.br
+[\-\-nowheelmouse]
+.br
+[\-\-nobuttondistinction]
+.br
+[\-\-nofancycursors]
+.br
+[\-\-hidecursor]
+.br
+[\-\-nooutlines]
+.br
+[\-\-nostamps]
+.br
+[\-\-nostampcontrols]
+.br
+[\-\-nostamprotation]
+.br
+[\-\-nomagiccontrols]
+.br
+[\-\-nomagicsizes]
+.br
+[\-\-ungroupmagictools]
+.br
+[\-\-noshapecontrols]
+.br
+[\-\-nolabel]
+.br
+[\-\-nobrushspacing]
+.br
+[\-\-complexity=\fIbeginner\fP | \-\-complexity=\fInovice\fP]
+.br
+[\-\-notemplateexport]
+.br
+[\-\-newcolorslast]
+.br
+[\-\-mirrorstamps]
+.br
+[\-\-colorsrows=\fIRADER\fP]
+.br
+[\-\-mouse-accessibility]
+.br
+[\-\-onscreen-keyboard]
+.br
+[\-\-onscreen-keyboard-layout \fILAYOUT\fP]
+.br
+[\-\-onscreen-keyboard-disable-change]
+.br
+[\-\-joystick-dev=\fIENHET\fP]
+.br
+[\-\-joystick-dev=list]
+.br
+[\-\-joystick-slowness=\fIHASTIGHET\fP]
+.br
+[\-\-joystick-threshold=\fITRÖSKELVÄRDE\fP]
+.br
+[\-\-joystick-maxsteps=\fISTEG\fP]
+.br
+[\-\-joystick-hat-timeout=\fIMILLISEKUNDER\fP]
+.br
+[\-\-joystick-hat-slowness=\fIHASTIGHET\fP]
+.br
+[\-\-joystick-btn-escape=\fIKNAPP\fP]
+.br
+[\-\-joystick-btn-brush=\fIKNAPP\fP]
+.br
+[\-\-joystick-btn-stamp=\fIKNAPP\fP]
+.br
+[\-\-joystick-btn-lines=\fIKNAPP\fP]
+.br
+[\-\-joystick-btn-shapes=\fIKNAPP\fP]
+.br
+[\-\-joystick-btn-text=\fIKNAPP\fP]
+.br
+[\-\-joystick-btn-label=\fIKNAPP\fP]
+.br
+[\-\-joystick-btn-magic=\fIKNAPP\fP]
+.br
+[\-\-joystick-btn-undo=\fIKNAPP\fP]
+.br
+[\-\-joystick-btn-redo=\fIKNAPP\fP]
+.br
+[\-\-joystick-btn-eraser=\fIKNAPP\fP]
+.br
+[\-\-joystick-btn-new=\fIKNAPP\fP]
+.br
+[\-\-joystick-btn-open=\fIKNAPP\fP]
+.br
+[\-\-joystick-btn-save=\fIKNAPP\fP]
+.br
+[\-\-joystick-btn-pgsetup=\fIKNAPP\fP]
+.br
+[\-\-joystick-btn-print=\fIKNAPP\fP]
+.br
+[\-\-joystick-buttons-ignore=\fIKNAPP1,KNAPP2,...\fP]
+.br
+[\-\-stampsize=\fISTRL\fP]
+.br
+[\-\-keyboard]
+.br
+[\-\-nosysfonts]
+.br
+[\-\-alllocalefonts]
+.br
+[\-\-uifont \fITYPSNITTSNAMN\fP]
+.br
+[\-\-savedir \fIDIR\fP]
+.br
+[\-\-exportdir \fIDIR\fP]
+.br
+[\-\-datadir \fIDIR\fP]
+.br
+[\-\-saveover]
+.br
+[\-\-saveovernew]
+.br
+[\-\-nosave]
+.br
+[\-\-noerase]
+.br
+[\-\-autosave]
+.br
+[\-\-reversesort]
+.br
+[\-\-colorfile \fIFIL\fP]
+
+.TP 9
+.B tuxpaint (standardvärden)
+[\-\-windowed]
+.br
+[\-\-disablescreensaver]
+.br
+[\-\-800x600]
+.br
+[\-\-orient=landscape]
+.br
+[\-\-buttonsize 48]
+.br
+[\-\-startlast]
+.br
+[\-\-sound]
+.br
+[\-\-stereo]
+.br
+[\-\-quit]
+.br
+[\-\-print]
+.br
+[\-\-printdelay=0]
+.br
+[\-\-noprintcfg]
+.br
+[\-\-altprintmod]
+.br
+[\-\-complexshapes]
+.br
+[\-\-mixedcase]
+.br
+[\-\-dontgrab]
+.br
+[\-\-shortcuts]
+.br
+[\-\-wheelmouse]
+.br
+[\-\-buttondistinction]
+.br
+[\-\-fancycursors]
+.br
+[\-\-showcursor]
+.br
+[\-\-outlines]
+.br
+[\-\-stamps]
+.br
+[\-\-stampcontrols]
+.br
+[\-\-stamprotation]
+.br
+[\-\-magiccontrols]
+.br
+[\-\-magicsizes]
+.br
+[\-\-groupmagictools]
+.br
+[\-\-shapecontrols]
+.br
+[\-\-label]
+.br
+[\-\-brushspacing]
+.br
+[\-\-complexity=\fIadvanced\fP]
+.br
+[\-\-templateexport]
+.br
+[\-\-newcolorsfirst]
+.br
+[\-\-dontmirrorstamps]
+.br
+[\-\-stampsize=default]
+.br
+[\-\-mouse]
+.br
+[\-\-sysfonts]
+.br
+[\-\-currentlocalefont]
+.br
+[\-\-uifont=default]
+.br
+[\-\-saveoverask]
+.br
+[\-\-save]
+.br
+[\-\-erase]
+.br
+[\-\-noautosave]
+.br
+[\-\-noreversesort]
+.br
+
+.TP 9
+.B tuxpaint
+[\-\-locale \fILOKALANPASSNING\fP]
+
+.TP 9
+.B tuxpaint
+[\-\-lang \fISPRÅK\fP | \-\-lang help]
+
+.TP 9
+.B tuxpaint
+[\-\-nosysconfig]
+.br
+[\-\-nolockfile]
+
+.SH BESKRIVNING
+.PP
+\fITux Paint\fP är ett ritprogram för små barn.  Det är tänkt att vara
+enkelt och roligt att använda.  Det har ett enkelt gränssnitt och en fast
+storlek på målarduken och ger tillgång till tidigare bilder med hjälp
+av en miniatyrbildsbläddrare (dvs. ingen tillgång till det underliggande
+filsystemet).
+
+Till skillnad från populära ritprogram som "\fIThe GIMP\fP" har det en
+mycket begränsad uppsättning verktyg. Det har dock ett mycket enklare
+gränssnitt och underhållande, barnanpassade tillägg som t.ex.
+ljudeffekter.
+
+.SH ALTERNATIV - INFORMATIV
+.l
+\fItuxpaint\fP accepterar följande alternativ för att skicka ut
+information om programmet.  Det avslutas sedan omedelbart (utan att öppna
+ett grafiskt fönster).
+
+.TP 8
+.B \-\-help
+Visa kort, användbar information om Rita med Tux.
+.TP 8
+.B \-\-version
+Utmatning av versionsinformation.
+.TP 8
+.B \-\-verbose\-version
+Utmatning av versionsinformation och kompileringsalternativ för byggtiden.
+.TP 8
+.B \-\-usage
+Visa en lista över alla kommandoradsalternativ.
+.TP 8
+.B \-\-copying
+Visa licensen (GNU GPL) under vilken Rita med Tux är släppt.
+.TP 8
+.B \-\-listfonts
+Visa en lista över teckensnitt som hittats av Pango (och som därmed är tillgängliga för Rita med Tux via --uifont).
+
+.SH ALTERNATIV - GRÄNSSNITT
+.l
+\fItuxpaint\fP accepterar följande alternativ för att ändra
+gränssnittet.  De kan användas tillsammans med, i stället för eller
+för att åsidosätta alternativ som anges i konfigurationsfiler. (Se
+nedan.)
+
+.SS VIDEO
+.TP 8
+.B \-\-fullscreen=yes \-\-fullscreen=native \-\-fullscreen=no \-\-windowed
+Kör \fITux Paint\fP i helskärmsläge med standard - eller en angiven -
+skärmupplösning ("--fullscreen=yes"); eller i helskärmsläge med
+systemets ursprungliga upplösning ("--fullscreen=native"); eller kör i
+ett fönster ("--fullscreen=no" eller "--windowed") (standard).
+
+.TP 8
+.B \-\-native
+I helskärmsläge använder du systemets standardskärmupplösning.
+
+.TP 8
+.B \-\-\fIBREDD\fPx\fISKÄRMHÖJD\fP
+Kör \fITux Paint\fP i ett fönster av en viss storlek eller med en viss
+fullskärmsupplösning (om \-\-native inte används).  Standard är
+800x600.  Minsta bredd är 640.  Minsta höjd är 480.  Både stående och
+liggande orientering stöds.  (Se även \-\-orient nedan.)
+
+.TP 8
+.B \-\-orient=landscape \-\-orient=portrait
+Om \-\-orient=portrait är inställd, ber \fITux Paint\fP att byta ut
+WIDTH- och HEIGHT-värdena som används för fönster- eller
+helskärmsläge, utan att du behöver ändra WIDTH- och HEIGHT-värdena i
+konfigurationsfilen eller på kommandoraden. (Detta är användbart på
+enheter där skärmen kan roteras, t.ex. surfplattor)
+
+.TP 8
+.B \-\-allowscreensaver \-\-disablescreensaver
+Normalt inaktiverar \fItuxpaint\fP din skärmsläckare. Använd
+\-\-allowscreensaver för att förhindra att detta sker.
+
+.SS LJUD
+.TP 8
+.B \-\-nosound \-\-sound
+Avaktivera eller aktivera ljud (standard).
+
+.TP 8
+.B \-\-nostereo \-\-stereo
+Inaktivera eller aktivera (standard) stöd för stereopanorering.
+
+.SS STORLEK PÅ GRÄNSSNITTET
+.TP 8
+.B \-\-buttonsize \fISTRL\fP \-\-buttonsize auto
+Justera storleken på knapparna i \fITux Paint\fP:s användargränssnitt,
+mellan 24 och 192 pixlar (48 är standard och passar för skärmar med
+96-120 dpi pixeldensitet). Använd "auto" för att låta \fITux Paint\fP
+välja en knappstorlek baserat på \fITux Paint\fP:s
+fönster-/displaystorlek.
+
+.TP 8
+.B \-\-colorsrows=\fIRADER\fP
+Hur många rader med färgpalettknappar som ska visas; användbart när du
+använder en stor färgpalett och/eller för användning med grova
+inmatningsenheter (som ögonstyrningsenheter).  Värdet kan vara mellan 1
+(standard) och 3.
+
+.SS FÖRENKLING AV GRÄNSSNITT
+.TP 8
+.B \-\-simpleshapes \-\-complexshapes
+Inaktivera eller aktivera (standard) rotationssteget när du använder
+Shape-verktyget i Rita med Tux.  När funktionen är inaktiverad kan
+formerna inte roteras, men gränssnittet är enklare (klicka, dra, släpp),
+vilket kan vara användbart för yngre eller funktionshindrade barn.
+
+.TP 8
+.B \-\-nooutlines \-\-outlines
+Med "--nooutlines" aktiverat visas mycket enklare konturer och
+"gummibandslinjer" när du använder verktygen Lines, Shapes, Stamps och
+Eraser. (Detta kan vara till hjälp när Rita med Tux körs på
+långsammare datorer eller visas på en fjärrterminal)
+
+.TP 8
+.B \-\-uppercase \-\-mixedcase
+När "--uppercase" är aktiverat kommer alla textmeddelanden och
+ritverktygen Text och Etikett endast att visa versaler.  Detta är
+användbart för barn som ännu inte är bekväma med gemener. 
+Standardläget är blandade versaler.
+
+.SS INITIAL STÄMPELSTORLEK
+.TP 8
+.B \-\-stampsize=\fISTRL\fP \-\-stampsize=default
+Åsidosätter standardstorleken för alla stämplar, i förhållande till
+deras möjliga storlekar (bestäms av Rita med Tux, baserat på
+dimensionerna för både stämplarna själva och ritduken).  Giltiga
+värden är från 0 (minst) till 10 (störst).  Använd
+"--stampsize=default" för att låta Rita med Tux välja per stämpel
+(detta är standardinställningen).
+
+.SS STARTAR UT
+.TP 8
+.B \-\-startblank \-\-startlast
+När du startar Rita med Tux laddas den senaste bilden som du arbetade med.
+ Alternativet "\-\-startblank" inaktiverar detta, så att den alltid
+startar med en tom duk.  Standardbeteendet är "\-\-startlast".
+
+.TP 8
+.B \-\-newcolorslast \-\-newcolorsfirst
+Lista fasta (tomma) färger i slutet eller början (standard) av de
+alternativ som visas när du använder verktyget New för att starta en ny
+bild.
+
+.SS FÖRENKLING AV KONTROLLEN
+.TP 8
+.B \-\-noquit \-\-quit
+Inaktivera eller aktivera (standard) Quit-knappen och [Escape]-tangenten
+på skärmen för att avsluta Rita med Tux.  Använd i stället knappen
+Stäng fönster i titelfältet, tangentsekvensen [Alt]+[F4] eller
+tangentsekvensen [Skift]+[Kontroll]+[Escape].
+
+.TP 8
+.B \-\-nostamps \-\-stamps
+Med inställningen "--nostamps" laddas inte stämpelbilderna, så
+stämpelverktyget kommer inte att vara tillgängligt.  Detta alternativ kan
+användas för att minska den tid det tar för Rita med Tux att ladda och
+minska mängden RAM-minne som krävs.
+
+.TP 8
+.B \-\-nostampcontrols \-\-stampcontrols
+Inaktivera eller aktivera (standard) knappar för att styra stämplar. 
+Kontrollerna omfattar spegling, vändning, krympning och tillväxt.  (Obs:
+Alla stämplar kommer inte att kunna styras på alla sätt)
+
+.TP 8
+.B \-\-nostamprotation \-\-stamprotation
+Inaktivera eller aktivera (standard) rotationssteget när du placerar en
+stämpel i ritningen.
+
+.TP 8
+.B \-\-nomagiccontrols \-\-magiccontrols
+Inaktivera eller aktivera (standard) knappar för att styra Magic-verktyg. 
+Bland annat kan du styra om ett magiskt verktyg ska användas som en pensel
+eller om det ska påverka hela bilden på en gång.  (Obs: Alla magiska
+verktyg kommer inte att kunna styras)
+
+.TP 8
+.B \-\-nomagicsizes \-\-magicsizes
+Inaktivera eller aktivera (standard) Magic-storlekskontroller.  (Obs: Det
+är inte alla Magic-verktyg som erbjuder storlekskontroller)
+
+.TP 8
+.B \-\-ungroupmagictools \-\-groupmagictools
+Inaktivera eller aktivera (standard) gruppering av Magic-verktyg.
+
+.TP 8
+.B \-\-noshapecontrols \-\-shapecontrols
+Inaktivera eller aktivera (standard) knappar för att ändra
+Shape-verktygets beteende - former expanderar från mitten eller från ett
+hörn där musen ursprungligen klickades.
+
+.TP 8
+.B \-\-nolabel \-\-label
+Inaktivera eller aktivera (standard) etikettverktyget, som gör att du kan
+skapa text som kan ändras eller flyttas senare.
+
+.TP 8
+.B \-\-nobrushspacing \-\-brushspacing
+Inaktivera eller aktivera (standard) alternativet för penselavstånd i
+verktygen Paint och Lines, vilket gör att du kan åsidosätta
+standardavståndet för en pensel.
+
+.TP 8
+.B \-\-complexity=advanced \-\-complexity=beginner \-\-complexity=novice
+Ställ in komplexitetsnivån (expertis), som påverkar om vissa
+Magic-verktyg är tillgängliga eller hur de fungerar. (advanced är
+standard)
+
+.TP 8
+.B \-\-notemplateexport \-\-templateexport
+Inaktivera eller aktivera (standard) möjligheten att skapa nya mallar
+från sparade ritningar via dialogrutan Öppna.
+
+.TP 8
+.B \-\-noerase \-\-erase
+Alternativet --noerase inaktiverar Rita med Tuxs möjlighet att radera
+filer (sparade ritningar via dialogrutan Öppna och exporterade mallar via
+dialogrutan Ny). Användbart för att förhindra att en användare av
+misstag raderar sitt eget eller andras arbete (används särskilt i
+kombination med --saveovernew).
+
+.SH TILLVAL - KONTROLLERAD TUX-LACK
+.l
+\fItuxpaint\fP accepterar följande alternativ för att ändra hur du styr
+Rita med Tux.  De kan användas tillsammans med, i stället för eller för
+att åsidosätta alternativ som anges i konfigurationsfiler. (Se nedan.)
+
+.SS MARKÖR
+.TP 8
+.B \-\-nofancycursors \-\-fancycursors
+Inaktivera eller aktivera (standard) de "snygga" muspekarformerna i Rita
+med Tux. Även om formerna är större och kontextkänsliga har vissa
+miljöer problem med att visa muspekaren och/eller lämnar "spår" på
+skärmen.
+
+.TP 8
+.B \-\-hidecursor \-\-showcursor
+Döljer muspekaren helt eller aktiverar den (standard) i Rita med Tux.
+Detta kan vara användbart på enheter med pekskärm, t.ex. surfplattor.
+
+.SS Tangentbord
+.TP 8
+.B \-\-noshortcuts \-\-shortcuts
+I läget "--noshortcuts" inaktiveras kortkommandon (t.ex. [Ctrl]+[S] för
+Spara).  Standardläget är att kortkommandon är aktiverade.
+
+.SS MUS OCH HJÄLPMEDEL
+.TP 8
+.B \-\-grab \-\-dontgrab
+Ta tag i musen och tangentbordsinmatningen (om möjligt) så att musen
+begränsas till Rita med Tux-fönstret.  Standard är att inte ta tag i
+musen.
+
+.TP 8
+.B \-\-nowheelmouse \-\-wheelmouse
+Som standard kommer hjulet (jog dial) på en mus att användas för att
+rulla "väljaren" till höger på skärmen.  Detta kan inaktiveras, och
+hjulet ignoreras helt, med alternativet "--nowheelmouse". Detta är
+användbart för barn som ännu inte är bekväma med musen.
+Standardinställningen är att stödja hjulet.
+
+.TP 8
+.B \-\-mouse-accessibility
+I det här läget klickar du inte bara, drar och släpper (t.ex. för att
+rita), utan du klickar, flyttar och klickar igen för att avsluta
+rörelsen. ("Klibbiga musklick.")
+
+.TP 8
+.B \-\-keyboard \-\-mouse
+Alternativet "--keyboard" gör att muspekaren i Rita med Tux kan styras med
+tangentbordet.  Piltangenterna [Upp], [Ned], [Vänster] och [Höger]
+flyttar muspekaren. [Mellanslagstangenten] fungerar som musknapp.
+
+.TP 8
+.B \-\-nobuttondistinction \-\-buttondistinction
+Som standard kan endast musknapp #1 (vanligtvis den längst till vänster
+på möss med mer än en knapp) användas för att interagera med Rita med
+Tux.  Med alternativet "--nobuttondistinction" kan även musknapparna 2
+(mitten) och 3 (höger) användas. Detta är användbart för barn som
+ännu inte är bekväma med musen. Standard är att bara känna igen knapp
+#1.
+
+.SS TANGENTBORD PÅ SKÄRMEN
+.TP 8
+.B \-\-onscreen-keyboard
+Visar ett klickbart tangentbord på skärmen när du använder verktygen
+Text och Etikett.
+
+.TP 8
+.B \-\-onscreen-keyboard-layout \fILAYOUT\fP
+Ange standardlayouten för skärmtangentbordet (se ovan).
+
+.TP 8
+.B \-\-onscreen-keyboard-disable-change
+Inaktiverar vänster/höger-pilknapparna som syns på skärmtangentbordet
+och som används för att växla mellan de tillgängliga layouterna på
+skärmtangentbordet.
+
+.SS Styrspak
+.TP 8
+.B \-\-joystick-dev=\fIENHET\fP
+Ange vilken joystickenhet som ska användas av Rita med Tux.
+Standardvärdet är 0 (den första joysticken).
+
+.TP 8
+.B \-\-joystick-dev=list
+Lista systemets tillgängliga joysticks och avsluta. (Startar inte Rita med
+Tux.)
+
+.TP 8
+.B \-\-joystick-slowness=\fIHASTIGHET\fP
+Ställer in en fördröjning vid varje axelrörelse, vilket gör det
+möjligt att sakta ner joysticken. Tillåtna värden är från 0 till 500.
+Standardvärdet är 15.
+
+.TP 8
+.B \-\-joystick-threshold=\fITRÖSKELVÄRDE\fP
+Ställer in den lägsta nivån av axelrörelse för att börja flytta
+pekaren. Tillåtna värden är från 0 till 32766. Standardvärdet är
+3200.
+
+.TP 8
+.B \-\-joystick-maxsteps=\fISTEG\fP
+Ställer in det maximala antalet pixlar som pekaren flyttar på en gång.
+Tillåtna värden är från 1 till 7. Standardvärdet är 7.
+
+.TP 8
+.B \-\-joystick-hat-timeout=\fIMILLISEKUNDER\fP
+Ställer in fördröjningen efter vilken pekaren börjar röra sig
+automatiskt om hatten hålls intryckt. Tillåtna värden är från 0 till
+3000. Standardvärdet är 1000.
+
+.TP 8
+.B \-\-joystick-hat-slowness=\fIHASTIGHET\fP
+Ställer in en fördröjning vid varje automatisk rörelse, vilket gör det
+möjligt att sakta ner hattens hastighet. Tillåtna värden är från 0
+till 500. Standardvärdet är 15.
+
+.TP 8
+.B \-\-joystick-btn-escape=\fIKNAPP\fP
+Väljer joystickknappens nummer, sett av SDL, som ska användas för att
+generera en escape-händelse. Användbart för att avfärda dialoger och
+avsluta.
+
+.TP 8
+.B \-\-joystick-btn-\fIKOMMANDO\fP=\fIKNAPP\fP
+Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg till
+olika verktyg i Rita med Tux.
+
+.PP
+.RS
+.PD 0
+.TP 2
+-
+brush | Annonserar Rita med Tux %s
+.TP 2
+-
+stamp | Stämpel
+.TP 2
+-
+lines | Linjer
+.TP 2
+-
+shapes | Former
+.TP 2
+-
+text | Text
+.TP 2
+-
+label | Etikett
+.TP 2
+-
+magic | Magisk
+.TP 2
+-
+undo | Ångra
+.TP 2
+-
+redo | Gör om
+.TP 2
+-
+eraser | Sudda
+.TP 2
+-
+new | Ny
+.TP 2
+-
+open | Öppna
+.TP 2
+-
+save | Spara
+.TP 2
+-
+pgsetup | Skriv ut (dialog)
+.TP 2
+-
+print | Skriv ut (omedelbart)
+.RE
+.PD
+
+.TP 8
+.B \-\-joystick-buttons-ignore=\fIKNAPP1,KNAPP2,...\fP
+En uppsättning nummer för joystickknappar som SDL ser och som ska
+ignoreras. Om de inte används av något av alternativen
+"--joystick-btn-..." ovan, kommer knapparna att ses som ett vänsterklick
+med musen.  Kommaseparerade.
+
+.SH ALTERNATIV - UTSKRIFT
+.l
+\fItuxpaint\fP accepterar följande alternativ för att ändra hur Rita med
+Tux hanterar utskrifter.  De kan användas tillsammans med, i stället för
+eller för att åsidosätta alternativ som anges i konfigurationsfiler. (Se
+nedan.)
+
+.SS UTSKRIFTSBEHÖRIGHET
+.TP 8
+.B \-\-noprint \-\-print
+Inaktivera eller aktivera (standard) kommandot Print i Rita med Tux.
+
+.TP 8
+.B \-\-printdelay=\fISEKUNDER\fP \-\-printdelay=0
+Tillåt endast utskrift (via kommandot Print) en gång var SECONDS:e
+sekund.  Standardvärdet är 0 (ingen begränsning).
+
+.SS VISA SKRIVARDIALOG
+.TP 8
+.B \-\-altprintmod \-\-altprintnever \-\-altprintalways
+Dessa alternativ styr om en dialogruta för systemskrivaren ska visas när
+användaren klickar på knappen Skriv ut.  Som standard ("--altprintmod")
+visas en dialogruta om du trycker på [Alt] samtidigt som du klickar på
+Skriv ut (såvida du inte är i helskärmsläge).  Med "--altprintalways"
+visas dialogrutan alltid, även om [Alt] inte hålls nedtryckt.  Med
+"--altprintnever" visas aldrig dialogrutan, även om [Alt] hålls
+nedtryckt.
+
+.SS SPARA SKRIVARENS KONFIGURATION
+.TP 8
+.B \-\-printcfg \-\-noprintcfg
+(Endast Windows och Mac OS X.) Aktivera eller inaktivera laddning och
+lagring av skrivarinställningar.  Som standard skriver Rita med Tux ut
+till standardskrivaren med standardinställningar.  Om du trycker på [Alt]
+samtidigt som du trycker på knappen Skriv ut visas en skrivardialogruta
+(så länge du inte är i helskärmsläge; se även "--altprintalways" och
+"--altprintnever" nedan.) Om inte "--noprintcfg" används läses dina
+tidigare inställningar in när Rita med Tux startar och
+inställningsändringar sparas till nästa gång.
+
+.SS PRINT-KOMMANDON
+.TP 8
+.B \-\-printcommand \fIKOMMANDO\fP
+(Endast när PostScript-utskrift används.) Låt Rita med Tux skriva ut via
+ett alternativt kommando i stället för lpr(1).
+
+.TP 8
+.B \-\-altprintcommand \fIKOMMANDO\fP
+(Endast när PostScript-utskrift används.) Låt Rita med Tux skriva ut via
+ett alternativt kommando, när en dialogruta väntar (t.ex. när du håller
+[Alt] nedtryckt medan du klickar på Skriv ut; se ovan), i stället för
+via kprinter.
+
+.SS PAPPERSSTORLEK
+.TP 8
+.B \-\-papersize \fIPAPPERSSTORLEK\fP
+(Endast när PostScript-utskrift används.) Be Rita med Tux att generera
+PostScript för en viss pappersstorlek. Giltiga storlekar är de som stöds
+av libpaper.  Se papersize(5).
+
+.SH ALTERNATIV - SPARA
+.l
+\fItuxpaint\fP accepterar följande alternativ för att ändra hur Rita med
+Tux fungerar när du sparar eller exporterar ritningar.  De kan användas
+tillsammans med, i stället för eller för att åsidosätta alternativ som
+anges i konfigurationsfiler. (Se nedan.)
+
+.SS SPARA JÄMFÖRT MED TIDIGARE ARBETE
+.TP 8
+.B \-\-saveover \-\-saveovernew \-\-saveoverask
+Om en äldre version av filen kommer att skrivas över när en bild sparas,
+kommer Rita med Tux som standard att be om bekräftelse: antingen spara
+över den gamla filen eller skapa en ny fil.  Denna fråga kan avaktiveras
+med "--saveover" (vilket alltid sparar över äldre versioner av bilder)
+eller "--saveovernew" (vilket alltid sparar en ny fil).
+Standardinställningen är att fråga ("--saveoverask").
+
+.SS SPARA OCH EXPORTERA KATALOGER
+.TP 8
+.B \-\-savedir \fIDIR\fP
+Ange var Rita med Tux ska spara och ladda sina ritningar.
+
+.TP 8
+.B \-\-exportdir \fIDIR\fP
+Ange vart Rita med Tux ska exportera ritningar och animationer.
+
+.SS FLER SPARALTERNATIV
+.TP 8
+.B \-\-nosave \-\-save
+Alternativet --nosave inaktiverar Rita med Tuxs möjlighet att spara filer.
+Detta kan användas i situationer där programmet bara används för skojs
+skull eller i en testmiljö.
+
+.TP 8
+.B \-\-autosave \-\-noautosave
+Alternativet --autosave förhindrar att Rita med Tux frågar om du vill
+spara den aktuella bilden när du avslutar programmet, och förutsätter
+att du gör det.
+
+.TP 8
+.B \-\-reversesort \-\-noautosave
+Alternativet --reversesort gör att dialogrutorna Öppna och Bildspel i
+Rita med Tux visar de äldsta bilderna högst upp i listan (normalt visas
+de nyaste högst upp och de äldsta längst ned).
+
+.SH ALTERNATIV - DATAFILER
+.l
+\fItuxpaint\fP accepterar följande alternativ för att ändra var Rita med
+Tux laddar data (stämplar, penslar etc.) De kan användas tillsammans med,
+istället för eller för att åsidosätta alternativ som anges i
+konfigurationsfiler. (Se nedan.)
+
+.TP 8
+.B \-\-datadir \fIDIR\fP
+Ange var Rita med Tux ska leta efter personliga datafiler (penslar,
+stämplar etc.).
+
+.TP 8
+.B \-\-colorfile \fIFIL\fP
+Med det här alternativet kan du åsidosätta standardfärgpaletten i Rita
+med Tux och ersätta den med din egen. Filen ska vara en vanlig
+ASCII-textfil som innehåller en färgbeskrivning per rad. Färgerna kan
+vara decimala eller 6- eller 3-siffriga hexadecimala och följas av en
+beskrivning. (Till exempel "\fI#000 Black\fP" och "\fI255 192 64
+Orange\fP".)
+
+.SH ALTERNATIV - SPRÅK
+.l
+\fItuxpaint\fP accepterar följande alternativ för att ändra det språk
+som används i Rita med Tuxs gränssnitt och andra relaterade
+inställningar.  De kan användas tillsammans med, i stället för eller
+för att åsidosätta alternativ som anges i konfigurationsfiler. (Se
+nedan.)
+
+.l
+Olika delar av Rita med Tux har översatts till ett flertal språk. Rita
+med Tux kommer att göra sitt bästa för att respektera din
+språkinställning (dvs. miljövariabeln "LANG"), om möjligt. Du kan
+också ställa in språket specifikt med hjälp av alternativ på
+kommandoraden eller i en konfigurationsfil.
+
+.TP 8
+.B \-\-locale \fILOKALANPASSNING\fP
+Ange vilket språk som ska användas, baserat på locale-namnet (som
+vanligtvis är av formen "language[_territory][.codeset][@modifier], där
+"language" är en ISO 639-språkkod, "territory" är en ISO 3166-landskod
+och "codeset" är en teckenuppsättning eller kodningsidentifierare som
+"ISO-8859-1" eller "UTF-8")
+.PP
+.RS
+Till exempel "de_DE@euro" för tyska eller "pt_BR" för brasiliansk
+portugisiska.
+.RE
+
+.TP 8
+.B \-\-lang \fISPRÅK\fP
+Ange vilket språk som ska användas, baserat på språkets namn (som det
+identifieras av Rita med Tux).  Välj ett av språknamnen som listas nedan:
+.PP
+.RS
+.PD 0
+.TP 2
+-
+english | american-english
+.TP 2
+-
+acholi | acoli
+.TP 2
+-
+afrikaans
+.TP 2
+-
+akan | twi-fante
+.TP 2
+-
+albanian
+.TP 2
+-
+amharic
+.TP 2
+-
+arabic
+.TP 2
+-
+aragones
+.TP 2
+-
+armenian | hayeren
+.TP 2
+-
+assamese
+.TP 2
+-
+asturian
+.TP 2
+-
+azerbaijani
+.TP 2
+-
+australian-english
+.TP 2
+-
+bambara
+.TP 2
+-
+basque | euskara
+.TP 2
+-
+belarusian | bielaruskaja
+.TP 2
+-
+bengali
+.TP 2
+-
+bodo
+.TP 2
+-
+bokmal
+.TP 2
+-
+bosnian
+.TP 2
+-
+brazilian-portuguese | portugues-brazilian | brazilian
+.TP 2
+-
+breton | brezhoneg
+.TP 2
+-
+british | british-english
+.TP 2
+-
+bulgarian
+.TP 2
+-
+canadian-english
+.TP 2
+-
+catalan | catala
+.TP 2
+-
+chinese | simplified-chinese
+.TP 2
+-
+croatian | hrvatski
+.TP 2
+-
+czech | cesky
+.TP 2
+-
+danish | dansk
+.TP 2
+-
+dogri
+.TP 2
+-
+dutch | nederlands
+.TP 2
+-
+esperanto
+.TP 2
+-
+estonian
+.TP 2
+-
+faroese
+.TP 2
+-
+finnish | suomi
+.TP 2
+-
+french | francais
+.TP 2
+-
+fula | fulah | pulaar-fulfulde
+.TP 2
+-
+gaelic | irish-gaelic | gaidhlig
+.TP 2
+-
+galician | galego
+.TP 2
+-
+georgian
+.TP 2
+-
+german | deutsch
+.TP 2
+-
+greek
+.TP 2
+-
+gronings | zudelk-veenkelonioals
+.TP 2
+-
+gujarati
+.TP 2
+-
+hebrew
+.TP 2
+-
+hindi
+.TP 2
+-
+hungarian | magyar
+.TP 2
+-
+icelandic | islenska
+.TP 2
+-
+indonesian | bahasa-indonesia
+.TP 2
+-
+inuktitut
+.TP 2
+-
+italian | italiano
+.TP 2
+-
+japanese
+.TP 2
+-
+kabyle | kabylian
+.TP 2
+-
+kannada
+.TP 2
+-
+kashmiri-devanagari
+.TP 2
+-
+kashmiri-perso-arabic
+.TP 2
+-
+kiga | chiga
+.TP 2
+-
+kinyarwanda
+.TP 2
+-
+khmer
+.TP 2
+-
+klingon | tlhIngan
+.TP 2
+-
+konkani-devanagari
+.TP 2
+-
+konkani-roman
+.TP 2
+-
+korean
+.TP 2
+-
+kurdish
+.TP 2
+-
+latvian
+.TP 2
+-
+lithuanian | lietuviu
+.TP 2
+-
+luganda
+.TP 2
+-
+luxembourgish | letzebuergesch
+.TP 2
+-
+macedonian
+.TP 2
+-
+maithili
+.TP 2
+-
+malay
+.TP 2
+-
+malayalam
+.TP 2
+-
+manipuri-bengali
+.TP 2
+-
+manipuri-meitei-mayek
+.TP 2
+-
+marathi
+.TP 2
+-
+mexican-spanish | espanol-mejicano | mexican
+.TP 2
+-
+mongolian
+.TP 2
+-
+ndebele
+.TP 2
+-
+nepali
+.TP 2
+-
+northern-sotho | sesotho-sa-leboa
+.TP 2
+-
+norwegian | nynorsk | norsk
+.TP 2
+-
+occitan
+.TP 2
+-
+odia | oriya
+.TP 2
+-
+ojibway | ojibwe
+.TP 2
+-
+persian
+.TP 2
+-
+polish | polski
+.TP 2
+-
+portuguese | portugues
+.TP 2
+-
+punjabi | panjabi
+.TP 2
+-
+romanian
+.TP 2
+-
+russian | russkiy
+.TP 2
+-
+sanskrit
+.TP 2
+-
+santali-devanagari
+.TP 2
+-
+santali-ol-chiki
+.TP 2
+-
+sardinian
+.TP 2
+-
+scottish | scottish-gaelic | ghaidhlig
+.TP 2
+-
+serbian
+.TP 2
+-
+serbian-latin
+.TP 2
+-
+shuswap | secwepemctin
+.TP 2
+-
+shuswap-devanagari
+.TP 2
+-
+sindhi-perso-arabic
+.TP 2
+-
+slovak
+.TP 2
+-
+slovenian | slovensko
+.TP 2
+-
+songhay
+.TP 2
+-
+southafrican-english
+.TP 2
+-
+spanish | espanol
+.TP 2
+-
+sundanese
+.TP 2
+-
+swahili
+.TP 2
+-
+swedish | svenska
+.TP 2
+-
+tagalog
+.TP 2
+-
+tamil
+.TP 2
+-
+telugu
+.TP 2
+-
+thai
+.TP 2
+-
+tibetan
+.TP 2
+-
+traditional-chinese
+.TP 2
+-
+turkish
+.TP 2
+-
+twi
+.TP 2
+-
+ukrainian
+.TP 2
+-
+urdu
+.TP 2
+-
+valencian
+.TP 2
+-
+venda
+.TP 2
+-
+venetian | veneto
+.TP 2
+-
+vietnamese
+.TP 2
+-
+walloon | walon
+.TP 2
+-
+welsh | cymraeg
+.TP 2
+-
+wolof
+.TP 2
+-
+xhosa
+.TP 2
+-
+zapotec | miahuatlan-zapotec
+.TP 2
+-
+zulu
+.RE
+.PD
+
+.TP 8
+.B \-\-lang help
+Visar en lista över alla språk som stöds.
+
+.TP 8
+.B \-\-mirrorstamps \-\-dontmirrorstamps
+Med "--mirrorstamps" inställt kommer stämplar som kan speglas att visas
+speglade som standard.  Detta kan vara användbart när det används av
+personer som föredrar saker från höger till vänster framför från
+vänster till höger.
+
+.SS TYPSNITT
+.TP 8
+.B \-\-nosysfonts \-\-sysfonts
+Rita med Tux försöker normalt att söka efter ytterligare
+TrueType-teckensnitt som är installerade på vanliga platser i systemet. 
+Om detta orsakar problem, eller om du föredrar att endast göra
+teckensnitt som är installerade i Rita med Tuxs katalog tillgängliga, kan
+du använda alternativet "--nosysfonts" för att inaktivera den här
+funktionen.
+
+.TP 8
+.B \-\-alllocalefonts \-\-currentlocalefont
+Rita med Tux undviker att ladda alla teckensnitt som finns i
+teckensnittsunderkatalogen "locale", utom de som matchar den aktuella
+locale som Rita med Tux körs under. Använd alternativet
+"--alllocalefonts" för att ladda alla sådana teckensnitt, för
+användning i verktygen Text och Etikett. (Detta var standardbeteendet
+före version 0.9.21.)
+
+.TP 8
+.B \-\-uifont=\fI"TYPSNITTSNAMN"\fP \-\-uifont=default
+Ange namnet på ett teckensnitt som Rita med Tux ska försöka använda
+för sitt användargränssnitt (UI) - knappetiketter, popup-text för
+dialogrutor, instruktionstext längst ned. Om inget anges, eller om
+"default" anges, kommer "DejaVu Sans" att användas. (Detta var
+standardbeteendet före version 0.9.31.)
+
+.SH ALTERNATIV - DIVERSE
+.l
+\fItuxpaint\fP accepterar följande alternativ för att ändra dess
+beteende. De kan användas tillsammans med, i stället för eller för att
+åsidosätta alternativ som anges i konfigurationsfiler. (Se nedan.)
+
+.TP 8
+.B \-\-nosysconfig
+Med detta alternativ kommer Rita med Tux inte att försöka läsa den
+systemomfattande konfigurationsfilen (vanligtvis
+"/etc/tuxpaint/tuxpaint.conf" eller
+"/usr/local/etc/tuxpaint/tuxpaint.conf").
+
+.TP 8
+.B \-\-nolockfile
+Som standard använder Rita med Tux en låsfil (lagrad i användarens lokala Rita med Tux-katalog) som förhindrar att programmet startas mer än en gång på 30 sekunder. (Ibland blir barn för ivriga, eller så kräver användargränssnitt bara ett klick, men användarna tror att de måste dubbelklicka) Detta alternativ gör att Rita med Tux ignorerar den aktuella låsfilen.
+
+.SH MILJÖ
+.ad l
+Även om Rita med Tux kan hänvisa till ett antal miljövariabler indirekt
+(t.ex. via SDL(3)), har den direkt åtkomst till följande: (Se även
+"FILER" nedan.)
+.PP
+.TP 8
+.B HOME
+för att avgöra var bildfiler hamnar när du använder kommandona Spara
+och Öppna i Rita med Tux, för att hålla reda på den aktuella bilden,
+när du avslutar och startar om Rita med Tux och för att hämta
+användarens konfigurationsfil.
+
+.TP 8
+.B LANG, LC_ALL, LANGUAGE, och LC_MESSAGES
+för att bestämma vilket språk som ska användas, om setlocale(3)
+hänvisar till "LC_MESSAGES".
+
+.TP 8
+.B SDL_VIDEO_ALLOW_SCREENSAVER
+Ställ in denna miljövariabel på '1' för att tillåta att en
+skärmsläckare visas medan Rita med Tux körs. Detta kan också göras via
+alternativet "--allowscreensaver".
+
+.TP 8
+.B SDL_VIDEO_WINDOW_POS
+Om den INTE är inställd kommer Rita med Tux att ställa in den på
+"center", för att försöka placera Rita med Tux-fönstret i mitten av
+skärmen. Om den ÄR inställd (t.ex. till "nopref", vilket betyder "ingen
+preferens"), kommer Rita med Tux inte att åsidosätta den.
+
+.SH FILER
+.TP 8
+.B [/usr/local/]/etc/tuxpaint/tuxpaint.conf
+Systemomfattande konfigurationsfil.  Den läses först (om inte
+alternativet "--nosysconfig" har angetts på kommandoraden).
+.RS
+.PP
+(Skapas under installationen.)
+.RE
+.TP 8
+.B $HOME/.tuxpaintrc
+Användarens konfigurationsfil.  Den kan användas för att ange
+standardalternativ (i stället för att ange dem på kommandoraden varje
+gång) och/eller för att åsidosätta inställningar i den
+systemomfattande konfigurationsfilen.
+.RS
+.PP
+(Kan inte skapas eller redigeras automatiskt, utan måste skapas manuellt.
+Du kan göra detta för hand, eller använda tuxpaint-config(1)
+.RE
+.TP 8
+.B $HOME/.tuxpaint/saved/
+En katalog med tidigare sparade bilder (och miniatyrbilder).  Endast filer
+i den här katalogen kommer att göras tillgängliga med kommandot Öppna i
+Rita med Tux.  Åsidosätts via alternativet "--savedir".
+.RS
+.PP
+(Skapas när kommandot Spara används.)
+.RE
+.TP 8
+.B $HOME/.tuxpaint/current_id.txt
+En referens till den bild som redigerades när Rita med Tux senast
+avslutades.  (Denna bild laddas automatiskt nästa gång Rita med Tux körs
+om, såvida inte alternativet "--startblank" har angetts)
+.RS
+.PP
+(Skapas när Rita med Tux avslutas.)
+.RE
+.TP 8
+.B $HOME/.tuxpaint/lockfile.dat
+En låsfil som förhindrar att Rita med Tux startas mer än en gång var
+30:e sekund.  Avaktivera kontroll av låsfilen genom att använda
+alternativet "--nolockfile".
+.RS
+.PP
+(Det finns ingen anledning att ta bort låsfilen, eftersom den innehåller
+en tidsstämpel som gör att den upphör att gälla efter 30 sekunder)
+.RE
+.TP 8
+.B $XDG_CONFIG_HOME[XDG_PICTURES_DIR]/TuxPaint/
+En katalog dit bilder och animationer ska exporteras (via alternativen i
+Rita med Tuxs dialogruta Öppna), om alternativet "--exportdir" inte
+används för att åsidosätta det.  Om "$XDG_CONFIG_HOME" är inställt
+kommer en konfigurationsfil "user-dirs.dirs" att skannas i den katalog som
+den pekar på; om inte, kommer Rita med Tux att försöka göra det i
+"$HOME/.config/".  Om en inställning med namnet "XDG_PICTURES_DIR" hittas
+kommer den att användas som plats för att exportera bilder. Om allt annat
+misslyckas används "$HOME/Pictures/".  En underkatalog med namnet
+"TuxPaint" kommer att skapas.
+.TP 8
+.B $XDG_DATA_HOME/Trash/ eller $HOME/.local/share/Trash/
+En katalog där bilderna placeras när alternativet Erase används i
+dialogrutan Öppna.
+
+.SH UPPHOVSRÄTT
+Detta program är fri programvara; du kan vidaredistribuera det och/eller
+modifiera det enligt villkoren i GNU General Public License som publiceras
+av Free Software Foundation; antingen version 2 av licensen eller (efter
+eget val) någon senare version.
+
+.SH ÖVRIG INFORMATION
+Se dokumentationen som medföljer Rita med Tux för ytterligare instruktioner om hur du använder programmets funktioner.
+
+Det vanligaste stället att hitta information om Rita med Tux är på
+.nh
+https://tuxpaint.org/.
+.hy
+
+.SH UPPHOVSPERSONER
+Huvudutvecklare och projektledare: Bill Kendrick
+.nh
+<bill@newbreedsoftware.com>.
+.hy
+
+Med korrigeringar, korrigeringar, tillägg, portning, översättningar,
+dokumentation och mer från många människor, inklusive, men förmodligen
+inte begränsat till (se AUTHORS.txt och CHANGES.txt):
+
+Aki,
+Ashish Arora,
+A S Alam,
+Khalid Al Holan,
+Daniel Andersson,
+Hodorog Andrei,
+Joana Portia Antwi-Danso,
+Adorilson Bezerra de Araujo,
+Xandru Armesto,
+Ben Armstrong,
+Ravishankar Ayyakkannu,
+
+Dwayne Bailey,
+Matías Bellone,
+Martin Benjamin,
+Besnik Bleta,
+Denis Bodor,
+Rahul Borade,
+Yacine Bouklif,
+Miguel Anxo Bouzada,
+René Brandenburger,
+Herman Bruyninckx,
+Lucie Burianova,
+Laurentiu Buzdugan,
+
+Albert Cahalan,
+Pere Pujal i Carabantes,
+Hugo Carvalho,
+Felipe Castro,
+Ouychai Chaita,
+Zdenek Chalupský,
+Wei-Lun Chao,
+Jacques Chion,
+Ankit Choudary,
+Yuri Chornoivan,
+Abdoul Cisse,
+Urska Colner,
+Adam 'akanewbie' Corcoran,
+Helder Correia,
+Ricardo Cruz,
+
+Magnus Dahl,
+Laurent Dhima,
+Chandrakant Dhutadmal,
+Yavor Doganov,
+Joe Dalton,
+Tim Dickson,
+Dawa Dolma,
+Kevin Donnelly,
+Dovix,
+Korvigellou An Drouizig (Philippe),
+Serhij Dubyk,
+
+Ander Elortondo,
+Alberto Escudero-Pascual,
+
+T. Surya Fajri,
+Jamil Farzana,
+Fasokan,
+Sveinn í Felli,
+Emanuel Feruzi,
+Doruk Fisek,
+Flavia Floris,
+Fòram na Gàidhlig,
+Fabian Franz,
+Derrick Frimpong,
+Martin Fuhrer,
+Fula Localization Project,
+
+Alexander Gabillondo,
+Török Gábor,
+Gabriel Gazzan,
+Robert Buj Gelonch,
+Olesya Gerasimenko,
+Alexander Geroimenko,
+Torsten Giebl,
+Harvey Ginter,
+Solomon Gizaw,
+Robert Glowczynski,
+Chris Goerner,
+Mikel González,
+Volker Grabsch,
+The Greek Linux i18n Team,
+Edmund GRIMLEY EVANS,
+Frederico Goncalves Guimaraes,
+
+HackerGene,
+Joe Hanson,
+Sam "Criswell" Hart,
+Guy Hed,
+Farinaz Hedayat,
+Prasanta Hembram,
+Willem Heppe,
+Tedi Heriyanto,
+Pjetur G. Hjaltason,
+Knut Erik Hollund,
+Henrik Holst,
+Khaled Hosny,
+Henry House,
+Mohomodou Houssouba,
+Song Huang,
+Karl Ove Hufthammer,
+
+Roland Illig,
+Daniel Illingworth,
+Indigenas Sin Fronteras,
+Juan Irigoien,
+Students of Vocational Higher Secondary School Irimpanam,
+Itai,
+Dmitriy Ivanov,
+
+Mogens Jaeger,
+Lis Gøthe í Jákupsstovu,
+Nedjeljko Jedvaj,
+Aleksandar Jelenak,
+Rasmus Erik Voel Jensen,
+Lauri Jesmin,
+Wang Jian,
+Amed Ç. Jiyan,
+Klaus Ade Johnstad,
+Petri Jooste,
+Richard June,
+
+Andrej Kacian,
+Thomas Kalka,
+Alevtina Karashokova,
+Carole Karema,
+Jorma Karvonen,
+Yannis Kaskamanidis,
+Kazuhiko,
+Gabor Kelemen,
+Mark Kim,
+Thomas Klausner,
+Koby,
+Marcin 'Shard' Konicki,
+Ines Kovacevic,
+Mantas Kriauciunas,
+Freek de Kruijf,
+Andrzej M. Krzysztofowicz,
+Anand Kulkarni,
+Enes Burhan KURAN,
+Piotr Kwilinski,
+Serafeim Kyriaki,
+
+J.F.M. Lange,
+Matthew Lange,
+Fabio Lazarin,
+Niko Lewman,
+Arkadiusz Lipiec,
+Ricky Lontoc,
+Dag H. Loras,
+Burkhard Luck,
+
+Nuno Magalhães,
+Vincent Mahlangu,
+Ankit Malik,
+Neskie Manuel,
+Fred Ulisses Maranhao,
+Yannig MARCHEGAY (Kokoyaya),
+Jorge Mariano,
+Martin,
+Sergio Marques,
+Pheledi Mathibela,
+Scott McCreary,
+Marco Milanesi,
+Never Min,
+Kartik Mistry,
+Viateur MUGENZI,
+Mugunth,
+Benson Muite,
+Noëlla Mupole,
+Steve Murphy,
+Samuel Murray (Groenkloof),
+
+Philibert Ndandali,
+Shumani Mercy Nehulaudzi,
+Mikkel Kirkgaard Nielsen,
+Alesis Novik,
+Nudjaree,
+Daniel Nylander,
+
+Olli,
+Sven Ollino,
+James Olweny,
+Teresa Orive,
+Gareth Owen,
+
+Quentin PAGÈS,
+Sorin Paliga,
+Yannis Papatzikos,
+Nikolay Parukhin,
+Cas Pascal,
+Alessandro Pasotti,
+Flavio Pastor,
+Patrick,
+George Patrick,
+Primoz Peterlin,
+Le Quang Phan,
+Henrik Pihl,
+Auk Piseth,
+Pablo Pita,
+Milan Plzik,
+Eric Poncet,
+Sergei Popov,
+John Popplewell,
+
+Ivana Rakic,
+Adam 'foo-script' Rakowski,
+Rodrigo Perez Ramirez and Indigenas Sin Fronteras,
+Sebastian Rasmussen,
+Robert Readman,
+Leandro Regueiro,
+Samir Ribić,
+Jozef Říha,
+Simona Riva,
+Michael de Rooij,
+Robin Rosenberg,
+Philipp Rösner,
+Ilir Rugova,
+Jaroslav Rynik,
+
+Bert Saal,
+Ibraahiima SAAR,
+Saikumar,
+Pablo Saratxaga,
+Samuel Sarpong,
+Kevin Patrick Scannell,
+Stephanie Schilling,
+Luc 'Begasus' Schrijvers,
+Kiriaki SERAFEIM,
+Pavithran Shakamuri,
+Savitha Shankar,
+Terrence Sheflin,
+Gia Shervashidze,
+Clytie Siddall,
+Kliment Simoncev,
+sipho,
+Tomas Skäre,
+Sokratis Sofianopoulos,
+Khoem Sokhem,
+Songhay localisation and dictionary project,
+Geert Stams,
+Peter Sterba,
+Raivis Strogonovs,
+Luis C. Suárez,
+Sugar Labs i18n team,
+
+Tomasz 'karave' Tarach,
+Michal Terbert,
+Will Thompson,
+Ignacio Tike,
+Tilo,
+Tarmo Toikkanen,
+TOYAMA Shin-ichi,
+Niall Tracey,
+Gerasim Troeglazov,
+tropikhajma,
+Peter Tuhársky,
+Florence Tushabe,
+
+Matej Urbančič,
+
+Vankata453,
+Rita Verbauskaite,
+Daniel Jose Viana,
+Charles Vidal,
+
+Darrell Walisser,
+Frank Weng,
+
+Damian Yerrick,
+
+Muhammad Najmi Ahmad Zabidi,
+臧传明,
+Eugene Zelenko,
+Martin Zhekov,
+and
+Huang Zuzhen.
+
+.SH SE ÄVEN
+.BR tuxpaint-import (1),
+.BR tuxpaint-config (1),
+.BR tp-magic-config (1),
+.BR xpaint (1),
+.BR gpaint (1),
+.BR gimp (1),
+.BR kolourpaint (1),
+.BR krita (1),
+.BR gcompris (1)
+.PP
+Och dokumentation inom /usr/[local/]share/doc/tuxpaint/0.9.35/.

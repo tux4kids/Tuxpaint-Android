@@ -1,0 +1,2272 @@
+                                   Tux Paint
+                                version 0.9.35
+
+                       ### Dokumentation av optioner ###
+
+         Copyright © 2002-2025 av olika bidragsgivare; se AUTHORS.txt.
+                             https://tuxpaint.org/
+
+                                  maj 2, 2025
+
++-----------------------------------------------------+
+|                      Innehåll                       |
+|-----------------------------------------------------|
+|   * Tux Färgkonfiguration.                          |
+|   * Konfigurationsfil för KVIrc                     |
+|   * Tillgängliga alternativ                         |
+|       + Video/ljud                                  |
+|       + Mus/tangentbord                             |
+|       + Förenkling                                  |
+|       + Språk                                       |
+|       + Skriver ut                                  |
+|       + Sparar                                      |
+|       + Data                                        |
+|       + Hjälpmedel                                  |
+|       + Styrspak                                    |
+|   * Åsidosättande av System Config. Alternativ      |
+|   * Alternativ för kommandoraden                    |
+|       + Alternativ för information på kommandoraden |
+|   * Att välja ett annat språk                       |
+|       + Tillgängliga språk                          |
+|       + Ställa in lokal språkdräkt för din miljö    |
+|       + Särskilda teckensnitt                       |
++-----------------------------------------------------+
+
+Tux Färgkonfiguration.
+
+Det finns ett grafiskt verktyg som gör att du kan ändra Rita med Tuxs beteende.
+Om du inte vill installera och använda det här verktyget, eller om du vill ha
+en bättre förståelse för de tillgängliga alternativen, kan du fortsätta läsa.
+
+Konfigurationsfil för KVIrc
+
+Du kan skapa en enkel konfigurationsfil för Rita med Tux, som den kommer att
+läsa varje gång du startar den.
+
+Filen är helt enkelt en ren textfil som innehåller de alternativ som du vill
+aktivera:
+
+                       ### Linux- och Unix-användare ###
+
+/home/användarnamn/.tuxpaintrc
+
+## Systemomfattande konfigurationsfil ##
+
+Innan denna fil läses, läses en systemomfattande konfigurationsfil. (Som
+standard har denna konfiguration inga inställningar aktiverade.) Den finns
+normalt på:
+
+    /etc/tuxpaint/tuxpaint.conf
+
+                            ### macOS-användare ###
+
+/Användare/användarnamn/Bibliotek/Applikationsstöd/TuxPaint/tuxpaint.cfg
+
+## Systemomfattande konfigurationsfil ##
+
+Innan denna fil läses, läses en systemomfattande konfigurationsfil. (Som
+standard har denna konfiguration inga inställningar aktiverade.) Den finns
+normalt på:
+
+    /Bibliotek/Applikationsstöd/TuxPaint/tuxpaint.cfg
+
+                           ### Windows-användare ###
+
+C:\Users\användarnamn\AppData\Roaming\TuxPaint\tuxpaint.cfg
+
+Du kan använda NotePad eller WordPad för att skapa denna fil. Var noga med att
+spara den som vanlig text och se till att filnamnet inte har ".txt" i slutet
+...
+
+## Systemomfattande konfigurationsfil ##
+
+Innan denna fil läses, läses en systemomfattande konfigurationsfil. (Som
+standard har denna konfiguration inga inställningar aktiverade.) Den finns
+normalt på:
+
+C:\Programfiler\TuxPaint\tuxpaint.cfg
+
+                            ### Haiku-användare ###
+
+/boot/home/config/settings/TuxPaint/tuxpaint.conf
+
+⚙ Du kan avaktivera läsning av den här filen helt och hållet och låta
+inställningarna vara standardinställningar (som sedan kan åsidosättas av din
+personliga konfigurationsfil och/eller kommandoradsargument) genom att använda
+kommandoradsalternativet "--nosysconfig".
+
+Tillgängliga alternativ
+
+Följande inställningar kan göras i konfigurationsfilen. (Inställningar på
+kommandoraden åsidosätter dessa. Se avsnittet "Alternativ för kommandoraden"
+nedan)
+
+                              ### Video/ljud ###
+
+## Video ##
+
+→ fullscreen=yes ←
+
+    Kör programmet i helskärmsläge i stället för i ett fönster.
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med "fullscreen=no". I båda
+    fallen kan det åsidosättas med kommandoradsalternativet "--windowed".
+
+
+     
+→ fullscreen=native ←
+
+    Kör programmet i helskärmsläge. Utgå dessutom från skärmens aktuella
+    upplösning (som ställs in av operativsystemet).
+
+
+     
+→ windowsize=STRL ←
+
+    Kör programmet i en annan storlek (i fönsterläge) eller med en annan
+    skärmupplösning (i helskärmsläge) än standardinställningen (vanligtvis
+    800x600).
+
+    Värdet STRL ska anges i pixlar, i formatet "bredd-för-höjd", med ett "x"
+    (litet X) mellan värdena. Storleken kan vara vad som helst som är minst 640
+    brett och minst 480 högt.
+
+    Några exempel:
+
+      o 640x480
+      o 1024x768
+      o 768x1024
+      o 1600x1200
+
+    💡 Om endast en bildskärm är tillgänglig och Rita med Tux körs i fönsterläge
+    (inte fullskärm) och den valda fönsterstorleken överskrider bildskärmens
+    kapacitet, kommer Rita med Tux att falla tillbaka till bildskärmens
+    dimensioner.
+
+
+     
+→ orient=portrait ←
+
+    Byter ut bredd- och höjdalternativen som ges till Rita med Tux, vilket är
+    användbart för att rotera fönstret på porträttskärmar, t.ex. en surfplatta
+    som är i surfplatteorientering.
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med "orient=landscape". I båda
+    fallen kan det åsidosättas med kommandoradsalternativet "--orient=
+    landscape".
+
+
+     
+→ native=yes ←
+
+    När Rita med Tux körs i helskärmsläge antas skärmens aktuella upplösning
+    (vilket åsidosätter eventuella "windowsize"-alternativ), som den har
+    ställts in av operativsystemet.
+
+
+     
+→ allowscreensaver=yes ←
+
+    Som standard hindrar Rita med Tux systemets skärmsläckare från att starta.
+    Du kan åsidosätta detta genom att använda alternativet "allowscreensaver".
+    (Du kan också göra det genom att ställa in miljövariabeln
+    "SDL_VIDEO_ALLOW_SCREENSAVER" på ditt system till "1")
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av "allowscreensaver
+    =no" eller "disablescreensaver=yes". I båda fallen kan det åsidosättas med
+    kommandoradsalternativet "--disablescreensaver".
+
+
+     
+
+## Ljud ##
+
+→ nosound=yes ←
+
+    Avaktivera ljudeffekter. (Obs: Om du trycker på [Alt] + [S] kan du inte
+    aktivera ljud igen om de har inaktiverats med detta alternativ)
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av "nosound=no"
+    eller "sound=yes". I båda fallen kan det åsidosättas med
+    kommandoradsalternativet "--sound".
+
+
+     
+→ nostereo=yes ←
+
+    Avaktivera stöd för stereopanorering. (Användbart för användare med
+    hörselnedsättning på ett öra eller på platser där en enda högtalare eller
+    hörlur används)
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av "nostereo=no"
+    eller "stereo=yes". I båda fallen kan det åsidosättas med
+    kommandoradsalternativet "--stereo".
+
+
+     
+
+## Gränssnittets storlek ##
+
+→ buttonsize=STRL ←
+
+    Ställ in pixelstorleken på knapparna i Rita med Tuxs användargränssnitt
+    (åsidosätter standardvärdet "48"). Användbart vid användning av skärmar med
+    mycket hög densitet eller grova inmatningsenheter, t.ex.
+    ögonstyrningsenheter.
+
+    Värdet STRL ska anges i pixlar och kan vara allt mellan 24 och 192,
+    inklusive. De flesta knappar är kvadratiska och detta påverkar deras bredd
+    och höjd.
+
+    Ett värde på "auto" kan anges, och Rita med Tux väljer en lämplig
+    knappstorlek baserat på storleken på Rita med Tuxs fönster (eller
+    fullskärmsvisning). (För standardskärmstorleken 800x600 kommer det att vara
+    standardknappstorleken: "48".)
+
+    💡 Obs: Om den valda knappstorleken gör att knapparna blir för stora för att
+    alla nödvändiga användargränssnittselement ska visas i den fönsterstorlek
+    som Rita med Tux har valt, används den största möjliga knappstorleken. (En
+    anteckning visas i stderr.)
+
+
+     
+→ colorsrows=RADER ←
+
+    Hur många rader med färgpalettknappar som ska visas; användbart vid
+    användning av en stor färgpalett (se "colorfile" ovan) och/eller för
+    användning med grova inmatningsenheter (t.ex. eyegaze-trackers). "RADER"
+    kan vara mellan "1" (standard) och "3".
+
+
+     
+
+                            ### Mus/tangentbord ###
+
+## Markör ##
+
+→ nofancycursors=yes ←
+
+    Detta inaktiverar de snygga muspekarformerna i Rita med Tux och använder
+    din miljös normala muspekare.
+
+    I vissa miljöer orsakar de snygga markörerna problem. Använd det här
+    alternativet för att undvika dem.
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av "nofancycursors=
+    no" eller "fancycursors=yes". I båda fallen kan det åsidosättas med
+    kommandoradsalternativet "--fancycursors".
+
+
+     
+→ hidecursor=yes ←
+
+    Detta döljer helt muspekarformerna i Rita med Tux.
+
+    Detta är användbart för enheter med pekskärm, t.ex. surfplattor.
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av "hidecursor=no"
+    eller "showcursor=yes". I båda fallen kan det åsidosättas med
+    kommandoradsalternativet "--showcursor".
+
+
+     
+
+## Tangentbord ##
+
+→ noshortcuts=yes ←
+
+    Detta inaktiverar kortkommandon (t.ex. [Ctrl]-[S] för spara, [Ctrl]-[N] för
+    en ny bild etc.)
+
+    Detta är användbart för att förhindra att oönskade kommandon aktiveras av
+    barn som inte är vana vid tangentbord.
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av "noshortcuts=no"
+    eller "shortcuts=yes". I båda fallen kan det åsidosättas med
+    kommandoradsalternativet "--shortcuts".
+
+
+     
+
+## Mus ##
+
+→ grab=yes ←
+
+    Rita med Tux kommer att försöka "ta tag i" musen och tangentbordet så att
+    musen begränsas till Rita med Tux-fönstret och nästan all
+    tangentbordsinmatning skickas direkt till den.
+
+    Detta är användbart för att inaktivera åtgärder i operativsystemet som kan
+    få användaren att lämna Rita med Tux [Alt]-[Tab] fönstercykling, [Ctrl]-
+    [Escape], etc. Detta är särskilt användbart i helskärmsläge.
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av "grab=no" eller
+    "dontgrab=yes". I båda fallen kan det åsidosättas med
+    kommandoradsalternativet "--dontgrab".
+
+
+     
+→ nowheelmouse=yes ←
+
+    Detta inaktiverar stöd för hjulet på möss som har det. (Normalt kommer
+    hjulet att rulla väljaren menyn till höger)
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av "nowheelmouse=no"
+    eller "wheelmouse=yes". I båda fallen kan det åsidosättas med
+    kommandoradsalternativet "--wheelmouse".
+
+
+     
+→ nobuttondistinction=yes ←
+
+    För barn som har problem med musen kan denna skillnad mellan de två eller
+    tre knapparna på en mus inaktiveras med hjälp av detta alternativ.
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av
+    "nobuttondistinction=no" eller "buttondistinction=yes". I båda fallen kan
+    det åsidosättas med kommandoradsalternativet "--buttondistinction".
+
+
+     
+
+                              ### Förenkling ###
+
+## Förenkling av gränssnitt ##
+
+→ simpleshapes=yes ←
+
+    Inaktivera rotationssteget i verktyget "Shape". Klicka, dra och släpp - det
+    är allt som behövs för att rita en form.
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av "simpleshapes=no"
+    eller "complexshapes=yes". I båda fallen kan det åsidosättas med
+    kommandoradsalternativet "--complexshapes".
+
+
+     
+→ nooutlines=yes ←
+
+    I det här läget visas mycket enklare konturer och "gummibandslinjer" när du
+    använder verktygen Lines, Shapes, Stamps och Eraser.
+
+    Detta kan vara till hjälp när Rita med Tux körs på mycket långsamma datorer
+    eller visas på en fjärrskärm i X-Window.
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av "nooutlines=no"
+    eller "outlines=yes". I båda fallen kan det åsidosättas med
+    kommandoradsalternativet "--outlines".
+
+
+     
+→ uppercase=yes ←
+
+    All text återges endast med versaler (t.ex. "Brush" blir "BRUSH").
+    Användbart för barn som kan läsa, men som hittills bara har lärt sig
+    versaler.
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av "uppercase=no"
+    eller "mixedcase=yes". I båda fallen kan det åsidosättas med
+    kommandoradsalternativet "--mixedcase".
+
+
+     
+
+## Initial stämpelstorlek ##
+
+→ stampsize=STRL ←
+
+    Använd detta alternativ för att tvinga Rita med Tux att ställa in
+    startstorleken för alla stämplar. Värdet STRL bör ligga mellan 0 (minst)
+    och 10 (störst). Storleken är relativ till de tillgängliga storlekarna på
+    stämpeln, vilket beror på själva stämpeln och Rita med Tuxs aktuella
+    canvasstorlek.
+
+    Ange "default" för att låta Rita med Tux bestämma (standardbeteende).
+
+
+     
+
+## Förenkling av styrning ##
+
+→ noquit=yes ←
+
+    Inaktivera "Avsluta"-knappen på skärmen och förhindra att [Avsluta meny]
+    -tangenten avslutar Rita med Tux.
+
+    Att använda tangentbordskombinationen [Alt] + [F4] eller klicka på
+    fönstrets stängknapp (förutsatt att du inte är i helskärmsläge) fungerar
+    fortfarande för att avsluta Rita med Tux.
+
+    Du kan också använda följande tangentbordskombination för att avsluta:
+    [Skift] + [Kontroll] + [Avsluta meny].
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av "noquit=no" eller
+    "quit=yes". I båda fallen kan det åsidosättas med kommandoradsalternativet
+    "--quit".
+
+
+     
+→ nostamps=yes ←
+
+    Detta alternativ talar om för Rita med Tux att inte ladda några
+    stämpelbilder, vilket i sin tur slutar inaktivera stämpelverktyget.
+
+    Detta kan snabba upp Rita med Tux när det först laddas upp och minska
+    minnesanvändningen medan det körs. Naturligtvis kommer inga stämplar att
+    vara tillgängliga alls.
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av "nostamps=no"
+    eller "stamps=yes". I båda fallen kan det åsidosättas med
+    kommandoradsalternativet "--stamps".
+
+
+     
+→ nostampcontrols=yes ←
+
+    Vissa bilder i verktyget Stämplar kan speglas, vändas och/eller få ändrad
+    storlek. Detta alternativ inaktiverar kontrollerna och ger endast de
+    grundläggande stämplarna.
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av "nostampcontrols=
+    no" eller "stampcontrols=yes". I båda fallen kan det åsidosättas med
+    kommandoradsalternativet "--stampcontrols".
+
+
+     
+→ nostamprotation=yes ←
+
+    Detta inaktiverar rotationssteget i verktyget Stamps och placerar
+    omedelbart stämpeln i dess vanliga orientering (med eventuell vändning
+    eller spegling) vid första klicket.
+
+    📜 Obs: Funktionen för frimärksrotation lades till i Rita med Tux i version
+    0.9.29.
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av "nostamprotation=
+    no" eller "stamprotation=yes". I båda fallen kan det åsidosättas med
+    kommandoradsalternativet "--stamprotation".
+
+
+     
+→ nomagiccontrols=yes ←
+
+    Vissa Magic-verktyg har möjlighet att fungera som en pensel eller påverka
+    hela duken på en gång. Detta alternativ inaktiverar kontrollerna och ger
+    endast standardfunktionen (vanligtvis färgläge).
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av "nomagiccontrols=
+    no" eller "magiccontrols=yes". I båda fallen kan det åsidosättas med
+    kommandoradsalternativet "--magiccontrols".
+
+
+     
+→ nomagicsizes=yes ←
+
+    Vissa Magic-verktyg erbjuder olika storleksinställningar. Det här
+    alternativet inaktiverar storlekskontrollen och ger endast verktygens
+    standardstorlekar. (Vissa plugins kan erbjuda ytterligare varianter av ett
+    magiskt verktyg för att göra några storlekar möjliga, t.ex. "tegelstenar"
+    och "googly Eyes")
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av "nomagicsizes=no"
+    eller "magicsizes=yes". I båda fallen kan det åsidosättas med
+    kommandoradsalternativet "--magicsizes".
+
+
+     
+→ ungroupmagictools=yes ←
+
+    Som standard är de magiska verktygen i Rita med Tux organiserade i grupper
+    med liknande verktyg (t.ex. alla verktyg för färg, mättnad och mörkare/
+    ljusare tillsammans). Detta alternativ tar bort gruppindelningen och
+    placerar alla verktyg i en lång lista.
+
+    📜 Obs: Grupper för magiska verktyg lades till i Rita med Tux 0.9.27.
+    Möjligheten att inaktivera gruppering lades till i Rita med Tux i version
+    0.9.33.
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av
+    "ungroupmagictools=no" eller "groupmagictools=yes". I båda fallen kan det
+    åsidosättas med kommandoradsalternativet "--groupmagictools".
+
+
+     
+→ noshapecontrols=yes ←
+
+    Inaktivera de kontrollknappar som visas när du använder verktyget Shapes
+    och som gör det möjligt att ändra hur former ritas - centrerade runt det
+    första musklicket eller med ett hörn vid det första musklicket.
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av "noshapecontrols=
+    no" eller "shapecontrols=yes". I båda fallen kan det åsidosättas med
+    kommandoradsalternativet "--shapecontrols".
+
+
+     
+→ nolabel=yes ←
+
+    Inaktiverar etikettverktyget: det verktyg som gör det möjligt att skriva in
+    text som kan redigeras senare.
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av "nolabel=no"
+    eller "label=yes". I båda fallen kan det åsidosättas med
+    kommandoradsalternativet "--label".
+
+
+     
+→ nobrushspacing=yes ←
+
+    Inaktiverar alternativet för penselavstånd i Måla och Linjer verktygen.
+    Penslarnas standardavstånd kommer att användas.
+
+    📜 Obs: Alternativet för penselavstånd lades till i Rita med Tuxs
+    användargränssnitt i version 0.9.28. För mer information om penselavstånd,
+    se EXTENDING.html
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av "nobrushspacing=
+    no" eller "brushspacing=yes". I båda fallen kan det åsidosättas med
+    kommandoradsalternativet "--brushspacing".
+
+
+     
+→ complexity=KOMPLEXITET ←
+
+    Ställer in komplexitetsnivån (expertisnivån) för Rita med Tux, vilket
+    antingen kan inaktivera vissa Magic-verktyg eller få dem att fungera
+    annorlunda. (Verktyget "Clone" är t.ex. inte tillgängligt i nybörjarläget,
+    och verktygen för 1-, 2- och 3-punktsperspektiv gör det inte möjligt att
+    redigera försvinnande punkter i nybörjarläget )
+
+    Värdet KOMPLEXITET kan vara ett av följande:
+    → advanced NEJ (STANDARD) ←
+        "Avancerat" - För användare som är bekanta med Rita med Tux och som kan
+        använda mer komplexa verktyg.
+         
+    → beginner ←
+        "Nybörjare" - För användare som är bekväma med Rita med Tux, men där
+        komplexa verktyg kan orsaka förvirring eller frustration.
+         
+    → novice ←
+        "Novis" - För förstagångsanvändare av Rita med Tux, användare utan
+        datorvana eller användare med särskilda tillgänglighetsbehov.
+         
+
+    📜 Obs: Alternativet komplexitet lades till i Rita med Tux i version 0.9.32.
+    Se dokumentationen för de enskilda Magic-verktygen.
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med "complexity=advanced". I
+    båda fallen kan det åsidosättas med kommandoradsalternativet "--complexity=
+    advanced".
+
+
+     
+→ notemplateexport=yes ←
+
+    Inaktiverar möjligheten att skapa en ny mallbild (baserad på en sparad
+    ritning) från Öppna dialogrutan.
+
+    📜 Obs: Funktionen för att skapa mallar lades till i Rita med Tux i version
+    0.9.31.
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av "notemplateexport
+    =no" eller "templateexport=yes". I båda fallen kan det åsidosättas med
+    kommandoradsalternativet "--templateexport".
+
+
+     
+→ noerase=yes ←
+
+    Inaktiverar möjligheten att radera sparade ritningar via knappen "Erase" på
+    Öppna eller exporterade mallbilder (baserade på en sparad ritning) via
+    knappen "Erase" i dialogrutan New. Användbart för att hindra användare från
+    att radera arbete, särskilt i kombination med --sparapånytt alternativet.
+
+    📜 Obs: Detta alternativ lades till i Rita med Tux i version 0.9.31.
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av "noerase=no"
+    eller "erase=yes". I båda fallen kan det åsidosättas med
+    kommandoradsalternativet "--erase".
+
+
+     
+
+                                 ### Språk ###
+
+## Språk ##
+
+→ lang=SPRÅK ←
+
+    Kör Rita med Tux på ett av de språk som stöds. Möjliga val för LANGUAGE
+    inkluderar för närvarande:
+
+        +-----------------------------------------------------------------+
+        | english               | american-english      |                 |
+        |-----------------------+-----------------------+-----------------|
+        | acholi                | acoli                 |                 |
+        |-----------------------+-----------------------+-----------------|
+        | afrikaans             |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | akan                  | twi-fante             |                 |
+        |-----------------------+-----------------------+-----------------|
+        | albanian              |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | amharic               |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | arabic                |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | aragones              |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | armenian              | hayeren               |                 |
+        |-----------------------+-----------------------+-----------------|
+        | assamese              |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | asturian              |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | australian-english    |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | azerbaijani           |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | bambara               |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | basque                | euskara               |                 |
+        |-----------------------+-----------------------+-----------------|
+        | belarusian            | bielaruskaja          |                 |
+        |-----------------------+-----------------------+-----------------|
+        | bengali               |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | bodo                  |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | bokmal                |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | bosnian               |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | brazilian-portuguese  | portugues-brazilian   | brazilian       |
+        |-----------------------+-----------------------+-----------------|
+        | breton                | brezhoneg             |                 |
+        |-----------------------+-----------------------+-----------------|
+        | british-english       | british               |                 |
+        |-----------------------+-----------------------+-----------------|
+        | bulgarian             |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | canadian-english      |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | catalan               | catala                |                 |
+        |-----------------------+-----------------------+-----------------|
+        | chinese               | simplified-chinese    |                 |
+        |-----------------------+-----------------------+-----------------|
+        | croatian              | hrvatski              |                 |
+        |-----------------------+-----------------------+-----------------|
+        | czech                 | cesky                 |                 |
+        |-----------------------+-----------------------+-----------------|
+        | danish                | dansk                 |                 |
+        |-----------------------+-----------------------+-----------------|
+        |                       | dogri                 |                 |
+        |-----------------------+-----------------------+-----------------|
+        | dutch                 | nederlands            |                 |
+        |-----------------------+-----------------------+-----------------|
+        | esperanto             |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | estonian              |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | faroese               |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | finnish               | suomi                 |                 |
+        |-----------------------+-----------------------+-----------------|
+        | french                | francais              |                 |
+        |-----------------------+-----------------------+-----------------|
+        | fula                  | fulah                 | pulaar-fulfulde |
+        |-----------------------+-----------------------+-----------------|
+        | gaelic                | gaidhlig              | irish-gaelic    |
+        |-----------------------+-----------------------+-----------------|
+        | galician              | galego                |                 |
+        |-----------------------+-----------------------+-----------------|
+        | georgian              |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | german                | deutsch               |                 |
+        |-----------------------+-----------------------+-----------------|
+        | greek                 |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | gronings              | zudelk-veenkelonioals |                 |
+        |-----------------------+-----------------------+-----------------|
+        | gujarati              |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | hebrew                |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | hindi                 |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | hungarian             | magyar                |                 |
+        |-----------------------+-----------------------+-----------------|
+        | icelandic             | islenska              |                 |
+        |-----------------------+-----------------------+-----------------|
+        | indonesian            | bahasa-indonesia      |                 |
+        |-----------------------+-----------------------+-----------------|
+        | inuktitut             |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | italian               | italiano              |                 |
+        |-----------------------+-----------------------+-----------------|
+        | japanese              |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | kabyle                |                       | kabylian        |
+        |-----------------------+-----------------------+-----------------|
+        | kannada               |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | kashmiri-devanagari   |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | kashmiri-perso-arabic |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | khmer                 |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | kiga                  | chiga                 |                 |
+        |-----------------------+-----------------------+-----------------|
+        | kinyarwanda           |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | klingon               | tlhIngan              |                 |
+        |-----------------------+-----------------------+-----------------|
+        | konkani-devanagari    |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | konkani-roman         |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | korean                |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | kurdish               |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | latvian               |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | lithuanian            | lietuviu              |                 |
+        |-----------------------+-----------------------+-----------------|
+        | luganda               |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | luxembourgish         | letzebuergesch        |                 |
+        |-----------------------+-----------------------+-----------------|
+        | macedonian            |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | maithili              |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | malay                 |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | malayalam             |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | manipuri-bengali      |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | manipuri-meitei-mayek |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | marathi               |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | mexican-spanish       | espanol-mejicano      | mexican         |
+        |-----------------------+-----------------------+-----------------|
+        | mongolian             |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | ndebele               |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | nepali                |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | northern-sotho        | sesotho-sa-leboa      |                 |
+        |-----------------------+-----------------------+-----------------|
+        | norwegian             | nynorsk               | norsk           |
+        |-----------------------+-----------------------+-----------------|
+        | occitan               |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | odia                  | oriya                 |                 |
+        |-----------------------+-----------------------+-----------------|
+        | ojibwe                | ojibway               |                 |
+        |-----------------------+-----------------------+-----------------|
+        | persian               |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | polish                | polski                |                 |
+        |-----------------------+-----------------------+-----------------|
+        | portuguese            | portugues             |                 |
+        |-----------------------+-----------------------+-----------------|
+        | punjabi               | panjabi               |                 |
+        |-----------------------+-----------------------+-----------------|
+        | romanian              |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | russian               | russkiy               |                 |
+        |-----------------------+-----------------------+-----------------|
+        | sanskrit              |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | santali-devanagari    |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | santali-ol-chiki      |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | scottish              | ghaidhlig             | scottish-gaelic |
+        |-----------------------+-----------------------+-----------------|
+        | serbian               |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | serbian-latin         |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | shuswap               | secwepemctin          |                 |
+        |-----------------------+-----------------------+-----------------|
+        | sindhi-devanagari     |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | sindhi-perso-arabic   |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | slovak                |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | slovenian             | slovensko             |                 |
+        |-----------------------+-----------------------+-----------------|
+        | songhay               |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | southafrican-english  |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | spanish               | espanol               |                 |
+        |-----------------------+-----------------------+-----------------|
+        | sundanese             |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | swahili               |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | swedish               | svenska               |                 |
+        |-----------------------+-----------------------+-----------------|
+        | tagalog               |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | tamil                 |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | telugu                |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | thai                  |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | tibetan               |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | traditional-chinese   |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | turkish               |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | twi                   |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | ukrainian             |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | urdu                  |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | venda                 |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | venetian              | veneto                |                 |
+        |-----------------------+-----------------------+-----------------|
+        | vietnamese            |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | walloon               | walon                 |                 |
+        |-----------------------+-----------------------+-----------------|
+        | welsh                 | cymraeg               |                 |
+        |-----------------------+-----------------------+-----------------|
+        | wolof                 |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | xhosa                 |                       |                 |
+        |-----------------------+-----------------------+-----------------|
+        | miahuatlan-zapotec    |                       | zapotec         |
+        |-----------------------+-----------------------+-----------------|
+        | zulu                  |                       | zulu            |
+        +-----------------------------------------------------------------+
+
+
+     
+→ --locale LOKALANPASSNING ←
+
+    Kör Rita med Tux på ett av de språk som stöds. Se avsnittet "Välja ett
+    annat språk" nedan för de lokala strängarna (t.ex. "de_DE" för tyska) som
+    ska användas.
+
+    (Om din locale redan är inställd, t.ex. med miljövariabeln "$LANG", är det
+    här alternativet inte nödvändigt eftersom Rita med Tux om möjligt följer
+    din miljöinställning)
+
+
+     
+→ mirrorstamps=yes ←
+
+    För stämplar som kan speglas innebär det här alternativet att de som
+    standard får den spegelvända formen.
+
+    Detta kan vara användbart för personer som föredrar saker från höger till
+    vänster snarare än från vänster till höger.
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av "mirrorstamps=no"
+    eller "dontmirrorstamps=yes". I båda fallen kan det åsidosättas med
+    kommandoradsalternativet "--dontmirrorstamps".
+
+
+     
+
+## Typsnitt ##
+
+→ sysfonts=yes ←
+
+    Detta alternativ gör att Rita med Tux försöker ladda in teckensnitt (för
+    användning i textverktyget ) från operativsystemet. Normalt laddar Rita med
+    Tux bara de teckensnitt som medföljer Rita med Tux.
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av "sysfonts=no"
+    eller "nosysfonts=yes". I båda fallen kan det åsidosättas med
+    kommandoradsalternativet "--nosysfonts".
+
+
+     
+→ alllocalefonts=yes ←
+
+    Före version 0.9.21 laddade Rita med Tux alla teckensnitt i sin egen
+    teckensnittskatalog, inklusive lokalspecifika (t.ex. den för tibetanska,
+    som inte hade några latinska tecken). Från och med 0.9.21 är det enda
+    teckensnittet som laddas från den lokalspecifika underkatalogen, om det
+    finns något, ett som matchar den lokal som Rita med Tux körs på.
+
+    Om du vill ladda alla lokalspecifika teckensnitt (det gamla beteendet)
+    anger du detta alternativ.
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med hjälp av "alllocalefonts=
+    no" eller "currentlocalefont=yes". I båda fallen kan det åsidosättas med
+    kommandoradsalternativet "--currentlocalefont".
+
+
+     
+→ uifont=TYPSNITTSNAMN ←
+
+    Detta alternativ gör att Rita med Tux försöker ladda in teckensnitt (för
+    användning i textverktyget ) från operativsystemet. Normalt laddar Rita med
+    Tux bara de teckensnitt som medföljer Rita med Tux.
+
+    Ange "default" för att låta Rita med Tux använda sitt standardteckensnitt,
+    "DejaVu Sans" (standardbeteende).
+
+
+     
+
+                              ### Skriver ut ###
+
+## Skriv ut behörigheter ##
+
+→ noprint=yes ←
+
+    Inaktivera utskriftsfunktionen.
+
+
+     
+→ printdelay=SEKUNDER ←
+
+    Begränsa utskriften så att den endast kan ske en gång var SEKUNDER sekund.
+
+    ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+    åsidosättas av användarens konfigurationsfil med "printdelay=0". I båda
+    fallen kan det åsidosättas med kommandoradsalternativet "--printdelay=0".
+
+
+     
+
+## Visa dialogruta för skrivare ##
+
+→ altprint=always ←
+
+    Detta gör att Rita med Tux alltid visar skrivardialogen (eller, på Linux/
+    Unix, kör "altprintcommand") när man klickar på "Print"-knappen. Med andra
+    ord, det är som att klicka på "Print" medan du håller in [Alt], förutom att
+    du inte behöver hålla in [Alt] varje gång.
+
+
+     
+→ altprint=never ←
+
+    Detta förhindrar Rita med Tux från att någonsin visa skrivardialogen
+    (eller, på Linux/Unix, köra "altprintcommand") när man klickar på
+    "Print"-knappen. Med andra ord får tangenten [Alt] ingen effekt när man
+    klickar på "Print"-knappen.
+
+
+     
+→ altprint=mod ←
+
+    Detta är det normala standardbeteendet. Rita med Tux visar en skrivardialog
+    (eller, under Linux/Unix, kör "altprintcommand") när tangenten [Alt] hålls
+    nedtryckt samtidigt som man klickar på knappen "Print". Om du klickar på
+    "Print" utan att hålla in [Alt] skrivs ut utan att en dialogruta visas.
+
+
+     
+
+## Spara skrivarens konfiguration ##
+
+    → printcfg=yes ←
+
+        (Endast Windows och macOS)
+
+        Rita med Tux använder en konfigurationsfil för skrivaren vid utskrift.
+        Tryck på tangenten [Alt] samtidigt som du klickar på knappen "Skriv ut"
+        i Rita med Tux för att få fram ett dialogfönster för utskrift i
+        Windows.
+
+        Alla konfigurationsändringar som görs i denna dialog sparas i filen
+        "userdata/print.cfg" och kan användas igen så länge alternativet
+        "printcfg" är inställt.
+
+        💡 Obs: Detta fungerar bara när du inte kör Rita med Tux i
+        helskärmsläge.
+
+        ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+        åsidosättas av användarens konfigurationsfil med hjälp av "printcfg=no"
+        eller "noprintcfg=yes". I båda fallen kan det åsidosättas med
+        kommandoradsalternativet "--noprintcfg".
+
+
+         
+   
+    ## Kommandon för utskrift ##
+
+    → printcommand=KOMMANDO ←
+
+        (endast Linux och Unix)
+
+        Använd kommandot KOMMANDO för att skriva ut en fil i PostScript-format
+        när du klickar på knappen "Skriv ut". Om det här alternativet inte är
+        specifikt inställt är standardkommandot:
+
+            lpr
+
+
+         
+    → altprintcommand=KOMMANDO ←
+
+        (endast Linux och Unix)
+
+        Använd kommandot KOMMANDO för att skriva ut en fil i PostScript-format
+        när du klickar på knappen "Skriv ut" samtidigt som du håller in
+        modifieringstangenten [Alt]. (Detta används vanligtvis för att skapa en
+        utskriftsdialog, på samma sätt som när du trycker på [Alt]+'Print' i
+        Windows och macOS)
+
+        Om det här alternativet inte är specifikt inställt, är
+        standardkommandot KDE:s grafiska utskriftsdialog:
+
+            kprinter
+
+
+         
+   
+    ## Pappersstorlek ##
+
+    → papersize=PAPPERSSTORLEK ←
+
+        (Plattformar som använder Rita med Tuxs interna PostScript-generator -
+        inte Windows, macOS, BeOS eller Haiku)
+
+        Tala om för Rita med Tux vilken storlek på PostScript som ska
+        genereras. Om ingen anges kontrollerar Rita med Tux först
+        miljövariabeln $PAPER, sedan filen /etc/papersize och använder sedan
+        standardpappersstorleken i biblioteket 'libpaper'.
+
+        Giltiga pappersstorlekar inkluderar: letter, legal, tabloid, executive,
+        note, statement, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, b0, b1,
+        b2 b3, b4, 10x14, 11x17, halfletter, halfexecutive, halfnote, folio,
+        quarto, ledger, archA, archB, archC, archD, archE, flsa, flse, csheet,
+        dsheet, esheet.
+
+
+         
+   
+                                  ### Sparar ###
+
+    ## Spara över tidigare arbete ##
+
+    → saveover=yes ←
+
+        Detta inaktiverar frågan"Spara över den gamla versionen...?" när en
+        befintlig fil sparas. Med detta alternativ kommer den äldre versionen
+        alltid att ersättas av den nya versionen automatiskt.
+
+
+         
+    → saveover=new ←
+
+        Detta inaktiverar också frågan"Spara över den gamla versionen...?" när
+        du sparar en befintlig fil. Detta alternativ kommer dock alltid att
+        spara en ny fil i stället för att skriva över den äldre versionen.
+
+
+         
+    → saveover=ask ←
+
+        (Detta alternativ är överflödigt eftersom det är standardinställningen)
+        När du sparar en befintlig ritning får du först frågan om du vill spara
+        över den äldre versionen eller inte.
+
+
+         
+   
+    ## Börja om ##
+
+    → startblank=yes ←
+
+        Detta gör att Rita med Tux visar en tom bild när den startas första
+        gången, i stället för att ladda den senaste bilden som redigerades.
+
+        ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+        åsidosättas av användarens konfigurationsfil med hjälp av "startblank=
+        no" eller "startlast=yes". I båda fallen kan det åsidosättas med
+        kommandoradsalternativet "--startlast".
+
+
+         
+    → newcolorslast=yes ←
+
+        Placerar de tomma färgalternativen i dialogrutan Ny i slutet, så att
+        eventuella startbilder och/eller mallar visas först.
+
+        ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+        åsidosättas av användarens konfigurationsfil med hjälp av
+        "newcolorslast=no" eller "newcolorsfirst=yes". I båda fallen kan det
+        åsidosättas med kommandoradsalternativet "--newcolorsfirst".
+
+
+         
+   
+    ## Spara och exportera kataloger ##
+
+    → savedir=KATALOG ←
+
+        Använd det här alternativet för att ändra var Rita med Tuxs katalog/
+        mapp "saved" finns, där Rita med Tux sparar och öppnar bilder.
+
+        Om du inte åsidosätter den, kommer standard plats:
+
+        → Linux / Unix ←
+            Under en dold katalog i din hemkatalog:
+            /home/användarnamn/.tuxpaint/saved/
+             
+        → Windows ←
+            C:\Users\användarnamn\AppData\Roaming\TuxPaint\saved\
+             
+        → macOS ←
+            /Användare/användarnamn/Bibliotek/Applikationsstöd/TuxPaint/saved/
+             
+        → Haiku ←
+            /boot/home/config/settings/TuxPaint/saved/
+             
+
+        💡 Obs: När du anger en Windows-enhet (t.ex. "H:\") måste du också ange
+        en underkatalog.
+
+        📜 Obs: Före version 0.9.18 använde Rita med Tux även inställningen
+        eller standardinställningen för "savedir" som plats för att söka efter
+        filer med personuppgifter (penslar, stämplar, startbilder och
+        teckensnitt). Från och med version 0.9.18 kan de specificeras separat
+        (se alternativet "datadir" nedan).
+
+        Exempel: savedir=Z:\tuxpaint\
+
+
+         
+    → exportdir=KATALOG ←
+
+        Använd det här alternativet för att ändra var Rita med Tux exporterar
+        filer - enstaka bilder eller animerade GIF-bildspel - för extern
+        användning.
+
+        Om du inte åsidosätter den, kommer standard plats:
+
+          # Linux & Unix - Om tillgängligt, där din skrivbordsmiljö är
+            konfigurerad för att bilder ska lagras, baserat på din XDG (X
+            Desktop Group)-konfiguration. (Prova att köra kommandoraden
+            "xdg-user-dir PICTURES" för att ta reda på det)
+            Vanligtvis (i en engelsk lokal) kommer detta att vara en
+            "Bilder"-underkatalog i din hemkatalog (dvs. 
+            "/home/användarnamn/Bilder").
+            Rita med Tux kommer att återgå till att använda den typiska
+            katalogen om ingen XDG-konfiguration kan läsas eller om inget har
+            angetts för "XDG_PICTURES_DIR".
+          # Windows - "My Pictures" katalog för varje användare (normalt 
+            "C:\Users\användarnamn\My Pictures")
+            Du kan öppna mappen direkt på följande sätt:
+              @ Tryck på tangenten "[Windows]+[R]" för att öppna dialogen "Kör
+                ...".
+              @ Ange "Shell:My Pictures" i textrutan och tryck på [OK].
+          # macOS — TBD!
+
+        💡 Obs: När standardinställningarna används kommer en ny underkatalog
+        "TuxPaint" att skapas och användas. (t.ex. 
+        "/home/användarnamn/Bilder/TuxPaint") När alternativet "--exportdir"
+        används, kommer den exakta sökvägen som anges att användas (ingen
+        "TuxPaint" underkatalog skapas).
+
+        Själva katalogen (t.ex. "/home/användarnamn/Bilder/TuxPaint") kommer
+        att skapas om den inte redan finns.
+
+        Om den överordnade katalogen (t.ex. "/home/användarnamn/Bilder") inte
+        heller finns, kommer Rita med Tux att försöka skapa den också (men inte
+        några högre kataloger än så).
+
+        Exempel: exportdir=/home/penguin/TuxPaintExports
+
+
+         
+   
+    ## Fler alternativ för sparande ##
+
+    → nosave=yes ←
+
+        Detta inaktiverar Rita med Tuxs förmåga att spara filer (och
+        inaktiverar därför "Spara"-knappen på skärmen). Det kan användas i
+        situationer där programmet bara används för skojs skull eller i en
+        testmiljö.
+
+        ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+        åsidosättas av användarens konfigurationsfil med hjälp av "nosave=no"
+        eller "save=yes". I båda fallen kan det åsidosättas med
+        kommandoradsalternativet "--save".
+
+
+         
+    → autosave=yes ←
+
+        Detta förhindrar att Rita med Tux frågar om du vill spara den aktuella
+        bilden när du avslutar, och förutsätter att du gör det.
+
+        ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+        åsidosättas av användarens konfigurationsfil med hjälp av "autosave=no"
+        eller "noautosave=yes". I båda fallen kan det åsidosättas med
+        kommandoradsalternativet "--noautosave".
+
+
+         
+    → reversesort=yes ←
+
+        Detta ändrar sorteringen i dialogrutorna Öppna och Bildspel, så att de
+        nyaste bilderna hamnar överst i listan.
+
+        ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+        åsidosättas av användarens konfigurationsfil med hjälp av "reversesort=
+        no" eller "noreversesort=yes". I båda fallen kan det åsidosättas med
+        kommandoradsalternativet "--noreversesort".
+
+
+         
+   
+                                   ### Data ###
+
+    ## Låsfil ##
+
+    → nolockfile=yes ←
+
+        Som standard använder Rita med Tux en s.k. "lockfile" för att förhindra
+        att programmet startas mer än en gång på 30 sekunder. (Detta för att
+        undvika att flera kopior körs av misstag, t.ex. genom att dubbelklicka
+        på en enkelklicksstartare eller helt enkelt otåligt klicka på ikonen
+        flera gånger)
+
+        Om du vill att Rita med Tux ska ignorera låsfilen och köra programmet
+        igen, även om det startades för mindre än 30 sekunder sedan, ska du
+        aktivera den här inställningen i konfigurationsfilen eller köra Rita
+        med Tux med alternativet --nolockfile på kommandoraden.
+
+        Som standard lagras låsfilen i "~/.tuxpaint/" under Linux och Unix, och
+        "userdata\" under Windows.
+
+        ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+        åsidosättas av användarens konfigurationsfil med hjälp av "nolockfile=
+        no" eller "lockfile=yes". I båda fallen kan det åsidosättas med
+        kommandoradsalternativet "--lockfile".
+
+
+         
+   
+    ## Katalog för användardata ##
+
+    → datadir=KATALOG ←
+
+        Använd det här alternativet för att ändra var Rita med Tux letar efter
+        personliga datafiler (penslar, stämplar, startbilder, mallar och
+        teckensnitt som är specifika för den aktuella användaren).
+
+        Rita med Tux söker efter underkataloger/undermappar med namnen
+        "brushes", "stamps", "starters", "templates" och "fonts" under den
+        angivna datakatalogen.
+
+        Om du inte åsidosätter den, kommer standard plats:
+
+        → Linux / Unix ←
+            /home/användarnamn/.tuxpaint/
+             
+        → Windows ←
+            C:\Users\användarnamn\AppData\Roaming\TuxPaint\
+             
+        → macoS ←
+            /Användare/användarnamn/Bibliotek/Applikationsstöd/TuxPaint/
+             
+
+        📜 Obs: Före version 0.9.18 använde Rita med Tux samma inställning eller
+        standard som för "savedir" för att söka efter datafiler. Från och med
+        version 0.9.18 kan de specificeras separat.
+
+        💡 Obs: När du anger en Windows-enhet (t.ex. "H:\") måste du också ange
+        en underkatalog.
+
+        Exempel: datadir=/home/johnny/tuxpaint-data/
+
+
+         
+   
+    ## Färgpalettfil ##
+
+    → colorfile=FILNAMN ←
+
+        Du kan åsidosätta Rita med Tuxs standardfärgpalett genom att skapa en
+        ren ASCII-textfil som beskriver de färger du vill ha och peka på den
+        filen med alternativet "colorfile".
+
+        Filen ska innehålla en färg per rad. Färger definieras med hjälp av
+        värdena för rött, grönt och blått, var och en från 0 (släckt) till 255
+        (ljusast). (Mer information finns i Wikipedias artikel"RGB-färgmodell")
+
+        Färgerna kan anges med tre decimala siffror (t.ex. "255 68 136") eller
+        en sex- eller tresiffrig hexadecimal "triplett" (t.ex. "#ff4488" eller
+        "#F48").
+
+        Efter färgdefinitionen (på samma rad) kan du ange en text för att
+        beskriva färgen. Tux kommer att visa denna text när färgen klickas på
+        (till exempel "#FFF Vit som snö.")
+
+        Som ett exempel kan du se de standardfärger som för närvarande används
+        i Rita med Tux i: "default_colors.txt".
+
+        OBSERVERA: Du måste separera decimala värden med mellanslag och inleda
+        hexadecimala värden med ett pund-/nummertecken ("#"). I 3-siffrig
+        hexadecimal används varje siffra för både den höga och den låga halvan
+        av byten, så "#FFF" är samma sak som "#FFFFFF", inte "#F0F0F0".
+
+
+         
+   
+                                ### Hjälpmedel ###
+
+    ## Mus ##
+
+    → mouse-accessibility=yes ←
+
+        I det här läget klickar du inte, drar och släpper (t.ex. för att rita),
+        utan du klickar, flyttar och klickar igen för att avsluta rörelsen.
+
+
+         
+   
+    ## Tangentbord ##
+
+    → keyboard=yes ←
+
+        Detta gör att tangentbordets piltangenter kan användas för att styra
+        muspekaren. (t.ex. för muslösa miljöer eller för funktionshindrade/
+        tillgänglighet)
+
+        Funktioner:
+
+          # Fin rörelse inom bildytan, eller grov rörelse om Shift hålls
+            intryckt.
+          # Grov rörelse inom verktygsknapparnas områden.
+          # Nyckelkontroller:
+              @ [Left]/[Right]/[Up]/[Down], numpad [1] till [9]: Flytta musen
+              @ [Space]/[5]: Klicka på musen (utom när du använder verktygen
+                "Text" eller "Etikett")
+              @ [Insert]/[F5]: Klicka på musen (alltid)
+              @ [F4] flytta musen mellan "Verktyg", "Färger" och dukytorna
+              @ Om musen befinner sig i avsnittet "Verktyg" till vänster eller
+                i avsnittet "Färger" längst ned:
+                  - [F7], [F8]: Flytta nedåt/uppåt mellan knapparna (endast
+                    avsnittet Verktyg)
+                  - [F11], [F12]: Flytta till föregående respektive nästa knapp
+          # För att klicka och dra håller du ned en av "klick"-knapparna (t.ex.
+            [Insert]) och använder förflyttningsknapparna (t.ex. [Left]).
+
+            💡 Obs: Funktionen "mustillgänglighet" fungerar med tangentbordets
+            muskontroller. När båda alternativen är aktiverade kan du använda
+            målarverktygen för att rita genom att trycka på en "klick"-tangent
+            för att börja klicka, förflyttningstangenter för att flytta runt
+            (vilket ritar) och en annan "klick"-tangent för att avsluta klicket
+            (sluta rita).
+
+          # En vanlig mus och/eller joystick kan fortfarande användas (så att
+            du t.ex. kan flytta med musen och klicka med tangentbordet, eller
+            vice versa)
+
+        ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+        åsidosättas av användarens konfigurationsfil med hjälp av "keyboard=no"
+        eller "mouse=yes". I båda fallen kan det åsidosättas med
+        kommandoradsalternativet "--mouse".
+
+
+         
+   
+    ## Tangentbord på skärmen ##
+
+    → onscreen-keyboard=yes ←
+
+        Visar ett klickbart tangentbord på skärmen när du använder verktygen
+        Text och Etikett.
+
+
+         
+    → onscreen-keyboard-layout=LAYOUTNAME ←
+
+        Väljer den ursprungliga layouten för tangentbordet på skärmen när du
+        använder verktygen Text och Etikett.
+        Obs: Om du använder detta alternativ innebär det automatiskt
+        onscreen-keyboard=yes, så det är överflödigt att ställa in båda.
+
+
+         
+    → onscreen-keyboard-disable-change=yes ←
+
+        Inaktiverar möjligheten att ändra layout på skärmtangentbordet när du
+        använder verktygen Text och Etikett, vilket är användbart för att
+        förenkla för små barn.
+        Obs: Om du använder detta alternativ innebär det automatiskt
+        onscreen-keyboard=yes, så det är överflödigt att ställa in båda.
+
+        ⚙ Obs: Om den används i en systemomfattande konfigurationsfil kan den
+        åsidosättas av användarens konfigurationsfil med
+        "onscreen-keyboard-disable-change=no". I båda fallen kan det
+        åsidosättas med kommandoradsalternativet
+        "--onscreen-keyboard-disable-change=no".
+
+
+         
+   
+                                 ### Styrspak ###
+
+    ## Huvudenhet ##
+
+    → joystick-dev=N ←
+
+        Ange vilken joystickenhet som ska användas av Rita med Tux.
+        Standardvärdet är 0 (den första joysticken).
+
+
+         
+    → joystick-slowness=HASTIGHET ←
+
+        Ställer in en fördröjning vid varje axelrörelse, vilket gör det möjligt
+        att sakta ner joysticken. Tillåtna värden är från 0 till 500.
+        Standardvärdet är 15.
+
+
+         
+    → joystick-threshold=TRÖSKELVÄRDE ←
+
+        Ställer in den lägsta nivån av axelrörelse för att börja flytta
+        pekaren. Tillåtna värden är från 0 till 32766. Standardvärdet är 3200.
+
+
+         
+    → joystick-maxsteps=STEG ←
+
+        Ställer in det maximala antalet pixlar som pekaren flyttar på en gång.
+        Tillåtna värden är från 1 till 7. Standardvärdet är 7.
+
+
+         
+   
+    ## Hatt ##
+
+    → joystick-hat-slowness=HASTIGHET ←
+
+        Ställer in en fördröjning vid varje automatisk rörelse, vilket gör det
+        möjligt att sakta ner hattens hastighet. Tillåtna värden är från 0 till
+        500. Standardvärdet är 15.
+
+
+         
+    → joystick-hat-timeout=MILLISEKUNDER ←
+
+        Ställer in fördröjningen efter vilken pekaren börjar röra sig
+        automatiskt om hatten hålls intryckt. Tillåtna värden är från 0 till
+        3000. Standardvärdet är 1000.
+
+
+         
+   
+    ## Knappar som ska inaktiveras ##
+
+    → joystick-buttons-ignore=KNAPP1,KNAPP2,... ←
+
+        En uppsättning nummer för joystickknappar som SDL ser och som ska
+        ignoreras. Om de inte används av något av alternativen "joystick-btn-"
+        ovan kommer knapparna att uppfattas som ett vänsterklick med musen.
+
+
+         
+
+## Kortkommandon för knappar ##
+
+    → joystick-btn-escape=KNAPP NUMMER ←
+
+        Väljer joystickknappens nummer, sett av SDL, som ska användas för att
+        generera en escape-händelse. Användbart för att avfärda dialoger och
+        avsluta.
+
+
+         
+    → joystick-btn-brush=KNAPP NUMMER ←
+
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg till
+        välj penselverktyget.
+
+
+         
+    → joystick-btn-stamp=KNAPP NUMMER ←
+
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg till
+        välj stämpelverktyget.
+
+
+         
+    → joystick-btn-lines=KNAPP NUMMER ←
+
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg till
+        välj linjeverktyget.
+
+
+         
+    → joystick-btn-shapes=KNAPP NUMMER ←
+
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg till
+        välj formverktyget.
+
+
+         
+    → joystick-btn-text=KNAPP NUMMER ←
+
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg till
+        välj textverktyget.
+
+
+         
+    → joystick-btn-label=KNAPP NUMMER ←
+
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg till
+        välj etikettverktyget.
+
+
+         
+    → joystick-btn-fill=KNAPP NUMMER ←
+
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg till
+        välj fyllningsverktyget.
+
+
+         
+    → joystick-btn-magic=KNAPP NUMMER ←
+
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg till
+        välj det magiska verktyget.
+
+
+         
+    → joystick-btn-undo=KNAPP NUMMER ←
+
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg till
+        anropa ångra-verktyget.
+
+
+         
+    → joystick-btn-redo=KNAPP NUMMER ←
+
+        Väljer joystickknappens nummer, enligt SDL, som kommer att vara en
+        genväg för att välja återställningsverktyg.
+
+
+         
+    → joystick-btn-eraser=KNAPP NUMMER ←
+
+        Väljer joystickknappens nummer, enligt SDL, som kommer att vara en
+        genväg för att välja sudda-verktyget.
+
+
+         
+    → joystick-btn-new=KNAPP NUMMER ←
+
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg för
+        att starta dialogrutan för att skapa en ny ritning.
+
+
+         
+    → joystick-btn-open=KNAPP NUMMER ←
+
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg för
+        att starta dialogrutan för att öppna en befintlig ritning.
+
+
+         
+    → joystick-btn-save=KNAPP NUMMER ←
+
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg till
+        spara ritningen.
+
+
+         
+    → joystick-btn-pgsetup=KNAPP NUMMER ←
+
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg till
+        starta dialogrutan för sidinställning för utskrift.
+
+
+         
+    → joystick-btn-print=KNAPP NUMMER ←
+
+        Väljer joystickknappens nummer, enligt SDL, som ska vara en genväg till
+        skriv ut.
+
+
+         
+   
+    Åsidosättande av System Config. Alternativ
+
+    Om något av ovanstående alternativ är inställt i en systemomfattande
+    konfigurationsfil (t.ex. "/etc/tuxpaint/tuxpaint.conf" på Linux) kan du
+    åsidosätta dem i din egen personliga konfigurationsfil (t.ex. 
+    "/home/användarnamn/.tuxpaintrc")
+
+    För true/false-alternativ, som "noprint" och "grab", kan du helt enkelt
+    säga att de är lika med "no" i din personliga konfigurationsfil:
+
+        noprint=no
+        uppercase=no
+
+    Du kan också använda alternativ som liknar de alternativ för
+    kommandoradsöverstyrning som beskrivs nedan. Till exempel:
+
+        print=yes
+        mixedcase=yes
+
+    Alternativ för kommandoraden
+
+    Alternativ kan också anges på kommandoraden när du startar Rita med Tux.
+
+    → --fullscreen=yes
+    --fullscreen=native
+    --BREDDxSKÄRMHÖJD
+    --orient=portrait
+    --buttonsize=STRL
+    --colorsrows=RADER
+    --native
+    --allowscreensaver
+    --startblank
+    --nosound
+    --nostereo
+    --noquit
+    --noprint
+    --printdelay=SEKUNDER
+    --printcfg
+    --altprintnever
+    --altprintalways
+    --papersize=PAPPERSSTORLEK
+    --printcommand=KOMMANDO
+    --altprintcommand=KOMMANDO
+    --nolockfile
+    --simpleshapes
+    --uppercase
+    --grab
+    --noshortcuts
+    --nowheelmouse
+    --nobuttondistinction
+    --nofancycursors
+    --hidecursor
+    --nooutlines
+    --nostamps
+    --nostampcontrols
+    --nostamprotation
+    --nomagiccontrols
+    --nomagicsizes
+    --noshapecontrols
+    --nolabel
+    --nobrushspacing
+    --newcolorslast
+    --mouse-accessibility
+    --onscreen-keyboard
+    --onscreen-keyboard-layout
+    --onscreen-keyboard-disable-change
+    --joystick-dev
+    --joystick-slowness
+    --joystick-threshold
+    --joystick-maxsteps
+    --joystick-hat-slowness
+    --joystick-hat-timeout
+    --joystick-btn-escape
+    --joystick-btn-brush
+    --joystick-btn-stamp
+    --joystick-btn-lines
+    --joystick-btn-shapes
+    --joystick-btn-text
+    --joystick-btn-label
+    --joystick-btn-magic
+    --joystick-btn-undo
+    --joystick-btn-redo
+    --joystick-btn-eraser
+    --joystick-btn-new
+    --joystick-btn-open
+    --joystick-btn-save
+    --joystick-btn-pgsetup
+    --joystick-btn-print
+    --joystick-buttons-ignore
+    --sysfonts
+    --uifont=TYPSNITTSNAMN
+    --alllocalefonts
+    --mirrorstamps
+    --stampsize=STRL
+    --keyboard
+    --savedir KATALOG
+    --datadir KATALOG
+    --exportdir KATALOG
+    --saveover
+    --saveovernew
+    --nosave
+    --autosave
+    --reversesort
+    --lang SPRÅK
+    --colorfile FIL
+    ←
+
+        Dessa aktiverar eller motsvarar de konfigurationsfilalternativ som
+        beskrivs ovan.
+
+
+         
+    → --windowed
+    --800x600
+    --orient=landscape
+    --disablescreensaver
+    --startlast
+    --sound
+    --stereo
+    --quit
+    --print
+    --printdelay=0
+    --noprintcfg
+    --altprintmod
+    --lockfile
+    --complexshapes
+    --mixedcase
+    --dontgrab
+    --shortcuts
+    --wheelmouse
+    --buttondistinction
+    --fancycursors
+    --showcursor
+    --outlines
+    --stamps
+    --stampcontrols
+    --stamprotation
+    --magiccontrols
+    --magicsizes
+    --shapecontrols
+    --label
+    --brushspacing
+    --newcolorsfirst
+    --nosysfonts
+    --currentlocalefont
+    --uifont=default
+    --dontmirrorstamps
+    --stampsize=default
+    --mouse
+    --saveoverask
+    --save
+    --noautosave
+    --noreversesort
+    ←
+
+        Dessa alternativ kan användas för att åsidosätta alla inställningar som
+        gjorts i konfigurationsfilen. (Om alternativet inte har angetts i
+        konfigurationsfilen/filerna behövs inget åsidosättandealternativ)
+
+
+         
+    → --nosysconfig ←
+
+        Detta förhindrar att den systemomfattande konfigurationsfilen (t.ex. 
+        "/etc/tuxpaint/tuxpaint.conf" på Linux) läses.
+
+        Endast din egen konfigurationsfil (t.ex. 
+        "/home/användarnamn/.tuxpaintrc" på Linux) - om den finns - kommer att
+        användas.
+
+
+         
+   
+                ### Alternativ för information på kommandoraden ###
+
+    Följande alternativ visar lite informativ text på skärmen. Rita med Tux
+    startar dock inte upp och körs efteråt.
+
+    → --version
+    --verbose-version ←
+
+        Visar versionsnummer och datum för den kopia av Rita med Tux som du
+        kör. "--verbose-version" visar också vilka kompileringstidsalternativ
+        som ställdes in. (Se INSTALL och FAQ).
+
+
+         
+    → --copying ←
+
+        Visa kortfattad licensinformation om kopiering av Rita med Tux.
+
+
+         
+    → --usage ←
+
+        Visa listan över tillgängliga kommandoradsalternativ.
+
+
+         
+    → --help ←
+
+        Visa kortfattad hjälp med att använda Rita med Tux.
+
+
+         
+    → --lang help ←
+
+        Visa en lista över tillgängliga språk i Rita med Tux.
+
+
+         
+    → --joystick-dev list ←
+
+        Visa lista över anslutna joysticks som är tillgängliga för Rita med
+        Tux.
+
+
+         
+   
+    Att välja ett annat språk
+
+    Rita med Tux har översatts till ett antal olika språk. För att få tillgång
+    till översättningarna kan du använda alternativet "--lang" på kommandoraden
+    för att ställa in språket (t.ex. "--lang spanish") eller använda
+    inställningen "lang=" i konfigurationsfilen (t.ex. "lang=spanish").
+
+    Rita med Tux tar också hänsyn till din miljös aktuella locale. (Du kan
+    åsidosätta det på kommandoraden med hjälp av alternativet "--locale"; se
+    ovan)
+
+    Använd alternativet "--lang help" för att lista de tillgängliga
+    språkalternativen.
+
+                            ### Tillgängliga språk ###
+
+    +-----------------------------------------------------------------------------+
+    |                     |      Språk       |     Språk      |  Inmatningsmetod  |
+    | Lokalanpassningskod |   (modersmål)    |   (engelskt    |       Cykel       |
+    |                     |                  |     namn)      | Nyckelkombination |
+    |---------------------+------------------+----------------+-------------------|
+    | C                   |                  | English        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | ach_UG              | Acoli            | Acholi         |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | af_ZA               |                  | Afrikaans      |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | ak_GH               |                  | Akan           |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | am_ET               |                  | Amharic        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | an_ES               |                  | Aragones       |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | ar_SA               |                  | Arabic         |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | as_IN               |                  | Assamese       |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | ast_ES              |                  | Asturian       |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | az_AZ               |                  | Azerbaijani    |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | bm_ML               |                  | Bambara        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | bn_IN               |                  | Bengali        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | be_BY               | Bielaruskaja     | Belarusian     |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | bg_BG               |                  | Bulgarian      |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | bo_CN (*)           |                  | Tibetan        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | br_FR               | Brezhoneg        | Breton         |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | brx_IN              |                  | Bodo           |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | bs_BA               |                  | Bosnian        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | ca_ES               | Català           | Catalan        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | ca_ES@valencia      | Valencia         | Valencian      |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | cgg_UG              | Chiga            | Kiga           |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | cs_CZ               | Cesky            | Czech          |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | cy_GB               | Cymraeg          | Welsh          |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | da_DK               | Dansk            | Danish         |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | de_DE               | Deutsch          | German         |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | doi_IN              |                  | Dogri          |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | et_EE               |                  | Estonian       |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | el_GR (*)           |                  | Greek          |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | en_AU               |                  | Australian     |                   |
+    |                     |                  | English        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | en_CA               |                  | Canadian       |                   |
+    |                     |                  | English        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | en_GB               |                  | British        |                   |
+    |                     |                  | English        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | en_ZA               |                  | South African  |                   |
+    |                     |                  | English        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | eo                  |                  | Esperanto      |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | es_ES               | Español          | Spanish        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | es_MX               | Español-Mejicano | Mexican        |                   |
+    |                     |                  | Spanish        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | eu_ES               | Euskara          | Basque         |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | fa_IR               |                  | Persian        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | ff_SN               | Fulah            | Fula           |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | fi_FI               | Suomi            | Finnish        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | fo_FO               |                  | Faroese        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | fr_FR               | Français         | French         |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | ga_IE               | Gàidhlig         | Irish Gaelic   |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | gd_GB               | Ghaidhlig        | Scottish       |                   |
+    |                     |                  | Gaelic         |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | gl_ES               | Galego           | Galician       |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | gos_NL              | Zudelk           | Gronings       |                   |
+    |                     | Veenkelonioals   |                |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | gu_IN               |                  | Gujarati       |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | he_IL (*)           |                  | Hebrew         |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | hi_IN (*)           |                  | Hindi          |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | hr_HR               | Hrvatski         | Croatian       |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | hu_HU               | Magyar           | Hungarian      |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | hy_AM               | Hayeren          | Armenian       |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | id_ID               | Bahasa Indonesia | Indonesian     |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | is_IS               | Íslenska         | Icelandic      |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | it_IT               | Italiano         | Italian        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | iu_CA               |                  | Inuktitut      |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | ja_JP (*)           |                  | Japanese       | höger [Alt] eller |
+    |                     |                  |                | vänster [Alt]     |
+    |---------------------+------------------+----------------+-------------------|
+    | ka_GE               |                  | Georgian       |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | kab                 |                  | Kabyle         |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | km_KH               |                  | Khmer          |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | kn_IN               |                  | Kannada        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | ko_KR (*)           |                  | Korean         | höger [Alt] eller |
+    |                     |                  |                | vänster [Alt]     |
+    |---------------------+------------------+----------------+-------------------|
+    | kok_IN              |                  | Konkani        |                   |
+    |                     |                  | (Devanagari)   |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | kok@roman           |                  | Konkani        |                   |
+    |                     |                  | (Roman)        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | ks_IN@devanagari    |                  | Kashmiri       |                   |
+    |                     |                  | (Devanagari)   |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | ks_IN               |                  | Kashmiri       |                   |
+    |                     |                  | (Perso-Arabic) |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | ku_TR               |                  | Kurdish        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | lb_LU               | Letzebuergesch   | Luxembourgish  |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | lg_UG               |                  | Luganda        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | lt_LT               | Lietuviu         | Lithuanian     |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | lv_LV               |                  | Latvian        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | mk_MK               |                  | Macedonian     |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | mai_IN              |                  | Maithili       |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | ml_IN               |                  | Malayalam      |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | mn_MN               |                  | Mongolian      |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | mni_IN              |                  | Manipuri       |                   |
+    |                     |                  | (Bengali)      |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | mni@meiteimayek     |                  | Manipuri       |                   |
+    |                     |                  | (Meitei Mayek) |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | mr_IN               |                  | Marathi        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | ms_MY               |                  | Malay          |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | nb_NO               | Norsk (bokmål)   | Norwegian      |                   |
+    |                     |                  | Bokmål         |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | ne_NP               | Nepali           |                |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | nl_NL               |                  | Dutch          |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | nn_NO               | Norsk (nynorsk)  | Norwegian      |                   |
+    |                     |                  | Nynorsk        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | nr_ZA               |                  | Ndebele        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | nso_ZA              | Sesotho sa Leboa | Northern Sotho |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | oc_FR               |                  | Occitan        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | oj_CA               | Ojibwe           | Ojibway        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | pa_IN               |                  | Punjabi        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | or_IN               | Odia             | Oriya          |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | pl_PL               | Polski           | Polish         |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | pt_BR               | Portugês         | Brazilian      |                   |
+    |                     | Brazileiro       | Portuguese     |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | pt_PT               | Portugês         | Portuguese     |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | ro_RO               |                  | Romanian       |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | ru_RU               | Russkiy          | Russian        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | rw_RW               |                  | Kinyarwanda    |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | sa_IN               |                  | Sanskrit       |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | sat_IN              |                  | Santali        |                   |
+    |                     |                  | (Devanagari)   |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | sat@olchiki         |                  | Santali        |                   |
+    |                     |                  | (Ol-Chikii)    |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | shs_CA              | Secwepemctin     | Shuswap        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | si_LK               |                  | Sinhala        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | sd_IN@devanagari    |                  | Sindhi         |                   |
+    |                     |                  | (Devanagari)   |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | sd_IN               |                  | Sindhi         |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | sk_SK               |                  | Slovak         |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | sl_SI               |                  | Slovenian      |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | son                 |                  | Songhay        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | sq_AL               |                  | Albanian       |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | sr_YU               |                  | Serbian        |                   |
+    |                     |                  | (cyrillic)     |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | sr_RS@latin         |                  | Serbian        |                   |
+    |                     |                  | (latin)        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | su_ID               |                  | Sundanese      |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | sv_SE               | Svenska          | Swedish        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | sw_TZ               |                  | Swahili        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | ta_IN (*)           |                  | Tamil          |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | te_IN (*)           |                  | Telugu         |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | th_TH (*)           |                  | Thai           |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | tl_PH (*)           |                  | Tagalog        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | tlh                 | tlhIngan         | Klingon        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | tr_TR               |                  | Turkish        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | tw_GH               |                  | Twi            |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | uk_UA               |                  | Ukrainian      |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | ur_IN               |                  | Urdu           |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | ve_ZA               |                  | Venda          |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | vec                 | Venèto           | Venetian       |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | vi_VN               |                  | Vietnamese     |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | wa_BE               |                  | Walloon        |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | wo_SN               |                  | Wolof          |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | xh_ZA               |                  | Xhosa          |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | zh_CN (*)           |                  | Chinese        |                   |
+    |                     |                  | (Simplified)   |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | zh_TW (*)           |                  | Chinese        |                   |
+    |                     |                  | (Traditional)  |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | zam                 |                  | Zapotec        |                   |
+    |                     |                  | (Miahuatlan)   |                   |
+    |---------------------+------------------+----------------+-------------------|
+    | zu_ZA               |                  | Zulu           |                   |
+    +-----------------------------------------------------------------------------+
+
+    (*) - Dessa språk kräver sina egna teckensnitt, eftersom de inte
+    representeras med en latinsk teckenuppsättning, som de andra. Se avsnittet
+    "Särskilda teckensnitt" avsnittet nedan.
+
+    💡 Obs: Rita med Tux tillhandahåller en alternativ inmatningsmetod för att
+    mata in tecken med textverktyget på vissa platser. Den eller de
+    tangentkombinationer som anges kan användas för att växla mellan de
+    inmatningsmetoder som stöds medan textverktyget är aktivt.
+
+                 ### Ställa in lokal språkdräkt för din miljö ###
+
+    Om du byter lokal påverkas mycket av din miljö.
+
+    Som nämnts ovan låter Rita med Tux dig inte bara välja språk under körning
+    med hjälp av kommandoradsalternativ ("--lang" och "--locale"), utan Rita
+    med Tux tar också hänsyn till den globala locale-inställningen i din miljö.
+
+    Om du inte redan har ställt in din miljös locale, följer här en kort
+    beskrivning av hur du gör:
+
+    ## Linux/Unix-användare ##
+
+    Kontrollera först att det språk du vill använda är aktiverat genom att
+    redigera filen "/etc/locale.gen" på ditt system och sedan köra programmet
+    "locale-gen" som root.
+
+    💡 Obs: Debian-användare kanske helt enkelt kan köra kommandot
+    "dpkg-reconfigure locales" som root för att få upp en konfigurationsdialog.
+    Ubuntu-användare kan köra "sudo dpkg-reconfigure localeconf" (paketet
+    "localeconf" kan behöva installeras först), eller så kan du behöva redigera
+    filen "/var/lib/locales/supported.d/local" först och lägga till önskade
+    lokaliteter från listan som finns i "/usr/share/i18n/SUPPORTED".
+
+    Innan du kör Rita med Tux ska du sedan ställa in miljövariabeln "$LANG"
+    till en av de lokala språkversioner som anges ovan. (Om du vill att alla
+    program som kan översättas ska översättas, kan du placera följande i ditt
+    inloggningsskript; t.ex. "~/.profile", "~/.bashrc", "~/.cshrc", etc.)
+
+    Till exempel i ett Bourne Shell (som BASH):
+
+        export LANG=es_ES ; \
+        tuxpaint
+
+    Och i ett C Shell (som TCSH):
+
+        setenv LANG es_ES ; \
+        tuxpaint
+
+    ## Windows-användare ##
+
+    Rita med Tux känner igen det aktuella språket och använder lämpliga filer
+    som standard. Så det här avsnittet är bara för personer som provar olika
+    språk.
+
+    Det enklaste är att använda "--lang"-omkopplaren i genvägen (se "INSTALL").
+    Men genom att använda ett MSDOS Prompt-fönster är det också möjligt att ge
+    ett kommando som detta:
+
+        set LANG=es_ES
+
+    ...som kommer att bestämma språket för hela DOS-fönstrets livslängd.
+
+    Om du vill ha något mer permanent kan du ställa in en "miljövariabel" med
+    hjälp av dialogen "Systemets egenskaper" på följande sätt:
+
+      + Tryck på tangentkombinationen "[Windows]+[R]" för att öppna dialogen
+        "Kör ...".
+      + Skriv in "sysdm.cpl" i textrutan och klicka på knappen "[OK]" för att
+        öppna dialogen "Systemets egenskaper".
+      + Välj fliken "Avancerat".
+      + Klicka på knappen "Miljövariabler...".
+      + Redigera värdet för parametern "LANG" (skapa den om den inte finns).
+   
+                           ### Särskilda teckensnitt ###
+
+    Vissa språk kräver att särskilda teckensnitt installeras. Dessa
+    teckensnittsfiler (som är i TrueType-format (TTF)) är alldeles för stora
+    för att inkluderas i nedladdningen av Rita med Tux, och finns tillgängliga
+    separat. (Se tabellen ovan, under rubriken "Välja ett annat språk"
+    avsnitt.)
+
+    📜 Observera: Från och med version 0.9.18 använder Rita med Tux biblioteket
+    "SDL_Pango", som använder biblioteket "Pango" för att rendera text i
+    användargränssnittet, i stället för att använda "SDL_ttf" direkt. Om inte
+    din kopia av Rita med Tux byggdes utan stöd för Pango, bör speciella
+    teckensnitt inte längre vara nödvändiga.
+
+    När Rita med Tux körs på ett språk som kräver ett eget teckensnitt försöker
+    Rita med Tux läsa in teckensnittsfilen från den systemomfattande katalogen
+    "fonts" (under en underkatalog "locale"). Filens namn motsvarar de två
+    första bokstäverna i språkets "locale"-kod (t.ex. "ko" för koreanska, "ja"
+    för japanska, "zh_tw" för traditionell kinesiska).
+
+    Till exempel, under Linux eller Unix, när Rita med Tux körs på koreanska
+    (t.ex. med alternativet "--lang korean"), kommer Rita med Tux att försöka
+    ladda följande teckensnittsfil:
+
+        /usr/share/tuxpaint/fonts/locale/ko.ttf
+
+    Du kan ladda ner teckensnitt för språk som stöds från Rita med Tuxs
+    webbplats, https://tuxpaint.org/.(Titta i avsnittet "Fonts" under
+    "Download.")
+
+    Under Unix och Linux kan du använda Makefile som medföljer teckensnittet
+    för att installera teckensnittet på rätt plats.
+   

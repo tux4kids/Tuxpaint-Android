@@ -1,0 +1,1596 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>
+      Rita med Tux Magic Tool Plugin API-dokumentation    </title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=utf-8">
+    <style>
+  body { font-size: large; }
+  table { font-size: large; }
+  div.screenshot-center {
+    text-align: center;
+  }
+  div.screenshot-right {
+    float: right;
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+  div.screenshot-right-after {
+    clear: both;
+  }
+  div.keeptogether { page-break-inside: avoid; }
+  section h1 { font-size: 2em; }
+  h1, h2, h3, h4, h5 { font-family: sans; }
+  h1 { color: #800; page-break-before: always; break-before: always; }
+  h2 { color: #440; page-break-after: avoid; break-after: avoid; }
+  h3 { color: #080; page-break-after: avoid; break-after: avoid; }
+  h4 { color: #008; page-break-after: avoid; break-after: avoid; }
+  h5 { color: #808; page-break-after: avoid; break-after: avoid; }
+  h1 + p { page-break-inside: avoid; }
+  h2 + p { page-break-inside: avoid; }
+  h3 + p { page-break-inside: avoid; }
+  h4 + p { page-break-inside: avoid; }
+  h5 + p { page-break-inside: avoid; }
+  dt {
+    font-size: large;
+    color: #404;
+    font-family: sans;
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+  }
+  dd, blockquote {
+    border-left: 1px solid #888;
+    padding-left: 1em;
+    border-radius: 0 0 0 1em;
+  }
+  p.note {
+    border: 1px solid #000;
+    background-color: #eee;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    display: inline-block;
+    margin-right: 3em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  section.outer {
+    padding-bottom: 1em;
+    border-bottom: 2px solid #000;
+  }
+  section.indent p,dl {
+    margin-left: 2em;
+  }
+  section.indent dl p {
+    margin-left: 0;
+  }
+  p + ul, p + ol {
+    margin-left: 2em;
+  }
+
+  @media print {
+    p {
+      orphans: 3;
+      widows: 3;
+    }
+  }
+</style>
+  </head>
+  <body bgcolor="#FFFFFF"
+        text="#000000"
+        link="#0000FF"
+        vlink="#FF0000"
+        alink="#FF00FF">
+
+    <!-- Title -->
+    <section class="outer">
+      <header>
+        <center>
+          <h1 style="page-break-before: avoid;">
+            <img src="../../html/images/tuxpaint-title.png"
+                width="205"
+                height="210"
+                alt="Tux Paint"><br>
+            version 0.9.35          </h1>
+
+          <h2>
+            Dokumentation av API för Magic Tool Plugin          </h2>
+
+          <p>
+            Copyright © 2007-2025 av olika bidragsgivare; se <a href="../../AUTHORS.txt">AUTHORS.txt</a>.<br>
+            <a href="https://tuxpaint.org/">https://tuxpaint.org/</a>
+          </p>
+
+          <p>
+            januari 12, 2025          </p>
+        </center>
+      </header>
+
+      <table border="2"
+             cellspacing="0"
+             cellpadding="2"
+             summary="Innehåll"
+             align="center"
+             style="page-break-inside: avoid;">
+        <tr>
+          <th>
+            Innehåll          </th>
+        </tr>
+
+        <tr>
+          <td>
+            <ul>
+              <li><a href="#prereqs">Förutsättningar</a></li>              <li><a href="#interfaces">Gränssnitt</a>                <ul>
+                  <li><a href="#magic_plugin_funcs">plugin-funktioner för "Magic"-verktyget</a>                    <ul>
+                      <li><a href="#common_args">Vanliga argument till plugin-funktioner</a></li>                      <li><a href="#toolfuncs">Nödvändiga plugin-funktioner</a>                        <ul>
+                          <li><a href="#housekeeping">Plugin "hushållning" funktioner</a></li>                          <li><a href="#eventfuncs">Plugin-händelsefunktioner</a></li>                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a href="#tpfuncs">Rita med Tux Funktioner och data</a>                    <ul>
+                      <li><a href="#pixel_manip">Pixelmanipulationer</a></li>                      <li><a href="#helper_funcs">Hjälpfunktioner</a></li>                      <li><a href="#informational">Information</a></li>                      <li><a href="#sound">Ljudfunktioner</a></li>                      <li><a href="#syscalls">Systemanrop för Rita med Tux</a></li>                      <li><a href="#color_convs">Färgkonverteringar</a></li>                    </ul>
+                  </li>
+                  <li><a href="#macros">Hjälpmakron i "tp_magic_api.h"</a></li>                  <li><a href="#consts">Konstant Definitioner i "tp_magic_api.h"</a></li>                </ul>
+              </li>
+              <li><a href="#compiling">Kompilera</a>                <ul>
+                  <li><a href="#compiling-linux">Linux och andra Unix-liknande plattformar</a></li>                  <li><a href="#compiling-windows">Fönster</a></li>                  <li><a href="#compiling-macos">macOS</a></li>                </ul>
+              </li>
+              <li><a href="#installing">Installerar</a>                <ul>
+                  <li><a href="#installing-linux">Linux och andra Unix-liknande plattformar</a></li>                  <li><a href="#installing-windows">Fönster</a></li>                  <li><a href="#installing-macos">macOS</a></li>                </ul>
+              </li>
+              <li><a href="#multiple">Skapa plugins med flera effekter</a></li>              <li><a href="#examples">Om det anges söker GCode-visaren efter en rad som börjar med den här strängen. Om det hittas hoppas alla GCode upp till den punkten över. Detta kan användas för att hoppa över GCode för "rensa/munstyckesrensning" i tittaren. Observera att sökningen är fallkänslig. Exempel: <code>; layer 1</code></a></li>              <li><a href="#help">Få hjälp</a></li>              <li><a href="#glossary">Ordlista</a></li>            </ul>
+          </td>
+        </tr>
+      </table>
+    </section>
+
+    
+    <section class="outer"><!-- H1: Overview -->
+      <div class="keeptogether">
+        <header>
+          <h1 id="overview">
+            Översikt          </h1>
+        </header>
+
+        <p>
+          Rita med Tux's "Magic"-verktyg kommer som en uppsättning "plugins" som laddas när Rita med Tux startar.        </p>
+
+        <p>
+          Denna uppdelning möjliggör en snabbare utveckling av "magiska" verktyg och gör det möjligt för programmerare att skapa och testa nya verktyg utan att behöva integrera dem i Rita med Tuxs källkod.  (Användare av mer professionella grafikverktyg, t.ex. GIMP, bör känna till detta plugin-koncept)      </div>
+    </section><!-- H1: Overview -->
+
+    
+    <section class="outer"><!-- H1: Prerequisites -->
+      <div class="keeptogether">
+        <header>
+          <h1 id="prereqs">
+            Förutsättningar          </h1>
+        </header>
+
+        <p>
+          Rita med Tux är skrivet i <a href="http://en.wikipedia.org/wiki/C_(programming_language)">programspråket C</a> och använder biblioteket Simple DirectMedia Layer ("libSDL", eller bara "SDL"; finns på <a href="https://www.libsdl.org/">https://www.libsdl.org/).</a> Därför måste man, åtminstone för tillfället, förstå C-språket och hur man kompilerar C-baserade program.  Det rekommenderas starkt att man känner till SDL API, men några grundläggande SDL-koncept kommer att behandlas i detta dokument.        </p>
+      </div>
+    </section><!-- H1: Prerequisites -->
+
+    
+    <section class="outer"><!-- H1: Interfaces -->
+      <header>
+        <h1 id="interfaces">
+          Gränssnitt        </h1>
+      </header>
+
+      <p>
+        De som skapar plugins för "magiska" verktyg för Rita med Tux måste tillhandahålla vissa gränssnitt (C-funktioner) som Rita med Tux kan anropa.      </p>
+
+      <p>
+        Rita med Tux använder SDL:s rutiner "SDL_LoadObject()" och "SDL_LoadFunction()" för att ladda plugins (filer med delade objekt, t.ex. "<code>.so</code>"-filer i Linux eller "<code>.dll</code>"-filer i Windows) och hitta funktionerna i dem.      </p>
+
+      <p>
+        Rita med Tux tillhandahåller i sin tur ett antal hjälpfunktioner som plugin-programmet kan (eller ibland måste) använda.  Detta exponeras som en C-struktur (eller<code>"struct</code>") som innehåller pekare till funktioner och andra data i Rita med Tux.  En pekare till denna struktur skickas vidare till plugin-funktionerna som ett argument när Rita med Tux anropar dem.      </p>
+
+      <p>
+        Plugins bör <code>#inkludera</code> C-huvudfilen<code>"tp_magic_api.h</code>", som exponerar plugin-API:et för verktyget "Magic". När du kör C-kompilatorn för att bygga ett plugin bör du också använda kommandoradsverktyget<code>"tp-magic-config</code>" för att få lämpliga kompilatorflaggor (till exempel var kompilatorn kan hitta Rita med Tux-pluginhuvudfilen, liksom SDLs huvudfiler) för att bygga ett plugin. (Se<a href="#compiling">"Kompilering</a>" nedan.)      </p>
+
+      <p>
+        C-huvudfilen och kommandoradsverktyget som nämns ovan ingår i Rita med Tux - eller i vissa fall som en del av ett "Rita med Tux 'Magic' Tool Plugin Development package".      </p>
+
+      <section class="indent"><!-- H2: 'Magic' tool plugin functions -->
+        <header>
+          <h2 id="magic_plugin_funcs">
+            plugin-funktioner för "Magic"-verktyget          </h2>
+        </header>
+
+        <p>
+          plugins för "Magic"-verktyg <i>måste</i> innehålla de funktioner som anges nedan. <b>Observera:</b> För att undvika kollisioner i namnrymden måste varje funktionsnamn börja med det delade objektets filnamn (t.ex. skulle "blur.so" eller "blur.dll" ha funktioner vars namn börjar med<code>"blur_</code>"). <i>Detta inkluderar privata funktioner</i> (sådana som inte används direkt av Rita med Tux), såvida du inte deklarerar dem som<code>"statiska</code>".        </p>
+
+        <section class="indent"><!-- H3: Common arguments to plugin functions -->
+          <header>
+            <h3 id="common_args">
+              Vanliga argument till plugin-funktioner            </h3>
+          </header>
+
+          <p>
+            Här följer en beskrivning av de argument som många av funktionerna i ditt plugin måste acceptera.          </p>
+
+          <dl>
+            <dt><code><b>magic_api * api</b></code></dt>
+            <dd>
+              <p>
+                Pekare till en C-struktur som innehåller pekare till Rita med Tux-funktioner och andra data som insticksprogrammet kan (och ibland bör) använda. Innehållet i denna struktur <a href="#tpfuncs">beskrivs nedan.</a>.              </p>
+              <p>
+                Observera: Strukturen <code>magic_api</code> definieras i C-headerfilen<code>"tp_magic_api.h</code>", som du bör inkludera högst upp i ditt plugins C-källfil:                <blockquote><code>
+                  #include "tp_magic_api.h"
+                </code></blockquote>
+              </p>
+            </dd>
+
+            <dt><code><b>int which</b></code></dt>
+            <dd>
+              Ett index som insticksprogrammet ska använda för att skilja mellan olika "Magic"-verktyg, om insticksprogrammet tillhandahåller mer än ett.  (Om inte, kommer "which" alltid att vara 0.) Se <a href="#multiple">"Skapa insticksprogram med flera effekter"</a> nedan.            </dd>
+
+            <dt><code><b>SDL_Surface * snapshot</b></code></dt>
+            <dd>
+              En ögonblicksbild av den föregående Rita med Tux-bilden, tagen när musen först klickades för att aktivera det aktuella magiska verktyget.  Om du inte kontinuerligt påverkar bilden under ett musklick, bör du basera dina effekter på innehållet i denna canvas. (Det vill säga, läs från<code>"snapshot</code>" och skriv till<code>"canvas</code>", nedan)            </dd>
+
+            <dt><code><b>SDL_Surface * canvas</b></code></dt>
+            <dd>
+              Den aktuella Rita med Tux-ritningsduken.  Dina magiska effekter bör hamna här!            </dd>
+
+            <dt><code><b>SDL_Rect * update_rect</b></code></dt>
+            <dd>
+              En pekare till en SDL-"rektangel"-struktur som du använder för att tala om för Rita med Tux vilken del av duken som har uppdaterats.  Om din effekt påverkar ett 32x32-område centrerat runt muspekaren fyller du SDL_Rect på följande sätt:              <blockquote><code>
+                update_rect-&gt;x = x - 16;<br>
+                update_rect-&gt;y = y - 16;<br>
+                update_rect-&gt;w = 32;<br>
+                update_rect-&gt;h = 32;
+              </code></blockquote>
+              Om din effekt ändrar hela duken (t.ex. vänder den upp och ner) fyller du den på följande sätt:              <blockquote><code>
+                update_rect-&gt;x = 0;<br>
+                update_rect-&gt;y = 0;<br>
+                update_rect-&gt;w = canvas-&gt;w;<br>
+                update_rect-&gt;h = canvas-&gt;h;
+              </code></blockquote>
+              Obs:<code>"update_rect</code>" är en C-pekare (en<code>"SDL_Rect *</code>" snarare än bara en<code>"SDL_Rect</code>") eftersom du måste fylla i dess innehåll. Eftersom det är en pekare kommer du åt dess element via<code>"-&gt;"</code>(pil) snarare än "<code>.</code>" (punkt).            </dd>
+          </dl>
+        </section><!-- H3: Common arguments to plugin functions -->
+
+        <section class="indent"><!-- H3: Required Plugin Functions -->
+          <header>
+            <h3 id="toolfuncs">
+              Nödvändiga plugin-funktioner            </h3>
+          </header>
+
+          <p>
+            Ditt insticksprogram måste minst innehålla alla följande funktioner.          </p>
+
+          <p>
+            <b>Observera:</b> Kom ihåg att plugin-programmets funktionsnamn måste föregås av plugin-programmets filnamn.  Det vill säga, om ditt plugin heter<code>"zoom.so</code>" (på Linux) eller "<code>zoom.dll</code>" (på Windows), måste namnen på dina funktioner börja med "<code><b>zoom_</b></code>" (t.ex. "<code>zoom_get_name(...)</code>").          </p>
+
+          <section class="indent"><!-- H4: Plugin "housekeeping" functions -->
+            <header>
+              <h4 id="housekeeping">
+                Plugin "hushållning" funktioner              </h4>
+            </header>
+
+            <dl>
+              <dt><code><b>Uint32 api_version(void)</b></code></dt>
+              <dd>
+                <p>
+                  Insticksprogrammet bör returnera ett heltalsvärde som representerar versionen av Rita med Tux 'Magic' tool plugin API som insticksprogrammet byggdes mot. Det säkraste är att returnera värdet av <code>TP_MAGIC_API_VERSION</code>, som definieras i<code>"tp_magic_api.h</code>".  Om Rita med Tux anser att ditt plugin är kompatibelt kommer det att fortsätta och använda det.                </p>
+                <p>
+                  <b>Obs:</b> Anropas en gång av Rita med Tux, vid uppstart. Den anropas först.                </p>
+              </dd>
+
+              <dt><code><b>int init(magic_api * api, Uint8 disabled_features, Uint8 complexity_level)</b></code></dt>
+              <dd>
+                <p>
+                  Plugin-programmet bör göra alla initialiseringar här. Returnera '1' om initieringen lyckades, eller '0' om den inte gjorde det (och Rita med Tux kommer inte att presentera några 'Magic'-verktyg från insticksprogrammet).                </p>
+                <p>
+                  <b>Obs:</b> Anropas en gång av Rita med Tux, vid uppstart. Det anropas efter<code>"api_version()</code>", om Rita med Tux anser att ditt plugin är kompatibelt.                </p>
+                <p>
+                  Värdet <code>disabled_features</code> innehåller bits som ställts in för alla Rita med Tux-funktioner som är relevanta för Magic-verktyg som har inaktiverats i den här sessionen. Test med hjälp av C:s bitvisa operator "och",<code>"&amp;".</code> Funktionerna är definierade i <code>tp_magic_api.h:</code>:                  <ul>
+                    <li>
+                      <code>MAGIC_FEATURE_CONTROL</code>: Kontroll av magiska verktyg (färg vs helskärm) (<code>--nomagiccontrols</code>)                    </li>
+                    <li>
+                      <code>MAGIC_FEATURE_SIZE</code>: Storlek på magiskt verktyg (<code>--nomagicsizes</code>)                    </li>
+                  </ul>
+                  Ditt/dina magiska verktyg kan vilja reagera på olika sätt beroende på om en eller flera funktioner har inaktiverats. (Till exempel har det magiska verktyget "Brick" alltid erbjudit två verktygsvarianter: stort och litet. Med tillägget av storleksfunktionen behövs bara ett verktyg. Men när storleksalternativet är inaktiverat kan plugin-programmet återgå till att tillhandahålla två separata verktyg)                </p>
+                <p>
+                  Variabeln <code>complexity_level</code> innehåller den "komplexitetsnivå" som Rita med Tux magiska verktyg kan erbjuda - det vill säga användarens expertisnivå. Nivåerna definieras i <code>tp_magic_api.h:</code>:                  <ul>
+                    <li>
+                      <code>MAGIC_COMPLEXITY_NOVICE</code> (0): Novis (<code>--complexity=novice</code>)                    </li>
+                    <li>
+                      <code>MAGIC_COMPLEXITY_BEGINNER</code> (1): Nybörjare (<code>--complexity=beginner</code>)                    </li>
+                    <li>
+                      <code>MAGIC_COMPLEXITY_ADVANCED</code> (2): Avancerad (standard) (<code>--complexity=advanced</code>)                    </li>
+                  </ul>
+                  Ditt/dina Magic-verktyg kanske vill reagera olika beroende på användarens kunskapsnivå, antingen genom att förenkla hur varje verktyg fungerar eller genom att utesluta ett eller flera av dem helt. (Till exempel är verktygsuppsättningarna för 1-, 2- och 3-punktsperspektiv helt inaktiva i läget "nybörjare". I "nybörjarläget" är ritverktygen tillgängliga, men verktygen för att redigera vanishing-punkternas positioner är inaktiverade; standardvanishing-punkterna används. I själva verket visas i "nybörjar"-läget ytterligare ett ritverktyg för 3-punktsperspektiv, med alternativa vanishingpunkter)                </p>
+                <p>
+                  <b>Notera:</b> Senast ändrad i Rita med Tux 0.9.32; Magic API version 0x00000009.                </p>
+              </dd>
+
+              <dt><code><b>int get_tool_count(magic_api * api)</b></code></dt>
+              <dd>
+                <p>
+                  Detta ska returnera antalet magiska verktyg som detta plugin tillhandahåller till Rita med Tux.                </p>
+                <p>
+                  <b>Obs:</b> Anropas en gång av Rita med Tux, vid start.  Den anropas efter din<code>"init()</code>", om den lyckades.                </p>
+                <p>
+                  <b>Obs:</b> Du kanske vill svara på olika sätt beroende på om vissa funktioner har inaktiverats (t.ex. kontroller för "paint" kontra "entire picture" eller kontroller för "Magic sizes").                </p>
+              </dd>
+
+              <dt><code><b>int modes(magic_api * api, int which)</b></code></dt>
+              <dd>
+                <p>
+                  Här kan du tala om för Rita med Tux vilka lägen ditt verktyg kan användas i; antingen som ett verktyg som användaren kan måla med eller som ett verktyg som påverkar hela ritningen på en gång.                </p>
+                <p>
+                  Du måste returnera ett värde som är en kombination av ett eller flera av de tillgängliga lägena:                  <ul>
+                    <li>
+                      <code>MODE_PAINT</code> - måla på fri hand (klicka och dra)                    </li>
+                    <li>
+                      <code>MODE_FULLSCREEN</code> - gäller för hela bilden med ett klick                    </li>
+                    <li>
+                      <code>MODE_PAINT_WITH_PREVIEW</code> - frihandsmålning, med förhandsgranskning (klicka och dra)                    </li>
+                    <li>
+                      <code>MODE_ONECLICK</code> - gäller för ett område runt musen, med ett klick                    </li>
+                  </ul>
+                  t.ex. om ditt verktyg är det enda som användaren kan måla med, returnera<code>"MODE_PAINT</code>".  Om användaren kan göra båda, returnera<code>"MODE_PAINT | MODE_FULLSCREEN</code>" för att tala om för Rita med Tux att den kan göra båda.                </p>
+                <p>
+                  <b>Observera:</b> Anropas en gång för varje Magic-verktyg som ditt plugin påstår sig innehålla (genom ditt<code>"get_tool_count()</code>").                </p>
+                <p>
+                  <b>Obs:</b> Tillagd till Rita med Tux 0.9.21; Magic API-version 0x00000002.                </p>
+              </dd>
+
+              <dt><code><b>char * get_name(magic_api * api, int which)</b></code></dt>
+              <dd>
+                <p>
+                  Detta bör returnera en sträng som innehåller namnet på ett magiskt verktyg. Detta kommer att visas på knappen i "Magic"-väljaren i Rita med Tux.                </p>
+                <p>
+                  Rita med Tux kommer att <code>free()</code> strängen vid avslutning, så du bör linda in den i ett C <code>strdup()</code> -anrop.                </p>
+                <p>
+                  <b>Observera:</b> Anropas en gång för varje Magic-verktyg som ditt plugin påstår sig innehålla (genom ditt<code>"get_tool_count()</code>").                </p>
+              </dd>
+
+              <dt><code><b>int get_group(magic_api * api, int which)</b></code></dt>
+              <dd>
+                <p>
+                  Använd detta för att gruppera verktyg tillsammans inom sektioner av "Magic"-väljaren.  Ett antal grupper är fördefinierade i ett <code>enum</code> som finns i<code>"tp_magic_api.h</code>":                  <ul>
+                    <li>
+                      <code>MAGIC_TYPE_DISTORTS</code> &mdash; Verktyg som förvränger bildens form, t.ex. Blur, Emboss och Ripples                    </li>
+                    <li>
+                      <code>MAGIC_TYPE_COLOR_FILTERS</code> &mdash; Verktyg som främst påverkar bildens färger utan att förvränga dem, t.ex. Darken, Negative och Tint                    </li>
+                    <li>
+                      <code>MAGIC_TYPE_PICTURE_WARPS</code> &mdash; Verktyg som förvränger eller flyttar hela bilden, t.ex. Shift, Flip och Waves                    </li>
+                    <li>
+                      <code>MAGIC_TYPE_PAINTING</code> &mdash; Verktyg som i allmänhet målar nytt innehåll vid markörens position, som Grass, Bricks och Rails                    </li>
+                    <li>
+                      <code>MAGIC_TYPE_PATTERN_PAINTING</code> &mdash; Verktyg som målar på flera ställen samtidigt, t.ex. Kalejdoskop och Symmetry-verktygen                    </li>
+                    <li>
+                      <code>MAGIC_TYPE_PICTURE_DECORATIONS</code> &mdash; Verktyg som applicerar dekorationer på hela bilden, t.ex. Blinds och Checkboard                    </li>
+                    <li>
+                      <code>MAGIC_TYPE_ARTISTIC</code> &mdash; Specialverktyg för konstnärliga ändamål, t.ex. Flower, String-verktygen och Rainbow-arc-ritverktygen.                    </li>
+                  </ul>
+                </p>
+                <p>
+                  <b>Observera:</b> Anropas en gång för varje Magic-verktyg som ditt plugin påstår sig innehålla (genom ditt<code>"get_tool_count()</code>").                </p>
+                <p>
+                  <b>Obs:</b> Tillagd till Rita med Tux 0.9.27; Magic API-version 0x00000005.                </p>
+              </dd>
+
+              <dt><code><b>SDL_Surface * get_icon(magic_api * api, int which)</b></code></dt>
+              <dd>
+                <p>
+                  Detta bör returnera en SDL_Surface som innehåller ikonen som representerar verktyget.  (En gråskalebild med alfa, inte större än 40x40.) Detta kommer att visas på knappen i "Magic"-väljaren i Rita med Tux.                </p>
+                <p>
+                  Rita med Tux kommer att frigöra ("<code>SDL_FreeSurface()</code>") ytan när den avslutas.                </p>
+                <p>
+                  <b>Observera:</b> Anropas en gång för varje Magic-verktyg som ditt plugin påstår sig innehålla (genom ditt<code>"get_tool_count()</code>").                <p>
+              </dd>
+
+              <dt><code><b>char * get_description(magic_api * api, int which, int mode)</b></code></dt>
+              <dd>
+                <p>
+                  Detta bör returnera en sträng som innehåller en beskrivning av hur man använder ett visst magiskt verktyg. Detta kommer att visas som ett hjälptips, förklarat av pingvinen Tux, i Rita med Tux.                </p>
+                <p>
+                  Rita med Tux kommer att <code>free()</code> strängen vid avslutning, så du bör linda in den i ett C <code>strdup()</code> -anrop.                </p>
+                <p>
+                  <b>Obs:</b> För varje Magic-verktyg som ditt plugin påstår sig innehålla (rapporterat av din "<code>get_tool_count()</code>"-funktion), kommer denna funktion att anropas för varje läge som verktyget påstår sig stödja (rapporterat av din "<code>modes()</code>"-funktion).                </p>
+                <p>
+                  Med andra ord, om ditt plugin innehåller två verktyg, ett som bara fungerar i färgläge och det andra som fungerar i både färgläge och fullbildsläge, kommer ditt plugins<code>"get_description()</code>" att anropas tre gånger.                </p>
+              </dd>
+
+              <dt><code><b>int requires_colors(magic_api * api, int which)</b></code></dt>
+              <dd>
+                <p>
+                  Returnerar en "1" om "Magic"-verktyget accepterar färger (paletten "Colors" i Rita med Tux kommer att vara tillgänglig), eller "0" om inte.                </p>
+                <p>
+                  <b>Observera:</b> Anropas en gång för varje Magic-verktyg som ditt plugin påstår sig innehålla (genom ditt<code>"get_tool_count()</code>").                </p>
+              </dd>
+
+              <dt><code><b>Uint8 accepted_sizes(magic_api * api, int which, int mode)</b></code></dt>
+              <dd>
+                <p>
+                  Returnerar hur många storleksvariationer som 'Magic'-verktyget accepterar i det angivna läget (dvs.<code>'MODE_PAINT</code>' eller<code>'MODE_FULLSCREEN</code>). Returnera '0' om 'Magic'-verktyget inte ska erbjuda storleksalternativ. Att returnera '1' är samma sak som att returnera '0'.                </p>
+                <p>
+                  <b>Obs:</b> För varje Magic-verktyg som ditt plugin påstår sig innehålla (rapporterat av din "<code>get_tool_count()</code>"-funktion), kommer denna funktion att anropas för varje läge som verktyget påstår sig stödja (rapporterat av din "<code>modes()</code>"-funktion).                </p>
+                <p>
+                  <b>Obs:</b> Tillagd till Rita med Tux 0.9.30; Magic API-version 0x00000008.                </p>
+              </dd>
+
+              <dt><code><b>Uint8 default_size(magic_api * api, int which, int mode)</b></code></dt>
+              <dd>
+                <p>
+                  Returnerar den standardstorlek som verktyget "Magic" ska börja med i det angivna läget. Detta kommer att vara standardinställningen för verktyget första gången det används under en Rita med Tux-session. Om Rita med Tux anropas med storleksalternativet avaktiverat kommer detta att vara den enda storlek som Rita med Tux begär.  Returnera ett tal mellan '1' och det belopp som du returnerade i <code>accepted_sizes()</code>.                </p>
+                <p>
+                  <b>Obs:</b> För varje Magic-verktyg som ditt plugin påstår sig innehålla (rapporterat av din "<code>get_tool_count()</code>"-funktion), kommer denna funktion att anropas för varje läge som verktyget påstår sig stödja (rapporterat av din "<code>modes()</code>"-funktion).                </p>
+                <p>
+                  <b>Obs:</b> Tillagd till Rita med Tux 0.9.30; Magic API-version 0x00000008.                </p>
+              </dd>
+
+              <dt><code><b>void shutdown(magic_api * api)</b></code></dt>
+              <dd>
+                <p>
+                  Plugin-programmet bör göra all upprensning här.  Om du har allokerat något minne eller använt SDL_Mixer för att ladda några ljud under <code>init()</code>, till exempel, bör du <code>frigöra(</code> ) det allokerade minnet och <code>Mix_FreeChunk()</code> ljuden här.                </p>
+                <p>
+                  <b>Obs:</b> Denna funktion anropas en gång när Rita med Tux avslutas.                </p>
+              </dd>
+            </dl>
+          </section><!-- H4: Plugin "housekeeping" functions -->
+
+          <section class="indent"><!-- H4: Plugin event functions -->
+            <header>
+              <h4 id="eventfuncs">
+                Plugin-händelsefunktioner              </h4>
+            </header>
+
+            <dl>
+              <dt>
+                <code><b>void switchin(magic_api * api, int which, int mode, SDL_Surface * snapshot, SDL_Surface * canvas) </b></code><br/>
+                <code><b>void switchout(magic_api * api, int which, int mode, SDL_Surface * snapshot, SDL_Surface * canvas) </b></code>
+              </dt>
+              <dd>
+                <p>
+                  <code>switchin()</code> anropas när ett av plugin-programmets magiska verktyg blir aktivt, och <code>switchout()</code> anropas när ett blir inaktivt.  Detta kan bero på att användaren just har klickat på ett specifikt magiskt verktyg (det aktuella verktyget kopplas ut och ett nytt kopplas in).                </p>
+                <p>
+                  Det kan också hända när användaren lämnar/återvänder från valet av "magiska" verktyg när han/hon utför någon annan aktivitet (t.ex. använder ett annat verktyg, som "Text" eller "Brush", aktiverar ett tillfälligt verktyg, som "Undo" och "Redo", eller återvänder från en dialog - eventuellt med en ny bild när den växlar tillbaka - som "Open", "New" eller "Quit").  I detta fall är samma magiska verktyg först "utslaget" och sedan "inslaget igen", vanligtvis några ögonblick senare.                </p>
+                <p>
+                  Slutligen kan det också hända när användaren ändrar "läge" för ett verktyg (t.ex. från färgläge till fullbildsläge).  Först anropas <code>switchout()</code> för det gamla läget, sedan anropas <code>switchin()</code> för det nya läget.                </p>
+                <p>
+                  Dessa funktioner gör det möjligt för användare att interagera på komplicerade sätt med Magic-verktyg (t.ex. ett verktyg som låter användaren rita <i>flera</i> streck på fri hand och sedan använder det som indata, t.ex. handskrift - normalt kan användaren klicka någonstans i målarduken för att tala om för Magic-verktyget att de är "klara", men om de byter till ett annat verktyg kanske Magic-verktyget vill ångra alla tillfälliga ändringar i målarduken).                </p>
+                <p>
+                  Dessa funktioner skulle också kunna användas för att effektivisera vissa effekter; en bakomliggande kopia av hela duken skulle kunna ändras på något sätt när användaren först växlar till duken, och sedan skulle delar av den kopian kunna ritas på duken när användaren ritar med Magic-verktyget.                </p>
+                <p>
+                  <b>Obs:</b> Tillagd till Rita med Tux 0.9.21; Magic API-version 0x00000002.                </p>
+              </dd>
+
+              <dt><code><b>void set_color(magic_api * api, int which, SDL_Surface * canvas, SDL_Surface * last, Uint8 r, Uint8 g, Uint8 b, SDL_Rect * update_rect) </b></code></dt>
+              <dd>
+                <p>
+                  Rita med Tux anropar denna funktion för att informera insticksprogrammet om RGB-värdena för den aktuella valda färgen i Rita med Tuxs palett "Colors".  (Funktionen anropas när ett av plugin-programmets magiska verktyg som accepterar färger blir aktivt, och när användaren väljer en ny färg medan ett sådant verktyg är aktivt)                </p>
+                <p>
+                  I allmänhet kommer Magic-verktygen inte att ändra målarduken på något sätt när de får en uppdaterad färg, men det är möjligt. (Till exempel använder verktygen "Zoom" och "Perspective" effekter som använder det aktuella färgvalet som en solid bakgrund. Effekterna kan justeras med efterföljande klick/drag-operationer, men du kan också justera bakgrundsfärgen, utan att ändra zoomnivån eller perspektivet, genom att helt enkelt välja en ny färg)                </p>
+                <p>
+                  <b>Notera:</b> Senast ändrad i Rita med Tux 0.9.29; Magic API version 0x00000007.                </p>
+              </dd>
+
+              <dt><code><b>void set_size(magic_api * api, int which, int mode, SDL_Surface * canvas, SDL_Surface * last, Uint8 size, SDL_Rect * update_rect) </b></code></dt>
+              <dd>
+                <p>
+                  Rita med Tux anropar denna funktion för att informera insticksprogrammet om det valda storleksalternativet för "Magic"-verktyget. (Den anropas när ett av plugin-programmets magiska verktyg som accepterar storlekar blir aktivt, och när användaren väljer en ny storlek medan ett sådant verktyg är aktivt)                </p>
+                <p>
+                  I allmänhet kommer Magic-verktygen inte att ändra duken på något sätt när de får en uppdaterad storlek, men det är möjligt.                </p>
+                <p>
+                  <b>Obs:</b> Tillagd till Rita med Tux 0.9.30; Magic API-version 0x00000008.                </p>
+              </dd>
+
+              <dt><code><b>void click(magic_api * api, int which, int mode, SDL_Surface * snapshot, SDL_Surface * canvas, int x, int y, SDL_Rect * update_rect) </b></code></dt>
+              <dd>
+                <p>
+                  Plugin-programmet ska tillämpa lämpligt "Magic"-verktyg på<code>"canvas</code>"-ytan.  (x,y)-koordinaterna är var musen befann sig (inom canvasen) när musknappen klickades, och du får veta vilket "läge" ditt verktyg är i (dvs.<code>"MODE_PAINT</code>" eller<code>"MODE_FULLSCREEN</code>").                </p>
+                <p>
+                  Plugin-programmet bör rapportera tillbaka vilken del av duken som påverkades genom att fylla i elementen (x,y) och (w,h) i<code>"update_rect</code>".                </p>
+                <p>
+                  Innehållet i teckningsytan omedelbart före musklicket lagras i<code>"snapshot</code>"-ytan.                </p>
+              </dd>
+
+              <dt><code><b>void drag(magic_api * api, int which, SDL_Surface * snapshot, SDL_Surface * canvas, int ox, int oy, int x, int y, SDL_Rect * update_rect)</b></code></dt>
+              <dd>
+                <p>
+                  Plugin-programmet bör tillämpa lämpligt "Magic"-verktyg på<code>"canvas"</code>-ytan.  Koordinaterna (ox,oy) och (x,y) är musens position i början och slutet av strecket.                </p>
+                <p>
+                  Plugins som låter användaren "rita" effekter på duken använder vanligtvis Rita med Tux's<code>"line()</code>" 'Magic' tool plugin-hjälpfunktion för att beräkna punkterna på linjen mellan (ox,oy) och (x,y), och anropar en annan funktion inom pluginet för att tillämpa effekten vid varje punkt. (Se<a href="#tpfuncs">"Rita med Tux-funktioner och data</a>" nedan).                </p>
+                <p>
+                  Plugin-programmet bör rapportera tillbaka vilken del av duken som påverkades genom att fylla i elementen (x,y) och (w,h) i<code>"update_rect</code>".                </p>
+                <p>
+                  Obs: Innehållet i ritningsytan omedelbart före musklicket förblir detsamma som det var (när plugin-programmets "<code>click()</code>"-funktion anropades) och är fortfarande tillgängligt i<code>"snapshot</code>"-ytan.                <p>
+              </dd>
+
+              <dt><code><b>void release(magic_api * api, int which, SDL_Surface * snapshot, SDL_Surface * canvas, int x, int y, SDL_Rect * update_rect)</b></code></dt>
+              <dd>
+                <p>
+                  Plugin-programmet bör använda lämpligt "Magic"-verktyg på<code>"canvas"</code>-ytan.  (x,y)-koordinaterna är var musen befann sig (inom duken) när musknappen släpptes.                </p>
+                <p>
+                  Plugin-programmet bör rapportera tillbaka vilken del av duken som påverkades genom att fylla i elementen (x,y) och (w,h) i "update_rect".                </p>
+                <p>
+                  <b>Obs:</b> Innehållet i ritningsytan omedelbart före musklicket förblir detsamma som det var (när plugin-programmets "<code>click()</code>"-funktion anropades) och är fortfarande tillgängligt i "snapshot"-ytan.                </p>
+              </dd>
+            </dl>
+          </section><!-- H4: Plugin event functions -->
+        </section><!-- H3: Required Plugin Functions -->
+      </section><!-- H2: 'Magic' tool plugin functions -->
+
+      <section class="indent"><!-- H2: Tux Paint Functions and Data -->
+        <header>
+          <h2 id="tpfuncs">
+            Rita med Tux Funktioner och data          </h2>
+        </header>
+
+        <p>
+          Rita med Tux tillhandahåller ett antal hjälpfunktioner som plugins kan komma åt via strukturen<code>"magic_api</code>", som skickas till alla plugins funktioner. (Se<a href="#toolfuncs">"Obligatoriska plugin-funktioner</a>" ovan.)        </p>
+
+        <section class="indent"><!-- H3: Pixel Manipulations -->
+          <header>
+            <h3 id="pixel_manip">
+              Pixelmanipulationer            </h3>
+          </header>
+
+          <dl>
+            <dt><code><b>Uint32 getpixel(SDL_Surface * surf, int x, int y)</b></code></dt>
+            <dd>
+              Hämtar pixelvärdet från (x,y)-koordinaterna för en SDL_Surface. (Du kan använda SDL:s funktion "SDL_GetRGB()" för att konvertera Uint32 'pixel' till en uppsättning Uint8 RGB-värden)            </dd>
+
+            <dt><code><b>void putpixel(SDL_Surface * surf, int x, int y, Uint32 pixel)</b></code></dt>
+            <dd>
+              Ställer in pixelvärdet vid position (x,y) för en SDL_Surface. (Du kan använda SDL:s funktion "SDL_MapRGB()" för att konvertera en uppsättning Uint8 RGB-värden till ett Uint32 "pixel"-värde som passar för destinationsytan)            </dd>
+
+            <dt><code><b>Uint32 xorpixel(SDL_Surface * surf, int x, int y)</b></code></dt>
+            <dd>
+              Tillämpar en XOR-operation (exklusiv-eller) på pixeln vid koordinaterna (x,y) i SDL_Surface.  Om du gör en XOR-operation igen på samma position återställs pixeln till originalvärdet.  Användbar för att visa tillfälliga "gummibandslinjer", konturer och hårkors, samtidigt som du använder ett magiskt verktyg.            </d>
+
+            <dt><code><b>SDL_Surface * scale(SDL_Surface * surf, int w, int h, int keep_aspect)</b></code></dt>
+            <dd>
+              <p>
+                Detta accepterar en befintlig SDL-yta och skapar en ny som skalas till en godtycklig storlek.  (Den ursprungliga ytan förblir orörd.)              </p>
+              <p>
+                Flaggan<code>"keep_aspect</code>" kan sättas till '1' för att tvinga den nya ytan att behålla samma form (bildförhållande) som originalet, vilket innebär att den kanske inte har samma bredd och höjd som du begärde.  (Kontrollera elementen<code>"-&gt;w</code>" och<code>"-&gt;h</code>" i utdata "SDL_Surface *" för att avgöra den <i>faktiska</i> storleken)            </dd>
+
+                      </dl>
+        </section><!-- H3: Pixel Manipulations -->
+
+        <section class="indent"><!-- H3: Helper Functions -->
+          <header>
+            <h3 id="helper_funcs">
+              Hjälpfunktioner            </h3>
+          </header>
+
+          <dl>
+            <dt><code><b>int in_circle(int x, int y, int radius)</b></code></dt>
+            <dd>
+              Returnerar '1' om (x,y)-positionen ligger inom en cirkel med en viss radie (centrerad runt origo: (0,0)).  Returnerar '0' i annat fall. Användbart för att skapa "magiska" verktyg som påverkar duken med en cirkulär penselform.            </dd>
+
+            <dt><code><b>void line(void * api, int which, SDL_Surface * canvas, SDL_Surface * snapshot, int x1, int y1, int x2, int y2, int step, FUNC callback)</b></code></dt>
+            <dd>
+              <p>
+                Denna funktion beräknar alla punkter på en linje mellan koordinaterna (x1,y1) och (x2,y2).  Varje 'steg'-iteration anropar den funktionen 'callback'.              </p>
+              <p>
+                Den skickar (x,y)-koordinaterna på linjen till "callback"-funktionen, Rita med Tuxs<code>"magic_api</code>"-struktur (som en<code>"void *</code>"-pekare som du måste skicka till den), ett "which"-värde som representerar vilket av plugin-programmets "Magic"-verktyg som används, och de aktuella och snapshot-bilderna.              </p>
+              <p>
+                Exempel på prototyp av en callback-funktion som kan skickas till Rita med Tux's<code>"line()</code>" 'Magic' tool plugin helper-funktion:                <blockquote><code>
+                  void exampleCallBack(void * ptr_to_api, int which_tool, SDL_Surface * canvas, SDL_Surface * snapshot, int x, int y);
+                </code></blockquote>
+              </p>
+              <p>
+                Exempel på användning av<code>"line()</code>"-hjälpen (t.ex. inom ett plugins <code>draw()</code> -funktion):                <blockquote><code>
+                  api-&gt;line((void *) api, which, canvas, snapshot, ox, oy, x, y, 1, exampleCallBack);
+                </code></blockquote>
+              </p>
+            </dd>
+
+            <dt><code><b>Uint8 touched(int x, int y)</b></code></dt>
+            <dd>
+              <p>
+                Med den här funktionen kan du undvika att bearbeta samma pixlar flera gånger när användaren drar musen över ett område på duken, vilket ökar Rita med Tuxs svarstid, särskilt med matematiktunga effekter.              </p>
+              <p>
+                Om din effekts<code>"click(</code>)"-,<code>"drag(</code>)"- och/eller<code>"release(</code>)"-funktioner tar innehållet i källytan ("<code>snapshot</code>") och alltid skapar samma resultat i målytan (<code>"canvas</code>"), bör du linda in effekten i ett anrop till<code>"api-&gt;touched(</code>)".              </p>
+              <p>
+                Denna funktion returnerar helt enkelt om den redan har anropats för samma (x,y)-koordinater sedan användaren först klickade på musen. Med andra ord, första gången du anropar den för en viss (x,y)-koordinat returnerar den '0'.  Framtida anrop kommer att returnera '1' tills användaren släpper musknappen.              </p>
+              <p>
+                <b>Obs:</b> Magiska effekter som kontinuerligt påverkar destinationsytan (<code>"canvas</code>") (utan hänsyn till<code>"snapshotytan</code> ") har ingen anledning att använda denna funktion.  Verktygen "Blur" och "Smudge" som medföljer Rita med Tux är exempel på sådana effekter.              </p>
+            </dd>
+          </dl>
+        </section><!-- H3: Helper Functions -->
+
+        <section class="indent"><!-- H3: Informational -->
+          <header>
+            <h3 id="informational">
+              Information            </h3>
+          </header>
+
+          <dl>
+            <dt><code><b>char * tp_version</b></code></dt>
+            <dd>
+              En sträng som innehåller den version av Rita med Tux som körs (t.ex. "0.9.35").            </dd>
+
+            <dt>
+              <code><b>int canvas_w</b></code><br/>
+              <code><b>int canvas_h</b></code>
+            </dt>
+            <dd>
+              Returnerar bredden<code>(canvas_w)</code> och höjden (<code>canvas_h</code>) på teckningsytan (i pixlar).            </dd>
+
+            <dt><code><b>int button_down(void)</b></code></dt>
+            <dd>
+              En '1' returneras om musknappen är nedtryckt; '0' annars.            </dd>
+
+            <dt><code><b>char * data_directory</b></code></dt>
+            <dd>
+              <p>
+                Denna sträng innehåller den katalog där Rita med Tuxs datafiler lagras.  På Linux kan detta till exempel vara<code>"/usr/share/tuxpaint/</code>".              </p>
+              <p>
+                Magiska verktyg bör innehålla en ikon (se<code>"get_icon(</code>)", ovan) och uppmuntras att innehålla ljudeffekter, det är användbart för plugins att veta var sådana saker finns.              </p>
+              <p>
+                Vid kompilering och installation av ett insticksprogram bör kommandoradsverktyget<code>"tp-magic-config</code>" användas för att avgöra var sådana data ska placeras för att den installerade versionen av Rita med Tux ska hitta dem. (Se<a href="#installing">"Installera</a>" nedan.)              </p>
+              <p>
+                <b>Obs:</b> Om ditt plugin är installerat lokalt (<code>t.</code>ex. i din katalog<code>"~/.tuxpaint/plugins/</code>"), snarare än globalt (systemövergripande), kommer värdet<code>"data_directory</code>" att vara annorlunda. (<code>t.ex. "<i>/home/användarnamn/</i>.tuxpaint/plugins/data/</code>").              <p>
+            </dd>
+          </dl>
+        </section><!-- H3: Informational -->
+
+        <section class="indent"><!-- H3: Sound Functions -->
+          <header>
+            <h3 id="sound">
+              Ljudfunktioner            </h3>
+          </header>
+
+          <dl>
+            <dt><code><b>void playsound(Mix_Chunk * snd, int pan, int dist)</b></code></dt>
+            <dd>
+              <p>
+                Denna funktion spelar upp ett ljud (ett som laddats av SDL-hjälpbiblioteket "SDL_mixer").  Den använder SDL_mixers<code>"Mix_SetPanning()</code>" för att ställa in ljudets volym på vänster och höger högtalare, baserat på värdena<code>"pan</code>" och<code>"dist</code>" som skickas till den.              </p>
+              <p>
+                En<code>"pan"</code> på 128 innebär att ljudet spelas upp med samma volym i vänster och höger högtalare.  En<code>"pan</code>" på 0 gör att ljudet spelas upp helt till vänster och 255 helt till höger.              </p>
+              <p>
+                Värdet<code>"dist"</code> påverkar den totala volymen.  255 är högst och 0 är tyst.              </p>
+              <p>
+                Värdena<code>"pan</code>" och<code>"dist</code>" kan användas för att simulera plats och avstånd för "Magic"-verktygets effekt.              </p>
+            </dd>
+
+            <dt><code><b>void stopsound(void)</b></code></dt>
+            <dd>
+              Denna funktion stoppar uppspelningen av ett ljud som spelas upp av <code>playsound().</code> Det är användbart för att tysta effekter när användaren slutar använda verktyget (i din<code>"release</code>"-funktion).            </dd>
+
+            <dt><code><b>int playingsound(void)</b></code></dt>
+            <dd>
+              <p>
+                Anropa denna funktion för att avgöra om en ljudeffekt från ett magiskt verktyg fortfarande spelas upp. Kan användas av magiska verktyg som pausar och avpausar sina ljud (se nedan) för att avgöra om det är dags att starta ett nytt ljud - anropa <code>playsound()</code> istället för <code>unpausesound()</code>.                En "1" returneras om ett ljud spelas upp, annars en "0".              </p>
+              <p>
+                <b>Obs:</b> Tillagd till Rita med Tux 0.9.34; Magic API-version 0x0000000B.              </p>
+            </dd>
+
+            <dt><code><b>void pausesound(void)</b></code></dt>
+            <dd>
+              <p>
+                Pausar ljudeffekten för det magiska verktyget; den kan avpausas för att återuppta uppspelningen. Användbart när ett magiskt verktygsljud är mycket långt; undvik att upprepade gånger spela bara ett kort klipp av början när användaren ritar små streck genom att starta (<code>playsound()</code>) och stoppa (<code>stopsound()</code>) ljudet. Använd <code>playingsound()</code> för att avgöra om du kan avbryta eller måste spela upp från början.              </p>
+              <p>
+                <b>Obs:</b> Tillagd till Rita med Tux 0.9.34; Magic API-version 0x0000000B.              </p>
+            </dd>
+
+            <dt><code><b>void unpausesound(void)</b></code></dt>
+            <dd>
+              <p>
+                Återupptar en pausad ljudeffekt för det magiska verktyget, om en sådan spelades.              </p>
+              <p>
+                <b>Obs:</b> Tillagd till Rita med Tux 0.9.34; Magic API-version 0x0000000B.              </p>
+            </dd>
+          </dl>
+        </section><!-- H3: Sound Functions -->
+
+        <section class="indent"><!-- H3: Tux Paint System Calls -->
+          <header>
+            <h3 id="syscalls">
+              Systemanrop för Rita med Tux            </h3>
+          </header>
+
+          <dl>
+            <dt><code><b>void update_progress_bar(void)</b></code></dt>
+            <dd>
+              Ber Rita med Tux att animera och rita en bildruta i förloppsindikatorn (längst ned på skärmen).  Användbar för rutiner som kan ta lång tid, för att ge feedback till användaren om att Rita med Tux inte har kraschat eller frusit.            </dd>
+
+            <dt id="special_notify"><code><b>void special_notify(int flag)</b></code></dt>
+            <dd>
+              Denna funktion meddelar Rita med Tux om speciella händelser.  Olika värden som definieras i<code>"tp_magic_api.h</code>" kan kombineras (med hjälp av C:s booleska 'or':<code>"|</code>") och skickas till denna funktion.              <dl>
+                <dt><code>SPECIAL_FLIP</code></dt>
+                <dd>
+                  <p>
+                    Innehållet på duken har vänts vertikalt.                  </p>
+                  <p>
+                    Om en "Starter"-bild användes som grund för den här bilden ska den också vändas, och en registrering av vändningen ska lagras som en del av Rita med Tuxs buffertstapel för ångerrätt.  Dessutom ska det faktum att startbilden har vänts (eller inte vänts) sparas på disken när den aktuella teckningen sparas.                  </p>
+                </dd>
+                <dt><code>SPECIAL_MIRROR</code></dt>
+                <dd>
+                  Liknar <code>SPECIAL_FLIP</code>, men för magiska verktyg som speglar innehållet i duken horisontellt.                </dd>
+              </dl>
+            </dd>
+
+            <dt id="retract_undo"><code><b>void retract_undo(void)</b></code></dt>
+            <dd>
+              <p>
+                Varje gång användaren klickar i duken medan han eller hon använder Magic-verktyget läggs en ny ögonblicksbild av duken till i "Undo"-historiken. Detta gör det möjligt för användaren att klicka på "Undo" för att återställa bilden till det tillstånd den befann sig i precis innan de klickade med ditt Magic-verktyg. De kan klicka på "Redo" för att återställa ändringen.              </p>
+              <p>
+                Vissa mer sofistikerade Magic-verktyg kräver dock att ett eller flera steg utförs innan den slutliga "effekten" uppnås.  Till exempel kräver "Filled Polygon" att du placerar minst tre sammankopplade punkter och sedan kopplar ihop den första och den sista punkten för att skapa en form som läggs till på duken. Under tiden ritas en interaktiv förhandsgranskning av formen - en kontur med stora prickar som representerar varje punkt - på duken. (Punkterna kan flyttas, eller till och med tas bort, innan formen är klar)              </p>
+              <p>
+                API-funktionen <code>retract_undo()</code> kan användas av ett Magic-verktyg för att beordra det att kasta bort den "Undo"-bild som det just tog, som ett sätt att förhindra att förhandsvisningar som visas under åtgärder i flera steg visas på duken när kommandona "Undo" och "Redo" används.              </p>
+              <p class="note">
+                <span title="Information">&#128161;</span>                Detta är en avancerad funktion.              </p>
+              <p>
+                <b>Obs:</b> Tillagd till Rita med Tux 0.9.33; Magic API-version 0x0000000A.              </p>
+            </dd>
+          </dl>
+        </section><!-- H3: Tux Paint System Calls -->
+
+        <section class="indent"><!-- H3: Color Conversions -->
+          <header>
+            <h3 id="color_convs">
+              Färgkonverteringar            </h3>
+          </header>
+
+          <dl>
+            <dt><code><b>float sRGB_to_linear(Uint8 srbg)</b></code></dt>
+            <dd>
+              Konverterar ett 8-bitars sRGB-värde (ett värde mellan 0 och 255) till ett linjärt flyttalsvärde (mellan 0,0 och 1,0).            </dd>
+
+            <dt><code><b>uint8 linear_to_sRGB(float linear)</b></code></dt>
+            <dd>
+              Konverterar ett linjärt flyttalsvärde (ett värde mellan 0,0 och 1,0) till ett 8-bitars sRGB-värde (mellan 0 och 255).            </dd>
+
+            <dt><code><b>void rgbtohsv(Uint8 r, Uint8 g, Uint8 b, float * h, float * s, float * v)</b></code></dt>
+            <dd>
+              Konverterar 8-bitars sRGB-värden (mellan 0 och 255) till HSV-värden (Hue, Saturation och Value) med flyttal (Hue mellan 0,0 och 360,0, och Saturation och Value mellan 0,0 och 1,0).            </dd>
+
+            <dt><code><b>void hsvtorgb(float h, float s, float v, Uint8 * r, Uint8 * g, Uint8 * b)</b></code></dt>
+            <dd>
+              Konverterar HSV-värden (Hue, Saturation och Value) med flyttal (Hue mellan 0,0 och 360,0 och Saturation och Value mellan 0,0 och 1,0) till 8-bitars sRGB-värden (mellan 0 och 255).            </dd>
+          </dl>
+
+          <p>
+            Mer information finns i <a href="http://en.wikipedia.org/wiki/SRGB">artikeln om sRGB på Wikipedia</a> och <a href="http://en.wikipedia.org/wiki/HSV_color_space">artikeln om HSV-färgrymden på Wikipedia.</a>.          </p>
+        </section><!-- H3: Color Conversions -->
+      </section><!-- H2: Tux Paint Functions and Data -->
+
+      <section class="indent"><!-- H2: Helper Macros in tp_magic_api.h -->
+        <header>
+          <h2 id="macros">
+            Hjälpmakron i "<code>tp_magic_api.h</code>"          </h2>
+        </header>
+
+        <p>
+          Förutom C-strukturen<code>"magic_api</code>" som innehåller funktioner och data som beskrivs ovan, innehåller C-huvudfilen <code>tp_magic_api.h</code> också några hjälpmakron som du kan använda.        </p>
+
+        <dl>
+          <dt>
+            <code><b>min(x, y)</b></code><br>
+            <code><b>max(x, y)</b></code>
+          </dt>
+          <dd>
+            Minimum<code>(min)</code> eller maximum<code>(max)</code> av 'x' och 'y'.  Till exempel kommer <code>min()</code> att returnera värdet på 'x' om det är mindre än eller lika med 'y', annars kommer det att returnera 'y'.          </dd>
+
+          <dt><code><b>clamp(lo, value, hi)</b></code></dt>
+          <dd>
+            <p>
+              Ett värde som inte får vara mindre än "lo" och inte högre än "hi". (Det vill säga, om "värde" är mindre än "lo", används "lo"; om "värde" är större än "hi", används "hi"; i annat fall används "värde")            </p>
+            <p>
+              <b>Exempel:</b> <code>red = clamp(0, n, 255);</code> kommer att sätta variabeln "red" till värdet av variabeln "n", men utan att tillåta att den blir mindre än 0 eller större än 255.            </p>
+            <p>
+              <b>Observera:</b> Detta makro är helt enkelt en <code>#definition</code> av: "<code>(min(max(värde,lo),hi))".</code>.            </p>
+          </dd>
+        </dl>
+      </section><!-- H2: Helper Macros in tp_magic_api.h -->
+
+      <section class="indent"><!-- H2: Constant Definitions in tp_magic_api.h -->
+        <header>
+          <h2 id="consts">
+            Konstant Definitioner i "<code>tp_magic_api.h</code>"          </h2>
+        </header>
+
+        <p>
+          Följande är en sammanfattning av de konstantvärden som ställs in (via<code>"#define</code>") i huvudfilen för verktygs-API:et 'Magic'.        </p>
+
+        <dl>
+          <dt><code><b>TP_MAGIC_API_VERSION</b></code></dt>
+          <dd>
+            <p>
+              Detta heltalsvärde representerar vilken version av Rita med Tux 'Magic' tool API som rubriken motsvarar.            </p>
+            <p>
+              Det bör refereras till av ditt magiska verktygs<code>"api_version()"</code>-funktion, för att informera den löpande kopian av Rita med Tux om ditt plugin är kompatibelt eller inte.            </p>
+            <p>
+              <b>Obs:</b> Detta versionsnummer motsvarar inte Rita med Tux's eget versionsnummer (t.ex. "0.9.35").  API:et kommer inte att ändras varje gång en ny version av Rita med Tux släpps, vilket innebär att plugins som kompilerats för tidigare versioner av Rita med Tux ofta kommer att köras under nyare versioner.            </p>
+          </dd>
+
+          <dt>
+            <code><b>SPECIAL_MIRROR</b></code><br>
+            <code><b>SPECIAL_FLIP</b></code>
+          </dt>
+          <dd>
+            Dessa är flaggor för Rita med Tuxs hjälpfunktion<code>"special_notify()</code>".  De beskrivs <a href="#special_notify">ovan</a>.          </dd>
+        </dl>
+      </section><!-- H2: Constant Definitions in tp_magic_api.h -->
+    </section><!-- H1: Interfaces -->
+
+    
+    <section class="outer"><!-- H1: Compiling -->
+      <header>
+        <h1 id="compiling">
+          Kompilera        </h1>
+      </header>
+
+      <section class="indent"><!-- H2: Linux and other Unix-like Platforms -->
+        <header>
+          <h2 id="compiling-linux">
+            Linux och andra Unix-liknande plattformar          </h2>
+        </header>
+
+        <p>
+          Använd C-kompilatorns kommandoradsalternativ<code>"-shared</code>" för att generera en fil med delade objekt ("<code>.so</code>") baserat på C-källkoden för ditt verktygsplugin 'Magic'.        </p>
+        <p>
+          Använd kommandot<code>"tp-magic-config --cflags</code>", som levereras som en del av Rita med Tux - eller i vissa fall som en del av ett "Rita med Tux 'Magic' Tool Plugin Development package" - för att tillhandahålla ytterligare kommandoradsflaggor till din C-kompilator som hjälper den att bygga ditt plugin.        </p>
+
+        <section class="indent"><!-- H3: Command-Line Example -->
+          <header>
+            <h3>
+              Exempel på kommandoraden            </h3>
+          </header>
+
+          <p>
+            Som ett fristående kommando, till exempel med GNU C-kompilatorn och BASH-skalet:
+            <blockquote>
+              <p><code>
+                $ gcc -shared -fpic `tp-magic-config --cflags` my_plugin.c -o my_plugin.so
+              </code></p>
+            </blockquote>
+          </p>
+
+          <p>
+            <a name="grave"><b>Observera:</b></a> Tecknen runt kommandot<code>"tp-magic-config</code>" är en grav/backtick/backquote ("<code><b><font size=+1>`</font></b></code>"), och inte en apostrof/enkel citationstecken ("<code><b><font size=+1>'</font></b></code>"). De talar om för skalet att det ska utföra kommandot i kommandot (i det här fallet<code>"tp-magic-config .</code>..") och använda resultatet som ett argument till kommandot som ska utföras (i det här fallet<code>"gcc</code>...").          </p>
+        </section><!-- H3: Command-Line Example -->
+
+        <section class="indent"><!-- H3: Makefile Example -->
+          <header>
+            <h3>
+              Makefile Exempel            </h3>
+          </header>
+
+          <p>
+            Ett utdrag från en Makefile för att kompilera en Rita med Tux "Magic" tool plugin kan se ut så här:
+            <blockquote><code>
+              CFLAGS=-Wall -O2 $(shell tp-magic-config --cflags)<br>
+              <br>
+              my_plugin.so:  my_plugin.c<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;gcc -shared $(CFLAGS) -o my_plugin.so my_plugin.c
+            </code></blockquote>
+          </p>
+
+          <p>
+            Den första raden sätter upp Makefile-variabeln ("<code>CFLAGS</code>") som innehåller flaggor för kompilatorn.<code>"-Wall</code>" ber om att alla kompilatorvarningar ska visas. <code>"-O2</code>" begär optimering på nivå 2. "<code>($shell tp-magic-config --cflags)"</code> kör<code>"tp-magic-config</code>" för att hämta ytterligare kompilatorflaggor som "Magic"-verktygets insticksprogram kräver.  (Direktivet "$<code>(shell ...)</code>" liknar tecknet <a href="#grave"><b><font size=+1>`</font></b> ("grav")</a> i BASH-skalexemplen ovan)          </p>
+
+          <p>
+            På nästa rad definieras ett Makefile-mål,<code>"my_plugin.so</code>", och det anges att det är <i>beroende av</i> C-källfilen<code>"my_plugin.c</code>".  (Varje gång C-filen ändras vet<code>"make</code>" att den ska kompileras om och producera en uppdaterad "<code>.so</code>"-fil. Om C-filen inte hade ändrats skulle den inte bry sig om att kompilera om)          </p>
+
+          <p>
+            Den sista raden definierar det kommando som<code>"make</code>" ska köra när det bestämmer att det behöver (om)kompilera filen "<code>.so</code>".  Här använder vi<code>"gcc</code>", med kommandoradsargumenten<code>"-shared</code> och<code>"$(CFLAGS</code>)", som ovan.<code>"-o my_plugin.so</code>" talar om för C-kompilatorn att utdatafilen ska vara<code>"my_plugin</code>.<code>so</code>".  Det sista argumentet är C-filen som ska kompileras, i det här fallet<code>"my_plugin.c</code>".          </p>
+
+          <p>
+            <b>Observera:</b> Kommandon som listas under ett Makefile-mål ska anges med ett enda <b>tabbtecken</b>.          </p>
+        </section><!-- H3: Makefile Example -->
+
+        <section class="indent"><!-- H3: Advanced Makefile -->
+          <header>
+            <h3>
+              Avancerad Makefile            </h3>
+          </header>
+
+          <p>
+            En ännu mer generaliserad Makefile kan se ut så här:            <blockquote><code>
+              CFLAGS=-Wall -O2 $(shell tp-magic-config --cflags)<br>
+              <br>
+              my_plugin_1.so:  my_plugin_1.c<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;$(CC) -shared $(CFLAGS) -o $@ $&lt;<br>
+              <br>
+              my_plugin_2.so:  my_plugin_2.c<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;$(CC) -shared $(CFLAGS) -o $@ $&lt;
+            </code></blockquote>
+          </p>
+
+          <p>
+            Precis som tidigare finns det rader som definierar kommandot som<code>"make</code>" ska köra när det upptäcker att det behöver (om)kompilera "<code>.so</code>"-filen/filerna.  Här används dock mer allmänna termer...          </p>
+
+          <p>
+            <code>"$(CC)</code>" utökas till din standardkompilator för C (t.ex.<code>"gcc</code>"). <code>"-shared</code>" och<code>"$(CFLAGS</code>)" är kommandoradsargument till kompilatorn, som ovan.<code>"-o $@</code>" talar om för C-kompilatorn vad utdatafilen ska vara;<code>"make</code>" ersätter<code>"$@</code>" med namnet på målet, i det här fallet<code>"my_plugin_1.so</code>" eller<code>"my_plugin_2</code>.<code>so</code>". Och slutligen är det sista argumentet den C-fil som ska kompileras; "<code>make</code>" ersätter<code>"$&lt;</code>" med målets beroende, i det här fallet<code>"my_plugin_1</code>.c" eller<code>"my_plugin_2</code>.c".          </p>
+        </section><!-- H3: Advanced Makefile -->
+      </section><!-- H2: Linux and other Unix-like Platforms -->
+
+      <section class="indent"><!-- H2: Windows -->
+        <header>
+          <h2 id="compiling-windows">
+            Fönster          </h2>
+        </header>
+
+        <p>TBD</p>
+      </section><!-- H2: Windows -->
+
+      <section class="indent"><!-- H2: macOS -->
+        <header>
+          <h2 id="compiling-macos">
+            macOS          </h2>
+        </header>
+
+        <p>TBD</p>
+      </section><!-- H2: macOS -->
+    </section><!-- H1: Compiling -->
+
+    
+    <section class="outer"><!-- H1: Installing -->
+      <header>
+        <h1 id="installing">
+          Installerar        </h1>
+      </header>
+
+      <section class="indent"><!-- H2: Linux and other Unix-like Platforms -->
+        <header>
+          <h2 id="installing-linux">
+            Linux och andra Unix-liknande plattformar          </h2>
+        </header>
+
+        <p>
+          Använd kommandoradsverktyget<code>"tp-magic-config</code>", som levereras som en del av Rita med Tux - eller i vissa fall som en del av ett "Rita med Tux 'Magic' Tool Plugin Development package" - för att bestämma var dina plugins filer ska placeras.        </p>
+
+        <section class="indent"><!-- H3: Shared Object -->
+          <header>
+            <h3>
+              Delat objekt            </h3>
+          </header>
+
+          <p>
+            Använd<code>"tp-magic-config --pluginprefix</code>" för att bestämma var plugin shared object ("<code>.so</code>")-filerna ska installeras.  Det värde som returneras av detta kommando är den globala plats där den installerade kopian av Rita med Tux letar efter insticksprogram (<code>t.ex. "/usr/lib/tuxpaint/plugins</code>").          </p>
+
+          <p>
+            Alternativt kan du använda<code>"tp-magic-config --localpluginprefix</code>" för att ta reda på var Rita med Tux förväntar sig att hitta lokala plugins för den aktuella användaren (<code>t.ex. "<i>/home/username/</i>.tuxpaint/plugins</code>").          </p>
+
+          <p>
+            Som fristående kommandon, t.ex. i BASH-skalet:
+            <blockquote><code>
+              # cp my_plugin.so `tp-magic-config --pluginprefix`<br>
+              # chmod 644 `tp-magic-config --pluginprefix`/my_plugin.so
+            </code></blockquote>
+          </p>
+
+          <p>
+            <b>Obs:</b> Se <b>anmärkningen</b> <a href="#grave">ovan angående tecknet "<font size=+1><b>`"</b></font>(grav).</a>.          </p>
+        </section><!-- H3: Shared Object -->
+
+        <section class="indent"><!-- H3: Documentation -->
+          <header>
+            <h3>
+              Dokumentation            </h3>
+          </header>
+
+          <p>
+            Använd kommandot<code>"tp-magic-config --plugindocprefix</code>" för att bestämma var dokumentationen för dina "Magic"-verktyg ska placeras. Det värde som returneras av detta kommando är den plats där dokumentationen till den installerade kopian av Rita med Tux lagras. Huvuddokumentationen innehåller en länk till en mapp där dokumentationen för "Magic"-verktygen förväntas installeras</p> (<code>t.ex. "/usr/share/doc/tuxpaint/magic-docs</code>").          </p>
+
+          <p>
+            <b>Observera:</b> Det är bäst att inkludera både HTML- och klartextversioner av din dokumentation.  Det finns en underkatalog<code>"html</code>" i katalogen<code>"magic-docs</code>", och det är där HTML-versionerna ska läggas.          </p>
+
+          <p>
+            Som fristående kommandon, t.ex. i BASH-skalet:            <blockquote><code>
+              # cp my_plugin.html `tp-magic-config --plugindocprefix`/html<br>
+              # cp my_plugin.txt `tp-magic-config --plugindocprefix`
+            </code></blockquote>
+          </p>
+
+          <p>
+            <b>Obs:</b> Se <b>anmärkningen</b> <a href="#grave">ovan angående tecknet "<font size=+1><b>`"</b></font>(grav).</a>.          </p>
+
+          <p>
+            <b>Observera:</b> För närvarande finns det inget alternativ<code>"--localplugindocprefix</code>".          </p>
+        </section><!-- H3: Documentation -->
+
+        <section class="indent"><!-- H3: Icons, Sounds and other Data Files -->
+          <header>
+            <h3>
+              Ikoner, ljud och andra datafiler            </h3>
+          </header>
+
+          <p>
+            Använd kommandot<code>"tp-magic-config --dataprefix</code>", som ingår i Rita med Tux, för att bestämma var datafiler (PNG-ikoner, Ogg Vorbis-ljudeffekter etc.) ska installeras. Värdet som returneras av detta kommando kommer att vara detsamma som värdet på strängen<code>"data_directory</code>" som lagras i strukturen<code>"magic_api</code>" som funktionerna i ditt insticksprogram tar emot (<code>t.ex. "/usr/share/tuxpaint/</code>").          </p>
+
+          <p>
+            För lokalt installerade insticksprogram (endast för den aktuella användaren) använder du<code>"tp-magic-config --localdataprefix</code>".  Den returnerar värdet på strängen<code>"data_directory</code>" som lokalt installerade insticksprogram ser i sin<code>"magic_api</code>"-struktur (<code>t.ex. "<i>/home/username/</i>.tuxpaint/plugins/data/</code>").          </p>
+
+          <p>
+            <b>Observera:</b> Rita med Tuxs standardinsticksprogram för verktyget Magic installerar sina data i underkatalogerna<code>"magic</code>" i Rita med Tuxs datakataloger<code>"images</code>" och<code>"sounds</code>" (<code>t.ex. "/usr/share/tuxpaint/images/magic/</code>").  Vi uppmuntrar dig att göra detsamma.          </p>
+
+          <p>
+            Som fristående kommandon, t.ex. i BASH-skalet:            <blockquote><code>
+              # cp my_plugin_icon.png `tp-magic-config --dataprefix`/images/magic/<br>
+              # chmod 644 `tp-magic-config --dataprefix`/images/magic/my_plugin_icon.png
+            </code></blockquote>
+          </p>
+
+          <p>
+            <b>Obs:</b> Se <b>anmärkningen</b> <a href="#grave">ovan angående tecknet "<font size=+1><b>`"</b></font>(grav).</a>.          </p>
+        </section><!-- H3: Icons, Sounds and other Data Files -->
+
+        <section class="indent"><!-- H3: Putting it Together in a Makefile -->
+          <header>
+            <h3>
+              Sammanställa allt i en Makefile            </h3>
+          </header>
+
+          <p>
+            Ett utdrag från en mer generell Makefile kan se ut så här:            <blockquote><code>
+              PLUGINPREFIX=$(shell tp-magic-config --pluginprefix)<br>
+              PLUGINDOCPREFIX=$(shell tp-magic-config --plugindocprefix)<br>
+              DATAPREFIX=$(shell tp-magic-config --dataprefix)<br>
+              <br>
+              install:<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;#<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;# Install plugin<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;mkdir -p $(PLUGINPREFIX)<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;cp *.so $(PLUGINPREFIX)/<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;chmod 644 $(PLUGINPREFIX)/*.so<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;#<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;# Install icons<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;mkdir -p $(DATAPREFIX)/images/magic<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;cp icons/*.png $(DATAPREFIX)/images/magic/<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;chmod 644 $(DATAPREFIX)/images/magic/*.png<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;#<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;# Install sound effects<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;mkdir -p $(DATAPREFIX)/sounds/magic<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;cp sounds/*.ogg $(DATAPREFIX)/sounds/magic/<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;chmod 644 $(DATAPREFIX)/sounds/magic/*.ogg<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;#<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;# Install docs<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;mkdir -p $(PLUGINDOCPREFIX)/html<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;cp docs/*.html $(PLUGINDOCPREFIX)/html/<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;cp docs/*.txt $(PLUGINDOCPREFIX)/<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;chmod 644 $(PLUGINDOCPREFIX)/html/*.html<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;chmod 644 $(PLUGINDOCPREFIX)/*.txt<br>
+            </code></blockquote>
+          </p>
+
+          <p>
+            De tre första raderna ställer in Makefile-variabler som innehåller de sökvägar som returneras av kommandoradsverktyget<code>"tp-magic-config</code>". (Direktivet<code>"$(shell ...)</code>" liknar tecknet <a href="#grave"><b><font size=+1>`</font></b> ("grave")</a> i BASH-skalexemplen ovan)          </p>
+
+          <p>
+            Under det finns ett<code>"install</code>"-mål i Makefile. (Påkallas av till exempel<code>"$ sudo make install</code>" eller<code>"# make install</code>")          </p>
+
+          <p>
+            Målet<code>"install</code>" använder<code>"mkdir -p</code>" för att se till att plugin-katalogen finns, använder sedan<code>"cp</code>" för att kopiera alla plugin ("<code>.so</code>")-filer till den och anropar<code>"chmod</code>" för att se till att de är läsbara.          </p>
+
+          <p>
+            Därefter utförs en liknande serie kommandon för att installera ikonfiler ("<code>.png</code>"-bilder) och ljudeffekter ("<code>.ogg</code>"-filer) i underkataloger i Rita med Tuxs datakatalog och för att installera dokumentation ("<code>.html</code>"- och "<code>.txt</code>"-filer) i Rita med Tuxs dokumentationskatalog.          </p>
+
+          <p>
+            <b>Obs:</b> Makefile-exemplet ovan förutsätter att användaren har behörighet att installera Rita med Tux-plugins i hela systemet.          </p>
+        </section><!-- H3: Putting it Together in a Makefile -->
+      </section><!-- H2: Linux and other Unix-like Platforms -->
+
+      <section class="indent"><!-- H2: Windows -->
+        <header>
+          <h2 id="installing-windows">
+            Fönster          </h2>
+        </header>
+
+        <p>TBD</p>
+      </section><!-- H2: Windows -->
+
+      <section class="indent"><!-- H2: macOS -->
+        <header>
+          <h2 id="installing-macos">
+            macOS          </h2>
+        </header>
+
+        <p>TBD</p>
+      </section><!-- H2: macOS -->
+    </section><!-- H1: Installing -->
+
+    
+    <section class="outer"><!-- H1: Creating plugins with multiple effects -->
+      <header>
+        <h1 id="multiple">
+          Skapa plugins med flera effekter        </h1>
+      </header>
+
+      <p>
+        Plugins för Rita med Tux kan innehålla mer än en effekt.  Om du har flera effekter som liknar varandra kan det vara vettigt att placera dem i en plugin-fil för att minska overhead och dela kod.      </p>
+
+      <p>
+        Följande förslag kan hjälpa dig att skapa plugins som innehåller flera effekter:
+        <ul>
+          <li>
+            Använd C<code>"enum</code>" för att räkna upp effekterna och räkna dem.            <blockquote><code>
+              enum {<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;ETT_VERKTYG,<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;ANNAT_VERKTYG,<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;OCH_YTTERLIGARE_ETT_VERKTYG,<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;NUM_TOOLS };
+            </code></blockquote>
+          </li>
+
+          <li>
+            Returnera värdet på<code>"NUM_TOOLS</code>" när<code>"get_tool_count()</code>" anropas, och jämför<code>"which"</code>-värden som skickas till andra funktioner med de andra uppräknade värdena.          </li>
+
+          <li>
+            Skapa arrayer av längden<code>"NUM_TOOLS</code>" för att innehålla effektspecifika data.            <blockquote><code>
+              char * my_plugin_snd_filnamn[NUM_TOOLS] = {<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;"one.ogg", "another.ogg", "yet_another.ogg" };<br>
+              Mix_Chunk * min_plugin_snds[NUM_TOOLS]");
+            </code></blockquote>
+          </li>
+
+          <li>
+            Använd en C<code>"for</code>"-loop för att ladda eller skapa effektspecifika data (t.ex. ladda ljudeffekter under din<code>"init()</code>").            <blockquote><code>
+              int i;<br>
+              char fname[1024];<br>
+              <br>
+              for (i = 0; i &lt; NUM_TOOLS; i++)<br>
+              {<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;/* Blir till exempel "/usr/share/tuxpaint/sounds/magic/one.ogg" */<br>
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;snprintf(fname, sizeof(fname), "%s/sounds/magic/%<!-- -->s",<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;api-&gt;data_prefix, my_plugin_snd_filnamn[i]);<br>
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;min_plugin_snds[i] = Mix_LoadWAV(fname);<br>
+              }
+            </code></blockquote>
+          </li>
+
+          <li>
+            På samma sätt kan du göra för att frigöra dem senare (t.ex. frigöra ljudeffekter under din<code>"shutdown()</code>").            <blockquote><code>
+              &nbsp;&nbsp;&nbsp;&nbsp;int i;<br>
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;for (i = 0; i &lt; NUM_TOOLS; i++)<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mix_FreeChunk(min_plugin_snds[i]);
+            </code></blockquote>
+          </li>
+
+          <li>
+            Använd<code>"which"</code>-värden som skickas till dina funktioner som ett index i dessa matriser (t.ex. för att spela upp lämplig ljudeffekt för ett verktyg).          </li>
+        </ul>
+      </p>
+
+      <p>
+        <b>Observera:</b> Även om ditt plugin för närvarande bara innehåller en effekt, kan det vara bra att följa stegen ovan så att du kan lägga till en ny variant av en effekt med liten ansträngning.  ("<code>NUM_TOOLS</code>" kommer helt enkelt att vara '1', dina arrayer kommer att ha längden '1', etc.)      </p>
+
+    </section><!-- H1: Creating plugins with multiple effects -->
+
+    
+    <section class="outer"><!-- H1: Example Code -->
+      <header>
+        <h1 id="examples">
+          Om det anges söker GCode-visaren efter en rad som börjar med den här strängen. Om det hittas hoppas alla GCode upp till den punkten över. Detta kan användas för att hoppa över GCode för "rensa/munstyckesrensning" i tittaren. Observera att sökningen är fallkänslig. Exempel: <code>; layer 1</code>        </h1>
+      </header>
+
+      <p>
+        The C source file "<a href="tp_magic_example.c"><code>tp_magic_example.c</code></a>" contains a complete example of a plugin with multiple simple effects.
+      </p>
+    </section><!-- H1: Example Code -->
+
+    
+    <section class="outer"><!-- H1: Getting Help -->
+      <header>
+        <h1 id="help">
+          Få hjälp        </h1>
+      </header>
+
+      <p>
+        Mer information finns på webbplatsen för Rita med Tux: <a href="https://tuxpaint.org/">https://tuxpaint.org/</a> och på webbplatsen för biblioteket Simple DirectMedia Layer: <a href="http://www.libsdl.org/">http://www.libsdl.org/.</a>.      </p>
+
+      <p>
+        Dessutom finns andra utvecklare och användare av Rita med Tux på e-postlistorna<code>"tuxpaint-devel</code>" och<code>"tuxpaint-users</code>": <a href="https://tuxpaint.org/lists/">https://tuxpaint.org/lists/.</a>.      </p>
+    </section><!-- H1: Getting Help -->
+
+    
+    
+<section class="outer"><!-- H1: Glossary -->
+  <header>
+    <h1 id="glossary">
+      Ordlista    </h1>
+  </header>
+
+  <dl>
+          <dt><code>&amp;</code></dt>
+      <dd>
+        Se "ampersand"              </dd>
+            <dt><code>*</code></dt>
+      <dd>
+        Se "stjärna"              </dd>
+            <dt><code>-&gt;</code></dt>
+      <dd>
+        Se "pil"              </dd>
+            <dt><code>.</code></dt>
+      <dd>
+        Se "punkt"              </dd>
+            <dt><code>`</code></dt>
+      <dd>
+        Se "grav"              </dd>
+            <dt>alfa</dt>
+      <dd>
+        Se "RGBA"              </dd>
+            <dt>ampersand (bitvis operator)</dt>
+      <dd>
+        <code>"&amp;"</code>. En symbol i C som fungerar som en bitvis "och"-operator. Endast bitar som är inställda i båda värdena returneras. Till exempel jämför<code>"11 &amp; 6</code>" de binära värdena '1011' med '0110'. Endast biten på 2:ans plats är inställd, så resultatet blir <code>2</code> ('0010').        <br/>
+Se även: "bit"      </dd>
+            <dt>ampersand (pekare)</dt>
+      <dd>
+        <code>"&amp;"</code>. En symbol i C som gör det möjligt att referera till minnesadressen för en variabel, dvs. en pekare. (Tänk till exempel på<code>"int i;</code>". Senare hänvisar<code>"&amp;i</code>" till minnet där "<code>i</code>" är lagrat, inte värdet på "<code>i</code>" i sig; det är en "pekare till<code>"i</code>"")        <br/>
+Se även: "stjärna"      </dd>
+            <dt>API</dt>
+      <dd>
+        Gränssnitt för applikationsprogrammering. <i>Definitionen har ännu inte presenterats.</i>              </dd>
+            <dt>argument</dt>
+      <dd>
+        Ett värde som skickas till en funktion.              </dd>
+            <dt>backquote / backtick</dt>
+      <dd>
+        Se "grav"              </dd>
+            <dt>BASH</dt>
+      <dd>
+        "Bourne Again Shell", ett skal- och kommandospråk för Unix.              </dd>
+            <dt>bit</dt>
+      <dd>
+        "Binär siffra." Bitar är den grundläggande lagringsenheten i en dators minne, disk, nätverk etc. De representerar antingen 0 eller 1. (Jämfört med en decimalsiffra, som kan vara allt mellan 0 och 9.) Precis som en serie decimalsiffror kan representera ett större tal (t.ex. "1" och "5" är femton (15)), kan även bitar göra det (t.ex. "1" och "0" är två). I decimal går vi från höger till vänster: ettor, tior, hundratal, tusental osv. I binära tal är det: ettor, tvåor, fyror, åttor osv.        <br/>
+Se även: "byte"      </dd>
+            <dt>blå</dt>
+      <dd>
+        Se "RGBA"              </dd>
+            <dt>boolean &#039;eller&#039;</dt>
+      <dd>
+        En matematisk operation som resulterar i ett sant värde om en av operanderna är sann. ("1 | 0", "0 | 1" och "1 | 1" resulterar alla i "1". "0 | 0" resulterar i "0")        <br/>
+Se även: "bit"      </dd>
+            <dt>byte</dt>
+      <dd>
+        En minnesenhet som består av 8 bitar. Som ett signerat värde kan det representera -128 till 127. Som osignerat värde kan det representera 0 till 255. Som en serie bitar representerar t.ex. byten "00001100" det decimala värdet 12.        <br/>
+Se även: "bit"      </dd>
+            <dt>C-funktion / C-huvudfil</dt>
+      <dd>
+        <i>Definitionen har ännu inte presenterats.</i>        <br/>
+Se även: "Prototyp för C-funktion"      </dd>
+            <dt>C-pekare</dt>
+      <dd>
+        En variabel som innehåller platsen för en del av minnet; används vanligtvis för att "peka" på en annan variabel. Eftersom C-funktioner bara kan returnera ett värde som resultat, skickas ofta pekare till funktioner för att funktionen ska kunna ändra värdena för flera variabler. (Till exempel Rita med Tuxs<code>"rgbtohsv()</code>" och<code>"hsvtorgb()</code>")              </dd>
+            <dt>C-struktur</dt>
+      <dd>
+        En konstruktion i C som gör att du kan deklarera en ny variabel "typ" som kan innehålla andra typer. SDL:s<code>"SDL_Rect</code>" innehåller till exempel fyra heltalsvärden, rektangelns koordinater (X,Y) och dess dimensioner (bredd och höjd).              </dd>
+            <dt>C-uppräkning</dt>
+      <dd>
+        En konstruktion i C som gör det möjligt att märka numeriska värden (som vanligtvis börjar på 0 och ökar med ett). (t.ex.<code>"enum { ONE, TWO, THREE };</code>"              </dd>
+            <dt><code>#define</code></dt>
+      <dd>
+        En C-sats som definierar en substitution som kan förekomma senare i koden. Används vanligen för konstanta värden (t.ex. "<code>#define RADIUS 16</code>"; alla förekomster av<code>"RADIUS</code>" ersätts med<code>"16</code>"), men kan också användas för att skapa makron. Placeras vanligtvis i C-headerfiler.              </dd>
+            <dt>delat objekt</dt>
+      <dd>
+        En del av koden som kompileras separat från huvudapplikationen och laddas dynamiskt vid körning.              </dd>
+            <dt><code>dimensioner</code></dt>
+      <dd>
+        Ett objekts storlek i form av dess bredd (från vänster till höger) och höjd (uppifrån och ned).              </dd>
+            <dt><code>.dll</code></dt>
+      <dd>
+        Se "Shared Object"              </dd>
+            <dt>dra</dt>
+      <dd>
+        Att flytta en mus medan knappen hålls intryckt, eller att flytta ett finger eller en penna över en skärm eller surfplatta utan att ta bort den.        <br/>
+Se även nedan:
+<ul>
+<li>klick</li><li>utgåva</li></ul>
+      </dd>
+            <dt>element</dt>
+      <dd>
+        En variabel som lagras inom en C-struktur. (Exempel: elementen<code>"w</code>" och<code>"h</code>" i SDL_Surface lagrar ytans bredd respektive höjd)        <br/>
+Se även nedan:
+<ul>
+<li>C-struktur</li><li>punkt</li><li>pil</li></ul>
+      </dd>
+            <dt><code>enum</code></dt>
+      <dd>
+        Se "C-uppräkning"              </dd>
+            <dt><code>float</code></dt>
+      <dd>
+        Se "flyttal"              </dd>
+            <dt>flyttal</dt>
+      <dd>
+        <i>Definitionen har ännu inte presenterats.</i>        <br/>
+Se även: "heltal"      </dd>
+            <dt><code>format</code></dt>
+      <dd>
+        Ett <code>SDL_Surface-element</code> (en pekare till en <code>SDL_PixelFormat-struktur</code> ) som innehåller information om en yta, t.ex. antalet bitar som används för att representera varje pixel.)<br/>Se manuskriptet "<code>SDL_PixelFormat(3)</code>" <i>man page</i>.              </dd>
+            <dt><code>free()</code></dt>
+      <dd>
+        En C-funktion som frigör (deallokerar) minne som allokerats av andra C-funktioner (t.ex. "<code>strdup(</code>)").<br/>Se manuskriptet "<code>malloc(3)</code>" <i>man page</i>.              </dd>
+            <dt>funktion</dt>
+      <dd>
+        Se "C-funktion"              </dd>
+            <dt>färgrymd</dt>
+      <dd>
+        <i>Definitionen har ännu inte presenterats.</i>        <br/>
+Se även nedan:
+<ul>
+<li>RGBA</li><li>HSV</li></ul>
+      </dd>
+            <dt><code>gcc</code></dt>
+      <dd>
+        Se "GNU C-kompilator"              </dd>
+            <dt>GIMP</dt>
+      <dd>
+        GNU Image Manipulation Program, ett bildmanipulerings- och färgprogram med öppen källkod.        <br/>
+Se även: "Krita"      </dd>
+            <dt>GNU C-kompilator</dt>
+      <dd>
+        GNU C-kompilatorn, ett portabelt Open Source-paket för kompilering och länkning av program skrivna i programspråket C.<br/>Se manuskriptet "<code>gcc(1)</code>" <i>man page</i>.              </dd>
+            <dt>grav</dt>
+      <dd>
+        Den "<code><font size=+1>`</font></code>"; används av BASH-skalet för att använda utdata från ett kommando som kommandoradsargument för ett annat.              </dd>
+            <dt>grön</dt>
+      <dd>
+        Se "RGBA"              </dd>
+            <dt><code>.h</code></dt>
+      <dd>
+        Se "C-huvudfil"              </dd>
+            <dt>heltal</dt>
+      <dd>
+        <i>Definitionen har ännu inte presenterats.</i>        <br/>
+Se även: "flyttal"      </dd>
+            <dt>HSV</dt>
+      <dd>
+        Färgton, mättnad och värde.<i>Definitionen har ännu inte presenterats.</i>        <br/>
+Se även nedan:
+<ul>
+<li>RGBA</li><li>färgrymd</li></ul>
+      </dd>
+            <dt>huvudfil</dt>
+      <dd>
+        Se "C-huvudfil"              </dd>
+            <dt><code>IMG_Load()</code></dt>
+      <dd>
+        En SDL_image-funktion som laddar en bildfil (t.ex. en PNG) och returnerar den som en<code>"SDL_Surface *</code>".              </dd>
+            <dt><code>#include</code></dt>
+      <dd>
+        En C-sats som ber kompilatorn att läsa innehållet i en annan fil (vanligtvis en header-fil).              </dd>
+            <dt>instick</dt>
+      <dd>
+        <i>Definitionen har ännu inte presenterats.</i>              </dd>
+            <dt><code>int</code></dt>
+      <dd>
+        Se "heltal"              </dd>
+            <dt>kanal</dt>
+      <dd>
+        <i>Definitionen har ännu inte presenterats.</i>              </dd>
+            <dt>klick</dt>
+      <dd>
+        Att trycka på en knapp på en mus, trycka på en pekskärm eller trycka en penna mot en surfplatta.        <br/>
+Se även nedan:
+<ul>
+<li>dra</li><li>utgåva</li></ul>
+      </dd>
+            <dt>koordinater</dt>
+      <dd>
+        En uppsättning siffror som motsvarar en fysisk position; till exempel i en tvådimensionell (2D) bild anger "X"- och "Y"-koordinaterna positionen tvärs över (från vänster till höger) respektive nedåt i bilden. I SDL är koordinaterna (0,0) den längst upp till vänster belägna pixeln på en yta.              </dd>
+            <dt>Krita</dt>
+      <dd>
+        Ett bildmanipulerings- och färgprogram med öppen källkod.        <br/>
+Se även: "GIMP"      </dd>
+            <dt>libSDL</dt>
+      <dd>
+        Se "Simple DirectMedia Layer"              </dd>
+            <dt>linjär</dt>
+      <dd>
+        <i>Definitionen har ännu inte presenterats.</i>              </dd>
+            <dt><code>magic_api</code></dt>
+      <dd>
+        En C-struktur som skickas vidare till ett plugins funktioner som exponerar data och funktioner i den löpande kopian av Rita med Tux.              </dd>
+            <dt>Magiskt verktyg</dt>
+      <dd>
+        En av ett antal effekter eller ritverktyg i Rita med Tux, som görs tillgängliga via verktygsknappen "Magic".              </dd>
+            <dt><code>make</code></dt>
+      <dd>
+        Ett verktyg som automatiskt avgör vilka delar av ett större program som behöver kompileras om och ger kommandon för att kompilera om dem.        <br/>
+Se även: "Makefile"      </dd>
+            <dt><code>Makefile</code></dt>
+      <dd>
+        En textfil som används av verktyget "make"; den beskriver förhållandena mellan filerna i ditt program och kommandona för att uppdatera varje fil. (Till exempel för att kompilera en mänskligt läsbar källkodsfil till en datorläsbar körbar programfil)              </dd>
+            <dt>makro</dt>
+      <dd>
+        En C-konstruktion som ser ut som en C-funktion, men som helt enkelt är en #define som expanderas "inline". Om du till exempel deklarerade makrot<code>"#define ADD(A,B) ((A)+(B))</code>" och sedan använde det med<code>"c = ADD(1,2);</code>", skulle den kodraden bokstavligen expandera till<code>"c = ((1) + (2));</code>", eller enklare uttryckt,<code>"c = 1 + 2;</code>".              </dd>
+            <dt><code>Mix_Chunk *</code></dt>
+      <dd>
+        (En pekare till) en C-struktur som definieras av SDL_mixer och som innehåller ett ljud.              </dd>
+            <dt><code>Mix_FreeChunk()</code></dt>
+      <dd>
+        En SDL_mixer-funktion som frigör (avallokerar) minne som allokerats för en SDL_mixer-ljud "chunk" ("<code>Mix_Chunk *</code>").              </dd>
+            <dt><code>Mix_LoadWAV()</code></dt>
+      <dd>
+        En SDL_mixer-funktion som laddar en ljudfil (WAV, Ogg Vorbis, etc.) och returnerar den som en<code>"Mix_Chunk *</code>".              </dd>
+            <dt>mättnad</dt>
+      <dd>
+        Se "HSV"              </dd>
+            <dt>namnrymd</dt>
+      <dd>
+        <i>Definitionen har ännu inte presenterats.</i>              </dd>
+            <dt>nyans</dt>
+      <dd>
+        Se "HSV"              </dd>
+            <dt><code>.ogg</code></dt>
+      <dd>
+        Se "Ogg Vorbis"              </dd>
+            <dt>Ogg Vorbis</dt>
+      <dd>
+        <i>Definitionen har ännu inte presenterats.</i>        <br/>
+Se även: "WAVE"      </dd>
+            <dt>osignerad</dt>
+      <dd>
+        I C kan en variabel som kan lagra ett numeriskt värde deklareras som antingen "signerad" (standard) eller "osignerad". I det förra fallet används en bit av värdet för att ange värdets tecken (antingen positivt eller negativt). I det senare fallet kan värdet bara vara positivt, men det finns en extra lagringsbit för talet. En signerad byte (8 bitar) kan t.ex. representera vilket tal som helst mellan -128 och 127. En osignerad byte kan gå upp till 255, men den kan inte gå under 0. För grafik i SDL bör osignerade värden användas för RGB-värden, eftersom varje kanal (röd, grön och blå) kan vara mellan 0 (släckt) och 255 (ljusast).        <br/>
+Se även nedan:
+<ul>
+<li>Uint8</li><li>Uint32</li><li>integer</li></ul>
+      </dd>
+            <dt>peka</dt>
+      <dd>
+        Se "klick"              </dd>
+            <dt>pekare</dt>
+      <dd>
+        Se "C-pekare"              </dd>
+            <dt>pil</dt>
+      <dd>
+        <code>"-&gt;"</code>. En symbol i C som refererar till ett element inom en pekare till en struktur.              </dd>
+            <dt><code>.png</code></dt>
+      <dd>
+        Se "Portable Network Graphics"              </dd>
+            <dt>Portable Network Graphics</dt>
+      <dd>
+        Portable Network Graphics. Ett utbyggbart filformat för förlustfri, portabel och välkomprimerad lagring av rasterbilder. Det är det filformat som Rita med Tux använder för att spara bilder och för sina penslar och stämplar. Det är ett enkelt sätt att lagra 32bpp RGBA-bilder (24bpp äkta färg med full 8bpp alfa-genomskinlighet), utmärkt för användning i grafikprogram som Rita med Tux.<br/>Se manuskriptet "<code>png(5)</code>" <i>man page</i>.        <br/>
+Se även: "Scalable Vector Graphic"      </dd>
+            <dt>prototyp</dt>
+      <dd>
+        Se "Prototyp för C-funktion"              </dd>
+            <dt>Prototyp för C-funktion</dt>
+      <dd>
+        <i>Definitionen har ännu inte presenterats.</i>        <br/>
+Se även: "C-funktion"      </dd>
+            <dt>punkt</dt>
+      <dd>
+        "<code>.</code>". En symbol i C som refererar till ett element inom en struktur.        <br/>
+Se även nedan:
+<ul>
+<li>C-struktur</li><li>pil</li></ul>
+      </dd>
+            <dt>RGB</dt>
+      <dd>
+        Se "RGBA"              </dd>
+            <dt>RGBA</dt>
+      <dd>
+        Röd, grön, blå och alfa.<i>Definitionen har ännu inte presenterats.</i>        <br/>
+Se även nedan:
+<ul>
+<li>HSV</li><li>färgrymd</li></ul>
+      </dd>
+            <dt>röd</dt>
+      <dd>
+        Se "RGBA"              </dd>
+            <dt>SDL</dt>
+      <dd>
+        Se "Simple DirectMedia Layer"              </dd>
+            <dt><code>SDL_FreeSurface()</code></dt>
+      <dd>
+        En libSDL-funktion som frigör (deallokerar) minne som allokerats för en SDL-yta ("<code>SDL_Surface *</code>").              </dd>
+            <dt><code>SDL_GetRGB()</code></dt>
+      <dd>
+        En libSDL-funktion som, med tanke på ett <code>Uint32-pixelvärde</code> (t.ex. ett som returneras från Rita med Tux's Magic tool API-hjälpfunktionen "getpixel<code>()</code>"), formatet på ytan som pixeln togs från och pekare till tre <code>Uint8-variabler</code>, placerar pixelns RGB-värden (rött, grönt och blått) i de tre <code>Uint8-variablerna</code>. (Exempel:<code>"SDL_GetRGB(getpixel(surf, x, y), surf-&gt;format, &amp;r, &amp;g, &amp;b);</code>"<br/>Se manuskriptet "<code>SDL_GetRGB(3)</code>" <i>man page</i>.        <br/>
+Se även nedan:
+<ul>
+<li>SDL_MapRGB()</li><li>RGBA</li></ul>
+      </dd>
+            <dt><code>SDL_image</code></dt>
+      <dd>
+        Ett bibliotek ovanpå libSDL som kan ladda olika typer av bildfiler (t.ex. PNG) och returnera dem som en<code>"SDL_Surface *</code>".              </dd>
+            <dt><code>SDL_MapRGB()</code></dt>
+      <dd>
+        En libSDL-funktion som, givet formatet på en yta och <code>Uint8-värden</code> som representerar röda, gröna och blå värden för en pixel, returnerar ett <code>Uint32-pixelvärde</code> som kan placeras i ytan (t.ex. med hjälp av Rita med Tux's Magic tool API-hjälpfunktion<code>"putpixel()")</code>. (Exempel:<code>"putpixel(surf, x, y, SDL_MapRGB(surf-&gt;format, r, g, b));</code>".)<br/>Se manuskriptet "<code>SDL_MapRGB(3)</code>" <i>man page</i>.        <br/>
+Se även nedan:
+<ul>
+<li>SDL_GetRGB()</li><li>RGBA</li></ul>
+      </dd>
+            <dt><code>SDL_mixer</code></dt>
+      <dd>
+        Ett bibliotek ovanpå libSDL som kan läsa in olika typer av ljudfiler (WAV, Ogg Vorbis, etc.) och spela upp flera ljud samtidigt (mixa dem).              </dd>
+            <dt><code>SDL_Rect</code></dt>
+      <dd>
+        En C-struktur som definieras av libSDL och som representerar ett rektangulärt område. Den innehåller element som representerar koordinaterna för rektangelns övre vänstra hörn (x,y) och rektangelns dimensioner (w,h).<br/>Se manuskriptet "<code>SDL_Rect(3)</code>" <i>man page</i>.              </dd>
+            <dt><code>SDL_Surface *</code></dt>
+      <dd>
+        (En pekare till) en C-struktur som definieras av libSDL och som innehåller en rityta.<br/>Se manuskriptet "<code>SDL_Surface(3)</code>" <i>man page</i>.              </dd>
+            <dt>sidhuvud</dt>
+      <dd>
+        Se "C-huvudfil"              </dd>
+            <dt>Simple DirectMedia Layer</dt>
+      <dd>
+        Simple DirectMedia Layer (libSDL) är ett programmeringsbibliotek som ger portabel lågnivååtkomst till en videoramabuffert, ljudutgång samt mus- och tangentbordsinmatning. (Se: <a href="http://www.libsdl.org/">http://www.libsdl.org/</a>)              </dd>
+            <dt>skal</dt>
+      <dd>
+        Se "BASH"              </dd>
+            <dt><code>snprintf()</code></dt>
+      <dd>
+        En C-funktion, relaterad till "printf()", som tar en "format"-sträng och ett eller flera ytterligare argument och sätter ihop dem. "snprintf()" tar den resulterande utdata och lagrar den i en sträng, och ser till att inte gå utöver strängens buffertstorlek (som också måste anges). Anta till exempel att en sträng<code>"char str[20]</code>;" har deklarerats;<code>"snprintf(str, 20, "Namn: %s, Ålder: %d", "Bill", 32);</code>" lagrar "Namn: Bill, Ålder: 32" i<code>'str</code>'.<br/>Se manuskriptet "<code>sprintf(3)</code>" <i>man page</i>.              </dd>
+            <dt><code>.so</code></dt>
+      <dd>
+        Se "delat objekt"              </dd>
+            <dt>sRGB</dt>
+      <dd>
+        Se "RGBA"              </dd>
+            <dt>stjärna</dt>
+      <dd>
+        <code>"*</code>". En symbol i C som, när den används i deklarationen av variabler (t.ex. argument till en funktion), anger att variabeln är en pekare. (Till exempel<code>"int * p;</code>" betyder att<code>"p</code>" är en <i>pekare</i> till ett heltal.) När den används bredvid en pekare "dereferencerar" den variabeln. (Till exempel, senare<code>"*p = 50;</code>" tilldelar värdet 50 till det minne som "<code>p</code>" pekar på; det ändrar inte värdet på "<code>p</code>", som fortfarande är en pekare på ett heltal. I själva verket ändras det heltal som pekas ut)        <br/>
+Se även: "ampersand"      </dd>
+            <dt><code>strdup()</code></dt>
+      <dd>
+        En C-funktion som allokerar tillräckligt med minne för att lagra en kopia av en sträng, kopierar strängen till det och returnerar en<code>"char *</code>"-pekare till den nya kopian.<br/>Se manuskriptet "<code>strdup(3)</code>" <i>man page</i>.              </dd>
+            <dt><code>struct</code></dt>
+      <dd>
+        Se "C-struktur"              </dd>
+            <dt><code>tp-magic-config</code></dt>
+      <dd>
+        Ett kommandoradsprogram som ger information om den installerade versionen av Rita med Tux till plugin-utvecklare (t.ex. vilka C-kompilatorflaggor de ska kompilera med och var plugin-delade objekt och datafiler ska installeras).<br/>Se manuskriptet "<code>tp-magic-config(3)</code>" <i>man page</i>.              </dd>
+            <dt><code>tp_magic_api.h</code></dt>
+      <dd>
+        En header-fil som definierar Rita med Tuxs API för magiska verktyg.  Plugins måste<code>'#inkludera</code>' den.              </dd>
+            <dt><code>Uint32</code></dt>
+      <dd>
+        Ett 32-bitars, osignerat heltal (definierat av libSDL). Med andra ord, fyra byte som kan representera 0 till 4 294 967 295. (Används vanligtvis för att hålla tillräckligt med information för att lagra tre eller fyra byte som representerar en pixels färg; dvs. RBGA-värde).        <br/>
+Se även nedan:
+<ul>
+<li>Uint8</li><li>integer</li><li>unsigned</li></ul>
+      </dd>
+            <dt><code>Uint8</code></dt>
+      <dd>
+        Ett 8-bitars, osignerat heltal (definierat av libSDL). Med andra ord, en byte som kan representera 0 till 255.        <br/>
+Se även nedan:
+<ul>
+<li>Uint32</li><li>integer</li><li>unsigned</li></ul>
+      </dd>
+            <dt>utgåva</dt>
+      <dd>
+        Att släppa en musknapp eller att ta bort ett finger eller en pekpenna från en skärm eller surfplatta.        <br/>
+Se även nedan:
+<ul>
+<li>klick</li><li>dra</li></ul>
+      </dd>
+            <dt>variabel</dt>
+      <dd>
+        En konstruktion i datorprogrammering som innehåller ett värde som kan refereras till igen senare genom att hänvisa till variabelns namn, och vanligtvis ändras senare. Till exempel kan en variabel som innehåller någons ålder deklareras som ett heltal:<code>"int age</code>;". Den kan undersökas senare - t.ex.<code>"if (age &gt;= 18) { /* they are an adult */ } else { /* they are not an adult */ } }</code>" - och även ändras senare - t.ex. <code>age = 32; /* set age to 32 */</code>              </dd>
+            <dt>värde</dt>
+      <dd>
+        Se "HSV"              </dd>
+            <dt><code>(w,h)</code></dt>
+      <dd>
+        Se "dimensioner"              </dd>
+            <dt><code>.wav</code></dt>
+      <dd>
+        Se "WAVE"              </dd>
+            <dt>WAVE</dt>
+      <dd>
+        Waveform Audio File Format (WAVE, or WAV). <i>Definitionen har ännu inte presenterats.</i>        <br/>
+Se även: "Ogg Vorbis"      </dd>
+            <dt><code>(x,y)</code></dt>
+      <dd>
+        Se "koordinater"              </dd>
+            <dt><code>|</code></dt>
+      <dd>
+        Se "boolean 'eller'"              </dd>
+            <dt>återuppringning</dt>
+      <dd>
+        <i>Definitionen har ännu inte presenterats.</i>              </dd>
+        </dl>
+
+</section><!-- H1: Glossary -->
+
+
+  </body>
+</html>

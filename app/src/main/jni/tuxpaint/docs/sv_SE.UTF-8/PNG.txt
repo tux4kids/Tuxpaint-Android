@@ -1,0 +1,91 @@
+                                   Tux Paint
+                                version 0.9.35
+                               PNG-dokumentation
+
+         Copyright © 2007-2022 av olika bidragsgivare; se AUTHORS.txt.
+                             https://tuxpaint.org/
+
+                                 juni 4, 2022
+
+Om PNG
+
+PNG är Portable Network Graphic-formatet. Det är en öppen standard som inte är
+belastad av patent (som GIF). Det är ett mycket komprimerat format (men inte
+"lossy" som JPEG - lossiness gör att filer kan vara mycket mindre, men
+introducerar "misstag" i bilden när den sparas) och stöder 24-bitars färg (16,7
+miljoner färger) samt en fullständig "alfakanal" - det vill säga varje pixel
+kan ha en varierande grad av transparens.
+
+För mer information, besök: http://www.libpng.org/
+
+Dessa funktioner (öppenhet, förlustfrihet, komprimering, transparens / alfa)
+gör det till det bästa valet för Rita med Tux. (Rita med Tuxs stöd för
+PNG-formatet kommer från Open Source SDL_Image-biblioteket, som i sin tur får
+det från libPNG-biblioteket)
+
+Stöd för många färger gör det möjligt att använda "stämpelbilder" i
+fotokvalitet i Rita med Tux, och alfatransparens gör det möjligt att använda
+penslar av hög kvalitet.
+
+                       ### Hur man skapar PNG-filer ###
+
+Här följer en mycket kortfattad lista över olika sätt att skapa PNG-filer eller
+konvertera befintliga bilder till PNG-filer.
+
+→ GIMP & Krita ←
+
+    Utmärkta verktyg för att skapa PNG-bilder för användning i Rita med Tux är
+    GIMP och Krita, båda högkvalitativa interaktiva rit- och
+    fotoredigeringsprogram med öppen källkod.
+
+    Det är troligt att en eller båda redan är installerade på ditt system. Om
+    inte, bör de vara lätt tillgängliga från din Linux-distributions
+    programvaruarkiv. Om inte, eller om du vill veta mer, besök http://
+    www.gimp.org/ respektive http://www.krita.org/.
+
+
+     
+→ Verktyg för kommandoraden ←
+    → NetPBM ←
+
+        Portable Bitmap tools (kollektivt kända som "NetPBM") är en samling
+        kommandoradsverktyg med öppen källkod som konverterar till och från
+        olika format, inklusive GIF, TIFF, BMP, PNG och många fler.
+
+        Det är möjligt att det redan finns installerat på ditt system. Om inte,
+        finns det lätt tillgängligt från din Linux-distributions
+        programvaruarkiv. Om inte, eller för att lära dig mer, besök http://
+        netpbm.sourceforge.net/.
+
+
+         
+    → cjpeg/djpeg ←
+
+        Kommandoradsprogrammen "cjpeg" och "djpeg" konverterar mellan NetPBM
+        Portable Any Map (PNM)-formatet och JPEG. Det är möjligt att det redan
+        finns installerat på ditt system. Om inte, finns det lätt tillgängligt
+        från din Linux-distributions programvaruarkiv. Om inte, eller för att
+        lära dig mer, besök https://jpegclub.org/.
+
+
+         
+
+     
+→ Egenutvecklad programvara för Windows ←
+      o CorelDRAW (Corel) — http://www.corel.com/
+      o Illustrator (Adobe) — http://www.adobe.com/products/illustrator.html
+      o Paint Shop Pro (Corel) — https://www.paintshoppro.com/
+      o Photoshop (Adobe) — http://www.adobe.com/products/photoshop.html
+      o PIXresizer (Bluefive software) — http://bluefive.pair.com/
+        pixresizer.htm
+
+     
+→ Macintosh-användare ←
+      o CorelDRAW (Corel) — http://www.corel.com/
+      o GraphicConverter (Lemke Software) — https://www.lemkesoft.de/
+        mac-fotobearbeitung-mac-diashow-mac-grafikprogramm-mac-bildbetrachter/
+      o Illustrator (Adobe) — http://www.adobe.com/products/illustrator.html
+      o Photoshop (Adobe) — http://www.adobe.com/products/photoshop.html
+
+     
+
