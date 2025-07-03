@@ -15,7 +15,7 @@ android {
         targetSdkVersion 34
         externalNativeBuild {
             ndkBuild {
-                arguments "APP_PLATFORM=android-21"
+                arguments "APP_PLATFORM=android-21", "APP_STL=c++_shared"
                 abiFilters 'arm64-v8a'
             }
         }
