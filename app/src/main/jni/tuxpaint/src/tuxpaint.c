@@ -358,6 +358,7 @@ extern status_t haiku_trash(const char *f);
 #define AUTOSAVE_GOING_BACKGROUND
 #include "android_print.h"
 #include "android_assets.h"
+#include "SDL_mouse_c.h"
 int entered_background = 0;
 
 #else
@@ -409,7 +410,6 @@ int iswprint(wchar_t wc)
 #include <sys/stat.h>
 
 #include "SDL2/SDL.h"
-#include "SDL_mouse_c.h"
 #include "SDL2/SDL_thread.h"
 
 #if defined(__MACOS__)

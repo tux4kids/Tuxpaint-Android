@@ -31,8 +31,6 @@
 #include <string.h>
 #include <libintl.h>
 #include <locale.h>
-#include "SDL2/SDL.h"
-#include "../../../SDL2/src/core/android/SDL_android.h"
 #include "platform.h"
 #include "i18n.h"
 #include "debug.h"
@@ -54,6 +52,7 @@
 
 #ifdef __ANDROID__
 #include "SDL2/SDL.h"
+#include "../../../SDL2/src/core/android/SDL_android.h"
 #include "jni.h"
 // since setlocale on the Android is not supported well,
 // setlocale cannot get current default locale of the device.
