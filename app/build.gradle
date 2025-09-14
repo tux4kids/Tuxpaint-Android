@@ -16,7 +16,6 @@ android {
         externalNativeBuild {
             ndkBuild {
                 arguments "APP_PLATFORM=android-21"
-                arguments "NDK_DEBUG=0"
                 abiFilters 'arm64-v8a'
                 // Add 16KB page size alignment support - use ldFlags instead of cFlags
                 arguments "APP_LDFLAGS+=-Wl,-z,max-page-size=16384"
