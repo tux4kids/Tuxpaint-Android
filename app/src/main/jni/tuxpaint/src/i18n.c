@@ -31,6 +31,8 @@
 #include <string.h>
 #include <libintl.h>
 #include <locale.h>
+#include "SDL2/SDL.h"
+#include "../../../SDL2/src/core/android/SDL_android.h"
 #include "platform.h"
 #include "i18n.h"
 #include "debug.h"

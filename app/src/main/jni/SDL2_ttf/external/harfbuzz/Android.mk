@@ -61,7 +61,9 @@ LOCAL_C_INCLUDES = \
 LOCAL_STATIC_LIBRARIES += freetype
 
 #LOCAL_CFLAGS += -DHB_NO_MT -DHAVE_OT -DHAVE_UCDN -fPIC
-LOCAL_CFLAGS += -DHAVE_CONFIG_H -fPIC
+LOCAL_CFLAGS += -DHAVE_CONFIG_H -fPIC -Wno-cast-function-type-strict -Wno-error -Wno-cast-function-type -w
+LOCAL_CXXFLAGS += -Wno-cast-function-type-strict -Wno-error -Wno-cast-function-type -Wno-cast-function-type-strict -w
+LOCAL_CPPFLAGS += -Wno-cast-function-type-strict -Wno-error -Wno-cast-function-type -w
 
 LOCAL_EXPORT_C_INCLUDES = $(LOCAL_PATH)/src/
 

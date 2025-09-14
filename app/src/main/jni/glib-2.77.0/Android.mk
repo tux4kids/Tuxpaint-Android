@@ -477,7 +477,9 @@ LOCAL_CFLAGS := \
 	-DGIO_COMPILATION		\
 	-DGIO_MODULE_DIR=\"/mnt/sdcard/Android/data/org.tuxpaint/files/glib\"	\
 	-DXDG_PREFIX=_gio_xdg		\
-	-marm				\
+	-UHAVE_STRERROR_R		\
+	-USTRERROR_R_CHAR_P		\
+	-Wno-error=int-conversion	\
 	$(NULL)
 
 LOCAL_SHARED_LIBRARIES := 	\

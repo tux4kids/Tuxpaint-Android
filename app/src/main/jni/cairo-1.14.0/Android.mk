@@ -9,6 +9,7 @@ LOCAL_CFLAGS := \
 	-D_REENTRANT \
 	-DCAIRO_NO_MUTEX=1 \
 	-Wno-attributes \
+	-Wno-error=int-conversion \
 	$(NULL)
 
 LOCAL_C_INCLUDES := \
