@@ -49,6 +49,23 @@ void show_progress_bar_(SDL_Surface *screen, SDL_Texture *texture, SDL_Renderer 
   if (progress_bar_disabled)
     return;
 
+#ifdef __ANDROID__
+  /* On Android, skip all rendering operations in progress bar because:
+   * 1. It's called from worker threads (font loading, file scanning, etc.)
+   * 2. OpenGL/EGL contexts are thread-local and cannot be used from worker threads
+   * 3. Even with valid renderer/texture/screen parameters, the GL context is not
+   *    current on the worker thread, causing SIGSEGV when GL functions are called
+   * 
+   * We still allow the function to continue to update internal state like prog_bar_ctr
+   * and oldtime, but skip all SDL rendering calls. */
+  newtime = SDL_GetTicks();
+  if (newtime > oldtime + 500) {
+    prog_bar_ctr++;
+  }
+  oldtime = newtime;
+  return;
+#endif
+
   newtime = SDL_GetTicks();
   if (newtime > oldtime + 15)   /* trying not to eat some serious CPU time! */
   {
