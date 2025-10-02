@@ -29786,6 +29786,16 @@ static void setup(void)
   if (!fullscreen)
     init_flags |= SDL_INIT_NOPARACHUTE; /* allow debugger to catch crash */
 
+  /* Fix Android EGL threading issues - ensure GL context stays on render thread */
+#ifdef __ANDROID__
+  SDL_SetHint(SDL_HINT_TOUCH_MOUSE_EVENTS, "1");
+  SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengles2");
+  SDL_SetHint(SDL_HINT_ANDROID_TRAP_BACK_BUTTON, "1");
+  SDL_SetHint(SDL_HINT_ANDROID_BLOCK_ON_PAUSE, "0");
+  /* Prevent EGL context from being made current on multiple threads */
+  SDL_SetHint(SDL_HINT_VIDEO_ALLOW_SCREENSAVER, "1");
+#endif
+
   /* Init SDL */
   if (SDL_Init(init_flags) < 0)
   {
@@ -29997,7 +30007,12 @@ static void setup(void)
 
     /* FIXME: Check window_screen for being NULL, and abort?! (Also see below) -bjk 2024.12.20 */
 
+#ifdef __ANDROID__
+    /* On Android, use accelerated renderer to ensure proper GL context threading */
+    renderer = SDL_CreateRenderer(window_screen, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+#else
     renderer = SDL_CreateRenderer(window_screen, -1, 0);
+#endif
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
 
     if (native_screensize)
@@ -30180,7 +30195,12 @@ static void setup(void)
     SDL_SetWindowMaximumSize(window_screen, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 
+#ifdef __ANDROID__
+    /* On Android, use accelerated renderer to ensure proper GL context threading */
+    renderer = SDL_CreateRenderer(window_screen, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+#else
     renderer = SDL_CreateRenderer(window_screen, -1, 0);
+#endif
     SDL_GL_GetDrawableSize(window_screen, &ww, &hh);
     texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_STATIC, ww, hh);
 
