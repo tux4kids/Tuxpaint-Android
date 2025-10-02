@@ -13,7 +13,6 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 35
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             ndkBuild {
                 arguments "APP_PLATFORM=android-21"
@@ -101,10 +100,4 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "androidx.print:print:1.0.0"
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    
-    // Testing dependencies
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test:runner:1.5.2'
-    androidTestImplementation 'androidx.test:rules:1.5.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }

@@ -585,10 +585,6 @@ int iswprint(wchar_t wc)
 
 #include "compiler.h"
 
-#ifdef __ANDROID__
-#include <android/log.h>
-#endif
-
 char *tp_ui_font = NULL;
 
 /* Convert floats to fractions between (min/max) and ((max-min)/max)
@@ -21851,9 +21847,6 @@ static void load_magic_plugins(void)
     DEBUG_PRINTF("\n");
     DEBUG_PRINTF("Loading magic plug-ins from %s\n", place);
 
-#ifdef __ANDROID__
-    __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Opening magic plugin directory: %s", place);
-#endif
 
     /* Gather list of files (for sorting): */
 
@@ -21928,9 +21921,6 @@ static void load_magic_plugins(void)
             if (magic_handle[num_plugin_files] != NULL)
             {
               DEBUG_PRINTF("loading: %s\n", fname);
-#ifdef __ANDROID__
-              __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Loading magic plugin: %s", fname);
-#endif
 
               safe_snprintf(funcname, sizeof(funcname), "%s_%s", objname, "get_tool_count");
               magic_funcs[num_plugin_files].get_tool_count = SDL_LoadFunction(magic_handle[num_plugin_files], funcname);
@@ -22133,15 +22123,9 @@ static void load_magic_plugins(void)
               }
               else
               {
-#ifdef __ANDROID__
-                __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Initializing magic plugin: %s", fname);
-#endif
                 res =
                   magic_funcs[num_plugin_files].init(magic_api_struct, magic_disabled_features, magic_complexity_level);
 
-#ifdef __ANDROID__
-                __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Magic plugin init result: %d", res);
-#endif
 
                 if (res != 0)
                   n = magic_funcs[num_plugin_files].get_tool_count(magic_api_struct);
@@ -22339,9 +22323,6 @@ static void load_magic_plugins(void)
     }
   }
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Sorting magic plugins...");
-#endif
 
   for (i = 0; i < MAX_MAGIC_GROUPS; i++)
   {
@@ -22351,15 +22332,9 @@ static void load_magic_plugins(void)
   DEBUG_PRINTF("Loaded %d magic tools from %d plug-in files\n", num_magics_total, num_plugin_files);
   DEBUG_PRINTF("\n");
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Loaded %d magic tools from %d plugin files", num_magics_total, num_plugin_files);
-#endif
 
   /* Start out with the first magic group that _has_ any tools */
   tries = 0;
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Finding first magic group with tools, magic_group=%d", magic_group);
-#endif
   while (num_magics[magic_group] == 0 && tries < MAX_MAGIC_GROUPS)
   {
     magic_group++;
@@ -22369,9 +22344,6 @@ static void load_magic_plugins(void)
       magic_group = 0;
     }
   }
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "load_magic_plugins() completed");
-#endif
 }
 
 
@@ -30280,24 +30252,12 @@ static void setup(void)
 
   /* quickly: title image, version, progress bar, and watch cursor */
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Loading splash images...");
-#endif
   DEBUG_PRINTF("Loading splash images...\n");
   img_title = loadimage(DATA_PREFIX "images/title.png");
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "img_title loaded");
-#endif
   DEBUG_PRINTF("img_title loaded\n");
   img_title_credits = loadimage(DATA_PREFIX "images/title-credits.png");
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "img_title_credits loaded");
-#endif
   DEBUG_PRINTF("img_title_credits loaded\n");
   img_progress = loadimage(DATA_PREFIX "images/ui/progress.png");
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "img_progress loaded");
-#endif
   DEBUG_PRINTF("img_progress loaded\n");
 
   if (screen->w - img_title->w >= 410 && screen->h - img_progress->h - img_title_credits->h - 40)       /* FIXME: Font */
@@ -30311,14 +30271,8 @@ static void setup(void)
   else
     img_title_tuxpaint = loadimage(DATA_PREFIX "images/title-tuxpaint.png");
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "img_title_tuxpaint loaded");
-#endif
 
   /* Show splash screen (or white screen on Android) */
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Drawing splash screen...");
-#endif
   DEBUG_PRINTF("Drawing splash screen...\n");
   SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 255, 255, 255));
 
@@ -30345,14 +30299,8 @@ static void setup(void)
   prog_bar_ctr = 0;
   show_progress_bar(screen);
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Flipping screen...");
-#endif
   DEBUG_PRINTF("Flipping screen...\n");
   SDL_Flip(screen);
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Screen flipped!");
-#endif
   DEBUG_PRINTF("Screen flipped!\n");
 
 
@@ -30369,9 +30317,6 @@ static void setup(void)
 
   /* Create cursors: */
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Creating cursors...");
-#endif
 
   scale = 1;
 
@@ -30386,16 +30331,10 @@ static void setup(void)
   /* this one first, because we need it yesterday */
   cursor_watch = get_cursor(watch_bits, watch_mask_bits, watch_width, watch_height, 14 / scale, 14 / scale);
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Setting watch cursor...");
-#endif
 
   do_setcursor(cursor_watch);
   show_progress_bar(screen);
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Progress bar shown");
-#endif
 
 
   /* Let Pango & fontcache do their work without locking up */
@@ -30440,9 +30379,6 @@ static void setup(void)
 #endif
 
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Loading medium_font...");
-#endif
 
   medium_font = TuxPaint_Font_OpenFont(tp_ui_font, DATA_PREFIX "fonts/default_font.ttf",        /* FIXME: Does this matter any more? -bjk 2023.05.29 */
                                        (18 - (only_uppercase * 3)) * button_scale);
@@ -30458,9 +30394,6 @@ static void setup(void)
     exit(1);
   }
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "medium_font loaded");
-#endif
 
   safe_snprintf(tmp_str, sizeof(tmp_str), "Version: %s – %s", VER_VERSION, VER_DATE);
 
@@ -30501,9 +30434,6 @@ static void setup(void)
 
   /* continuing on with the rest of the cursors... */
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Creating additional cursors...");
-#endif
 
 #ifndef __APPLE__
   cursor_arrow = get_cursor(arrow_bits, arrow_mask_bits, arrow_width, arrow_height, 0, 0);
@@ -30534,9 +30464,6 @@ static void setup(void)
 
   /* Create drawing canvas: */
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Creating drawing canvas...");
-#endif
 
   canvas_width = WINDOW_WIDTH - r_ttools.w - r_ttoolopt.w;
   canvas_height = (button_h * buttons_tall) + r_ttools.h;
@@ -30605,9 +30532,6 @@ static void setup(void)
 
   /* Create undo buffer space: */
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Creating undo buffers...");
-#endif
 
   for (i = 0; i < NUM_UNDO_BUFS; i++)
   {
@@ -30629,23 +30553,14 @@ static void setup(void)
     undo_starters[i] = UNDO_STARTER_NONE;
   }
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Undo buffers created");
-#endif
 
 
   /* Load other images: */
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Loading tool images...");
-#endif
 
   for (i = 0; i < NUM_TOOLS; i++)
     img_tools[i] = loadimagerb(tool_img_fnames[i]);
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Tool images loaded, loading UI images...");
-#endif
 
   img_title_on = loadimagerb(DATA_PREFIX "images/ui/title.png");
   img_title_large_on = loadimagerb(DATA_PREFIX "images/ui/title_large.png");
@@ -30801,9 +30716,6 @@ static void setup(void)
 
   /* Load brushes: */
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Loading brushes...");
-#endif
 
   load_brush_dir(screen, DATA_PREFIX "brushes");
   homedirdir = get_fname("brushes", DIR_DATA);
@@ -30821,9 +30733,6 @@ static void setup(void)
     exit(1);
   }
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Brushes loaded: %d", num_brushes);
-#endif
 
   free(homedirdir);
 
@@ -30866,23 +30775,14 @@ static void setup(void)
 
   locale_font = medium_font;
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Loading stamps...");
-#endif
 
   if (!dont_load_stamps)
     load_stamps(screen);
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Stamps loaded");
-#endif
 
 
   /* Load magic tool plugins: */
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Loading magic plugins...");
-#endif
 
   magic_disabled_features = 0x00;       // 0b00000000
   if (disable_magic_sizes)
@@ -30896,15 +30796,9 @@ static void setup(void)
 
   load_magic_plugins();
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Magic plugins loaded");
-#endif
 
   show_progress_bar(screen);
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Loading shape icons...");
-#endif
 
   /* Load shape icons: */
   for (i = 0; i < NUM_SHAPES; i++)
@@ -30917,15 +30811,9 @@ static void setup(void)
     SDL_FreeSurface(aux_surf);
   }
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Shape icons loaded");
-#endif
 
   show_progress_bar(screen);
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Loading fill icons...");
-#endif
 
   /* Load fill sub-tool icons: */
   for (i = 0; i < NUM_FILLS; i++)
@@ -30938,29 +30826,17 @@ static void setup(void)
     SDL_FreeSurface(aux_surf);
   }
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Fill icons loaded");
-#endif
 
   show_progress_bar(screen);
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Loading tip tux images...");
-#endif
 
   /* Load tip tux images: */
   for (i = 0; i < NUM_TIP_TUX; i++)
     img_tux[i] = loadimagerb(tux_img_fnames[i]);
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Tip tux images loaded");
-#endif
 
   show_progress_bar(screen);
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Loading mouse and color picker images...");
-#endif
 
   img_mouse = loadimagerb(DATA_PREFIX "images/ui/mouse.png");
   img_mouse_click = loadimagerb(DATA_PREFIX "images/ui/mouse_click.png");
@@ -30970,9 +30846,6 @@ static void setup(void)
   img_color_picker = loadimagerb(DATA_PREFIX "images/ui/color_picker.png");
   img_color_picker_val = loadimagerb(DATA_PREFIX "images/ui/color_picker_val.png");
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Creating toolbox and selector labels...");
-#endif
 
   /* Create toolbox and selector labels: */
 
@@ -30997,17 +30870,11 @@ static void setup(void)
     }
   }
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Toolbox labels created");
-#endif
 
 
 
   /* Generate color selection buttons: */
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Generating color selection buttons...");
-#endif
 
   /* Create appropriately-shaped buttons: */
   img1 = loadimage(DATA_PREFIX "images/ui/paintwell.png");
@@ -31135,19 +31002,10 @@ static void setup(void)
   SDL_FreeSurface(tmp_btn_up);
   SDL_FreeSurface(tmp_btn_down);
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Color buttons generated");
-#endif
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Creating button labels...");
-#endif
 
   create_button_labels();
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Button labels created");
-#endif
 
   /* Resize any icons if the text we just rendered was too wide,
      and we word-wrapped it to be two lines tall */
@@ -31228,9 +31086,6 @@ static void setup(void)
   apple_init();
 #endif
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "setup() completed");
-#endif
 }
 
 

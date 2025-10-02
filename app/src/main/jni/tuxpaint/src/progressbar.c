@@ -31,10 +31,6 @@
 #include "progressbar.h"
 #include "debug.h"
 
-#ifdef __ANDROID__
-#include <android/log.h>
-#endif
-
 SDL_Surface *img_progress;
 int progress_bar_disabled, prog_bar_ctr;
 
@@ -63,9 +59,8 @@ void show_progress_bar_(SDL_Surface *screen, SDL_Texture *texture, SDL_Renderer 
    * We still allow the function to continue to update internal state like prog_bar_ctr
    * and oldtime, but skip all SDL rendering calls. */
   newtime = SDL_GetTicks();
-  if (newtime > oldtime + 500) {  /* Log every half second instead of rendering */
+  if (newtime > oldtime + 500) {
     prog_bar_ctr++;
-    __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Loading... progress tick %d", prog_bar_ctr);
   }
   oldtime = newtime;
   return;
