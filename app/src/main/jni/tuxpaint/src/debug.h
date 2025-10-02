@@ -32,15 +32,18 @@
 *
 * Verbose logging adds metadata to printf, including the source file location
 * from where printf was called and the time it was called at runtime.
+*
+* Note: On Android, we use __android_log_print instead to avoid infinite recursion
+* and to properly log to the Android logcat system.
 */
-#if defined(DEBUG) && defined(VERBOSE) && defined(__GNUC__)
+#if defined(DEBUG) && defined(VERBOSE) && defined(__GNUC__) && !defined(__ANDROID__)
 #include <stdio.h>
 #include <time.h>
 
 #define printf(args...) do { \
     time_t now = time(NULL); \
-    printf("\n### %s, line %d in %s() @ %s", __FILE__, __LINE__, __FUNCTION__, ctime(&now)); \
-    printf(args); \
+    fprintf(stderr, "\n### %s, line %d in %s() @ %s", __FILE__, __LINE__, __FUNCTION__, ctime(&now)); \
+    fprintf(stderr, args); \
 } while(0)
 #endif
 
