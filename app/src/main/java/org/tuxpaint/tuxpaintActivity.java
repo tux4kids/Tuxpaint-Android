@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.content.res.AssetManager;
 import android.content.pm.PackageManager;
+import android.view.MotionEvent;
 import android.Manifest;
 
 public class tuxpaintActivity extends SDLActivity {
@@ -17,6 +18,12 @@ public class tuxpaintActivity extends SDLActivity {
     private static AssetManager mgr;
     private static native boolean managertojni(AssetManager mgr);
     private static native void setnativelibdir(String path);
+    private static native void nativeOnTouch(int action, int pointerCount, float[] x, float[] y, long[] pointerIds);
+    
+    // Called by SDLSurface via reflection to forward all multitouch data
+    public static void forwardMultitouchToNative(int action, int pointerCount, float[] x, float[] y, long[] pointerIds) {
+        nativeOnTouch(action, pointerCount, x, y, pointerIds);
+    }
 
 
     @Override
@@ -36,6 +43,30 @@ public class tuxpaintActivity extends SDLActivity {
         mgr = getResources().getAssets();
         managertojni(mgr);
         setnativelibdir(getApplicationInfo().nativeLibraryDir + "/");
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        // Forward multitouch data to native code
+        int action = event.getActionMasked();
+        int pointerCount = event.getPointerCount();
+        
+        if (pointerCount > 0) {
+            float[] x = new float[pointerCount];
+            float[] y = new float[pointerCount];
+            long[] pointerIds = new long[pointerCount];
+            
+            for (int i = 0; i < pointerCount; i++) {
+                x[i] = event.getX(i);
+                y[i] = event.getY(i);
+                pointerIds[i] = event.getPointerId(i);
+            }
+            
+            nativeOnTouch(action, pointerCount, x, y, pointerIds);
+        }
+        
+        // Let SDL handle it too
+        return super.onTouchEvent(event);
     }
 
     static {

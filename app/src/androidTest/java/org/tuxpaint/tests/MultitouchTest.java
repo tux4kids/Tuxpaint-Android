@@ -29,16 +29,21 @@ public class MultitouchTest {
 
     /**
      * Test basic multitouch functionality with 2 simultaneous fingers painting.
+     * This test verifies that:
+     * 1. First finger can draw (mouse events work - compatibility)
+     * 2. Second finger can draw simultaneously (multitouch works)
+     * 3. Both fingers draw independent lines
      */
     @Test
     public void testTwoFingerSimultaneousPainting() throws InterruptedException {
         Log.i(TAG, "========================================");
         Log.i(TAG, "STARTING TWO-FINGER MULTITOUCH TEST");
+        Log.i(TAG, "Test: First finger draws line 1, second finger draws line 2 simultaneously");
         Log.i(TAG, "========================================");
         
         // Wait for activity to fully load
-        Log.i(TAG, "Waiting 5 seconds for app to fully load...");
-        Thread.sleep(5000);
+        Log.i(TAG, "Waiting 10 seconds for app to fully load and show canvas...");
+        Thread.sleep(10000);
 
         final boolean[] testComplete = {false};
         final boolean[] testPassed = {false};
@@ -166,6 +171,9 @@ public class MultitouchTest {
                 
                 testPassed[0] = true;
                 testComplete[0] = true;
+                
+                // Give SDL time to process events before shutdown
+                Thread.sleep(2000);
                 
             } catch (Exception e) {
                 Log.e(TAG, "ERROR during multitouch test", e);
@@ -307,6 +315,9 @@ public class MultitouchTest {
                 
                 testComplete[0] = true;
                 
+                // Give SDL time to process events before shutdown
+                Thread.sleep(2000);
+                
             } catch (Exception e) {
                 Log.e(TAG, "ERROR during three-finger test", e);
                 fail("Three-finger test failed: " + e.getMessage());
@@ -382,6 +393,9 @@ public class MultitouchTest {
                 Log.i(TAG, "========================================");
                 
                 testComplete[0] = true;
+                
+                // Give SDL time to process events before shutdown
+                Thread.sleep(2000);
                 
             } catch (Exception e) {
                 Log.e(TAG, "ERROR during stress test", e);

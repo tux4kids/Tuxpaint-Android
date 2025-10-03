@@ -27,6 +27,13 @@
 
 #include "platform.h"
 
+#ifdef __ANDROID__
+#include <android/log.h>
+#ifdef ENABLE_MULTITOUCH
+#include "android_multitouch.h"
+#endif
+#endif
+
 /* (Note: VER_VERSION and VER_DATE are now handled by Makefile) */
 
 
@@ -1399,6 +1406,22 @@ static int no_button_distinction;
 static int button_down;
 static int scrolling_selector, scrolling_tool, scrolling_dialog;
 
+#ifdef ENABLE_MULTITOUCH
+#define MAX_FINGERS 10
+
+typedef struct {
+  int active;
+  long pointer_id;  /* Android pointer ID or SDL finger ID */
+  int x;
+  int y;
+  int last_x;
+  int last_y;
+} FingerState;
+
+static FingerState active_fingers[MAX_FINGERS];
+static int num_active_fingers = 0;
+#endif
+
 static int promptless_save = SAVE_OVER_UNSET;
 static int _promptless_save_over, _promptless_save_over_ask, _promptless_save_over_new;
 static int disable_quit;
@@ -2313,6 +2336,12 @@ static int magic_button_down(void);
 static SDL_Surface *magic_scale(SDL_Surface * surf, int w, int h, int aspect);
 static SDL_Surface *magic_rotate_scale(SDL_Surface * surf, int r, int w);
 static void reset_touched(void);
+
+#ifdef ENABLE_MULTITOUCH
+static int find_finger_slot(SDL_FingerID finger_id);
+static int allocate_finger_slot(SDL_FingerID finger_id);
+static void release_finger_slot(int slot);
+#endif
 static Uint8 magic_touched(int x, int y);
 static void magic_retract_undo(void);
 
@@ -2664,6 +2693,17 @@ static void mainloop(void)
   shape_tool_mode = SHAPE_TOOL_MODE_DONE;
   stamp_tool_mode = STAMP_TOOL_MODE_PLACE;
   button_down = 0;
+
+#ifdef ENABLE_MULTITOUCH
+  /* Initialize multitouch tracking */
+  for (int i = 0; i < MAX_FINGERS; i++) {
+    active_fingers[i].active = 0;
+  }
+  num_active_fingers = 0;
+#ifdef __ANDROID__
+  android_multitouch_init();
+#endif
+#endif
   last_cursor_blink = cur_toggle_count = 0;
   texttool_len = 0;
   scrolling_selector = 0;
@@ -3628,6 +3668,13 @@ static void mainloop(void)
       else if ((event.type == SDL_MOUSEBUTTONDOWN ||
                 event.type == TP_SDL_MOUSEBUTTONSCROLL) && event.button.button <= 3)
       {
+#ifdef __ANDROID__
+        static int mouse_down_count = 0;
+        if (mouse_down_count++ < 5) {  /* Log first 5 mouse downs only */
+          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "MOUSEBUTTONDOWN received! x=%d y=%d button=%d", 
+                             event.button.x, event.button.y, event.button.button);
+        }
+#endif
         if (HIT(r_tools))
         {
           if (HIT(real_r_tools))
@@ -5340,29 +5387,19 @@ static void mainloop(void)
         }
         else if (HIT(r_canvas) && valid_click(event.button.button) && keyglobal == 0)
         {
+#ifdef __ANDROID__
+          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Canvas click detected! cur_tool=%d", cur_tool);
+#endif
           const Uint8 *kbd_state;
-
-          motion_since_click = 0;
 
           kbd_state = SDL_GetKeyboardState(NULL);
 
-          if ((kbd_state[SDL_SCANCODE_LCTRL] || kbd_state[SDL_SCANCODE_RCTRL]) && colors_are_selectable)
+          /* Render any live text label */
+          if (cur_tool == TOOL_LABEL && texttool_len > 0 && label_node_to_edit)
           {
-            int chose_color;
-
-            /* Holding [Ctrl] while clicking; switch to temp-mode color selector! */
-            chose_color = do_color_sel(1);
-
-            draw_cur_tool_tip();
-
-            if (chose_color)
-            {
-              playsound(screen, 1, SND_BUBBLE, 1, SNDPOS_CENTER, SNDDIST_NEAR);
-              cur_color = COLOR_SELECTOR;
-              handle_color_changed();
-            }
-            else
-              playsound(screen, 1, SND_CLICK, 1, SNDPOS_CENTER, SNDDIST_NEAR);
+            rec_undo_buffer();
+            do_render_cur_text(1);
+            texttool_len = 0;
 
             draw_colors(COLORSEL_FORCE_REDRAW);
 
@@ -6429,6 +6466,13 @@ static void mainloop(void)
       }
       else if (event.type == SDL_MOUSEMOTION && !ignoring_motion)
       {
+#ifdef __ANDROID__
+        static int motion_log_count = 0;
+        if (motion_log_count++ % 30 == 0) {  /* Log every 30th motion to avoid spam */
+          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "MOUSEMOTION event cur_tool=%d ignoring_motion=%d", cur_tool, ignoring_motion);
+        }
+#endif
+
         new_x = event.button.x - r_canvas.x;
         new_y = event.button.y - r_canvas.y;
 
@@ -6700,6 +6744,12 @@ static void mainloop(void)
 
         if (button_down || emulate_button_pressed)
         {
+#ifdef __ANDROID__
+          static int button_down_log = 0;
+          if (button_down_log++ % 30 == 0) {
+            __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "button_down block: cur_tool=%d TOOL_BRUSH=%d", cur_tool, TOOL_BRUSH);
+          }
+#endif
           if (cur_tool == TOOL_BRUSH)
           {
             /* Pushing button and moving: Draw with the brush: */
@@ -6707,6 +6757,111 @@ static void mainloop(void)
             brush_draw(old_x, old_y, new_x, new_y, 1);
 
             playsound(screen, 0, paintsound(img_cur_brush_w), 0, event.button.x, SNDDIST_NEAR);
+            
+#if defined(__ANDROID__) && defined(ENABLE_MULTITOUCH)
+            /* Multitouch: Use Android's direct touch data */
+            int numFingers = android_multitouch_get_count();
+            static int last_finger_count = 0;
+            static int finger_log_count = 0;
+            if (numFingers != last_finger_count || finger_log_count++ % 30 == 0) {
+              __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Android Multitouch: %d fingers detected while painting", numFingers);
+              last_finger_count = numFingers;
+            }
+            
+            if (numFingers >= 2)
+            {
+              /* Draw strokes for ALL fingers */
+              for (int i = 0; i < numFingers && i < MAX_FINGERS; i++)
+              {
+                long pointer_id;
+                float screen_x, screen_y, last_screen_x, last_screen_y;
+                
+                if (android_multitouch_get_pointer(i, &pointer_id, &screen_x, &screen_y, &last_screen_x, &last_screen_y))
+                {
+                  /* Convert to canvas coordinates */
+                  int canvas_x = (int)screen_x - r_canvas.x;
+                  int canvas_y = (int)screen_y - r_canvas.y;
+                  int last_canvas_x = (int)last_screen_x - r_canvas.x;
+                  int last_canvas_y = (int)last_screen_y - r_canvas.y;
+                  
+                  /* Check if this finger is on canvas */
+                  if (canvas_x >= 0 && canvas_x < canvas->w &&
+                      canvas_y >= 0 && canvas_y < canvas->h)
+                  {
+                    /* Find or allocate slot for this finger */
+                    int slot = -1;
+                    for (int s = 0; s < MAX_FINGERS; s++) {
+                      if (active_fingers[s].active && active_fingers[s].pointer_id == pointer_id) {
+                        slot = s;
+                        break;
+                      }
+                    }
+                    
+                    if (slot < 0) {
+                      /* Allocate new slot */
+                      for (int s = 0; s < MAX_FINGERS; s++) {
+                        if (!active_fingers[s].active) {
+                          slot = s;
+                          active_fingers[s].active = 1;
+                          active_fingers[s].pointer_id = pointer_id;
+                          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Finger %d (ID=%ld) DOWN at canvas(%d,%d)", i, pointer_id, canvas_x, canvas_y);
+                          break;
+                        }
+                      }
+                    }
+                    
+                    if (slot >= 0)
+                    {
+                      /* Draw stroke from last position to current */
+                      static int draw_log_count = 0;
+                      if (last_canvas_x >= 0 && last_canvas_y >= 0 &&
+                          last_canvas_x < canvas->w && last_canvas_y < canvas->h)
+                      {
+                        if (draw_log_count++ % 10 == 0) {
+                          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", 
+                            "DRAWING Finger %d: (%d,%d)->(%d,%d) canvas_size=%dx%d",
+                            i, last_canvas_x, last_canvas_y, canvas_x, canvas_y, canvas->w, canvas->h);
+                        }
+                        brush_draw(last_canvas_x, last_canvas_y, canvas_x, canvas_y, 1);
+                      }
+                      else if (draw_log_count++ % 10 == 0)
+                      {
+                        __android_log_print(ANDROID_LOG_WARN, "TuxPaint", 
+                          "SKIP DRAW Finger %d: last(%d,%d) out of bounds, canvas_size=%dx%d",
+                          i, last_canvas_x, last_canvas_y, canvas->w, canvas->h);
+                      }
+                    }
+                  }
+                }
+              }
+              
+              /* Clean up fingers that are no longer touching */
+              for (int slot = 0; slot < MAX_FINGERS; slot++)
+              {
+                if (active_fingers[slot].active)
+                {
+                  int found = 0;
+                  for (int i = 0; i < numFingers; i++)
+                  {
+                    long pointer_id;
+                    if (android_multitouch_get_pointer(i, &pointer_id, NULL, NULL, NULL, NULL))
+                    {
+                      if (pointer_id == active_fingers[slot].pointer_id)
+                      {
+                        found = 1;
+                        break;
+                      }
+                    }
+                  }
+                  if (!found)
+                  {
+                    __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Finger in slot %d (ID=%ld) lifted", slot, active_fingers[slot].pointer_id);
+                    active_fingers[slot].active = 0;
+                  }
+                }
+              }
+            }
+#endif /* __ANDROID__ && ENABLE_MULTITOUCH */
           }
           else if (cur_tool == TOOL_LINES)
           {
@@ -24065,6 +24220,49 @@ static int do_new_dialog_add_colors(SDL_Surface **thumbs, int num_files,
 }
 
 
+#ifdef ENABLE_MULTITOUCH
+/**
+ * Find existing finger slot by finger ID
+ */
+static int find_finger_slot(SDL_FingerID finger_id)
+{
+  for (int i = 0; i < MAX_FINGERS; i++) {
+    if (active_fingers[i].active && active_fingers[i].pointer_id == finger_id) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+/**
+ * Allocate a new finger slot
+ */
+static int allocate_finger_slot(SDL_FingerID finger_id)
+{
+  for (int i = 0; i < MAX_FINGERS; i++) {
+    if (!active_fingers[i].active) {
+      active_fingers[i].active = 1;
+      active_fingers[i].pointer_id = finger_id;
+      num_active_fingers++;
+      return i;
+    }
+  }
+  return -1;
+}
+
+/**
+ * Release a finger slot
+ */
+static void release_finger_slot(int slot)
+{
+  if (slot >= 0 && slot < MAX_FINGERS && active_fingers[slot].active) {
+    active_fingers[slot].active = 0;
+    num_active_fingers--;
+    if (num_active_fingers < 0) num_active_fingers = 0;
+  }
+}
+#endif
+
 /**
  * FIXME
  */
@@ -29797,7 +29995,9 @@ static void setup(void)
 
   /* Fix Android EGL threading issues - ensure GL context stays on render thread */
 #ifdef __ANDROID__
+  /* Always convert touch to mouse events (required for UI interaction) */
   SDL_SetHint(SDL_HINT_TOUCH_MOUSE_EVENTS, "1");
+  SDL_SetHint(SDL_HINT_MOUSE_TOUCH_EVENTS, "0");
   SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengles2");
   SDL_SetHint(SDL_HINT_ANDROID_TRAP_BACK_BUTTON, "1");
   SDL_SetHint(SDL_HINT_ANDROID_BLOCK_ON_PAUSE, "0");
@@ -31177,6 +31377,15 @@ static void claim_to_be_ready(void)
  */
 int main(int argc, char *argv[])
 {
+#ifdef __ANDROID__
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "=== TUXPAINT MAIN STARTED ===");
+#ifdef ENABLE_MULTITOUCH
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "MULTITOUCH SUPPORT: ENABLED");
+#else
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "MULTITOUCH SUPPORT: DISABLED");
+#endif
+#endif
+
 #ifdef DEBUG
   CLOCK_TYPE time1;
   CLOCK_TYPE time2;
