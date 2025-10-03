@@ -75,12 +75,26 @@ Java_org_tuxpaint_tuxpaintActivity_nativeOnTouch(JNIEnv *env, jclass cls,
     g_pointer_count = pointerCount;
     
     for (int i = 0; i < pointerCount && i < MAX_POINTERS; i++) {
+        // Check if this is a NEW pointer (different ID or wasn't active)
+        int is_new_pointer = (!g_pointers[i].active || g_pointers[i].pointer_id != id_arr[i]);
+        
         g_pointers[i].active = 1;
         g_pointers[i].pointer_id = id_arr[i];
-        g_pointers[i].last_x = g_pointers[i].x;
-        g_pointers[i].last_y = g_pointers[i].y;
-        g_pointers[i].x = x_arr[i];
-        g_pointers[i].y = y_arr[i];
+        
+        if (is_new_pointer) {
+            // First touch: Initialize both current AND last position to same value
+            // This prevents drawing from old position to new position
+            g_pointers[i].x = x_arr[i];
+            g_pointers[i].y = y_arr[i];
+            g_pointers[i].last_x = x_arr[i];  // Same as current position!
+            g_pointers[i].last_y = y_arr[i];
+        } else {
+            // Continuing touch: Save previous position, then update
+            g_pointers[i].last_x = g_pointers[i].x;
+            g_pointers[i].last_y = g_pointers[i].y;
+            g_pointers[i].x = x_arr[i];
+            g_pointers[i].y = y_arr[i];
+        }
     }
     
     // Clear inactive pointers
