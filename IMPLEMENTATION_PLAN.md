@@ -59,49 +59,44 @@
 
 ---
 
-## 4. 🔇 Add Sound Toggle Button (Bottom Left)
+## 4. ✅ Add Sound Toggle Button (Bottom Left)
 
-**Dateien:** `tuxpaint.c`, möglicherweise Icons
+**Dateien:** `tuxpaint.c`, `playsound.c`
 
-**Implementierung:**
-1. **Neue globale Variable:** `int sound_enabled = 1;`
-2. **Button Position:** Links unten, neben zukünftigem Child-Mode Button
-3. **Icon:** Lautsprecher (on) / durchgestrichener Lautsprecher (off)
-4. **Click Handler:** Toggle `sound_enabled`, update `use_sound` oder `mute`
-5. **Rendering:** In `draw_toolbar()` oder separater Bereich
+**Implementiert:** 6.10.2025 14:25
 
 **Änderungen:**
-- Neue Button-Koordinaten definieren
-- Click-Detection in `MOUSEBUTTONDOWN` Handler
-- Toggle-Logik für Sound
-- Icon rendering
+- Button `r_sound_btn` bei Row 8 (unterhalb Print/Quit)
+- Event handler VOR `HIT(r_tools)` verschoben (da Button in r_tools rect liegt)
+- Toggle `mute` Variable (definiert in playsound.c)
+- `Mix_HaltChannel(-1)` stoppt alle laufenden Sounds
+- Alle `Mix_PlayChannel()` Calls prüfen `if (!mute)`
 
-**Test:** Klick togglet Sound on/off
+**Test:** ✅ Getestet auf echtem Gerät - Sound stoppt korrekt
 
-**Commit:** `feat: Add sound toggle button at bottom left`
+**Commits:** 
+- `Fix sound button event handling order + add debug logging`
+- `Fix sound button: Move event handler before r_tools check`
 
 ---
 
-## 5. 👶 Add Child Mode Toggle Button (Bottom Left)
+## 5. ✅ Add Child Mode Toggle Button (Bottom Left)
 
-**Dateien:** `tuxpaint.c`, möglicherweise Icons
+**Dateien:** `tuxpaint.c`
 
-**Implementierung:**
-1. **Neue globale Variable:** `int child_mode = 0;`
-2. **Button Position:** Links unten, neben Sound Button
-3. **Icon:** Kind-Symbol
-4. **Click Handler:** Toggle `child_mode`, trigger UI re-layout
-5. **State Persistence:** in Preferences speichern
+**Implementiert:** 6.10.2025 15:20
 
 **Änderungen:**
-- Button-Koordinaten
-- Click-Detection
-- Toggle child_mode
-- Trigger `setup_screen_layout()` oder ähnliches
+- Globale Variable `child_mode` hinzugefügt (Zeile 821)
+- Button Handler aktiviert (Zeile 3717-3737)
+- Toggle-Logik implementiert
+- Button visual state (UP/DOWN) basierend auf `child_mode`
+- Trigger `setup_screen_layout()` bei Toggle
+- Vollständiges Screen-Redraw
 
-**Test:** Klick aktiviert/deaktiviert Child Mode (vorerst nur Toggle)
+**Test:** ✅ Button togglet Child Mode on/off
 
-**Commit:** `feat: Add child mode toggle button at bottom left`
+**Commit:** `2472ec75 - feat: Add child mode toggle button with Hide Tux + Text Area`
 
 ---
 
@@ -118,18 +113,23 @@ if (child_mode && cur_tool == TOOL_BRUSH) {
 }
 ```
 
-### 6.2 Hide Tux + Text Area
-- Text-Bereich unter Color-Buttons ausblenden
-- Tux-Pinguin ausblenden
-- Color-Buttons in Höhe erweitern (füllen bis Screen-Bottom)
+### 6.2 ✅ Hide Tux + Text Area
 
-**Layout Änderungen:**
-```c
-if (child_mode) {
-  r_tuxarea.h = 0;  // Hide Tux
-  r_colors.h = SCREEN_HEIGHT - r_colors.y;  // Extend to bottom
-}
-```
+**Implementiert:** 6.10.2025 15:20 (zusammen mit 5.)
+
+**Änderungen in `setup_normal_screen_layout()` (Zeile 960-973):**
+- Wenn `child_mode == 1`:
+  - `r_tuxarea.h = 0` (Tux versteckt)
+  - `r_tuxarea.y = WINDOW_HEIGHT` (off-screen)
+  - `r_colors.h = WINDOW_HEIGHT - r_colors.y` (Farben bis unten)
+  - `color_button_h` neu berechnet für größere Höhe
+- Normal mode: Original Layout wiederhergestellt
+
+**Test:** ✅ Getestet - Tux verschwindet, Farben füllen Platz
+
+**Commit:** `2472ec75` (gleicher wie 5.)
+
+**Test Guide:** Siehe `TEST_CHILD_MODE.md`
 
 ### 6.3 Replace Right Toolbar → Brush Size Slider
 - Rechte Button-Spalte ausblenden
