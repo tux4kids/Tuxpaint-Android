@@ -896,7 +896,7 @@ static void setup_normal_screen_layout(void)
   r_ttools.x = 0;
   r_ttools.y = 0;
   r_ttools.w = gd_tools.cols * button_w;
-  r_ttools.h = 40 * button_scale;
+  r_ttools.h = 40 * button_scale;  /* position of row 0 in the tools column and the first element below the Label on the right from top */
 
   r_ttoolopt.w = gd_toolopt.cols * button_w;
   r_ttoolopt.h = 40 * button_scale;
@@ -994,16 +994,16 @@ static void setup_normal_screen_layout(void)
   r_tools.w = gd_tools.cols * button_w;
   r_tools.h = gd_tools.rows * button_h;
 
-  /* Sound & Child mode buttons in tool bar below Print/Quit (row 8) */
+  /* Sound & Child mode buttons in r_ttools header area (Row -1, above tool buttons) */
   r_sound_btn.w = button_w;
-  r_sound_btn.h = button_h;
-  r_sound_btn.x = r_tools.x;           /* Column 0 (left) */
-  r_sound_btn.y = r_tools.y + (8 * button_h);  /* Row 8 */
+  r_sound_btn.h = button_h;         /* not used any more */
+  r_sound_btn.x = r_ttools.x;           /* Column 0 (left) */
+  r_sound_btn.y = r_ttools.y;           /* In r_ttools header area */
   
   r_childmode_btn.w = button_w;
-  r_childmode_btn.h = button_h;
-  r_childmode_btn.x = r_tools.x + button_w;    /* Column 1 (right) */
-  r_childmode_btn.y = r_tools.y + (8 * button_h);  /* Row 8 */
+  r_childmode_btn.h = button_h;             /* not used any more */
+  r_childmode_btn.x = r_ttools.x + button_w;    /* Column 1 (right) */
+  r_childmode_btn.y = r_ttools.y;               /* In r_ttools header area */
 
 
   r_toolopt.w = gd_toolopt.cols * button_w;
@@ -2155,7 +2155,7 @@ static void seticon(void);
 static SDL_Surface *loadimage(const char *const fname);
 static SDL_Surface *do_loadimage(const char *const fname, int abort_on_error);
 static void draw_toolbar(void);
-static void draw_control_buttons(void);
+static void draw_row_minus_1_buttons(void);
 static void draw_magic(void);
 static void draw_brushes(void);
 static void draw_brushes_spacing(void);
@@ -3720,7 +3720,7 @@ static void mainloop(void)
           Mix_HaltChannel(-1);
 
           /* Redraw the button with new state */
-          draw_control_buttons();
+          draw_row_minus_1_buttons();
           update_screen_rect(&r_sound_btn);
 
           if (mute)
@@ -3741,7 +3741,7 @@ static void mainloop(void)
           child_mode = !child_mode;
           
           /* Redraw button with new state */
-          draw_control_buttons();
+          draw_row_minus_1_buttons();
           update_screen_rect(&r_childmode_btn);
           
           /* Re-layout screen with new mode */
@@ -10622,7 +10622,8 @@ static void draw_toolbar(void)
   /* FIXME: Only allow print if we have something to print! */
 
 
-  draw_image_title(TITLE_TOOLS, r_ttools);
+  /* Tools title removed - r_ttools area now used for SND/KID buttons */
+  /* draw_image_title(TITLE_TOOLS, r_ttools); */
 
 
 
@@ -10720,30 +10721,39 @@ static void draw_toolbar(void)
     }
   }
 
-  /* Draw control buttons below tools */
-  draw_control_buttons();
+  draw_row_minus_1_buttons();
 }
 
 
 /**
- * Draw sound and child mode toggle buttons below tools
+ * Draw the two toggle buttons at the very top covering the "Tools" label
  */
-static void draw_control_buttons(void)
+static void draw_row_minus_1_buttons(void)
 {
   SDL_Rect dest;
   SDL_Surface *button_body;
+  SDL_Surface *button_scaled;
   SDL_Surface *button_color;
   SDL_Surface *txt;
   SDL_Color text_color = { 0, 0, 0, 0 };    /* Black text */
   SDL_Color grey_color = { 128, 128, 128, 0 }; /* Grey for muted */
+  int button_render_h = button_h - 20;  /* Reduced visual height for Row -1 buttons */
+  float scale_y = 1.04 * (float)button_render_h / button_h;  /* Scale factor for Y-axis */
 
 #ifndef NOSOUND
   /* Sound toggle button */
   button_body = mute ? img_btn_off : img_btn_up;
   button_color = mute ? img_grey : img_black;
   
-  dest = r_sound_btn;
-  SDL_BlitSurface(button_body, NULL, screen, &dest);
+  /* Scale button body to reduced height (squash vertically) */
+  button_scaled = rotozoomSurfaceXY(button_body, 0, 1.0, scale_y, SMOOTHING_ON);
+  if (button_scaled)
+  {
+    dest.x = r_sound_btn.x;
+    dest.y = r_sound_btn.y;
+    SDL_BlitSurface(button_scaled, NULL, screen, &dest);
+    SDL_FreeSurface(button_scaled);
+  }
 
   /* Render text "SND" */
   txt = render_text(small_font, "SND", mute ? grey_color : text_color);
@@ -10751,7 +10761,7 @@ static void draw_control_buttons(void)
   {
     SDL_BlitSurface(button_color, NULL, txt, NULL);
     dest.x = r_sound_btn.x + (r_sound_btn.w - txt->w) / 2;
-    dest.y = r_sound_btn.y + (r_sound_btn.h - txt->h) / 2;
+    dest.y = r_sound_btn.y + (button_render_h - txt->h) / 2;
     SDL_BlitSurface(txt, NULL, screen, &dest);
     SDL_FreeSurface(txt);
   }
@@ -10761,8 +10771,15 @@ static void draw_control_buttons(void)
   button_body = child_mode ? img_btn_down : img_btn_up;
   button_color = child_mode ? img_black : img_black;
   
-  dest = r_childmode_btn;
-  SDL_BlitSurface(button_body, NULL, screen, &dest);
+  /* Scale button body to reduced height (squash vertically) */
+  button_scaled = rotozoomSurfaceXY(button_body, 0, 1.0, scale_y, SMOOTHING_ON);
+  if (button_scaled)
+  {
+    dest.x = r_childmode_btn.x;
+    dest.y = r_childmode_btn.y;
+    SDL_BlitSurface(button_scaled, NULL, screen, &dest);
+    SDL_FreeSurface(button_scaled);
+  }
 
   /* Render text "KID" */
   txt = render_text(small_font, "KID", text_color);
@@ -10770,7 +10787,7 @@ static void draw_control_buttons(void)
   {
     SDL_BlitSurface(button_color, NULL, txt, NULL);
     dest.x = r_childmode_btn.x + (r_childmode_btn.w - txt->w) / 2;
-    dest.y = r_childmode_btn.y + (r_childmode_btn.h - txt->h) / 2;
+    dest.y = r_childmode_btn.y + (button_render_h - txt->h) / 2;
     SDL_BlitSurface(txt, NULL, screen, &dest);
     SDL_FreeSurface(txt);
   }
@@ -11152,8 +11169,7 @@ static unsigned draw_colors(unsigned action)
   update_screen_rect(&r_tcolors);
   */
 
-  /* Draw control buttons (sound & child mode) */
-  draw_control_buttons();
+  draw_row_minus_1_buttons();
 
   return old_colors_state;
 }
