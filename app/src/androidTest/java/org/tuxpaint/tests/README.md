@@ -32,6 +32,20 @@ Tests multitouch painting functionality.
 
 **Note:** Multitouch tests will FAIL until multitouch support is implemented (see `MULTITOUCH_IMPLEMENTATION.md`). The tests are written to verify the feature once it's implemented.
 
+### SoundToggleTest.java
+Tests sound toggle button functionality.
+
+**What it tests:**
+- Sound button click detection
+- Mute state toggling
+- Sound blocking when muted
+- Sound playback when unmuted
+
+**Run with:**
+```bash
+./gradlew connectedOffPlayStoreDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=org.tuxpaint.tests.SoundToggleTest
+```
+
 ## Running All Tests
 
 ```bash
