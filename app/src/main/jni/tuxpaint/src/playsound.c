@@ -93,34 +93,16 @@ void playsound(SDL_Surface *screen, int chan, int s, int override, int x, int y)
           left = 0;
         else
         {
-          if (x < 0)
-            x = 0;
-          else if (x >= screen->w)
-            x = screen->w - 1;
-
-          left = ((255 - dist) * ((screen->w - 1) - x)) / (screen->w - 1);
+          left = 255 - dist - ((x * (255 - dist)) / screen->w);
         }
-      }
-      else
-      {
-        /* Stereo disabled; treat everything like a SNDPOS_CENTER
-           (equal amount in each of the left/right channels) */
-        left = (255 - dist) / 2;
-      }
+
+        Mix_SetPanning(chan, left, 255 - left);
+
 #ifdef DEBUG
-      fflush(stdout);
+        fflush(stdout);
 #endif
-      Mix_SetPanning(chan, left, (255 - dist) - left);
+      }
     }
   }
-#ifdef DEBUG
-  else if (mute && s != SND_NONE)
-  {
-    /* Sound was blocked because mute is enabled */
-#ifdef __ANDROID__
-    __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", "Sound %d blocked (muted)", s);
-#endif
-  }
-#endif
 #endif
 }

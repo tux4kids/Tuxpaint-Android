@@ -978,11 +978,6 @@ static void setup_normal_screen_layout(void)
   r_sound_btn.x = r_tools.x;           /* Column 0 (left) */
   r_sound_btn.y = r_tools.y + (8 * button_h);  /* Row 8 */
   
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "r_sound_btn: x=%d y=%d w=%d h=%d", 
-                      r_sound_btn.x, r_sound_btn.y, r_sound_btn.w, r_sound_btn.h);
-#endif
-  
   r_childmode_btn.w = button_w;
   r_childmode_btn.h = button_h;
   r_childmode_btn.x = r_tools.x + button_w;    /* Column 1 (right) */
@@ -3693,25 +3688,38 @@ static void mainloop(void)
       else if ((event.type == SDL_MOUSEBUTTONDOWN ||
                 event.type == TP_SDL_MOUSEBUTTONSCROLL) && event.button.button <= 3)
       {
-#ifdef __ANDROID__
-        static int mouse_down_count = 0;
-        if (mouse_down_count++ < 5) {  /* Log first 5 mouse downs only */
-          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "MOUSEBUTTONDOWN received! x=%d y=%d button=%d", 
-                             event.button.x, event.button.y, event.button.button);
-        }
-        
-        /* Always log clicks in sound button area for debugging */
-        if (event.button.x >= 0 && event.button.x < 200 && event.button.y > 700) {
-          int hit_sound = (event.button.x >= r_sound_btn.x && 
-                          event.button.x < r_sound_btn.x + r_sound_btn.w &&
-                          event.button.y >= r_sound_btn.y && 
-                          event.button.y < r_sound_btn.y + r_sound_btn.h);
-          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Click at (%d,%d) - HIT(r_sound_btn)=%d rect(%d,%d,%d,%d)", 
-                             event.button.x, event.button.y, hit_sound,
-                             r_sound_btn.x, r_sound_btn.y, r_sound_btn.w, r_sound_btn.h);
-        }
+        /* IMPORTANT: Check sound & childmode buttons FIRST, before r_tools! 
+           These buttons are inside r_tools rect but need separate handling */
+        if (HIT(r_sound_btn) && valid_click(event.button.button))
+        {
+          /* Sound toggle button clicked */
+#ifndef NOSOUND
+          mute = !mute;
+          Mix_HaltChannel(-1);
+
+          /* Redraw the button with new state */
+          draw_control_buttons();
+          update_screen_rect(&r_sound_btn);
+
+          if (mute)
+          {
+            draw_tux_text(TUX_BORED, gettext("Sound muted."), 0);
+          }
+          else
+          {
+            draw_tux_text(TUX_BORED, gettext("Sound unmuted."), 0);
+          }
+
+          playsound(screen, 1, SND_CLICK, 1, SNDPOS_LEFT, SNDDIST_NEAR);
 #endif
-        if (HIT(r_tools))
+        }
+        else if (HIT(r_childmode_btn) && valid_click(event.button.button))
+        {
+          /* Child mode toggle button clicked - placeholder for now */
+          draw_tux_text(TUX_BORED, "Child mode (coming soon)", 0);
+          playsound(screen, 1, SND_CLICK, 1, SNDPOS_LEFT, SNDDIST_NEAR);
+        }
+        else if (HIT(r_tools))
         {
           if (HIT(real_r_tools))
           {
@@ -5423,50 +5431,8 @@ static void mainloop(void)
             }
           }
         }
-        else if (HIT(r_sound_btn) && valid_click(event.button.button))
-        {
-          /* Sound toggle button clicked */
-#ifndef NOSOUND
-#ifdef __ANDROID__
-          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "SOUND_BTN: Clicked at (%d,%d)", event.button.x, event.button.y);
-          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "SOUND_BTN: mute BEFORE = %d", mute);
-#endif
-          
-          mute = !mute;
-          
-#ifdef __ANDROID__
-          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "SOUND_BTN: mute AFTER = %d", mute);
-#endif
-          
-          Mix_HaltChannel(-1);
-
-          /* Redraw the button with new state */
-          draw_control_buttons();
-          update_screen_rect(&r_sound_btn);
-
-          if (mute)
-          {
-            draw_tux_text(TUX_BORED, gettext("Sound muted."), 0);
-          }
-          else
-          {
-            draw_tux_text(TUX_BORED, gettext("Sound unmuted."), 0);
-          }
-
-          playsound(screen, 1, SND_CLICK, 1, SNDPOS_LEFT, SNDDIST_NEAR);
-#endif
-        }
-        else if (HIT(r_childmode_btn) && valid_click(event.button.button))
-        {
-          /* Child mode toggle button clicked - placeholder for now */
-          draw_tux_text(TUX_BORED, "Child mode (coming soon)", 0);
-          playsound(screen, 1, SND_CLICK, 1, SNDPOS_LEFT, SNDDIST_NEAR);
-        }
         else if (HIT(r_canvas) && valid_click(event.button.button) && keyglobal == 0)
         {
-#ifdef __ANDROID__
-          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Canvas click detected! cur_tool=%d", cur_tool);
-#endif
           const Uint8 *kbd_state;
 
           kbd_state = SDL_GetKeyboardState(NULL);
