@@ -6745,22 +6745,30 @@ static void mainloop(void)
         }
 
 
-        if (button_down || emulate_button_pressed)
+#if defined(__ANDROID__) && defined(ENABLE_MULTITOUCH)
+        int has_multitouch = (android_multitouch_get_count() >= 2 && cur_tool == TOOL_BRUSH);
+#else
+        int has_multitouch = 0;
+#endif
+        
+        if (button_down || emulate_button_pressed || has_multitouch)
         {
 #ifdef __ANDROID__
           static int button_down_log = 0;
           if (button_down_log++ % 30 == 0) {
-            __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "button_down block: cur_tool=%d TOOL_BRUSH=%d", cur_tool, TOOL_BRUSH);
+            __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "button_down block: cur_tool=%d TOOL_BRUSH=%d button_down=%d has_multitouch=%d", 
+              cur_tool, TOOL_BRUSH, button_down, has_multitouch);
           }
 #endif
           if (cur_tool == TOOL_BRUSH)
           {
             /* Pushing button and moving: Draw with the brush: */
 
-            /* Finger 0 (primary): Drawn by SDL MOUSEMOTION events */
-            brush_draw(old_x, old_y, new_x, new_y, 1);
-
-            playsound(screen, 0, paintsound(img_cur_brush_w), 0, event.button.x, SNDDIST_NEAR);
+            /* Finger 0 (primary): Drawn by SDL MOUSEMOTION events - only if button_down */
+            if (button_down || emulate_button_pressed) {
+              brush_draw(old_x, old_y, new_x, new_y, 1);
+              playsound(screen, 0, paintsound(img_cur_brush_w), 0, event.button.x, SNDDIST_NEAR);
+            }
             
 #if defined(__ANDROID__) && defined(ENABLE_MULTITOUCH)
             /* Multitouch: Use Android's direct touch data */
@@ -6774,23 +6782,45 @@ static void mainloop(void)
             
             if (numFingers >= 2)
             {
+              /* Store last end position for each finger to connect gaps between strokes */
+              typedef struct {
+                int valid;  // 1 if we have a previous end position
+                int x, y;   // Last end position
+                long pointer_id;  // To track if it's the same finger
+              } FingerEndPos;
+              static FingerEndPos finger_end_pos[MAX_FINGERS] = {{0}};
+              
               /* Draw strokes for ALL fingers */
               for (int i = 0; i < numFingers && i < MAX_FINGERS; i++)
               {
                 long pointer_id;
                 float screen_x, screen_y, last_screen_x, last_screen_y;
                 
-                if (android_multitouch_get_pointer(i, &pointer_id, &screen_x, &screen_y, &last_screen_x, &last_screen_y))
+                int got_pointer = android_multitouch_get_pointer(i, &pointer_id, &screen_x, &screen_y, &last_screen_x, &last_screen_y);
+                
+                if (got_pointer)
                 {
                   /* Convert to canvas coordinates */
                   int canvas_x = (int)screen_x - r_canvas.x;
                   int canvas_y = (int)screen_y - r_canvas.y;
-                  int last_canvas_x = (int)last_screen_x - r_canvas.x;
-                  int last_canvas_y = (int)last_screen_y - r_canvas.y;
+                  
+                  /* Use stored position if available, otherwise fall back to SDL's last position */
+                  int last_canvas_x, last_canvas_y;
+                  if (finger_end_pos[i].valid && finger_end_pos[i].pointer_id == pointer_id) {
+                    /* Use our stored last position for this finger */
+                    last_canvas_x = finger_end_pos[i].x;
+                    last_canvas_y = finger_end_pos[i].y;
+                  } else {
+                    /* Fall back to SDL's last position */
+                    last_canvas_x = (int)last_screen_x - r_canvas.x;
+                    last_canvas_y = (int)last_screen_y - r_canvas.y;
+                  }
+                  
+                  int on_canvas = (canvas_x >= 0 && canvas_x < canvas->w &&
+                                   canvas_y >= 0 && canvas_y < canvas->h);
                   
                   /* Check if this finger is on canvas */
-                  if (canvas_x >= 0 && canvas_x < canvas->w &&
-                      canvas_y >= 0 && canvas_y < canvas->h)
+                  if (on_canvas)
                   {
                     /* Find or allocate slot for this finger */
                     int slot = -1;
@@ -6808,7 +6838,9 @@ static void mainloop(void)
                           slot = s;
                           active_fingers[s].active = 1;
                           active_fingers[s].pointer_id = pointer_id;
-                          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Finger %d (ID=%ld) DOWN at canvas(%d,%d)", i, pointer_id, canvas_x, canvas_y);
+                          
+                          // Mark this as first stroke for this finger
+                          finger_end_pos[i].valid = 0;
                           break;
                         }
                       }
@@ -6816,24 +6848,18 @@ static void mainloop(void)
                     
                     if (slot >= 0)
                     {
-                      /* Draw stroke from last position to current */
-                      static int draw_log_count = 0;
+                      /* Draw stroke from last position to current position */
                       if (last_canvas_x >= 0 && last_canvas_y >= 0 &&
                           last_canvas_x < canvas->w && last_canvas_y < canvas->h)
                       {
-                        if (draw_log_count++ % 10 == 0) {
-                          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", 
-                            "DRAWING Finger %d: (%d,%d)->(%d,%d) canvas_size=%dx%d",
-                            i, last_canvas_x, last_canvas_y, canvas_x, canvas_y, canvas->w, canvas->h);
-                        }
                         brush_draw(last_canvas_x, last_canvas_y, canvas_x, canvas_y, 1);
                       }
-                      else if (draw_log_count++ % 10 == 0)
-                      {
-                        __android_log_print(ANDROID_LOG_WARN, "TuxPaint", 
-                          "SKIP DRAW Finger %d: last(%d,%d) out of bounds, canvas_size=%dx%d",
-                          i, last_canvas_x, last_canvas_y, canvas->w, canvas->h);
-                      }
+                      
+                      /* Always save current position for next stroke (ensures continuous lines) */
+                      finger_end_pos[i].valid = 1;
+                      finger_end_pos[i].x = canvas_x;
+                      finger_end_pos[i].y = canvas_y;
+                      finger_end_pos[i].pointer_id = pointer_id;
                     }
                   }
                 }
@@ -7321,10 +7347,8 @@ static void mainloop(void)
       handle_motioners(oldpos_x, oldpos_y, motioner, hatmotioner, old_hat_ticks, val_x, val_y, valhat_x, valhat_y);
 
 #if defined(__ANDROID__) && defined(ENABLE_MULTITOUCH)
-    /* Draw multitouch strokes every frame */
-    if (button_down && cur_tool == TOOL_BRUSH) {
-      android_multitouch_paint_now();
-    }
+    /* Multitouch is now handled inside the button_down block above */
+    /* No need to call multitouch_paint_now() here anymore */
 #endif
 
     SDL_Delay(10);
@@ -7360,11 +7384,12 @@ static void android_multitouch_paint_now(void) {
   static int call_count = 0;
   call_count++;
   
-  if (cur_tool != TOOL_BRUSH || !button_down) {
+  // Only check cur_tool, not button_down (button_down is only for Finger 0)
+  if (cur_tool != TOOL_BRUSH) {
     static int skip_log = 0;
     if (skip_log++ % 100 == 0) {
       __android_log_print(ANDROID_LOG_WARN, "TuxPaint", 
-        "multitouch_paint_now SKIP: cur_tool=%d button_down=%d", cur_tool, button_down);
+        "multitouch_paint_now SKIP: cur_tool=%d (need TOOL_BRUSH)", cur_tool);
     }
     return;
   }
@@ -7376,6 +7401,21 @@ static void android_multitouch_paint_now(void) {
   }
   
   if (numFingers < 2) {
+    return;
+  }
+  
+  // Store last end position for each finger to connect gaps between strokes
+  typedef struct {
+    int valid;  // 1 if we have a previous end position
+    int x, y;   // Last end position
+    long pointer_id;  // To track if it's the same finger
+  } FingerEndPos;
+  static FingerEndPos finger_end_pos[MAX_FINGERS] = {{0}};
+  
+  // Safety check
+  if (!canvas) {
+    __android_log_print(ANDROID_LOG_ERROR, "TuxPaint", 
+      "❌ multitouch_paint_now: canvas is NULL!");
     return;
   }
   
@@ -7391,21 +7431,55 @@ static void android_multitouch_paint_now(void) {
       int last_canvas_y = (int)last_screen_y - r_canvas.y;
       
       if (canvas_x >= 0 && canvas_x < canvas->w &&
-          canvas_y >= 0 && canvas_y < canvas->h &&
-          last_canvas_x >= 0 && last_canvas_x < canvas->w &&
-          last_canvas_y >= 0 && last_canvas_y < canvas->h) {
+          canvas_y >= 0 && canvas_y < canvas->h) {
         
-        // Only draw if position has changed (skip first frame of new stroke)
-        if (canvas_x != last_canvas_x || canvas_y != last_canvas_y) {
-          brush_draw(last_canvas_x, last_canvas_y, canvas_x, canvas_y, 1);
+        // Check if we have a previous end position for this finger
+        if (finger_end_pos[i].valid && finger_end_pos[i].pointer_id == pointer_id) {
+          // Draw connection from old end position to new start position
+          if (last_canvas_x >= 0 && last_canvas_x < canvas->w &&
+              last_canvas_y >= 0 && last_canvas_y < canvas->h) {
+            
+            // Calculate gap between strokes (squared distance)
+            int gap_x = last_canvas_x - finger_end_pos[i].x;
+            int gap_y = last_canvas_y - finger_end_pos[i].y;
+            int gap_dist_sq = gap_x * gap_x + gap_y * gap_y;
+            
+            // Only connect if gap is reasonable (4 to 2500 pixels squared = 2-50 pixels)
+            if (gap_dist_sq > 4 && gap_dist_sq < 2500) {
+              static int gap_log = 0;
+              if (gap_log++ % 10 == 0) {
+                __android_log_print(ANDROID_LOG_INFO, "TuxPaint", 
+                  "🔗 GAP FILL Finger %d: (%d,%d)->(%d,%d) dist_sq=%d", 
+                  i, finger_end_pos[i].x, finger_end_pos[i].y, last_canvas_x, last_canvas_y, gap_dist_sq);
+              }
+              brush_draw(finger_end_pos[i].x, finger_end_pos[i].y, last_canvas_x, last_canvas_y, 0);
+            }
+          }
+        } else {
+          // First stroke for this finger or pointer_id changed
+          finger_end_pos[i].pointer_id = pointer_id;
+          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", 
+            "🆕 NEW STROKE Finger %d (ID=%ld) at (%d,%d)", i, pointer_id, canvas_x, canvas_y);
+        }
+        
+        // Draw the current stroke segment
+        if (last_canvas_x >= 0 && last_canvas_x < canvas->w &&
+            last_canvas_y >= 0 && last_canvas_y < canvas->h &&
+            (canvas_x != last_canvas_x || canvas_y != last_canvas_y)) {
           
           static int draw_log = 0;
           if (draw_log++ % 30 == 0) {
             __android_log_print(ANDROID_LOG_INFO, "TuxPaint", 
-              "REALTIME DRAW Finger %d: (%d,%d)->(%d,%d)", 
+              "✏️ DRAW Finger %d: (%d,%d)->(%d,%d)", 
               i, last_canvas_x, last_canvas_y, canvas_x, canvas_y);
           }
+          brush_draw(last_canvas_x, last_canvas_y, canvas_x, canvas_y, 0);
         }
+        
+        // Save end position for next stroke
+        finger_end_pos[i].valid = 1;
+        finger_end_pos[i].x = canvas_x;
+        finger_end_pos[i].y = canvas_y;
       }
     }
   }
