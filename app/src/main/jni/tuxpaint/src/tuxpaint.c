@@ -5177,7 +5177,8 @@ static void mainloop(void)
                 {
                   Mix_ChannelFinished(NULL);    /* Prevents multiple clicks from toggling between SFX and desc sound, rather than always playing SFX first, then desc sound... */
 
-                  Mix_PlayChannel(2, stamp_data[stamp_group][cur_thing]->ssnd, 0);
+                  if (!mute)
+                    Mix_PlayChannel(2, stamp_data[stamp_group][cur_thing]->ssnd, 0);
 
                   /* If there's a description sound, play it after the SFX! */
 
@@ -5192,7 +5193,8 @@ static void mainloop(void)
 
                   if (stamp_data[stamp_group][cur_thing]->sdesc != NULL)
                   {
-                    Mix_PlayChannel(2, stamp_data[stamp_group][cur_thing]->sdesc, 0);
+                    if (!mute)
+                      Mix_PlayChannel(2, stamp_data[stamp_group][cur_thing]->sdesc, 0);
                   }
                 }
               }
@@ -5890,12 +5892,14 @@ static void mainloop(void)
               /* Re-play sound effect: */
 
               Mix_ChannelFinished(NULL);
-              Mix_PlayChannel(2, stamp_data[stamp_group][cur_thing]->ssnd, 0);
+              if (!mute)
+                Mix_PlayChannel(2, stamp_data[stamp_group][cur_thing]->ssnd, 0);
             }
             else if (which == 1 && !stamp_data[stamp_group][cur_stamp[stamp_group]]->no_descsound)
             {
               Mix_ChannelFinished(NULL);
-              Mix_PlayChannel(2, stamp_data[stamp_group][cur_thing]->sdesc, 0);
+              if (!mute)
+                Mix_PlayChannel(2, stamp_data[stamp_group][cur_thing]->sdesc, 0);
             }
 
             magic_switchout(canvas);
