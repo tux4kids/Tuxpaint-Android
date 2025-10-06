@@ -54,15 +54,8 @@ void playsound(SDL_Surface *screen, int chan, int s, int override, int x, int y)
 #ifndef NOSOUND
   int left, dist;
 
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "PLAYSOUND_LOG: Called - mute=%d, use_sound=%d, sound=%d", mute, use_sound, s);
-#endif
-  
   if (!mute && use_sound && s != SND_NONE)
   {
-#ifdef __ANDROID__
-    __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "PLAYSOUND_LOG: Condition passed - playing sound %d on channel %d", s, chan);
-#endif
 #ifdef DEBUG
     printf("playsound #%d in channel %d, pos (%d,%d), %soverride, ptr=%p\n",
            s, chan, x, y, override ? "" : "no ", sounds[s]);
@@ -120,11 +113,14 @@ void playsound(SDL_Surface *screen, int chan, int s, int override, int x, int y)
       Mix_SetPanning(chan, left, (255 - dist) - left);
     }
   }
-  else
+#ifdef DEBUG
+  else if (mute && s != SND_NONE)
   {
+    /* Sound was blocked because mute is enabled */
 #ifdef __ANDROID__
-    __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "PLAYSOUND_LOG: Sound blocked - mute=%d, use_sound=%d, sound=%d", mute, use_sound, s);
+    __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", "Sound %d blocked (muted)", s);
 #endif
   }
+#endif
 #endif
 }
