@@ -23,4 +23,6 @@
 
 # later TODO (not for now)
 - multitouch support when erasing
+- ABC does not work
+- check why stamp and magic is not working (disabled all the time)
 

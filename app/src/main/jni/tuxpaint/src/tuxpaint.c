@@ -31480,7 +31480,7 @@ static void claim_to_be_ready(void)
   cur_tool = TOOL_BRUSH;
   cur_color = COLOR_BLACK;
   colors_are_selectable = 1;
-  cur_brush = 0;
+  cur_brush = 1;  /* Start with second brush (4px) instead of thinnest */
   for (i = 0; i < MAX_STAMP_GROUPS; i++)
     cur_stamp[i] = 0;
   cur_shape = SHAPE_SQUARE;
