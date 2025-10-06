@@ -2096,6 +2096,9 @@ SDL_Joystick *joystick;
 
 static void mainloop(void);
 static void brush_draw(int x1, int y1, int x2, int y2, int update);
+#if defined(__ANDROID__) && defined(ENABLE_MULTITOUCH)
+static void android_multitouch_paint_now(void);
+#endif
 static void blit_brush(int x, int y, int direction, double rotation, int *w, int *h);
 static void stamp_draw(int x, int y, int stamp_angle_rotation);
 static void rec_undo_buffer(void);
@@ -6754,6 +6757,7 @@ static void mainloop(void)
           {
             /* Pushing button and moving: Draw with the brush: */
 
+            /* Finger 0 (primary): Drawn by SDL MOUSEMOTION events */
             brush_draw(old_x, old_y, new_x, new_y, 1);
 
             playsound(screen, 0, paintsound(img_cur_brush_w), 0, event.button.x, SNDDIST_NEAR);
@@ -7316,6 +7320,12 @@ static void mainloop(void)
     if (motioner | hatmotioner)
       handle_motioners(oldpos_x, oldpos_y, motioner, hatmotioner, old_hat_ticks, val_x, val_y, valhat_x, valhat_y);
 
+#if defined(__ANDROID__) && defined(ENABLE_MULTITOUCH)
+    /* Draw multitouch strokes every frame */
+    if (button_down && cur_tool == TOOL_BRUSH) {
+      android_multitouch_paint_now();
+    }
+#endif
 
     SDL_Delay(10);
   }
@@ -7340,6 +7350,67 @@ static void hide_blinking_cursor(void)
     draw_blinking_cursor();
   }
 }
+
+#if defined(__ANDROID__) && defined(ENABLE_MULTITOUCH)
+/**
+ * Android multitouch painting - draws strokes for fingers 1+
+ * Finger 0 is already handled by regular SDL MOUSEMOTION events
+ */
+static void android_multitouch_paint_now(void) {
+  static int call_count = 0;
+  call_count++;
+  
+  if (cur_tool != TOOL_BRUSH || !button_down) {
+    static int skip_log = 0;
+    if (skip_log++ % 100 == 0) {
+      __android_log_print(ANDROID_LOG_WARN, "TuxPaint", 
+        "multitouch_paint_now SKIP: cur_tool=%d button_down=%d", cur_tool, button_down);
+    }
+    return;
+  }
+  
+  int numFingers = android_multitouch_get_count();
+  if (call_count % 10 == 0) {
+    __android_log_print(ANDROID_LOG_INFO, "TuxPaint", 
+      "multitouch_paint_now: call#%d fingers=%d", call_count, numFingers);
+  }
+  
+  if (numFingers < 2) {
+    return;
+  }
+  
+  // Draw strokes for fingers 1+ (NOT finger 0)
+  for (int i = 1; i < numFingers && i < MAX_FINGERS; i++) {
+    long pointer_id;
+    float screen_x, screen_y, last_screen_x, last_screen_y;
+    
+    if (android_multitouch_get_pointer(i, &pointer_id, &screen_x, &screen_y, &last_screen_x, &last_screen_y)) {
+      int canvas_x = (int)screen_x - r_canvas.x;
+      int canvas_y = (int)screen_y - r_canvas.y;
+      int last_canvas_x = (int)last_screen_x - r_canvas.x;
+      int last_canvas_y = (int)last_screen_y - r_canvas.y;
+      
+      if (canvas_x >= 0 && canvas_x < canvas->w &&
+          canvas_y >= 0 && canvas_y < canvas->h &&
+          last_canvas_x >= 0 && last_canvas_x < canvas->w &&
+          last_canvas_y >= 0 && last_canvas_y < canvas->h) {
+        
+        // Only draw if position has changed (skip first frame of new stroke)
+        if (canvas_x != last_canvas_x || canvas_y != last_canvas_y) {
+          brush_draw(last_canvas_x, last_canvas_y, canvas_x, canvas_y, 1);
+          
+          static int draw_log = 0;
+          if (draw_log++ % 30 == 0) {
+            __android_log_print(ANDROID_LOG_INFO, "TuxPaint", 
+              "REALTIME DRAW Finger %d: (%d,%d)->(%d,%d)", 
+              i, last_canvas_x, last_canvas_y, canvas_x, canvas_y);
+          }
+        }
+      }
+    }
+  }
+}
+#endif
 
 /**
  * Draw & hide the blinking text entry cursor (caret),
