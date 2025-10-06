@@ -893,11 +893,10 @@ static void setup_normal_screen_layout(void)
   gd_toolopt.cols = 2;
   gd_tools.cols = 2;
 
-  /* Hide "Tools" label - give more space to tool buttons */
   r_ttools.x = 0;
   r_ttools.y = 0;
   r_ttools.w = gd_tools.cols * button_w;
-  r_ttools.h = 0;  /* No space for label */
+  r_ttools.h = 40 * button_scale;
 
   r_ttoolopt.w = gd_toolopt.cols * button_w;
   r_ttoolopt.h = 40 * button_scale;
@@ -991,7 +990,7 @@ static void setup_normal_screen_layout(void)
   gd_sfx.cols = 2;
 
   r_tools.x = 0;
-  r_tools.y = 0;  /* Start at top (no label above) */
+  r_tools.y = r_ttools.h + r_ttools.y;
   r_tools.w = gd_tools.cols * button_w;
   r_tools.h = gd_tools.rows * button_h;
 
@@ -10622,8 +10621,8 @@ static void draw_toolbar(void)
   off_y = 0;
   /* FIXME: Only allow print if we have something to print! */
 
-  /* "Tools" label rendering disabled - label removed */
-  /* draw_image_title(TITLE_TOOLS, r_ttools); */
+
+  draw_image_title(TITLE_TOOLS, r_ttools);
 
 
 
