@@ -113,23 +113,28 @@ if (child_mode && cur_tool == TOOL_BRUSH) {
 }
 ```
 
-### 6.2 ✅ Hide Tux + Text Area
+### 6.2 ✅ Hide Tux + Text Area + Stretch Color Buttons
 
-**Implementiert:** 6.10.2025 15:20 (zusammen mit 5.)
+**Implementiert:** 6.10.2025 18:30
 
-**Änderungen in `setup_normal_screen_layout()` (Zeile 960-973):**
+**Änderungen in `setup_normal_screen_layout()` (Zeile 963-983):**
 - Wenn `child_mode == 1`:
   - `r_tuxarea.h = 0` (Tux versteckt)
   - `r_tuxarea.y = WINDOW_HEIGHT` (off-screen)
-  - `r_colors.h = WINDOW_HEIGHT - r_colors.y` (Farben bis unten)
+  - `r_colors.h = WINDOW_HEIGHT - r_colors.y` (Farben bis unten gestreckt)
   - `color_button_h` neu berechnet für größere Höhe
 - Normal mode: Original Layout wiederhergestellt
 
-**Test:** ✅ Getestet - Tux verschwindet, Farben füllen Platz
+**Änderungen in `draw_colors()` (Zeile 11141-11189):**
+- Normale Farb-Buttons werden dynamisch skaliert mit `thumbnail()`
+- Spezial-Buttons (Pipette, Color Picker, Mixer) bleiben in Original-Größe zentriert
+- Clickable Area bleibt für alle Buttons gestreckt
 
-**Commit:** `2472ec75` (gleicher wie 5.)
+**Test:** ✅ Getestet - Tux verschwindet, Farben füllen Platz, Buttons skalieren korrekt
 
-**Test Guide:** Siehe `TEST_CHILD_MODE.md`
+**Commits:** 
+- `2472ec75` - Initial implementation
+- `63dfe05e` - Child mode: stretch color buttons vertically, center special buttons
 
 ### 6.3 Replace Right Toolbar → Brush Size Slider
 - Rechte Button-Spalte ausblenden

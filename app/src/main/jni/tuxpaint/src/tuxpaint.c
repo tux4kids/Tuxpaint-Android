@@ -963,9 +963,6 @@ static void setup_normal_screen_layout(void)
   /* Child mode: Hide Tux area and extend colors to bottom */
   if (child_mode)
   {
-#ifdef __ANDROID__
-    __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "LAYOUT: Child mode active - hiding Tux, extending colors");
-#endif
     r_tuxarea.y = WINDOW_HEIGHT;  /* Off-screen */
     r_tuxarea.h = 0;              /* No height */
     
@@ -974,26 +971,15 @@ static void setup_normal_screen_layout(void)
     
     /* Stretch color buttons vertically to fill space (same as width: color_button_w = r_colors.w / gd_colors.cols) */
     color_button_h = r_colors.h / gd_colors.rows;
-#ifdef __ANDROID__
-    __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "LAYOUT: r_colors extended to h=%d, color_button_h=%d (stretched)", 
-                        r_colors.h, color_button_h);
-#endif
   }
   else
   {
-#ifdef __ANDROID__
-    __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "LAYOUT: Normal mode - showing Tux");
-#endif
     /* Reset to normal color area height */
     r_colors.h = 48 * button_scale * gd_colors.rows;
     color_button_h = r_colors.h / gd_colors.rows;
     
     r_tuxarea.y = r_colors.y + r_colors.h;
     r_tuxarea.h = WINDOW_HEIGHT - r_tuxarea.y;
-#ifdef __ANDROID__
-    __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "LAYOUT: r_colors reset to h=%d, color_button_h=%d", 
-                        r_colors.h, color_button_h);
-#endif
   }
 
   r_sfx.x = r_tuxarea.x;
@@ -1019,13 +1005,6 @@ static void setup_normal_screen_layout(void)
   r_childmode_btn.h = button_h;
   r_childmode_btn.x = r_tools.x + button_w;    /* Column 1 (right) */
   r_childmode_btn.y = r_tools.y + (8 * button_h);  /* Row 8 */
-
-#ifdef __ANDROID__
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "BUTTON_LAYOUT: r_childmode_btn rect: x=%d y=%d w=%d h=%d", 
-                      r_childmode_btn.x, r_childmode_btn.y, r_childmode_btn.w, r_childmode_btn.h);
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "BUTTON_LAYOUT: r_sound_btn rect: x=%d y=%d w=%d h=%d", 
-                      r_sound_btn.x, r_sound_btn.y, r_sound_btn.w, r_sound_btn.h);
-#endif
 
 
   r_toolopt.w = gd_toolopt.cols * button_w;
@@ -2802,13 +2781,6 @@ static void mainloop(void)
 
     while (SDL_PollEvent(&event))
     {
-#ifdef __ANDROID__
-      if (event.type == SDL_MOUSEBUTTONDOWN)
-      {
-        __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "EVENT_LOOP: Got MOUSEBUTTONDOWN at (%d,%d) button=%d", 
-                            event.button.x, event.button.y, event.button.button);
-      }
-#endif
       current_event_time = SDL_GetTicks();
 
       /* To avoid getting stuck in a 'catching up with mouse motion' interface lock-up */
@@ -3739,20 +3711,8 @@ static void mainloop(void)
       else if ((event.type == SDL_MOUSEBUTTONDOWN ||
                 event.type == TP_SDL_MOUSEBUTTONSCROLL) && event.button.button <= 3)
       {
-#ifdef __ANDROID__
-        __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "EVENT_BLOCK: Reached button handler block at line 3732");
-#endif
         /* IMPORTANT: Check sound & childmode buttons FIRST, before r_tools! 
            These buttons are inside r_tools rect but need separate handling */
-#ifdef __ANDROID__
-        int hit_sound = HIT(r_sound_btn);
-        int hit_childmode = HIT(r_childmode_btn);
-        __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "BTN_CHECK: click at (%d,%d) hit_sound=%d hit_childmode=%d", 
-                            event.button.x, event.button.y, hit_sound, hit_childmode);
-        __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "BTN_CHECK: r_sound_btn=(%d,%d,%d,%d) r_childmode_btn=(%d,%d,%d,%d)",
-                            r_sound_btn.x, r_sound_btn.y, r_sound_btn.w, r_sound_btn.h,
-                            r_childmode_btn.x, r_childmode_btn.y, r_childmode_btn.w, r_childmode_btn.h);
-#endif
         if (HIT(r_sound_btn) && valid_click(event.button.button))
         {
           /* Sound toggle button clicked */
@@ -3781,23 +3741,12 @@ static void mainloop(void)
           /* Child mode toggle button clicked */
           child_mode = !child_mode;
           
-#ifdef __ANDROID__
-          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "CHILD_MODE: Toggled to %d", child_mode);
-          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "CHILD_MODE: r_colors BEFORE layout: y=%d h=%d", r_colors.y, r_colors.h);
-          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "CHILD_MODE: r_tuxarea BEFORE layout: y=%d h=%d", r_tuxarea.y, r_tuxarea.h);
-#endif
-          
           /* Redraw button with new state */
           draw_control_buttons();
           update_screen_rect(&r_childmode_btn);
           
           /* Re-layout screen with new mode */
           setup_screen_layout();
-          
-#ifdef __ANDROID__
-          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "CHILD_MODE: r_colors AFTER layout: y=%d h=%d", r_colors.y, r_colors.h);
-          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "CHILD_MODE: r_tuxarea AFTER layout: y=%d h=%d", r_tuxarea.y, r_tuxarea.h);
-#endif
           
           /* Redraw entire screen */
           draw_toolbar();
@@ -11149,23 +11098,32 @@ static unsigned draw_colors(unsigned action)
     dest.w = color_button_w;
     dest.h = color_button_h;
     
-    /* Scale button if size differs from original */
-    if (btn_img && (btn_img->w != color_button_w || btn_img->h != color_button_h))
+    /* Special buttons (COLOR_SELECTOR, COLOR_PICKER, COLOR_MIXER) should NOT be stretched 
+       Only keep their clickable area stretched, but center the image at original size */
+    int is_special_button = (i == COLOR_SELECTOR || i == COLOR_PICKER || i == COLOR_MIXER);
+    
+    /* Scale button if size differs from original AND not a special button */
+    if (btn_img)
     {
-      SDL_Surface *scaled = thumbnail(btn_img, color_button_w, color_button_h, 0);
-      if (scaled)
+      if ((btn_img->w != color_button_w || btn_img->h != color_button_h) && !is_special_button)
       {
-        SDL_BlitSurface(scaled, NULL, screen, &dest);
-        SDL_FreeSurface(scaled);
+        /* Normal color buttons: scale to fit stretched area */
+        SDL_Surface *scaled = thumbnail(btn_img, color_button_w, color_button_h, 0);
+        if (scaled)
+        {
+          SDL_BlitSurface(scaled, NULL, screen, &dest);
+          SDL_FreeSurface(scaled);
+        }
+        else
+        {
+          SDL_BlitSurface(btn_img, NULL, screen, &dest);
+        }
       }
       else
       {
+        /* Special buttons or normal size: always draw at original size without centering */
         SDL_BlitSurface(btn_img, NULL, screen, &dest);
       }
-    }
-    else
-    {
-      SDL_BlitSurface(btn_img, NULL, screen, &dest);
     }
   }
   update_screen_rect(&r_colors);
