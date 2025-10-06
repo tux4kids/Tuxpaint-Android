@@ -30,6 +30,7 @@ LOCAL_SRC_FILES := \
 	src/onscreen_keyboard.c \
 	src/android_print.c \
 	src/android_mbstowcs.c \
+	src/android_multitouch.c \
 	src/fill.c \
 	src/android_assets.c \
 	src/gifenc.c\
