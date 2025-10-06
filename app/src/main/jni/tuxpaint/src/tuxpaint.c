@@ -805,6 +805,8 @@ static SDL_Rect r_ttools;       /* was 96x40 @ 0,0  (title for tools, "Tools") *
 static SDL_Rect r_tcolors;      /* was 96x48 @ 0,376 (title for colors, "Colors") */
 static SDL_Rect r_ttoolopt;     /* was 96x40 @ 544,0 (title for tool options) */
 static SDL_Rect r_tuxarea;      /* was 640x56 */
+static SDL_Rect r_sound_btn;    /* Sound toggle button (bottom left) */
+static SDL_Rect r_childmode_btn; /* Child mode toggle button (bottom left) */
 static SDL_Rect r_label;
 static SDL_Rect old_dest;
 static SDL_Rect r_tir;          /* Text input rectangle */
@@ -969,6 +971,17 @@ static void setup_normal_screen_layout(void)
   r_tools.y = 0;  /* Start at top (no label above) */
   r_tools.w = gd_tools.cols * button_w;
   r_tools.h = gd_tools.rows * button_h;
+
+  /* Sound & Child mode buttons in tool bar below Print/Quit (row 8) */
+  r_sound_btn.w = button_w;
+  r_sound_btn.h = button_h;
+  r_sound_btn.x = r_tools.x;           /* Column 0 (left) */
+  r_sound_btn.y = r_tools.y + (8 * button_h);  /* Row 8 */
+  
+  r_childmode_btn.w = button_w;
+  r_childmode_btn.h = button_h;
+  r_childmode_btn.x = r_tools.x + button_w;    /* Column 1 (right) */
+  r_childmode_btn.y = r_tools.y + (8 * button_h);  /* Row 8 */
 
   r_toolopt.w = gd_toolopt.cols * button_w;
   r_toolopt.h = gd_toolopt.rows * button_h;
@@ -2119,6 +2132,7 @@ static void seticon(void);
 static SDL_Surface *loadimage(const char *const fname);
 static SDL_Surface *do_loadimage(const char *const fname, int abort_on_error);
 static void draw_toolbar(void);
+static void draw_control_buttons(void);
 static void draw_magic(void);
 static void draw_brushes(void);
 static void draw_brushes_spacing(void);
@@ -5881,6 +5895,35 @@ static void mainloop(void)
             magic_switchout(canvas);
           }
 #endif
+        }
+        else if (HIT(r_sound_btn) && valid_click(event.button.button))
+        {
+          /* Sound toggle button clicked */
+#ifndef NOSOUND
+          mute = !mute;
+          Mix_HaltChannel(-1);
+
+          /* Redraw the button with new state */
+          draw_control_buttons();
+          update_screen_rect(&r_sound_btn);
+
+          if (mute)
+          {
+            draw_tux_text(TUX_BORED, gettext("Sound muted."), 0);
+          }
+          else
+          {
+            draw_tux_text(TUX_BORED, gettext("Sound unmuted."), 0);
+          }
+
+          playsound(screen, 1, SND_CLICK, 1, SNDPOS_LEFT, SNDDIST_NEAR);
+#endif
+        }
+        else if (HIT(r_childmode_btn) && valid_click(event.button.button))
+        {
+          /* Child mode toggle button clicked - placeholder for now */
+          draw_tux_text(TUX_BORED, "Child mode (coming soon)", 0);
+          playsound(screen, 1, SND_CLICK, 1, SNDPOS_LEFT, SNDDIST_NEAR);
         }
 
 #ifdef __ANDROID__
@@ -10642,6 +10685,61 @@ static void draw_toolbar(void)
       SDL_BlitSurface(img_btn_off, NULL, screen, &dest);
     }
   }
+
+  /* Draw control buttons below tools */
+  draw_control_buttons();
+}
+
+
+/**
+ * Draw sound and child mode toggle buttons below tools
+ */
+static void draw_control_buttons(void)
+{
+  SDL_Rect dest;
+  SDL_Surface *button_body;
+  SDL_Surface *button_color;
+  SDL_Surface *txt;
+  SDL_Color text_color = { 0, 0, 0, 0 };    /* Black text */
+  SDL_Color grey_color = { 128, 128, 128, 0 }; /* Grey for muted */
+
+#ifndef NOSOUND
+  /* Sound toggle button */
+  button_body = mute ? img_btn_off : img_btn_up;
+  button_color = mute ? img_grey : img_black;
+  
+  dest = r_sound_btn;
+  SDL_BlitSurface(button_body, NULL, screen, &dest);
+
+  /* Render text "SND" */
+  txt = render_text(small_font, "SND", mute ? grey_color : text_color);
+  if (txt)
+  {
+    SDL_BlitSurface(button_color, NULL, txt, NULL);
+    dest.x = r_sound_btn.x + (r_sound_btn.w - txt->w) / 2;
+    dest.y = r_sound_btn.y + (r_sound_btn.h - txt->h) / 2;
+    SDL_BlitSurface(txt, NULL, screen, &dest);
+    SDL_FreeSurface(txt);
+  }
+#endif
+
+  /* Child mode button - placeholder */
+  button_body = img_btn_up;
+  button_color = img_black;
+  
+  dest = r_childmode_btn;
+  SDL_BlitSurface(button_body, NULL, screen, &dest);
+
+  /* Render text "KID" */
+  txt = render_text(small_font, "KID", text_color);
+  if (txt)
+  {
+    SDL_BlitSurface(button_color, NULL, txt, NULL);
+    dest.x = r_childmode_btn.x + (r_childmode_btn.w - txt->w) / 2;
+    dest.y = r_childmode_btn.y + (r_childmode_btn.h - txt->h) / 2;
+    SDL_BlitSurface(txt, NULL, screen, &dest);
+    SDL_FreeSurface(txt);
+  }
 }
 
 
@@ -10987,6 +11085,9 @@ static unsigned draw_colors(unsigned action)
 
   update_screen_rect(&r_tcolors);
   */
+
+  /* Draw control buttons (sound & child mode) */
+  draw_control_buttons();
 
   return old_colors_state;
 }
