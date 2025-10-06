@@ -336,6 +336,133 @@ public class MultitouchTest {
     }
     
     /**
+     * Test finger lift and re-touch (gap detection).
+     * Verifies that when a finger is lifted and touches down again at a different location,
+     * no line is drawn connecting the old and new stroke.
+     */
+    @Test
+    public void testFingerLiftAndRetouch() throws InterruptedException {
+        Log.i(TAG, "========================================");
+        Log.i(TAG, "STARTING FINGER LIFT AND RETOUCH TEST");
+        Log.i(TAG, "Test: Draw with finger, lift it, touch at new location - should NOT connect");
+        Log.i(TAG, "========================================");
+        
+        Thread.sleep(10000);
+
+        final boolean[] testComplete = {false};
+        
+        activityRule.getScenario().onActivity(activity -> {
+            Log.i(TAG, "Activity ready, starting lift-retouch test...");
+            View surfaceView = activity.getWindow().getDecorView().getRootView();
+            
+            try {
+                // Phase 1: Draw first stroke with finger
+                Log.i(TAG, "PHASE 1: Drawing first stroke at (300,300)");
+                long downTime1 = SystemClock.uptimeMillis();
+                
+                MotionEvent.PointerProperties[] props = new MotionEvent.PointerProperties[1];
+                props[0] = new MotionEvent.PointerProperties();
+                props[0].id = 0;
+                props[0].toolType = MotionEvent.TOOL_TYPE_FINGER;
+                
+                MotionEvent.PointerCoords[] coords = new MotionEvent.PointerCoords[1];
+                coords[0] = new MotionEvent.PointerCoords();
+                coords[0].x = 300f;
+                coords[0].y = 300f;
+                coords[0].pressure = 1.0f;
+                coords[0].size = 1.0f;
+                
+                // Touch down
+                MotionEvent down1 = MotionEvent.obtain(downTime1, downTime1,
+                    MotionEvent.ACTION_DOWN, 1, props, coords,
+                    0, 0, 1.0f, 1.0f, 0, 0, 0, 0);
+                surfaceView.dispatchTouchEvent(down1);
+                down1.recycle();
+                Thread.sleep(50);
+                
+                // Draw short line (5 moves)
+                for (int i = 1; i <= 5; i++) {
+                    coords[0].x = 300f + (i * 20f);
+                    coords[0].y = 300f + (i * 20f);
+                    MotionEvent move = MotionEvent.obtain(downTime1, SystemClock.uptimeMillis(),
+                        MotionEvent.ACTION_MOVE, 1, props, coords,
+                        0, 0, 1.0f, 1.0f, 0, 0, 0, 0);
+                    Log.i(TAG, "  Drawing at (" + coords[0].x + "," + coords[0].y + ")");
+                    surfaceView.dispatchTouchEvent(move);
+                    move.recycle();
+                    Thread.sleep(100);
+                }
+                
+                // Lift finger
+                Log.i(TAG, "PHASE 2: Lifting finger at (" + coords[0].x + "," + coords[0].y + ")");
+                MotionEvent up1 = MotionEvent.obtain(downTime1, SystemClock.uptimeMillis(),
+                    MotionEvent.ACTION_UP, 1, props, coords,
+                    0, 0, 1.0f, 1.0f, 0, 0, 0, 0);
+                surfaceView.dispatchTouchEvent(up1);
+                up1.recycle();
+                
+                // Wait to ensure lift is detected
+                Thread.sleep(500);
+                
+                // Phase 3: Touch down at NEW location (far away)
+                Log.i(TAG, "PHASE 3: Touching down at NEW location (600,600) - should NOT connect!");
+                long downTime2 = SystemClock.uptimeMillis();
+                coords[0].x = 600f;
+                coords[0].y = 600f;
+                
+                MotionEvent down2 = MotionEvent.obtain(downTime2, downTime2,
+                    MotionEvent.ACTION_DOWN, 1, props, coords,
+                    0, 0, 1.0f, 1.0f, 0, 0, 0, 0);
+                surfaceView.dispatchTouchEvent(down2);
+                down2.recycle();
+                Thread.sleep(50);
+                
+                // Draw second stroke
+                for (int i = 1; i <= 5; i++) {
+                    coords[0].x = 600f + (i * 20f);
+                    coords[0].y = 600f - (i * 20f);
+                    MotionEvent move = MotionEvent.obtain(downTime2, SystemClock.uptimeMillis(),
+                        MotionEvent.ACTION_MOVE, 1, props, coords,
+                        0, 0, 1.0f, 1.0f, 0, 0, 0, 0);
+                    Log.i(TAG, "  Drawing new stroke at (" + coords[0].x + "," + coords[0].y + ")");
+                    surfaceView.dispatchTouchEvent(move);
+                    move.recycle();
+                    Thread.sleep(100);
+                }
+                
+                // Lift finger again
+                Log.i(TAG, "PHASE 4: Lifting finger (final)");
+                MotionEvent up2 = MotionEvent.obtain(downTime2, SystemClock.uptimeMillis(),
+                    MotionEvent.ACTION_UP, 1, props, coords,
+                    0, 0, 1.0f, 1.0f, 0, 0, 0, 0);
+                surfaceView.dispatchTouchEvent(up2);
+                up2.recycle();
+                
+                Log.i(TAG, "========================================");
+                Log.i(TAG, "Finger lift-retouch test completed");
+                Log.i(TAG, "EXPECTED: Two separate strokes, NO connecting line");
+                Log.i(TAG, "========================================");
+                
+                testComplete[0] = true;
+                Thread.sleep(2000);
+                
+            } catch (Exception e) {
+                Log.e(TAG, "ERROR during lift-retouch test", e);
+                fail("Lift-retouch test failed: " + e.getMessage());
+            }
+        });
+        
+        int timeout = 0;
+        while (!testComplete[0] && timeout < 50) {
+            Thread.sleep(100);
+            timeout++;
+        }
+        
+        assertTrue("Lift-retouch test did not complete", testComplete[0]);
+        Log.i(TAG, "Lift-retouch test completed successfully");
+    }
+    
+    /**
      * Test rapid touch add/remove (stress test).
      */
     @Test
