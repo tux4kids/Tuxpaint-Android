@@ -904,10 +904,11 @@ static void setup_normal_screen_layout(void)
   color_button_h = r_colors.h / gd_colors.rows;
   r_tcolors.h = r_colors.h;
 
+  /* Hide "Colors" label - stretch color buttons to full width */
   r_tcolors.x = 0;
-  r_tcolors.w = gd_tools.cols * button_w;
-  r_colors.x = r_tcolors.w;
-  r_colors.w = WINDOW_WIDTH - r_tcolors.w;
+  r_tcolors.w = 0;  /* No space for label */
+  r_colors.x = 0;   /* Start at left edge */
+  r_colors.w = WINDOW_WIDTH;  /* Full width */
 
   color_button_w = r_colors.w / gd_colors.cols;
 
@@ -10965,7 +10966,8 @@ static unsigned draw_colors(unsigned action)
   if (colors_state == old_colors_state)
     return old_colors_state;
 
-  /* If more than one colors rows, fill the parts of the r_tcolors not covered by the title. */
+  /* "Colors" label rendering disabled - label removed to give more space to buttons */
+  /* 
   if (gd_colors.rows > 1)
     SDL_FillRect(screen, &r_tcolors, SDL_MapRGBA(screen->format, 255, 255, 255, 255));
 
@@ -10983,6 +10985,7 @@ static unsigned draw_colors(unsigned action)
   }
 
   update_screen_rect(&r_tcolors);
+  */
 
   return old_colors_state;
 }
