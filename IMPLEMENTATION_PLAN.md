@@ -106,12 +106,32 @@
 
 **Child Mode Anforderungen:**
 
-### 6.1 Auto-select 4px Brush
+### 6.1 ✅ Auto-select 24px Brush and switch to paint mode
+
+**Implementiert:** 7.10.2025 11:02
+
+**Änderungen in `tuxpaint.c` (Zeile 3745-3772):**
+- Beim Aktivieren von Child Mode:
+  - Automatischer Wechsel zu TOOL_BRUSH
+  - cur_brush = 3 (aa_round_24.png - 24px Brush)
+  - brush_scroll = 0 (Scroll an den Anfang)
+  - render_brush() + draw_brushes() aufrufen
+
 ```c
-if (child_mode && cur_tool == TOOL_BRUSH) {
-  cur_brush = 1; // 4px brush
+if (child_mode)
+{
+  if (cur_tool != TOOL_BRUSH)
+  {
+    cur_tool = TOOL_BRUSH;
+  }
+  cur_brush = 3;  /* aa_round_24.png (24px brush) */
+  brush_scroll = 0;
+  render_brush();
 }
 ```
+
+**Test:** ✅ Beim Aktivieren von Child Mode aus einem anderen Tool wird automatisch zum Paint-Tool mit 24px Brush gewechselt
+
 
 ### 6.2 ✅ Hide Tux + Text Area + Stretch Color Buttons
 

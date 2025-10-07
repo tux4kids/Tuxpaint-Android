@@ -1005,7 +1005,6 @@ static void setup_normal_screen_layout(void)
   r_childmode_btn.x = r_ttools.x + button_w;    /* Column 1 (right) */
   r_childmode_btn.y = r_ttools.y;               /* In r_ttools header area */
 
-
   r_toolopt.w = gd_toolopt.cols * button_w;
   r_toolopt.h = gd_toolopt.rows * button_h;
   r_toolopt.x = WINDOW_WIDTH - r_ttoolopt.w;
@@ -1762,6 +1761,7 @@ static SDL_Surface *img_title_names[NUM_TITLES];
 static SDL_Surface *img_tools[NUM_TOOLS], *img_tool_names[NUM_TOOLS];
 static SDL_Surface *img_kids_icon, *img_expert_icon;
 static SDL_Surface *img_kids_label, *img_expert_label;
+static SDL_Surface *img_sound_icon;
 
 static SDL_Surface *img_oskdel, *img_osktab, *img_oskenter, *img_oskcapslock, *img_oskshift, *img_oskpaste;
 static SDL_Surface *thumbnail(SDL_Surface * src, int max_x, int max_y, int keep_aspect);
@@ -3740,13 +3740,19 @@ static void mainloop(void)
         else if (HIT(r_childmode_btn) && valid_click(event.button.button))
         {
           /* Child mode toggle button clicked */
-#ifdef __ANDROID__
-          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Child mode button clicked! Was: %d", child_mode);
-#endif
           child_mode = !child_mode;
-#ifdef __ANDROID__
-          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Child mode now: %d", child_mode);
-#endif
+          
+          /* When entering child mode: switch to paint tool with thick brush */
+          if (child_mode)
+          {
+            if (cur_tool != TOOL_BRUSH)
+            {
+              cur_tool = TOOL_BRUSH;
+            }
+            cur_brush = 3;  /* Select aa_round_24.png (24px brush - good size for kids) */
+            brush_scroll = 0;  /* Ensure we scroll to top so brush is visible */
+            render_brush();
+          }
           
           /* Redraw button with new state */
           draw_row_minus_1_buttons();
@@ -3757,7 +3763,16 @@ static void mainloop(void)
           
           /* Redraw entire screen */
           draw_toolbar();
+          update_screen_rect(&r_tools);  /* Update left toolbar display */
           draw_colors(COLORSEL_FORCE_REDRAW);
+          
+          /* Draw brushes if in brush tool */
+          if (cur_tool == TOOL_BRUSH)
+          {
+            draw_brushes();
+            update_screen_rect(&r_ttoolopt);  /* Update right brush panel display */
+          }
+          
           draw_tux_text(child_mode ? TUX_GREAT : TUX_DEFAULT, 
                        child_mode ? gettext("Child mode activated!") : gettext("Child mode deactivated."), 
                        0);
@@ -10749,10 +10764,12 @@ static void draw_row_minus_1_buttons(void)
   SDL_Surface *mode_icon;
   SDL_Surface *mode_label;
   SDL_Surface *txt;
+  SDL_Surface *icon_scaled;
   SDL_Color text_color = { 0, 0, 0, 0 };    /* Black text */
   SDL_Color grey_color = { 128, 128, 128, 0 }; /* Grey for muted */
   int button_render_h = button_h - 20;  /* Reduced visual height for Row -1 buttons */
   float scale_y = 1.04 * (float)button_render_h / button_h;  /* Scale factor for Y-axis */
+  float icon_scale = 0.7;  /* Scale icons to 70% (30% smaller) */
 
 #ifndef NOSOUND
   /* Sound toggle button */
@@ -10769,15 +10786,15 @@ static void draw_row_minus_1_buttons(void)
     SDL_FreeSurface(button_scaled);
   }
 
-  /* Render text "SND" */
-  txt = render_text(small_font, "SND", mute ? grey_color : text_color);
-  if (txt)
+  /* Scale and draw speaker icon (with transparency preserved) */
+  icon_scaled = rotozoomSurfaceXY(img_sound_icon, 0, icon_scale, icon_scale, SMOOTHING_ON);
+  if (icon_scaled)
   {
-    SDL_BlitSurface(button_color, NULL, txt, NULL);
-    dest.x = r_sound_btn.x + (r_sound_btn.w - txt->w) / 2;
-    dest.y = r_sound_btn.y + (button_render_h - txt->h) / 2;
-    SDL_BlitSurface(txt, NULL, screen, &dest);
-    SDL_FreeSurface(txt);
+    /* Position icon at top of button, horizontally centered */
+    dest.x = r_sound_btn.x + (r_sound_btn.w - icon_scaled->w) / 2;
+    dest.y = r_sound_btn.y + 2;  /* Top-aligned with small margin */
+    SDL_BlitSurface(icon_scaled, NULL, screen, &dest);
+    SDL_FreeSurface(icon_scaled);
   }
 #endif
 
@@ -10789,9 +10806,6 @@ static void draw_row_minus_1_buttons(void)
   mode_icon = child_mode ? img_kids_icon : img_expert_icon;
   mode_label = child_mode ? img_kids_label : img_expert_label;
   
-  fprintf(stderr, "Drawing row -1 button: child_mode=%d, icon=%p, label=%p\n", 
-          child_mode, (void*)mode_icon, (void*)mode_label);
-  
   /* Scale button body to reduced height (squash vertically) */
   button_scaled = rotozoomSurfaceXY(button_body, 0, 1.0, scale_y, SMOOTHING_ON);
   if (button_scaled)
@@ -10802,16 +10816,19 @@ static void draw_row_minus_1_buttons(void)
     SDL_FreeSurface(button_scaled);
   }
 
-  /* Apply color to icon and label (like tool buttons) */
-  SDL_BlitSurface(button_color, NULL, mode_icon, NULL);
+  /* Scale and draw icon (with transparency preserved) */
+  icon_scaled = rotozoomSurfaceXY(mode_icon, 0, icon_scale, icon_scale, SMOOTHING_ON);
+  if (icon_scaled)
+  {
+    /* Position icon at top of button, horizontally centered */
+    dest.x = r_childmode_btn.x + (button_w - icon_scaled->w) / 2;
+    dest.y = r_childmode_btn.y + 2;  /* Top-aligned with small margin */
+    SDL_BlitSurface(icon_scaled, NULL, screen, &dest);
+    SDL_FreeSurface(icon_scaled);
+  }
+
+  /* Apply color to label and draw it below the icon */
   SDL_BlitSurface(button_color, NULL, mode_label, NULL);
-
-  /* Draw icon */
-  dest.x = r_childmode_btn.x + 4;
-  dest.y = r_childmode_btn.y + 2;
-  SDL_BlitSurface(mode_icon, NULL, screen, &dest);
-
-  /* Draw label below icon */
   dest.x = r_childmode_btn.x + (button_w - mode_label->w) / 2;
   dest.y = r_childmode_btn.y + button_render_h - mode_label->h - 2;
   SDL_BlitSurface(mode_label, NULL, screen, &dest);
@@ -31127,9 +31144,10 @@ static void setup(void)
   for (i = 0; i < NUM_TOOLS; i++)
     img_tools[i] = loadimagerb(tool_img_fnames[i]);
 
-  /* Load Kids/Expert icons (use Tux images as placeholders) */
-  img_kids_icon = loadimagerb(DATA_PREFIX "images/tux/great.png");
-  img_expert_icon = loadimagerb(DATA_PREFIX "images/tools/shapes.png");
+  /* Load Kids/Expert/Sound icons */
+  img_kids_icon = loadimagerb(DATA_PREFIX "images/ui/kids_icon.png");
+  img_expert_icon = loadimagerb(DATA_PREFIX "images/ui/expert_icon.png");
+  img_sound_icon = loadimagerb(DATA_PREFIX "images/ui/sound_icon.png");
 
   img_title_on = loadimagerb(DATA_PREFIX "images/ui/title.png");
   img_title_large_on = loadimagerb(DATA_PREFIX "images/ui/title_large.png");
