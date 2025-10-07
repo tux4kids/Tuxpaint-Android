@@ -26,3 +26,4 @@
 - ABC does not work
 - check why stamp and magic is not working (disabled all the time)
 
+- die haupt datei in mehrere sinnvoll splitten

@@ -156,7 +156,7 @@ if (child_mode)
 - `2472ec75` - Initial implementation
 - `63dfe05e` - Child mode: stretch color buttons vertically, center special buttons
 
-### 6.2.2 Simplify Left Toolbar
+### 6.2.2 ✅ Simplify Left Toolbar
 **Nur diese Tools anzeigen (alle anderen disablen)**
 - Child Mode Button
 - Paint (TOOL_BRUSH)
@@ -167,11 +167,18 @@ if (child_mode)
 - Undo (TOOL_UNDO)
 - Redo (TOOL_REDO)
 
-### 6.3 Replace Right Toolbar → Brush Size Slider
-- Rechte Button-Spalte ausblenden
-- Großer vertikaler Slider anzeigen
-- Slider steuert Brush-Size (0-100% → brush sizes)
-
+### 6.3 ✅ Replace Right Toolbar → Brush Size Slider
+- ✅ Rechte Button-Spalte ausblenden
+- ✅ Großer vertikaler Slider anzeigen (5% komprimiert für Margin)
+- ✅ Slider steuert Brush-Size (0-100% → brush sizes 0-4)
+- ✅ Weißer Hintergrund
+- ✅ Slider-Schiene: Hellblau oben (bis Handle), Hellgrau unten (ab Handle)
+- ✅ Handle: Hellblauer Kreis mit weißem Rand
+  - Inverses Größenverhältnis: Brush 0 → kleiner Kreis (5px) + großer Rand (25px), Brush 4 → großer Kreis (29px) + kleiner Rand (1px)
+  - Total-Radius konstant bei 30px
+- ✅ Fließende Auswahl: Handle kann überall auf Schiene positioniert werden (nicht nur diskrete Positionen)
+- 1. der anfasser soll insgesamt 3 pixel grösser und einen pixel mehr weissen rand bekommen
+- 2. die bewegung soll mit ease stattfinden, also z.b. 0.5s dauern, bis der slider sich sichtbar zu der position hin bewegt, wo der taouch passierrt, bei touchend dann in 0.2s zu einer der erlaubten positionen hin snappen
 **Implementierung:**
 ```c
 if (child_mode) {
@@ -186,6 +193,7 @@ if (child_mode) {
 **Layout:**
 - Größere Buttons (mehr Platz pro Button)
 - nur 1 Spalte statt 2
+- den speaker in row -1 auch sperren in dem Zustand, wie er gerade ist
 
 **New-Button Behavior:**
 ```c
