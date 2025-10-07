@@ -156,6 +156,17 @@ if (child_mode)
 - `2472ec75` - Initial implementation
 - `63dfe05e` - Child mode: stretch color buttons vertically, center special buttons
 
+### 6.2.2 Simplify Left Toolbar
+**Nur diese Tools anzeigen (alle anderen disablen)**
+- Child Mode Button
+- Paint (TOOL_BRUSH)
+- Eraser (TOOL_ERASER)
+- Fill (TOOL_FILL)
+- Save (TOOL_SAVE)
+- New (TOOL_NEW mit Auto-Save)
+- Undo (TOOL_UNDO)
+- Redo (TOOL_REDO)
+
 ### 6.3 Replace Right Toolbar → Brush Size Slider
 - Rechte Button-Spalte ausblenden
 - Großer vertikaler Slider anzeigen
@@ -170,16 +181,7 @@ if (child_mode) {
 }
 ```
 
-### 6.4 Simplified Left Toolbar
-**Nur diese Tools anzeigen:**
-- Paint (TOOL_BRUSH)
-- Eraser (TOOL_ERASER)  
-- Fill (TOOL_FILL)
-- Save (TOOL_SAVE)
-- New (TOOL_NEW mit Auto-Save)
-- Undo (TOOL_UNDO)
-- Redo (TOOL_REDO)
-- Exit Child Mode (Custom Button)
+### 6.4 Left Toolbar
 
 **Layout:**
 - Größere Buttons (mehr Platz pro Button)

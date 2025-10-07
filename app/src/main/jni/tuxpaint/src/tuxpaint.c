@@ -2203,6 +2203,8 @@ static void do_eraser(int x, int y, int update);
 static void eraser_draw(int x1, int y1, int x2, int y2);
 static void disable_avail_tools(void);
 static void enable_avail_tools(void);
+static void apply_child_mode_tool_filter(void);
+static void remove_child_mode_tool_filter(void);
 static void reset_avail_tools(void);
 static int compare_dirent2s(struct dirent2 *f1, struct dirent2 *f2);
 static int compare_dirent2s_invert(struct dirent2 *f1, struct dirent2 *f2);
@@ -3742,16 +3744,25 @@ static void mainloop(void)
           /* Child mode toggle button clicked */
           child_mode = !child_mode;
           
-          /* When entering child mode: switch to paint tool with thick brush */
+          /* Apply or remove tool restrictions */
           if (child_mode)
           {
-            if (cur_tool != TOOL_BRUSH)
+            /* Entering child mode */
+            apply_child_mode_tool_filter();
+            
+            /* Switch to paint tool with thick brush if current tool is disabled */
+            if (!tool_avail[cur_tool] || cur_tool != TOOL_BRUSH)
             {
               cur_tool = TOOL_BRUSH;
             }
             cur_brush = 3;  /* Select aa_round_24.png (24px brush - good size for kids) */
             brush_scroll = 0;  /* Ensure we scroll to top so brush is visible */
             render_brush();
+          }
+          else
+          {
+            /* Leaving child mode */
+            remove_child_mode_tool_filter();
           }
           
           /* Redraw button with new state */
@@ -13606,6 +13617,51 @@ static void enable_avail_tools(void)
 {
   int i;
 
+  for (i = 0; i < NUM_TOOLS; i++)
+  {
+    tool_avail[i] = tool_avail_bak[i];
+  }
+}
+
+
+/**
+ * Apply child mode tool restrictions
+ */
+static void apply_child_mode_tool_filter(void)
+{
+  int i;
+  
+  /* Save current tool_avail state */
+  for (i = 0; i < NUM_TOOLS; i++)
+  {
+    tool_avail_bak[i] = tool_avail[i];
+  }
+  
+  /* Disable all tools first */
+  for (i = 0; i < NUM_TOOLS; i++)
+  {
+    tool_avail[i] = 0;
+  }
+  
+  /* Enable only child-mode-friendly tools */
+  tool_avail[TOOL_BRUSH] = 1;
+  tool_avail[TOOL_ERASER] = 1;
+  tool_avail[TOOL_FILL] = 1;
+  tool_avail[TOOL_UNDO] = tool_avail_bak[TOOL_UNDO];  /* Keep undo state */
+  tool_avail[TOOL_REDO] = tool_avail_bak[TOOL_REDO];  /* Keep redo state */
+  tool_avail[TOOL_NEW] = 1;
+  tool_avail[TOOL_SAVE] = tool_avail_bak[TOOL_SAVE];  /* Keep save state */
+}
+
+
+/**
+ * Remove child mode tool restrictions
+ */
+static void remove_child_mode_tool_filter(void)
+{
+  int i;
+  
+  /* Restore original tool_avail state */
   for (i = 0; i < NUM_TOOLS; i++)
   {
     tool_avail[i] = tool_avail_bak[i];
