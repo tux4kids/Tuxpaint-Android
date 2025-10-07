@@ -819,6 +819,12 @@ static float button_scale;      /* scale factor to be applied to the size of but
 static int color_button_w;      /* was 32 */
 static int color_button_h;      /* was 48 */
 static int child_mode = 0;      /* Child mode toggle (simplified UI) */
+static int slider_dragging = 0; /* True when user is dragging the child mode brush slider */
+static float slider_current_pos = 0.0; /* Current animated slider position (0.0-1.0 percentage) */
+static float slider_start_pos = 0.0;   /* Animation start position (0.0-1.0 percentage) */
+static float slider_target_pos = 0.0;  /* Target slider position (0.0-1.0 percentage) */
+static Uint32 slider_anim_start_time = 0; /* Animation start time in milliseconds */
+static int slider_anim_duration = 500; /* Animation duration in milliseconds (0.5s default for drag) */
 static int colors_rows;
 
 static int buttons_tall;        /* promoted to a global variable from setup_normal_screen_layout() */
@@ -2159,6 +2165,8 @@ static SDL_Surface *do_loadimage(const char *const fname, int abort_on_error);
 static void draw_toolbar(void);
 static void draw_row_minus_1_buttons(void);
 static void draw_magic(void);
+static void draw_child_mode_brush_slider(void);
+static void update_slider_animation(void);
 static void draw_brushes(void);
 static void draw_brushes_spacing(void);
 static void draw_stamps(void);
@@ -3757,12 +3765,26 @@ static void mainloop(void)
             }
             cur_brush = 3;  /* Select aa_round_24.png (24px brush - good size for kids) */
             brush_scroll = 0;  /* Ensure we scroll to top so brush is visible */
+            
+            /* Initialize slider animation state */
+            int child_brush_min = 0;
+            int child_brush_max = 4;
+            float initial_pos = (float)(cur_brush - child_brush_min) / (float)(child_brush_max - child_brush_min);
+            slider_current_pos = initial_pos;
+            slider_target_pos = initial_pos;
+            slider_anim_start_time = 0;
+            slider_anim_duration = 0;  /* No animation on initial load */
+            
             render_brush();
           }
           else
           {
             /* Leaving child mode */
             remove_child_mode_tool_filter();
+            
+            /* Auto-select Paint tool when exiting child mode */
+            cur_tool = TOOL_BRUSH;
+            SDL_Log("Child mode exit: Auto-selected Paint tool");
           }
           
           /* Redraw button with new state */
@@ -3777,12 +3799,24 @@ static void mainloop(void)
           update_screen_rect(&r_tools);  /* Update left toolbar display */
           draw_colors(COLORSEL_FORCE_REDRAW);
           
+          /* Clear right panel before drawing brushes/slider */
+          SDL_Rect clear_rect;
+          clear_rect.x = WINDOW_WIDTH - r_ttoolopt.w;
+          clear_rect.y = 0;
+          clear_rect.w = r_ttoolopt.w;
+          clear_rect.h = r_colors.y;
+          SDL_FillRect(screen, &clear_rect, SDL_MapRGB(screen->format, 221, 221, 221));
+          SDL_Log("Child mode toggle: Cleared right panel before redraw");
+          
           /* Draw brushes if in brush tool */
-          if (cur_tool == TOOL_BRUSH)
+          if (cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES)
           {
             draw_brushes();
-            update_screen_rect(&r_ttoolopt);  /* Update right brush panel display */
           }
+          
+          /* Flip screen immediately to prevent old buffer from being restored */
+          SDL_Flip(screen);
+          SDL_Log("Child mode toggle: Screen flipped");
           
           draw_tux_text(child_mode ? TUX_GREAT : TUX_DEFAULT, 
                        child_mode ? gettext("Child mode activated!") : gettext("Child mode deactivated."), 
@@ -4294,14 +4328,75 @@ static void mainloop(void)
 
         else if (HIT(r_toolopt) && valid_click(event.button.button))
         {
+          /* In child mode with brush tool, handle slider clicks and dragging */
+          if (child_mode && (cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES))
+          {
+            /* Calculate slider position - MUST match draw_child_mode_brush_slider() */
+            int slider_x, slider_y, slider_w, slider_h;
+            int click_y;
+            float click_percentage;
+            int child_brush_min = 0;  /* Brush index 0 */
+            int child_brush_max = 4;  /* Brush index 4 */
+            
+            slider_w = button_w - 20;
+            /* Use r_colors.y instead of (WINDOW_HEIGHT - r_colors.h) because in child mode
+               r_colors extends to bottom, so WINDOW_HEIGHT - r_colors.h would be tiny/negative */
+            /* Compress by 5% to avoid overlapping neighboring elements */
+            slider_h = (int)((r_colors.y - r_ttoolopt.h - 40) * 0.95);
+            slider_x = WINDOW_WIDTH - r_ttoolopt.w + (r_ttoolopt.w - slider_w) / 2;
+            slider_y = r_ttoolopt.h + 30;  /* Add extra margin at top */
+            
+            click_y = event.button.y;
+            
+            SDL_Log("SLIDER CLICK: click_y=%d, slider_y=%d, slider_h=%d, range=[%d,%d]",
+                    click_y, slider_y, slider_h, slider_y, slider_y + slider_h);
+            
+            /* Check if click is within slider area */
+            if (click_y >= slider_y && click_y <= slider_y + slider_h)
+            {
+              /* Start slider dragging mode */
+              slider_dragging = 1;
+              
+              /* Calculate position and brush based on click position */
+              /* Map slider position to brush range 0-4 */
+              click_percentage = (float)(click_y - slider_y) / (float)slider_h;
+              
+              /* Set position instantly (no animation on initial click) */
+              slider_current_pos = click_percentage;
+              slider_target_pos = click_percentage;
+              slider_anim_duration = 0;  /* No animation - instant response */
+              
+              /* Calculate target brush for the click position */
+              cur_brush = child_brush_min + (int)((click_percentage * (child_brush_max - child_brush_min + 1)));
+              
+              /* Clamp to valid range 0-4 */
+              if (cur_brush < child_brush_min) cur_brush = child_brush_min;
+              if (cur_brush > child_brush_max) cur_brush = child_brush_max;
+              
+              SDL_Log("SLIDER CLICK: percentage=%.2f, brush=%d, instant position update", 
+                      click_percentage, cur_brush);
+              
+              /* Update brush */
+              render_brush();
+              draw_child_mode_brush_slider();
+              SDL_Flip(screen);  /* Flip immediately to show new position */
+              
+              playsound(screen, 1, SND_CLICK, 1, SNDPOS_RIGHT, SNDDIST_NEAR);
+            }
+            else
+            {
+              SDL_Log("SLIDER: Click outside slider area, ignoring");
+            }
+            /* In child mode, don't process grid-based brush selection - skip the else if below */
+          }
           /* Options on the right
              WARNING: this must be kept in sync with the mouse-move
              code (for cursor changes) and mouse-scroll code. */
 
-          if (cur_tool == TOOL_BRUSH || cur_tool == TOOL_STAMP ||
+          else if (!child_mode && (cur_tool == TOOL_BRUSH || cur_tool == TOOL_STAMP ||
               cur_tool == TOOL_SHAPES || cur_tool == TOOL_LINES ||
               cur_tool == TOOL_MAGIC || cur_tool == TOOL_TEXT ||
-              cur_tool == TOOL_ERASER || cur_tool == TOOL_LABEL || cur_tool == TOOL_FILL)
+              cur_tool == TOOL_ERASER || cur_tool == TOOL_LABEL || cur_tool == TOOL_FILL))
           {
             int num_rows_needed;
             SDL_Rect r_controls;
@@ -6281,6 +6376,28 @@ static void mainloop(void)
       }
       else if (event.type == SDL_MOUSEBUTTONUP)
       {
+        /* Stop slider dragging in child mode and snap to final position */
+        if (slider_dragging)
+        {
+          slider_dragging = 0;
+          
+          /* Snap to final discrete brush position with 0.2s animation */
+          int child_brush_min = 0;
+          int child_brush_max = 4;
+          
+          /* Calculate final snapped position based on cur_brush */
+          float final_pos = (float)(cur_brush - child_brush_min) / (float)(child_brush_max - child_brush_min);
+          
+          /* Start snap animation with 0.1s duration (fast snap) */
+          slider_start_pos = slider_current_pos;  /* Remember where we're animating from */
+          slider_target_pos = final_pos;
+          slider_anim_start_time = SDL_GetTicks();
+          slider_anim_duration = 100;  /* 0.1s for fast snap animation */
+          
+          SDL_Log("SLIDER RELEASE: cur_brush=%d, snapping from %.2f to %.2f with 0.1s animation", 
+                  cur_brush, slider_start_pos, final_pos);
+        }
+        
         if (scrolling_selector)
         {
           if (scrolltimer_selector != TIMERID_NONE)
@@ -6596,6 +6713,58 @@ static void mainloop(void)
           __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "MOUSEMOTION event cur_tool=%d ignoring_motion=%d", cur_tool, ignoring_motion);
         }
 #endif
+
+        /* Handle slider dragging in child mode */
+        if (slider_dragging && child_mode && (cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES))
+        {
+          int slider_x, slider_y, slider_w, slider_h;
+          int motion_y;
+          float click_percentage;
+          int child_brush_min = 0;
+          int child_brush_max = 4;
+          
+          /* Calculate slider dimensions - MUST match draw_child_mode_brush_slider() */
+          slider_w = button_w - 20;
+          slider_h = (int)((r_colors.y - r_ttoolopt.h - 40) * 0.95);
+          slider_x = WINDOW_WIDTH - r_ttoolopt.w + (r_ttoolopt.w - slider_w) / 2;
+          slider_y = r_ttoolopt.h + 30;
+          
+          motion_y = event.motion.y;
+          
+          /* Clamp motion to slider bounds */
+          if (motion_y < slider_y) motion_y = slider_y;
+          if (motion_y > slider_y + slider_h) motion_y = slider_y + slider_h;
+          
+          /* Calculate position based on motion position */
+          click_percentage = (float)(motion_y - slider_y) / (float)slider_h;
+          
+          /* During drag, update position directly (no animation) for responsive feel */
+          slider_current_pos = click_percentage;
+          slider_target_pos = click_percentage;
+          slider_anim_duration = 0;  /* No animation during drag */
+          
+          /* Calculate target brush */
+          int new_brush = child_brush_min + (int)((click_percentage * (child_brush_max - child_brush_min + 1)));
+          
+          /* Clamp to valid range 0-4 */
+          if (new_brush < child_brush_min) new_brush = child_brush_min;
+          if (new_brush > child_brush_max) new_brush = child_brush_max;
+          
+          /* Only update if brush changed */
+          if (new_brush != cur_brush)
+          {
+            cur_brush = new_brush;
+            SDL_Log("SLIDER DRAG: motion_y=%d, pos=%.2f, new brush=%d", 
+                    motion_y, slider_current_pos, cur_brush);
+            
+            /* Update brush */
+            render_brush();
+          }
+          
+          /* Always redraw to show current position */
+          draw_child_mode_brush_slider();
+          SDL_Flip(screen);
+        }
 
         new_x = event.button.x - r_canvas.x;
         new_y = event.button.y - r_canvas.y;
@@ -7493,6 +7662,21 @@ static void mainloop(void)
     /* Multitouch is now handled inside the button_down block above */
     /* No need to call multitouch_paint_now() here anymore */
 #endif
+
+    /* Update slider animation in child mode */
+    if (child_mode && slider_anim_duration > 0)
+    {
+      /* Get current animated position */
+      float prev_pos = slider_current_pos;
+      update_slider_animation();
+      
+      /* If position changed significantly, redraw */
+      if (fabs(slider_current_pos - prev_pos) > 0.001)
+      {
+        draw_child_mode_brush_slider();
+        SDL_Flip(screen);
+      }
+    }
 
     SDL_Delay(10);
   }
@@ -11228,6 +11412,167 @@ static unsigned draw_colors(unsigned action)
 
 
 /**
+ * Easing function for slider animation (ease-out cubic)
+ * @param t Current time (0.0 to 1.0)
+ * @return Eased value (0.0 to 1.0)
+ */
+static float ease_out_cubic(float t)
+{
+  float f = t - 1.0f;
+  return f * f * f + 1.0f;
+}
+
+/**
+ * Update slider animation state
+ * Updates the global slider_current_pos based on animation progress
+ */
+static void update_slider_animation(void)
+{
+  if (slider_anim_duration <= 0)
+  {
+    /* No animation, set to target immediately */
+    slider_current_pos = slider_target_pos;
+    return;
+  }
+  
+  Uint32 current_time = SDL_GetTicks();
+  Uint32 elapsed = current_time - slider_anim_start_time;
+  
+  if (elapsed >= slider_anim_duration)
+  {
+    /* Animation finished */
+    slider_current_pos = slider_target_pos;
+    slider_anim_duration = 0;  /* Stop animation */
+  }
+  else
+  {
+    /* Calculate eased progress (0.0 to 1.0) */
+    float t = (float)elapsed / (float)slider_anim_duration;
+    float eased_t = ease_out_cubic(t);
+    
+    /* Interpolate between start and target positions */
+    slider_current_pos = slider_start_pos + (slider_target_pos - slider_start_pos) * eased_t;
+  }
+}
+
+/**
+ * Draw brush size slider for child mode (replaces brush selection buttons)
+ */
+static void draw_child_mode_brush_slider(void)
+{
+  SDL_Rect dest, slider_rect, handle_rect;
+  int slider_x, slider_y, slider_w, slider_h;
+  int handle_y, handle_size;
+  float brush_percentage;
+  
+  SDL_Log("draw_child_mode_brush_slider() called, cur_brush=%d, num_brushes=%d", cur_brush, num_brushes);
+  
+  /* Clear the entire right panel area */
+  /* In child mode, r_colors.h extends to bottom, so use r_colors.y for height calculation */
+  dest.x = WINDOW_WIDTH - r_ttoolopt.w;
+  dest.y = 0;
+  dest.w = r_ttoolopt.w;
+  dest.h = r_colors.y;  /* Clear from top to where colors start */
+  SDL_Log("Clearing right panel: x=%d, y=%d, w=%d, h=%d (r_colors.y=%d)", dest.x, dest.y, dest.w, dest.h, r_colors.y);
+  SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, 255, 255, 255));  /* White background */
+  
+  /* Draw title "Size" */
+  draw_image_title(TITLE_BRUSHES, r_ttoolopt);
+  
+  /* Calculate slider dimensions - make it large and centered */
+  slider_w = button_w - 20;  /* Slightly narrower than button width */
+  /* In child mode, r_colors extends to bottom, so use r_colors.y instead */
+  /* Compress by 5% to avoid overlapping neighboring elements */
+  slider_h = (int)((r_colors.y - r_ttoolopt.h - 40) * 0.95);
+  slider_x = WINDOW_WIDTH - r_ttoolopt.w + (r_ttoolopt.w - slider_w) / 2;
+  slider_y = r_ttoolopt.h + 30;  /* Add extra margin at top */
+  
+  SDL_Log("Slider dimensions: x=%d, y=%d, w=%d, h=%d (r_colors.y=%d, r_colors.h=%d)", 
+          slider_x, slider_y, slider_w, slider_h, r_colors.y, r_colors.h);
+  
+  /* Calculate handle position using animated slider position */
+  /* In child mode, slider only uses brushes 0-4 */
+  int child_brush_min = 0;  /* Brush index 0 */
+  int child_brush_max = 4;  /* Brush index 4 */
+  
+  /* Clamp cur_brush to range 0-4 (for handle size calculation) */
+  if (cur_brush < child_brush_min) cur_brush = child_brush_min;
+  if (cur_brush > child_brush_max) cur_brush = child_brush_max;
+  
+  /* Update animation and use current animated position (0.0 to 1.0) */
+  update_slider_animation();
+  brush_percentage = slider_current_pos;
+  
+  SDL_Log("Handle position: cur_brush=%d, animated_percentage=%.2f", cur_brush, brush_percentage);
+  
+  /* Calculate handle position */
+  int handle_center_x = slider_x + slider_w / 2;
+  int handle_center_y = slider_y + (int)(slider_h * brush_percentage);
+  
+  /* Slider track dimensions (thin vertical line) */
+  int track_width = 8;
+  int track_x = handle_center_x - track_width / 2;
+  
+  /* Draw upper part of slider track (light blue, from top to handle) */
+  slider_rect.x = track_x;
+  slider_rect.y = slider_y;
+  slider_rect.w = track_width;
+  slider_rect.h = handle_center_y - slider_y;
+  SDL_FillRect(screen, &slider_rect, SDL_MapRGB(screen->format, 100, 180, 255));  /* Light blue */
+  
+  /* Draw lower part of slider track (gray, from handle to bottom) */
+  slider_rect.x = track_x;
+  slider_rect.y = handle_center_y;
+  slider_rect.w = track_width;
+  slider_rect.h = (slider_y + slider_h) - handle_center_y;
+  SDL_FillRect(screen, &slider_rect, SDL_MapRGB(screen->format, 200, 200, 200));  /* Light gray */
+  
+  /* Calculate handle radii - constant white border (4px), variable total radius:
+   * cur_brush=0: total_radius=30, inner_radius=26, border=4 (top - small)
+   * cur_brush=1: total_radius=35, inner_radius=31, border=4
+   * cur_brush=2: total_radius=40, inner_radius=36, border=4
+   * cur_brush=3: total_radius=45, inner_radius=41, border=4
+   * cur_brush=4: total_radius=50, inner_radius=46, border=4 (bottom - large)
+   */
+  int white_border_thickness = 4;  /* Constant 4px white border */
+  int total_radius = 30 + cur_brush * 5;  /* Increases from 30 (brush 0) to 50 (brush 4) */
+  int inner_radius = total_radius - white_border_thickness;  /* Blue circle radius */
+  
+  SDL_Log("Handle: inner_radius=%d, border_thickness=%d, total=%d", inner_radius, white_border_thickness, total_radius);
+  
+  /* Draw handle: white outer circle, then blue inner circle */
+  Uint32 white_color = SDL_MapRGB(screen->format, 255, 255, 255);  /* White */
+  Uint32 blue_color = SDL_MapRGB(screen->format, 100, 180, 255);   /* Light blue */
+  
+  /* Draw outer white circle */
+  for (int y = -total_radius; y <= total_radius; y++)
+  {
+    int x_width = (int)sqrt((float)(total_radius * total_radius - y * y));
+    SDL_Rect line;
+    line.x = handle_center_x - x_width;
+    line.y = handle_center_y + y;
+    line.w = x_width * 2;
+    line.h = 1;
+    SDL_FillRect(screen, &line, white_color);
+  }
+  
+  /* Draw inner blue circle */
+  for (int y = -inner_radius; y <= inner_radius; y++)
+  {
+    int x_width = (int)sqrt((float)(inner_radius * inner_radius - y * y));
+    SDL_Rect line;
+    line.x = handle_center_x - x_width;
+    line.y = handle_center_y + y;
+    line.w = x_width * 2;
+    line.h = 1;
+    SDL_FillRect(screen, &line, blue_color);
+  }
+  
+  /* No brush preview needed - the circle size itself shows the brush size */
+}
+
+
+/**
  * FIXME
  */
 /* Draw brushes: */
@@ -11236,6 +11581,15 @@ static void draw_brushes(void)
   int i, off_y, max, brush;
   SDL_Rect src, dest;
   int most;
+
+  /* In child mode, show brush size slider instead of brush buttons */
+  SDL_Log("draw_brushes() called, child_mode=%d, cur_tool=%d, TOOL_BRUSH=%d, TOOL_LINES=%d", child_mode, cur_tool, TOOL_BRUSH, TOOL_LINES);
+  if (child_mode && (cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES))
+  {
+    SDL_Log("Calling draw_child_mode_brush_slider()");
+    draw_child_mode_brush_slider();
+    return;
+  }
 
   /* Draw the title: */
   draw_image_title(TITLE_BRUSHES, r_ttoolopt);
@@ -11288,6 +11642,7 @@ static void draw_brushes(void)
 
 
   /* Draw each of the shown brushes: */
+  SDL_Log("DRAWING BRUSH BUTTONS: child_mode=%d, brush_scroll=%d, max=%d, num_brushes=%d", child_mode, brush_scroll, max, num_brushes);
 
   for (brush = brush_scroll; brush < brush_scroll + max; brush++)
   {
@@ -11296,6 +11651,8 @@ static void draw_brushes(void)
 
     dest.x = ((i % 2) * button_w) + (WINDOW_WIDTH - r_ttoolopt.w);
     dest.y = ((i / 2) * button_h) + r_ttoolopt.h + off_y;
+
+    SDL_Log("  Drawing brush button #%d at (%d,%d)", brush, dest.x, dest.y);
 
     if (brush == cur_brush)
     {
