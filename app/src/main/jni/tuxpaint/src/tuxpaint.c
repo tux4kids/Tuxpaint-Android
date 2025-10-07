@@ -1760,6 +1760,8 @@ static int color_mixer_reset;
 static SDL_Surface *img_title_on, *img_title_off, *img_title_large_on, *img_title_large_off;
 static SDL_Surface *img_title_names[NUM_TITLES];
 static SDL_Surface *img_tools[NUM_TOOLS], *img_tool_names[NUM_TOOLS];
+static SDL_Surface *img_kids_icon, *img_expert_icon;
+static SDL_Surface *img_kids_label, *img_expert_label;
 
 static SDL_Surface *img_oskdel, *img_osktab, *img_oskenter, *img_oskcapslock, *img_oskshift, *img_oskpaste;
 static SDL_Surface *thumbnail(SDL_Surface * src, int max_x, int max_y, int keep_aspect);
@@ -3738,7 +3740,13 @@ static void mainloop(void)
         else if (HIT(r_childmode_btn) && valid_click(event.button.button))
         {
           /* Child mode toggle button clicked */
+#ifdef __ANDROID__
+          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Child mode button clicked! Was: %d", child_mode);
+#endif
           child_mode = !child_mode;
+#ifdef __ANDROID__
+          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Child mode now: %d", child_mode);
+#endif
           
           /* Redraw button with new state */
           draw_row_minus_1_buttons();
@@ -10367,6 +10375,10 @@ static void create_button_labels(void)
   for (i = 0; i < NUM_TOOLS; i++)
     img_tool_names[i] = do_render_button_label(tool_names[i]);
 
+  /* Kids/Expert mode buttons (Row -1) */
+  img_kids_label = do_render_button_label(gettext("Kids"));
+  img_expert_label = do_render_button_label(gettext("Expert"));
+
   /* Magic Tools */
   for (i = 0; i < MAX_MAGIC_GROUPS; i++)
   {
@@ -10734,6 +10746,8 @@ static void draw_row_minus_1_buttons(void)
   SDL_Surface *button_body;
   SDL_Surface *button_scaled;
   SDL_Surface *button_color;
+  SDL_Surface *mode_icon;
+  SDL_Surface *mode_label;
   SDL_Surface *txt;
   SDL_Color text_color = { 0, 0, 0, 0 };    /* Black text */
   SDL_Color grey_color = { 128, 128, 128, 0 }; /* Grey for muted */
@@ -10767,9 +10781,16 @@ static void draw_row_minus_1_buttons(void)
   }
 #endif
 
-  /* Child mode button */
+  /* Child mode button - render like tool buttons with icon + label */
   button_body = child_mode ? img_btn_down : img_btn_up;
-  button_color = child_mode ? img_black : img_black;
+  button_color = img_black;
+  
+  /* Select icon and label based on current mode */
+  mode_icon = child_mode ? img_kids_icon : img_expert_icon;
+  mode_label = child_mode ? img_kids_label : img_expert_label;
+  
+  fprintf(stderr, "Drawing row -1 button: child_mode=%d, icon=%p, label=%p\n", 
+          child_mode, (void*)mode_icon, (void*)mode_label);
   
   /* Scale button body to reduced height (squash vertically) */
   button_scaled = rotozoomSurfaceXY(button_body, 0, 1.0, scale_y, SMOOTHING_ON);
@@ -10781,16 +10802,19 @@ static void draw_row_minus_1_buttons(void)
     SDL_FreeSurface(button_scaled);
   }
 
-  /* Render text "KID" */
-  txt = render_text(small_font, "KID", text_color);
-  if (txt)
-  {
-    SDL_BlitSurface(button_color, NULL, txt, NULL);
-    dest.x = r_childmode_btn.x + (r_childmode_btn.w - txt->w) / 2;
-    dest.y = r_childmode_btn.y + (button_render_h - txt->h) / 2;
-    SDL_BlitSurface(txt, NULL, screen, &dest);
-    SDL_FreeSurface(txt);
-  }
+  /* Apply color to icon and label (like tool buttons) */
+  SDL_BlitSurface(button_color, NULL, mode_icon, NULL);
+  SDL_BlitSurface(button_color, NULL, mode_label, NULL);
+
+  /* Draw icon */
+  dest.x = r_childmode_btn.x + 4;
+  dest.y = r_childmode_btn.y + 2;
+  SDL_BlitSurface(mode_icon, NULL, screen, &dest);
+
+  /* Draw label below icon */
+  dest.x = r_childmode_btn.x + (button_w - mode_label->w) / 2;
+  dest.y = r_childmode_btn.y + button_render_h - mode_label->h - 2;
+  SDL_BlitSurface(mode_label, NULL, screen, &dest);
 }
 
 
@@ -31103,6 +31127,10 @@ static void setup(void)
   for (i = 0; i < NUM_TOOLS; i++)
     img_tools[i] = loadimagerb(tool_img_fnames[i]);
 
+  /* Load Kids/Expert icons (use Tux images as placeholders) */
+  img_kids_icon = loadimagerb(DATA_PREFIX "images/tux/great.png");
+  img_expert_icon = loadimagerb(DATA_PREFIX "images/tools/shapes.png");
+
   img_title_on = loadimagerb(DATA_PREFIX "images/ui/title.png");
   img_title_large_on = loadimagerb(DATA_PREFIX "images/ui/title_large.png");
   img_title_off = loadimagerb(DATA_PREFIX "images/ui/no_title.png");
@@ -31546,6 +31574,20 @@ static void setup(void)
       SDL_FreeSurface(img_tools[i]);
       img_tools[i] = tmp_surf;
     }
+  }
+
+  /* (Kids/Expert mode buttons - Row -1) */
+  if (img_kids_icon->h + img_kids_label->h > button_h - 1)
+  {
+    tmp_surf = thumbnail(img_kids_icon, img_kids_icon->w, (button_h - img_kids_label->h - 1), 0);
+    SDL_FreeSurface(img_kids_icon);
+    img_kids_icon = tmp_surf;
+  }
+  if (img_expert_icon->h + img_expert_label->h > button_h - 1)
+  {
+    tmp_surf = thumbnail(img_expert_icon, img_expert_icon->w, (button_h - img_expert_label->h - 1), 0);
+    SDL_FreeSurface(img_expert_icon);
+    img_expert_icon = tmp_surf;
   }
 
   /* (Magic tools) */
