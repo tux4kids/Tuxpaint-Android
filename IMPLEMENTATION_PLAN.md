@@ -767,26 +767,24 @@ save_preferences();
 ```
 
 
-### 6.5 Left Toolbar in Child-Mode
-- Larger buttons (more space per button)
-- Only 1 column instead of 2
-  - Child Mode Button
-  - Paint (TOOL_BRUSH)
-  - Eraser (TOOL_ERASER)
-  - Fill (TOOL_FILL)
-  - Save (TOOL_SAVE)
-  - New (TOOL_NEW mit Auto-Save)
-    - the New button should not ask, but just do an Auto-Save in child mode
-  - Undo (TOOL_UNDO)
-  - Redo (TOOL_REDO)
+### 6.5 ✅ Left Toolbar in Child-Mode
+- [x] Larger buttons (20% taller, 2x wider)
+- [x] Only 1 column instead of 2
+  - [x] Child Mode Button
+  - [x] Paint (TOOL_BRUSH)
+  - [x] Eraser (TOOL_ERASER)
+  - [x] Fill (TOOL_FILL)
+  - [ ] Save (TOOL_SAVE) (dont ask to overwrite the old file, just save an ew file each time in child mode)
+  - [x] New (TOOL_NEW with Auto-Save)
+    - [x] Auto-Save before showing dialog
+  - [x] Undo (TOOL_UNDO)
+  - [x] Redo (TOOL_REDO)
 
-**New-Button Behavior:**
-```c
-if (child_mode && cur_tool == TOOL_NEW) {
-  do_save(current_pic, SAVE_OVER_NO_PROMPT);
-  do_new_dialog();
-}
-```
+**Implementation:**
+- `draw_toolbar()`: Child Mode renders single-column layout with 7 fixed tools
+- Click handling: Custom logic for single-column button detection
+- Cursor handling: Adapted for larger button heights
+- Auto-save: `do_save(cur_tool, 1, 1)` called before `do_new_dialog()`
 
 
 ---
@@ -794,7 +792,7 @@ if (child_mode && cur_tool == TOOL_NEW) {
 ## 7. 🧪 Testing & Documentation
 
 **Unit Tests:**
-- [ ] Child Mode: New performs auto-save
+- [x] Child Mode: New performs auto-save
 - [x] Child Mode Lock: 3s long-press locks/unlocks
 - [x] Sound button disabled in child mode
 - [x] Preferences save/load correctly

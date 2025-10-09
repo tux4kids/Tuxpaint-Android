@@ -2112,6 +2112,7 @@ static wchar_t texttool_str[256];
 static unsigned int texttool_len;
 
 static int tool_avail[NUM_TOOLS], tool_avail_bak[NUM_TOOLS];
+static int tool_avail_child_mode_bak[NUM_TOOLS];  /* Separate backup for child mode filtering */
 
 static Uint32 cur_toggle_count;
 
@@ -3915,7 +3916,28 @@ static void mainloop(void)
             brushflag = 0;
             magicflag = 0;
             magic_switchout(canvas);
-            whicht = tool_scroll + GRIDHIT_GD(real_r_tools, gd_tools);
+            
+            /* Child Mode: Calculate tool index from fixed single-column layout */
+            if (child_mode)
+            {
+              int child_tools[] = {TOOL_BRUSH, TOOL_ERASER, TOOL_FILL, TOOL_SAVE, TOOL_NEW, TOOL_UNDO, TOOL_REDO};
+              int button_height = button_h * 1.2;
+              int tool_index = (event.button.y - r_tools.y) / button_height;
+              
+              if (tool_index >= 0 && tool_index < 7)
+              {
+                whicht = child_tools[tool_index];
+              }
+              else
+              {
+                whicht = -1;  /* Invalid click */
+              }
+            }
+            /* Expert Mode: Original grid-based calculation */
+            else
+            {
+              whicht = tool_scroll + GRIDHIT_GD(real_r_tools, gd_tools);
+            }
 
             if (whicht < NUM_TOOLS && tool_avail[whicht] && (valid_click(event.button.button) || whicht == TOOL_PRINT))
             {
@@ -4247,6 +4269,21 @@ static void mainloop(void)
                 draw_toolbar();
                 draw_colors(COLORSEL_CLOBBER_WIPE);
                 draw_none();
+
+                /* Child Mode: Auto-save before creating new drawing */
+                if (child_mode && !disable_save && !been_saved)
+                {
+                  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", 
+                                     "Child Mode: Auto-saving before NEW");
+                  /* Save current drawing without prompts */
+                  if (file_id[0] == '\0')
+                  {
+                    /* No file_id yet, get a new one */
+                    get_new_file_id();
+                  }
+                  do_save(cur_tool, 1, 0);  /* dont_show_success=1, autosave=0 (save to current file) */
+                  been_saved = 1;
+                }
 
                 if (do_new_dialog() == 0)
                 {
@@ -7050,29 +7087,14 @@ static void mainloop(void)
 
         if (HIT(r_tools))
         {
-          int most = buttons_tall * gd_tools.cols;
-
-          /* Tools: */
-
-          if (NUM_TOOLS > most)
+          /* Child Mode: Single column cursor handling */
+          if (child_mode)
           {
-            if (event.button.y < r_tools.y + button_h / 2)
-            {
-              if (tool_scroll > 0)
-                do_setcursor(cursor_up);
-              else
-                do_setcursor(cursor_arrow);
-            }
-            else if (event.button.y > r_tools.y + r_tools.h - button_h / 2)
-            {
-              if (tool_scroll < NUM_TOOLS - buttons_tall * gd_tools.cols + gd_tools.cols)
-                do_setcursor(cursor_down);
-              else
-                do_setcursor(cursor_arrow);
-            }
-
-            else if (tool_avail[((event.button.x - r_tools.x) / button_w) +
-                                ((event.button.y - r_tools.y - button_h / 2) / button_h) * gd_tools.cols + tool_scroll])
+            int child_tools[] = {TOOL_BRUSH, TOOL_ERASER, TOOL_FILL, TOOL_SAVE, TOOL_NEW, TOOL_UNDO, TOOL_REDO};
+            int button_height = button_h * 1.2;
+            int tool_index = (event.button.y - r_tools.y) / button_height;
+            
+            if (tool_index >= 0 && tool_index < 7 && tool_avail[child_tools[tool_index]])
             {
               do_setcursor(cursor_hand);
             }
@@ -7080,19 +7102,50 @@ static void mainloop(void)
             {
               do_setcursor(cursor_arrow);
             }
-
           }
-
+          /* Expert Mode: Original scrolling cursor handling */
           else
           {
-            if (tool_avail[((event.button.x - r_tools.x) / button_w) +
-                           ((event.button.y - r_tools.y) / button_h) * gd_tools.cols])
+            int most = buttons_tall * gd_tools.cols;
+
+            if (NUM_TOOLS > most)
             {
-              do_setcursor(cursor_hand);
+              if (event.button.y < r_tools.y + button_h / 2)
+              {
+                if (tool_scroll > 0)
+                  do_setcursor(cursor_up);
+                else
+                  do_setcursor(cursor_arrow);
+              }
+              else if (event.button.y > r_tools.y + r_tools.h - button_h / 2)
+              {
+                if (tool_scroll < NUM_TOOLS - buttons_tall * gd_tools.cols + gd_tools.cols)
+                  do_setcursor(cursor_down);
+                else
+                  do_setcursor(cursor_arrow);
+              }
+
+              else if (tool_avail[((event.button.x - r_tools.x) / button_w) +
+                                  ((event.button.y - r_tools.y - button_h / 2) / button_h) * gd_tools.cols + tool_scroll])
+              {
+                do_setcursor(cursor_hand);
+              }
+              else
+              {
+                do_setcursor(cursor_arrow);
+              }
             }
             else
             {
-              do_setcursor(cursor_arrow);
+              if (tool_avail[((event.button.x - r_tools.x) / button_w) +
+                             ((event.button.y - r_tools.y) / button_h) * gd_tools.cols])
+              {
+                do_setcursor(cursor_hand);
+              }
+              else
+              {
+                do_setcursor(cursor_arrow);
+              }
             }
           }
         }
@@ -11143,19 +11196,35 @@ static void draw_toolbar(void)
 {
   int i, off_y, max, most, tool;
   SDL_Rect dest;
+  int cols, button_width, button_height;
+  
+  /* Child Mode: Single column layout with larger buttons */
+  if (child_mode)
+  {
+    cols = 1;
+    button_width = gd_tools.cols * button_w;  /* Use full width (2x normal) */
+    button_height = button_h * 1.2;  /* 20% taller buttons */
+  }
+  else
+  {
+    cols = gd_tools.cols;
+    button_width = button_w;
+    button_height = button_h;
+  }
 
   most = (buttons_tall * gd_toolopt.cols) - TOOLOFFSET;
   off_y = 0;
-  /* FIXME: Only allow print if we have something to print! */
-
 
   /* Tools title removed - r_ttools area now used for SND/KID buttons */
-  /* draw_image_title(TITLE_TOOLS, r_ttools); */
 
-
-
-  /* Do we need scrollbars? */
-  if (NUM_TOOLS > most + TOOLOFFSET)
+  /* Child Mode: No scrollbars needed, fixed set of tools */
+  if (child_mode)
+  {
+    off_y = 0;
+    max = 7;  /* Fixed: BRUSH, ERASER, FILL, SAVE, NEW, UNDO, REDO */
+  }
+  /* Expert Mode: Original scrolling logic */
+  else if (NUM_TOOLS > most + TOOLOFFSET)
   {
     off_y = img_scroll_up->h;
     max = most - gd_tools.cols + TOOLOFFSET;
@@ -11176,8 +11245,6 @@ static void draw_toolbar(void)
     dest.x = 0;
     dest.y = r_ttools.h + off_y + ((most - gd_tools.cols + TOOLOFFSET) / gd_tools.cols * button_h);
 
-
-
     if (tool_scroll < NUM_TOOLS - (most - gd_tools.cols) - TOOLOFFSET)
     {
       SDL_BlitSurface(img_scroll_down, NULL, screen, &dest);
@@ -11193,22 +11260,23 @@ static void draw_toolbar(void)
     max = most + TOOLOFFSET;
   }
 
-
-
-
-  for (tool = tool_scroll; tool < tool_scroll + max; tool++)
+  /* Child Mode: Draw only allowed tools in fixed order */
+  if (child_mode)
   {
-    i = tool - tool_scroll;
-    dest.x = ((i % 2) * button_w);
-    dest.y = ((i / 2) * button_h) + r_ttools.h + off_y;
-
-
-    if (tool < NUM_TOOLS)
+    int child_tools[] = {TOOL_BRUSH, TOOL_ERASER, TOOL_FILL, TOOL_SAVE, TOOL_NEW, TOOL_UNDO, TOOL_REDO};
+    int num_child_tools = 7;
+    
+    for (i = 0; i < num_child_tools; i++)
     {
+      tool = child_tools[i];
+      
+      dest.x = 0;  /* Single column, always x=0 */
+      dest.y = (i * button_height) + r_ttools.h + off_y;
+
       SDL_Surface *button_color;
       SDL_Surface *button_body;
 
-      if (tool_scroll + i == cur_tool)
+      if (tool == cur_tool)
       {
         button_body = img_btn_down;
         button_color = img_black;
@@ -11223,28 +11291,86 @@ static void draw_toolbar(void)
         button_body = img_btn_off;
         button_color = img_grey;
       }
-      SDL_BlitSurface(button_body, NULL, screen, &dest);
+      
+      /* Scale button to full width */
+      SDL_Rect button_rect = {dest.x, dest.y, button_width, button_height};
+      SDL_Surface *scaled_button = rotozoomSurfaceXY(button_body, 0, 
+                                                      (float)button_width / button_w,
+                                                      (float)button_height / button_h,
+                                                      SMOOTHING_ON);
+      if (scaled_button)
+      {
+        SDL_BlitSurface(scaled_button, NULL, screen, &dest);
+        SDL_FreeSurface(scaled_button);
+      }
+      
+      /* Apply color to icon and label */
       SDL_BlitSurface(button_color, NULL, img_tools[tool], NULL);
       SDL_BlitSurface(button_color, NULL, img_tool_names[tool], NULL);
 
-      dest.x = ((i % 2) * button_w) + 4;
-      dest.y = ((i / 2) * button_h) + r_ttools.h + 2 + off_y;
-
+      /* Draw icon - scaled and centered */
+      dest.x = (button_width - img_tools[tool]->w) / 2;
+      dest.y = (i * button_height) + r_ttools.h + 4 + off_y;
       SDL_BlitSurface(img_tools[tool], NULL, screen, &dest);
 
-      dest.x =
-        ((i % 2) * button_w) + (4 * button_w) / ORIGINAL_BUTTON_SIZE +
-        ((40 * button_w) / ORIGINAL_BUTTON_SIZE - img_tool_names[tool]->w) / 2;
-      dest.y =
-        ((i / 2) * button_h) + r_ttools.h +
-        (2 * button_w) / ORIGINAL_BUTTON_SIZE +
-        ((46 * button_w) / ORIGINAL_BUTTON_SIZE - img_tool_names[tool]->h) + off_y;
-
+      /* Draw label - centered below icon */
+      dest.x = (button_width - img_tool_names[tool]->w) / 2;
+      dest.y = (i * button_height) + r_ttools.h + button_height - img_tool_names[tool]->h - 4 + off_y;
       SDL_BlitSurface(img_tool_names[tool], NULL, screen, &dest);
     }
-    else
+  }
+  /* Expert Mode: Original 2-column layout */
+  else
+  {
+    for (tool = tool_scroll; tool < tool_scroll + max; tool++)
     {
-      SDL_BlitSurface(img_btn_off, NULL, screen, &dest);
+      i = tool - tool_scroll;
+      dest.x = ((i % 2) * button_w);
+      dest.y = ((i / 2) * button_h) + r_ttools.h + off_y;
+
+      if (tool < NUM_TOOLS)
+      {
+        SDL_Surface *button_color;
+        SDL_Surface *button_body;
+
+        if (tool_scroll + i == cur_tool)
+        {
+          button_body = img_btn_down;
+          button_color = img_black;
+        }
+        else if (tool_avail[tool])
+        {
+          button_body = img_btn_up;
+          button_color = img_black;
+        }
+        else
+        {
+          button_body = img_btn_off;
+          button_color = img_grey;
+        }
+        SDL_BlitSurface(button_body, NULL, screen, &dest);
+        SDL_BlitSurface(button_color, NULL, img_tools[tool], NULL);
+        SDL_BlitSurface(button_color, NULL, img_tool_names[tool], NULL);
+
+        dest.x = ((i % 2) * button_w) + 4;
+        dest.y = ((i / 2) * button_h) + r_ttools.h + 2 + off_y;
+
+        SDL_BlitSurface(img_tools[tool], NULL, screen, &dest);
+
+        dest.x =
+          ((i % 2) * button_w) + (4 * button_w) / ORIGINAL_BUTTON_SIZE +
+          ((40 * button_w) / ORIGINAL_BUTTON_SIZE - img_tool_names[tool]->w) / 2;
+        dest.y =
+          ((i / 2) * button_h) + r_ttools.h +
+          (2 * button_w) / ORIGINAL_BUTTON_SIZE +
+          ((46 * button_w) / ORIGINAL_BUTTON_SIZE - img_tool_names[tool]->h) + off_y;
+
+        SDL_BlitSurface(img_tool_names[tool], NULL, screen, &dest);
+      }
+      else
+      {
+        SDL_BlitSurface(img_btn_off, NULL, screen, &dest);
+      }
     }
   }
 
@@ -14624,10 +14750,10 @@ static void apply_child_mode_tool_filter(void)
 {
   int i;
   
-  /* Save current tool_avail state */
+  /* Save current tool_avail state in separate child mode backup */
   for (i = 0; i < NUM_TOOLS; i++)
   {
-    tool_avail_bak[i] = tool_avail[i];
+    tool_avail_child_mode_bak[i] = tool_avail[i];
   }
   
   /* Disable all tools first */
@@ -14640,10 +14766,10 @@ static void apply_child_mode_tool_filter(void)
   tool_avail[TOOL_BRUSH] = 1;
   tool_avail[TOOL_ERASER] = 1;
   tool_avail[TOOL_FILL] = 1;
-  tool_avail[TOOL_UNDO] = tool_avail_bak[TOOL_UNDO];  /* Keep undo state */
-  tool_avail[TOOL_REDO] = tool_avail_bak[TOOL_REDO];  /* Keep redo state */
+  tool_avail[TOOL_UNDO] = tool_avail_child_mode_bak[TOOL_UNDO];  /* Keep undo state */
+  tool_avail[TOOL_REDO] = tool_avail_child_mode_bak[TOOL_REDO];  /* Keep redo state */
   tool_avail[TOOL_NEW] = 1;
-  tool_avail[TOOL_SAVE] = tool_avail_bak[TOOL_SAVE];  /* Keep save state */
+  tool_avail[TOOL_SAVE] = tool_avail_child_mode_bak[TOOL_SAVE];  /* Keep save state */
 }
 
 
@@ -14654,10 +14780,10 @@ static void remove_child_mode_tool_filter(void)
 {
   int i;
   
-  /* Restore original tool_avail state */
+  /* Restore original tool_avail state from child mode backup */
   for (i = 0; i < NUM_TOOLS; i++)
   {
-    tool_avail[i] = tool_avail_bak[i];
+    tool_avail[i] = tool_avail_child_mode_bak[i];
   }
 }
 
@@ -17918,6 +18044,16 @@ static int do_save(int tool, int dont_show_success_results, int autosave)
   if (autosave)
   {
     /* No prompts, no progressbar, always save to autosave.png */
+  }
+  else if (child_mode)
+  {
+    /* Child Mode: Auto-save without prompts */
+    if (file_id[0] == '\0')
+    {
+      /* No file_id yet, create new one */
+      get_new_file_id();
+    }
+    /* Otherwise save over existing file without prompting */
   }
   else if (promptless_save == SAVE_OVER_NO)
   {
