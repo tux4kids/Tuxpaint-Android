@@ -2013,6 +2013,7 @@ static int stamp_tintable(int stamp)
 #define SHAPE_BRUSH_NAME "aa_round_03.png"
 static int num_brushes, num_brushes_max, shape_brush = 0;
 static SDL_Surface **img_brushes, **img_brushes_thumbs;
+static SDL_Surface **img_brushes_special_thumbs = NULL;  /* Thumbnails for brushes with frames/directional */
 static int *brushes_frames = NULL;
 static int *brushes_spacing = NULL;
 static int *brushes_spacing_default = NULL;
@@ -9126,6 +9127,7 @@ static void loadbrush_callback(SDL_Surface *screen,
         num_brushes_max = num_brushes_max * 5 / 4 + 4;
         img_brushes = realloc(img_brushes, num_brushes_max * sizeof *img_brushes);
         img_brushes_thumbs = realloc(img_brushes_thumbs, num_brushes_max * sizeof *img_brushes_thumbs);
+        img_brushes_special_thumbs = realloc(img_brushes_special_thumbs, num_brushes_max * sizeof *img_brushes_special_thumbs);
         brushes_frames = realloc(brushes_frames, num_brushes_max * sizeof(int));
         brushes_directional = realloc(brushes_directional, num_brushes_max * sizeof(short));
         brushes_rotate = realloc(brushes_rotate, num_brushes_max * sizeof(short));
@@ -9223,6 +9225,41 @@ static void loadbrush_callback(SDL_Surface *screen,
 
       brushes_spacing[num_brushes] = spacing;
       brushes_spacing_default[num_brushes] = spacing;
+      
+      /* Try to load handle icon for Child Mode slider */
+      img_brushes_special_thumbs[num_brushes] = NULL;
+      {
+        /* Build path to handle icon: brushes/handle_icons/<name>.png */
+        char handle_fname[512];
+        safe_snprintf(handle_fname, sizeof handle_fname, "%s/handle_icons/%s", dir, files[i].str);
+        
+        /* Try to load handle icon */
+        SDL_Surface *handle_icon = loadimage(handle_fname);
+        if (handle_icon != NULL) {
+          /* Scale icon to fit button */
+          int icon_w = handle_icon->w;
+          int icon_h = handle_icon->h;
+          float scale = 1.0f;
+          
+          if (icon_w > button_w || icon_h > button_h) {
+            if (icon_w > icon_h) {
+              scale = (float)button_w / (float)icon_w;
+            } else {
+              scale = (float)button_h / (float)icon_h;
+            }
+            
+            img_brushes_special_thumbs[num_brushes] = thumbnail2(handle_icon, 
+                                                                  icon_w * scale, 
+                                                                  icon_h * scale, 
+                                                                  0, 1);
+            SDL_FreeSurface(handle_icon);
+          } else {
+            img_brushes_special_thumbs[num_brushes] = handle_icon;
+          }
+          
+          SDL_Log("Loaded handle icon for brush %d (%s)", num_brushes, files[i].str);
+        }
+      }
 
       num_brushes++;
     }
@@ -11476,26 +11513,28 @@ static void init_child_brush_category(int expert_mode_brush)
     memcpy(child_brush_indices, brushes, sizeof(brushes));
     child_brush_count = 6;
   }
-  else if (expert_mode_brush == 35 || expert_mode_brush == 34 ||
-           expert_mode_brush == 50 || expert_mode_brush == 30 || expert_mode_brush == 39 ||
-           expert_mode_brush == 33 || expert_mode_brush == 38 || expert_mode_brush == 49 ||
-           expert_mode_brush == 52) {
+  else if (expert_mode_brush == 35 || expert_mode_brush == 34 || expert_mode_brush == 48 ||
+           expert_mode_brush == 30 || expert_mode_brush == 39 || expert_mode_brush == 33 ||
+           expert_mode_brush == 38 || expert_mode_brush == 49 || expert_mode_brush == 51 ||
+           expert_mode_brush == 54 || expert_mode_brush == 65 || expert_mode_brush == 66 ||
+           expert_mode_brush == 67) {
     /* Category 3: Mixed icon brushes */
     child_brush_category = 3;
-    int brushes[] = {35, 34, 50, 30, 39, 33, 38, 49, 52};
+    int brushes[] = {35, 34, 48, 30, 39, 33, 38, 49, 51, 54, 65, 66, 67};
     memcpy(child_brush_indices, brushes, sizeof(brushes));
-    child_brush_count = 9;
+    child_brush_count = 13;
     child_brush_use_icons = 1;
     child_brush_variable_size = 0;
   }
   else if (expert_mode_brush == 19 || expert_mode_brush == 31 || expert_mode_brush == 32 ||
            expert_mode_brush == 40 || expert_mode_brush == 61 || expert_mode_brush == 63 ||
-           expert_mode_brush == 64 || expert_mode_brush == 68) {
+           expert_mode_brush == 64 || expert_mode_brush == 68 || expert_mode_brush == 50 ||
+           expert_mode_brush == 52) {
     /* Category 4: Shapes */
     child_brush_category = 4;
-    int brushes[] = {19, 31, 32, 40, 61, 63, 64, 68};
+    int brushes[] = {19, 31, 32, 40, 61, 63, 64, 68, 50, 52};
     memcpy(child_brush_indices, brushes, sizeof(brushes));
-    child_brush_count = 8;
+    child_brush_count = 10;
     child_brush_use_icons = 1;
     child_brush_variable_size = 0;
   }
@@ -11510,12 +11549,12 @@ static void init_child_brush_category(int expert_mode_brush)
   }
   else if (expert_mode_brush == 14 || expert_mode_brush == 15 || expert_mode_brush == 16 ||
            expert_mode_brush == 27 || expert_mode_brush == 28 || expert_mode_brush == 29 ||
-           expert_mode_brush == 53 || expert_mode_brush == 67) {
-    /* Category 6: Animals & Nature (Critters, Footprints, Splats & Water) */
+           expert_mode_brush == 53) {
+    /* Category 6: Animals & Nature (Critters, Footprints & Splats) */
     child_brush_category = 6;
-    int brushes[] = {14, 15, 16, 27, 28, 29, 53, 67};
+    int brushes[] = {14, 15, 16, 27, 28, 29, 53};
     memcpy(child_brush_indices, brushes, sizeof(brushes));
-    child_brush_count = 8;
+    child_brush_count = 7;
     child_brush_use_icons = 1;
     child_brush_variable_size = 0;
   }
@@ -11538,24 +11577,23 @@ static void init_child_brush_category(int expert_mode_brush)
     child_brush_variable_size = 1;
   }
   else if (expert_mode_brush == 9 || expert_mode_brush == 25 || expert_mode_brush == 26 ||
-           expert_mode_brush == 48 || expert_mode_brush == 54 || expert_mode_brush == 62 ||
-           expert_mode_brush == 65 || expert_mode_brush == 66) {
+           expert_mode_brush == 62) {
     /* Category 9: Texture brushes */
     child_brush_category = 9;
-    int brushes[] = {9, 25, 26, 48, 54, 62, 65, 66};
+    int brushes[] = {9, 25, 26, 62};
     memcpy(child_brush_indices, brushes, sizeof(brushes));
-    child_brush_count = 8;
+    child_brush_count = 4;
     child_brush_use_icons = 1;
     child_brush_variable_size = 0;
   }
   else if (expert_mode_brush == 10 || expert_mode_brush == 11 || expert_mode_brush == 12 ||
            expert_mode_brush == 13 || expert_mode_brush == 17 || expert_mode_brush == 18 ||
-           expert_mode_brush == 41 || expert_mode_brush == 51) {
+           expert_mode_brush == 41) {
     /* Category 10: Effect brushes */
     child_brush_category = 10;
-    int brushes[] = {10, 11, 12, 13, 17, 18, 41, 51};
+    int brushes[] = {10, 11, 12, 13, 17, 18, 41};
     memcpy(child_brush_indices, brushes, sizeof(brushes));
-    child_brush_count = 8;
+    child_brush_count = 7;
     child_brush_use_icons = 1;
     child_brush_variable_size = 0;
   }
@@ -11726,8 +11764,13 @@ static void draw_child_mode_brush_slider(void)
   }
   
   /* Show brush icon if category uses icons */
-  if (child_brush_use_icons && cur_brush >= 0 && cur_brush < num_brushes && img_brushes_thumbs[cur_brush] != NULL) {
-    SDL_Surface *icon = img_brushes_thumbs[cur_brush];
+  if (child_brush_use_icons && cur_brush >= 0 && cur_brush < num_brushes) {
+    /* Use special thumbnail if available, otherwise use regular thumbnail */
+    SDL_Surface *icon = (img_brushes_special_thumbs[cur_brush] != NULL) ? 
+                        img_brushes_special_thumbs[cur_brush] : 
+                        img_brushes_thumbs[cur_brush];
+    
+    if (icon == NULL) return;
     
     /* Scale icon to fit in handle (leave some padding) */
     int icon_max_size = inner_radius;  /* Use inner radius to avoid overlapping border */
@@ -16630,6 +16673,7 @@ static void cleanup(void)
 
   free_surface_array(img_brushes, num_brushes);
   free_surface_array(img_brushes_thumbs, num_brushes);
+  free_surface_array(img_brushes_special_thumbs, num_brushes);
   free(brushes_frames);
   free(brushes_directional);
   free(brushes_rotate);

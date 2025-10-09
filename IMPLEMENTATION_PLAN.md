@@ -204,14 +204,14 @@ Brushes werden alphabetisch aus data/brushes/ geladen:
 6=aa_round_seethru_05
 7=aa_round_seethru_10
 8=aa_round_seethru
-9=acrylic
-10=arrow
-11=arrow_triangles
+9=acrylic (frames=4)
+10=arrow (rotate)
+11=arrow_triangles (directional)
 12=blob
 13=chisle
-14=critter_dog
-15=critter_kuroneko
-16=critter_squirrel
+14=critter_dog (frames=2, directional) *BOTH*
+15=critter_kuroneko (frames=2, directional) *BOTH*
+16=critter_squirrel (frames=3, directional) *BOTH*
 17=cutout_square_diamond
 18=cutout_star_circle
 19=diamond
@@ -220,36 +220,36 @@ Brushes werden alphabetisch aus data/brushes/ geladen:
 22=flower_6
 23=flower_6_small
 24=flower_7
-25=fluff_gradient
-26=fluff
-27=footprints-human
-28=footprints-human-shoes
-29=footprints-paws
-30=graphite
+25=fluff_gradient (frames=4)
+26=fluff (frames=4)
+27=footprints-human (frames=2, directional) *BOTH*
+28=footprints-human-shoes (frames=2, directional) *BOTH*
+29=footprints-paws (frames=2, directional) *BOTH*
+30=graphite (frames=7)
 31=heart
 32=hexagon
-33=impasto(directional, random)
-34=inksplat
+33=impasto (frames=10, rotate)
+34=inksplat (frames=5)
 35=lines-angled (directional)
 36=lozenge
 37=oval
-38=paint_splats
-39=pencil
+38=paint_splats (frames=4)
+39=pencil (frames=4, rotate)
 40=pentagon
-41=rotating_dash
+41=rotating_dash (rotate)
 42=slash_10_lt
 43=slash_10_rt
 44=slash_16_lt
 45=slash_16_rt
 46=slash_20_lt
 47=slash_20_rt
-48=smoke
-49=sparkles
+48=smoke (frames=3)
+49=sparkles (frames=4)
 50=sphere
 51=spines
-52=spiral
+52=spiral (frames=4)
 53=splat
-54=spray
+54=spray (frames=6)
 55=square_06
 56=square_12
 57=square_24
@@ -260,9 +260,9 @@ Brushes werden alphabetisch aus data/brushes/ geladen:
 62=tiny
 63=triangle_down
 64=triangle_up
-65=vine
-66=watercolor-texture
-67=water_still
+65=vine (frames=6)
+66=watercolor-texture (frames=4)
+67=water_still (frames=3)
 68=x
 ```
 
@@ -281,20 +281,20 @@ Brushes werden alphabetisch aus data/brushes/ geladen:
 - **Weißer Rand:** Konstant 4px
 - **Slider-Positionen:** 6 Positionen (0-5)
 
-#### Kategorie 3: Mixed Icon Brushes (35, 34, 50, 30, 39, 33, 38, 49, 52)
+#### Kategorie 3: Mixed Icon Brushes (35, 34, 48, 30, 39, 33, 38, 49, 51, 54, 65, 66, 67)
 - **Bedingung:** Wenn einer dieser Brushes im Expert Mode gewählt war
-- **Brushes:** 35=lines-angled, 34=inksplat, 50=sphere, 30=graphite, 39=pencil, 33=impasto, 38=paint_splats, 49=sparkles, 52=spiral
-- **Slider-Verhalten:** Regelt alle 9 Brushes in dieser Reihenfolge
+- **Brushes:** 35=lines-angled, 34=inksplat, 48=smoke, 30=graphite, 39=pencil, 33=impasto, 38=paint_splats, 49=sparkles, 51=spines, 54=spray, 65=vine, 66=watercolor-texture, 67=water_still
+- **Slider-Verhalten:** Regelt alle 13 Brushes in dieser Reihenfolge
 - **Handle-Design:** 
   - **Konstante Größe:** Handle bleibt immer voll groß (50px Radius)
   - **Brush-Icon:** Das Icon des jeweiligen Brushes wird **auf dem Ball angezeigt**
   - **Weißer Rand:** Konstant 4px
-- **Slider-Positionen:** 9 Positionen (0-8)
+- **Slider-Positionen:** 13 Positionen (0-12)
 
 #### Kategorie 4: Shapes (Grundformen)
-- **Bedingung:** Wenn einer dieser Brushes gewählt war: **19, 31, 32, 40, 61, 63, 64, 68**
-- **Brushes:** 19=diamond, 31=heart, 32=hexagon, 40=pentagon, 61=star, 63=triangle_down, 64=triangle_up, 68=x
-- **Slider-Verhalten:** 8 Positionen mit Icons
+- **Bedingung:** Wenn einer dieser Brushes gewählt war: **19, 31, 32, 40, 61, 63, 64, 68, 50, 52**
+- **Brushes:** 19=diamond, 31=heart, 32=hexagon, 40=pentagon, 61=star, 63=triangle_down, 64=triangle_up, 68=x, 50=sphere, 52=spiral
+- **Slider-Verhalten:** 10 Positionen mit Icons
 - **Handle:** Konstante Größe (50px), Icon wird angezeigt
 
 #### Kategorie 5: Flowers (Blumen - verschiedene Größen)
@@ -304,12 +304,12 @@ Brushes werden alphabetisch aus data/brushes/ geladen:
 - **Handle:** Variable Größe (30-50px), zeigt die Blumen-Icons
 
 #### Kategorie 6: Animals & Nature (Tiere, Fußabdrücke & Natur)
-- **Bedingung:** Wenn einer dieser Brushes gewählt war: **14, 15, 16, 27, 28, 29, 53, 67**
+- **Bedingung:** Wenn einer dieser Brushes gewählt war: **14, 15, 16, 27, 28, 29, 53**
 - **Brushes:** 
   - 14=critter_dog, 15=critter_kuroneko (schwarze Katze), 16=critter_squirrel (Eichhörnchen)
   - 27=footprints-human, 28=footprints-human-shoes, 29=footprints-paws
-  - 53=splat, 67=water_still
-- **Slider-Verhalten:** 8 Positionen mit Icons
+  - 53=splat
+- **Slider-Verhalten:** 7 Positionen mit Icons
 - **Handle:** Konstante Größe (50px), Icon wird angezeigt
 
 #### Kategorie 7: Slash Lines (Diagonale Linien - verschiedene Größen)
@@ -325,15 +325,15 @@ Brushes werden alphabetisch aus data/brushes/ geladen:
 - **Handle:** Variable Größe (30-50px) für erste 4, konstant für letzten 2 mit Icons
 
 #### Kategorie 9: Texture Brushes (Textur-Pinsel)
-- **Bedingung:** Wenn einer dieser Brushes gewählt war: **9, 25, 26, 48, 54, 62, 65, 66**
-- **Brushes:** 9=acrylic, 25=fluff_gradient, 26=fluff, 48=smoke, 54=spray, 62=tiny, 65=vine, 66=watercolor-texture
-- **Slider-Verhalten:** 8 Positionen mit Icons
+- **Bedingung:** Wenn einer dieser Brushes gewählt war: **9, 25, 26, 62**
+- **Brushes:** 9=acrylic, 25=fluff_gradient, 26=fluff, 62=tiny
+- **Slider-Verhalten:** 4 Positionen mit Icons
 - **Handle:** Konstante Größe (50px), Icon wird angezeigt
 
 #### Kategorie 10: Effect Brushes (Effekt-Pinsel)
-- **Bedingung:** Wenn einer dieser Brushes gewählt war: **10, 11, 12, 13, 17, 18, 41, 51**
-- **Brushes:** 10=arrow, 11=arrow_triangles, 12=blob, 13=chisle, 17=cutout_square_diamond, 18=cutout_star_circle, 41=rotating_dash, 51=spines
-- **Slider-Verhalten:** 8 Positionen mit Icons
+- **Bedingung:** Wenn einer dieser Brushes gewählt war: **10, 11, 12, 13, 17, 18, 41**
+- **Brushes:** 10=arrow, 11=arrow_triangles, 12=blob, 13=chisle, 17=cutout_square_diamond, 18=cutout_star_circle, 41=rotating_dash
+- **Slider-Verhalten:** 7 Positionen mit Icons
 - **Handle:** Konstante Größe (50px), Icon wird angezeigt
 
 **Zusammenfassung:**
