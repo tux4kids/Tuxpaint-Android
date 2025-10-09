@@ -31439,9 +31439,8 @@ static void setup(void)
   if (joystick_dev != -1)
     do_lock_file();
 
-  init_flags = SDL_INIT_VIDEO | SDL_INIT_JOYSTICK | SDL_INIT_TIMER;
-  if (use_sound)
-    init_flags |= SDL_INIT_AUDIO;
+  /* Always initialize audio to allow toggling sound on/off */
+  init_flags = SDL_INIT_VIDEO | SDL_INIT_JOYSTICK | SDL_INIT_TIMER | SDL_INIT_AUDIO;
   if (!fullscreen)
     init_flags |= SDL_INIT_NOPARACHUTE; /* allow debugger to catch crash */
 
@@ -31488,12 +31487,6 @@ static void setup(void)
      in SDL1.2, and I found that annoying -bjk 2022.09.15 */
   SDL_SetHint(SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH, "1");
 
-#ifdef __ANDROID__
-  /* Load saved preferences (child mode, sound settings, etc.) */
-  load_preferences();
-  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Loaded preferences at startup");
-#endif
-
   /* Set up event filter */
 
   SDL_SetEventFilter(TP_EventFilter, NULL);
@@ -31534,9 +31527,9 @@ static void setup(void)
 #ifndef NOSOUND
   DEBUG_PRINTF("Initializing sound...\n");
 #ifndef WIN32
-  if (use_sound && Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 1024) < 0)
+  if (Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 1024) < 0)
 #else
-  if (use_sound && Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 2048) < 0)
+  if (Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 2048) < 0)
 #endif
   {
     fprintf(stderr,
@@ -31544,18 +31537,38 @@ static void setup(void)
             "16-bit stereo.\n" "The Simple DirectMedia Layer error that occurred was:\n" "%s\n\n", SDL_GetError());
     use_sound = 0;
   }
-
-  i = NUM_SOUNDS;
-  while (use_sound && i--)
+  else
   {
-    sounds[i] = Mix_LoadWAV(sound_fnames[i]);
-
-    if (sounds[i] == NULL)
+    /* Audio initialized successfully, load all sounds (independent of use_sound state) */
+    /* This allows toggling sound on/off without reloading sounds */
+    int sound_load_failed = 0;
+    i = NUM_SOUNDS;
+    while (i--)
     {
-      fprintf(stderr,
-              "\nWarning: I couldn't open a sound file:\n%s\n"
-              "The Simple DirectMedia Layer error that occurred was:\n" "%s\n\n", sound_fnames[i], SDL_GetError());
-      use_sound = 0;
+      sounds[i] = Mix_LoadWAV(sound_fnames[i]);
+
+      if (sounds[i] == NULL)
+      {
+        fprintf(stderr,
+                "\nWarning: I couldn't open a sound file:\n%s\n"
+                "The Simple DirectMedia Layer error that occurred was:\n" "%s\n\n", sound_fnames[i], SDL_GetError());
+        sound_load_failed = 1;
+        use_sound = 0;
+        break;
+      }
+    }
+    
+    if (sound_load_failed)
+    {
+      /* Clean up any sounds that were loaded before failure */
+      for (i = 0; i < NUM_SOUNDS; i++)
+      {
+        if (sounds[i] != NULL)
+        {
+          Mix_FreeChunk(sounds[i]);
+          sounds[i] = NULL;
+        }
+      }
     }
   }
 #endif

@@ -679,14 +679,14 @@ if (HIT(r_sound_btn)) {
 }
 ```
 
-### 6.4.2 Preferences (Persistent Storage)
+### 6.4.2 ✅ Preferences (Persistent Storage)
 
 **Save the following in SharedPreferences:**
-- [ ] Sound toggle status (`use_sound`)
-- [ ] Child mode status (`child_mode`)
-- [ ] Child mode locked status (`child_mode_locked`)
-- [ ] Last brush in child mode (restore when switching back from expert mode)
-- [ ] Last brush category in child mode
+- [x] Sound toggle status (`use_sound`)
+- [x] Child mode status (`child_mode`)
+- [x] Child mode locked status (`child_mode_locked`)
+- [x] Last brush in child mode (restore when switching back from expert mode)
+- [x] Last brush category in child mode
 
 **Implementation (Android JNI):**
 ```c
@@ -767,12 +767,18 @@ save_preferences();
 ```
 
 
-### 6.5 Left Toolbar
-
-**Layout:**
+### 6.5 Left Toolbar in Child-Mode
 - Larger buttons (more space per button)
 - Only 1 column instead of 2
-- Lock sound button in row -1 in its current state
+  - Child Mode Button
+  - Paint (TOOL_BRUSH)
+  - Eraser (TOOL_ERASER)
+  - Fill (TOOL_FILL)
+  - Save (TOOL_SAVE)
+  - New (TOOL_NEW mit Auto-Save)
+    - the New button should not ask, but just do an Auto-Save in child mode
+  - Undo (TOOL_UNDO)
+  - Redo (TOOL_REDO)
 
 **New-Button Behavior:**
 ```c
@@ -789,10 +795,9 @@ if (child_mode && cur_tool == TOOL_NEW) {
 
 **Unit Tests:**
 - [ ] Child Mode: New performs auto-save
-- [ ] Child Mode: Exit returns to normal mode
-- [ ] Child Mode Lock: 3s long-press locks/unlocks
-- [ ] Sound button disabled in child mode
-- [ ] Preferences save/load correctly
+- [x] Child Mode Lock: 3s long-press locks/unlocks
+- [x] Sound button disabled in child mode
+- [x] Preferences save/load correctly
 
 **Performance:**
 - No slowdown from new features

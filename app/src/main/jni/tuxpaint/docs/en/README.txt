@@ -1179,13 +1179,9 @@ g."Quit" Command ←
      
 h.Sound Muting ←
 
-    There is no on-screen control button at this time, but by using the [Alt] +
+    There is an on-screen control button or using the [Alt] +
     [S] keyboard sequence, sound effects can be disabled and re-enabled (muted
     and unmuted) while the program is running.
-
-    Note that if sounds are completely disabled via the "nosound" option, the
-    [Alt] + [S] key combination has no effect. (i.e., it cannot be used to turn
-    on sounds when the parent/teacher wants them disabled.)
 
     ⚙ See the "Options" documentation.
 
