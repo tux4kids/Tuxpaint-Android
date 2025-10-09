@@ -23656,6 +23656,8 @@ static void load_magic_plugins(void)
 #if defined (__ANDROID__)
       /* Need this at runtime as Android installs on different locations depending on the user */
       place = strdup(get_nativelibdir());
+      __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", 
+                         "Magic plugins: trying global path: %s", place);
 #else
       place = strdup(MAGIC_PREFIX);
 #endif
@@ -23675,6 +23677,18 @@ static void load_magic_plugins(void)
     /* Gather list of files (for sorting): */
 
     d = opendir(place);
+#ifdef __ANDROID__
+    if (d == NULL)
+    {
+      __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", 
+                         "Magic plugins: opendir(%s) failed: %s", place, strerror(errno));
+    }
+    else
+    {
+      __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", 
+                         "Magic plugins: opendir(%s) SUCCESS", place);
+    }
+#endif
 
     if (d != NULL)
     {
@@ -23949,6 +23963,10 @@ static void load_magic_plugins(void)
               {
                 res =
                   magic_funcs[num_plugin_files].init(magic_api_struct, magic_disabled_features, magic_complexity_level);
+#ifdef __ANDROID__
+                __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", 
+                                   "Magic plugin %s: init returned %d", fname, res);
+#endif
 
                 if (res != 0)
                   n = magic_funcs[num_plugin_files].get_tool_count(magic_api_struct);
@@ -23957,6 +23975,10 @@ static void load_magic_plugins(void)
                   magic_funcs[num_plugin_files].shutdown(magic_api_struct);
                   n = 0;
                 }
+#ifdef __ANDROID__
+                __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", 
+                                   "Magic plugin %s: tool_count = %d", fname, n);
+#endif
 
 
                 if (n == 0)
@@ -23965,6 +23987,11 @@ static void load_magic_plugins(void)
                           "Notice: plugin %1$s failed to startup or reported 0 magic tools (Tux Paint is in complexity mode \"%2$s\")\n",
                           fname, MAGIC_COMPLEXITY_LEVEL_NAMES[magic_complexity_level]);
                   fflush(stderr);
+#ifdef __ANDROID__
+                  __android_log_print(ANDROID_LOG_WARN, "TuxPaint", 
+                                     "Magic plugin %s failed: init=%d, tools=%d, complexity=%s", 
+                                     fname, res, n, MAGIC_COMPLEXITY_LEVEL_NAMES[magic_complexity_level]);
+#endif
                   SDL_UnloadObject(magic_handle[num_plugin_files]);
                 }
                 else
@@ -24104,6 +24131,11 @@ static void load_magic_plugins(void)
 
                         num_magics[group]++;
                         num_magics_total++;
+#ifdef __ANDROID__
+                        __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", 
+                                           "Magic plugin loaded: %s (total: %d)", 
+                                           magics[group][idx].name, num_magics_total);
+#endif
 
                         if (num_magics[group] >= MAX_MAGICS_PER_GROUP)
                         {
@@ -24154,6 +24186,11 @@ static void load_magic_plugins(void)
 
   DEBUG_PRINTF("Loaded %d magic tools from %d plug-in files\n", num_magics_total, num_plugin_files);
   DEBUG_PRINTF("\n");
+#ifdef __ANDROID__
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", 
+                     "Loaded %d magic tools from %d plug-in files", 
+                     num_magics_total, num_plugin_files);
+#endif
 
   /* Start out with the first magic group that _has_ any tools */
   tries = 0;
