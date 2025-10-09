@@ -192,7 +192,81 @@ if (child_mode) {
 
 Der Slider soll verschiedene Brush-Sets anbieten, abhängig davon, welcher Brush im Expert Mode aktiv war beim Wechsel in den Child Mode.
 
-**Drei Brush-Kategorien:**
+#### Brush-Index nach Dateinamen (alphabetisch geladen)
+```
+Brushes werden alphabetisch aus data/brushes/ geladen:
+0=aa_round_03
+1=aa_round_06
+2=aa_round_12
+3=aa_round_24
+4=aa_round_36
+5=aa_round_fuzz
+6=aa_round_seethru_05
+7=aa_round_seethru_10
+8=aa_round_seethru
+9=acrylic
+10=arrow
+11=arrow_triangles
+12=blob
+13=chisle
+14=critter_dog
+15=critter_kuroneko
+16=critter_squirrel
+17=cutout_square_diamond
+18=cutout_star_circle
+19=diamond
+20=flower_5
+21=flower_5_small
+22=flower_6
+23=flower_6_small
+24=flower_7
+25=fluff_gradient
+26=fluff
+27=footprints-human
+28=footprints-human-shoes
+29=footprints-paws
+30=graphite
+31=heart
+32=hexagon
+33=impasto(directional, random)
+34=inksplat
+35=lines-angled (directional)
+36=lozenge
+37=oval
+38=paint_splats
+39=pencil
+40=pentagon
+41=rotating_dash
+42=slash_10_lt
+43=slash_10_rt
+44=slash_16_lt
+45=slash_16_rt
+46=slash_20_lt
+47=slash_20_rt
+48=smoke
+49=sparkles
+50=sphere
+51=spines
+52=spiral
+53=splat
+54=spray
+55=square_06
+56=square_12
+57=square_24
+58=square_36
+59=square_fuzz
+60=square_seethru
+61=star
+62=tiny
+63=triangle_down
+64=triangle_up
+65=vine
+66=watercolor-texture
+67=water_still
+68=x
+```
+
+**Brush-Kategorien:**
 
 #### Kategorie 1: Standard Brushes (0-4)
 - **Bedingung:** Wenn Brush 0, 1, 2, 3 oder 4 im Expert Mode gewählt war
@@ -207,34 +281,15 @@ Der Slider soll verschiedene Brush-Sets anbieten, abhängig davon, welcher Brush
 - **Weißer Rand:** Konstant 4px
 - **Slider-Positionen:** 6 Positionen (0-5)
 
-#### Kategorie 3: Icon Brushes (55, 35, 34, 50, 30, 39, 33, 38, 49, 52, 66, 67, 68)
+#### Kategorie 3: Mixed Icon Brushes (35, 34, 50, 30, 39, 33, 38, 49, 52)
 - **Bedingung:** Wenn einer dieser Brushes im Expert Mode gewählt war
-- **Slider-Verhalten:** Regelt alle 13 Brushes in dieser Reihenfolge
+- **Brushes:** 35=lines-angled, 34=inksplat, 50=sphere, 30=graphite, 39=pencil, 33=impasto, 38=paint_splats, 49=sparkles, 52=spiral
+- **Slider-Verhalten:** Regelt alle 9 Brushes in dieser Reihenfolge
 - **Handle-Design:** 
   - **Konstante Größe:** Handle bleibt immer voll groß (50px Radius)
   - **Brush-Icon:** Das Icon des jeweiligen Brushes wird **auf dem Ball angezeigt**
   - **Weißer Rand:** Konstant 4px
-- **Slider-Positionen:** 13 Positionen (0-12)
-
-#### Brush-Index nach Dateinamen (alphabetisch geladen)
-```
-Brushes werden alphabetisch aus data/brushes/ geladen:
-0=aa_round_03, 1=aa_round_06, 2=aa_round_12, 3=aa_round_24, 4=aa_round_36,
-5=aa_round_fuzz, 6=aa_round_seethru_05, 7=aa_round_seethru_10, 8=aa_round_seethru,
-9=acrylic, 10=arrow, 11=arrow_triangles, 12=blob, 13=chisle,
-14=critter_dog, 15=critter_kuroneko, 16=critter_squirrel,
-17=cutout_square_diamond, 18=cutout_star_circle, 19=diamond,
-20=flower_5, 21=flower_5_small, 22=flower_6, 23=flower_6_small, 24=flower_7,
-25=fluff_gradient, 26=fluff, 27=footprints-human, 28=footprints-human-shoes, 29=footprints-paws,
-30=graphite, 31=heart, 32=hexagon, 33=impasto, 34=inksplat, 35=lines-angled,
-36=lozenge, 37=oval, 38=paint_splats, 39=pencil, 40=pentagon,
-41=rotating_dash, 42=slash_10_lt, 43=slash_10_rt, 44=slash_16_lt, 45=slash_16_rt,
-46=slash_20_lt, 47=slash_20_rt, 48=smoke, 49=sparkles, 50=sphere,
-51=spines, 52=spiral, 53=splat, 54=spray, 55=square_06, 56=square_12,
-57=square_24, 58=square_36, 59=square_fuzz, 60=square_seethru,
-61=star, 62=tiny, 63=triangle_down, 64=triangle_up, 65=vine,
-66=watercolor-texture, 67=water_still, 68=x
-```
+- **Slider-Positionen:** 9 Positionen (0-8)
 
 #### Kategorie 4: Shapes (Grundformen)
 - **Bedingung:** Wenn einer dieser Brushes gewählt war: **19, 31, 32, 40, 61, 63, 64, 68**
@@ -248,50 +303,41 @@ Brushes werden alphabetisch aus data/brushes/ geladen:
 - **Slider-Verhalten:** 5 Positionen, gruppiert: [flower_5, flower_5_small], [flower_6, flower_6_small], [flower_7]
 - **Handle:** Variable Größe (30-50px), zeigt die Blumen-Icons
 
-#### Kategorie 6: Footprints (Fußabdrücke)
-- **Bedingung:** Wenn einer dieser Brushes gewählt war: **27, 28, 29**
-- **Brushes:** 27=footprints-human, 28=footprints-human-shoes, 29=footprints-paws
-- **Slider-Verhalten:** 3 Positionen mit Icons
+#### Kategorie 6: Animals & Nature (Tiere, Fußabdrücke & Natur)
+- **Bedingung:** Wenn einer dieser Brushes gewählt war: **14, 15, 16, 27, 28, 29, 53, 67**
+- **Brushes:** 
+  - 14=critter_dog, 15=critter_kuroneko (schwarze Katze), 16=critter_squirrel (Eichhörnchen)
+  - 27=footprints-human, 28=footprints-human-shoes, 29=footprints-paws
+  - 53=splat, 67=water_still
+- **Slider-Verhalten:** 8 Positionen mit Icons
 - **Handle:** Konstante Größe (50px), Icon wird angezeigt
 
-#### Kategorie 7: Critters (Tiere)
-- **Bedingung:** Wenn einer dieser Brushes gewählt war: **14, 15, 16**
-- **Brushes:** 14=critter_dog, 15=critter_kuroneko (schwarze Katze), 16=critter_squirrel (Eichhörnchen)
-- **Slider-Verhalten:** 3 Positionen mit Icons
-- **Handle:** Konstante Größe (50px), Icon wird angezeigt
-
-#### Kategorie 8: Slash Lines (Diagonale Linien - verschiedene Größen)
+#### Kategorie 7: Slash Lines (Diagonale Linien - verschiedene Größen)
 - **Bedingung:** Wenn einer dieser Brushes gewählt war: **42, 43, 44, 45, 46, 47**
 - **Brushes:** 42=slash_10_lt, 43=slash_10_rt, 44=slash_16_lt, 45=slash_16_rt, 46=slash_20_lt, 47=slash_20_rt
 - **Slider-Verhalten:** 6 Positionen, gruppiert nach Größe: [10_lt, 10_rt], [16_lt, 16_rt], [20_lt, 20_rt]
 - **Handle:** Variable Größe (30-50px), zeigt die Icons
 
-#### Kategorie 9: Squares (Quadrate - verschiedene Größen)
+#### Kategorie 8: Squares (Quadrate - verschiedene Größen)
 - **Bedingung:** Wenn einer dieser Brushes gewählt war: **55, 56, 57, 58, 59, 60**
 - **Brushes:** 55=square_06, 56=square_12, 57=square_24, 58=square_36, 59=square_fuzz, 60=square_seethru
 - **Slider-Verhalten:** 6 Positionen, gruppiert: [06, 12, 24, 36] Größen, [fuzz, seethru] Effekte
 - **Handle:** Variable Größe (30-50px) für erste 4, konstant für letzten 2 mit Icons
 
-#### Kategorie 10: Texture Brushes (Textur-Pinsel)
+#### Kategorie 9: Texture Brushes (Textur-Pinsel)
 - **Bedingung:** Wenn einer dieser Brushes gewählt war: **9, 25, 26, 48, 54, 62, 65, 66**
 - **Brushes:** 9=acrylic, 25=fluff_gradient, 26=fluff, 48=smoke, 54=spray, 62=tiny, 65=vine, 66=watercolor-texture
 - **Slider-Verhalten:** 8 Positionen mit Icons
 - **Handle:** Konstante Größe (50px), Icon wird angezeigt
 
-#### Kategorie 11: Effect Brushes (Effekt-Pinsel)
+#### Kategorie 10: Effect Brushes (Effekt-Pinsel)
 - **Bedingung:** Wenn einer dieser Brushes gewählt war: **10, 11, 12, 13, 17, 18, 41, 51**
 - **Brushes:** 10=arrow, 11=arrow_triangles, 12=blob, 13=chisle, 17=cutout_square_diamond, 18=cutout_star_circle, 41=rotating_dash, 51=spines
 - **Slider-Verhalten:** 8 Positionen mit Icons
 - **Handle:** Konstante Größe (50px), Icon wird angezeigt
 
-#### Kategorie 12: Splats & Water (Spritzer & Wasser)
-- **Bedingung:** Wenn einer dieser Brushes gewählt war: **53, 67**
-- **Brushes:** 53=splat, 67=water_still
-- **Slider-Verhalten:** 2 Positionen mit Icons
-- **Handle:** Konstante Größe (50px), Icon wird angezeigt
-
 **Zusammenfassung:**
-- **12 Kategorien** insgesamt
+- **10 Kategorien** insgesamt (statt 12)
 - **69 Brushes** vollständig abgedeckt
 - **Kategorien 1-2:** Variable Größe ohne Icons (Standard-Rundpinsel)
 - **Kategorien 3-12:** Icons werden auf dem Handle angezeigt
@@ -362,27 +408,20 @@ void init_child_brush_category(int expert_mode_brush) {
     child_brush_use_icons = 1;
     child_brush_variable_size = 1;
   }
-  else if (expert_mode_brush >= 27 && expert_mode_brush <= 29) {
-    /* Category 6: Footprints */
+  else if (expert_mode_brush == 14 || expert_mode_brush == 15 || expert_mode_brush == 16 ||
+           expert_mode_brush == 27 || expert_mode_brush == 28 || expert_mode_brush == 29 ||
+           expert_mode_brush == 53 || expert_mode_brush == 67) {
+    /* Category 6: Animals & Nature (Critters, Footprints, Splats & Water) */
     child_brush_category = 6;
-    int brushes[] = {27, 28, 29};
+    int brushes[] = {14, 15, 16, 27, 28, 29, 53, 67};
     memcpy(child_brush_indices, brushes, sizeof(brushes));
-    child_brush_count = 3;
-    child_brush_use_icons = 1;
-    child_brush_variable_size = 0;
-  }
-  else if (expert_mode_brush >= 14 && expert_mode_brush <= 16) {
-    /* Category 7: Critters */
-    child_brush_category = 7;
-    int brushes[] = {14, 15, 16};
-    memcpy(child_brush_indices, brushes, sizeof(brushes));
-    child_brush_count = 3;
+    child_brush_count = 8;
     child_brush_use_icons = 1;
     child_brush_variable_size = 0;
   }
   else if (expert_mode_brush >= 42 && expert_mode_brush <= 47) {
-    /* Category 8: Slash lines */
-    child_brush_category = 8;
+    /* Category 7: Slash lines */
+    child_brush_category = 7;
     int brushes[] = {42, 43, 44, 45, 46, 47};
     memcpy(child_brush_indices, brushes, sizeof(brushes));
     child_brush_count = 6;
@@ -390,8 +429,8 @@ void init_child_brush_category(int expert_mode_brush) {
     child_brush_variable_size = 1;
   }
   else if (expert_mode_brush >= 55 && expert_mode_brush <= 60) {
-    /* Category 9: Squares */
-    child_brush_category = 9;
+    /* Category 8: Squares */
+    child_brush_category = 8;
     int brushes[] = {55, 56, 57, 58, 59, 60};
     memcpy(child_brush_indices, brushes, sizeof(brushes));
     child_brush_count = 6;
@@ -401,8 +440,8 @@ void init_child_brush_category(int expert_mode_brush) {
   else if (expert_mode_brush == 9 || expert_mode_brush == 25 || expert_mode_brush == 26 ||
            expert_mode_brush == 48 || expert_mode_brush == 54 || expert_mode_brush == 62 ||
            expert_mode_brush == 65 || expert_mode_brush == 66) {
-    /* Category 10: Texture brushes */
-    child_brush_category = 10;
+    /* Category 9: Texture brushes */
+    child_brush_category = 9;
     int brushes[] = {9, 25, 26, 48, 54, 62, 65, 66};
     memcpy(child_brush_indices, brushes, sizeof(brushes));
     child_brush_count = 8;
@@ -412,20 +451,11 @@ void init_child_brush_category(int expert_mode_brush) {
   else if (expert_mode_brush == 10 || expert_mode_brush == 11 || expert_mode_brush == 12 ||
            expert_mode_brush == 13 || expert_mode_brush == 17 || expert_mode_brush == 18 ||
            expert_mode_brush == 41 || expert_mode_brush == 51) {
-    /* Category 11: Effect brushes */
-    child_brush_category = 11;
+    /* Category 10: Effect brushes */
+    child_brush_category = 10;
     int brushes[] = {10, 11, 12, 13, 17, 18, 41, 51};
     memcpy(child_brush_indices, brushes, sizeof(brushes));
     child_brush_count = 8;
-    child_brush_use_icons = 1;
-    child_brush_variable_size = 0;
-  }
-  else if (expert_mode_brush == 53 || expert_mode_brush == 67) {
-    /* Category 12: Splats & Water */
-    child_brush_category = 12;
-    int brushes[] = {53, 67};
-    memcpy(child_brush_indices, brushes, sizeof(brushes));
-    child_brush_count = 2;
     child_brush_use_icons = 1;
     child_brush_variable_size = 0;
   }

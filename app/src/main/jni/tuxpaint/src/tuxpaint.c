@@ -825,6 +825,14 @@ static float slider_start_pos = 0.0;   /* Animation start position (0.0-1.0 perc
 static float slider_target_pos = 0.0;  /* Target slider position (0.0-1.0 percentage) */
 static Uint32 slider_anim_start_time = 0; /* Animation start time in milliseconds */
 static int slider_anim_duration = 500; /* Animation duration in milliseconds (0.5s default for drag) */
+
+/* Child mode brush category system */
+static int child_brush_category = 1;  /* 1-10 for different categories */
+static int child_brush_indices[13];   /* Array of brush indices for current category (max 13 for category 3) */
+static int child_brush_count = 5;     /* Number of brushes in current category */
+static int child_brush_use_icons = 0; /* 1 if category should show icons on handle */
+static int child_brush_variable_size = 1; /* 1 if handle size should vary, 0 for constant size */
+
 static int colors_rows;
 
 static int buttons_tall;        /* promoted to a global variable from setup_normal_screen_layout() */
@@ -2167,6 +2175,7 @@ static void draw_row_minus_1_buttons(void);
 static void draw_magic(void);
 static void draw_child_mode_brush_slider(void);
 static void update_slider_animation(void);
+static void init_child_brush_category(int expert_mode_brush);
 static void draw_brushes(void);
 static void draw_brushes_spacing(void);
 static void draw_stamps(void);
@@ -3758,18 +3767,28 @@ static void mainloop(void)
             /* Entering child mode */
             apply_child_mode_tool_filter();
             
-            /* Switch to paint tool with thick brush if current tool is disabled */
+            /* Switch to paint tool if current tool is disabled */
             if (!tool_avail[cur_tool] || cur_tool != TOOL_BRUSH)
             {
               cur_tool = TOOL_BRUSH;
             }
-            cur_brush = 3;  /* Select aa_round_24.png (24px brush - good size for kids) */
-            brush_scroll = 0;  /* Ensure we scroll to top so brush is visible */
             
-            /* Initialize slider animation state */
-            int child_brush_min = 0;
-            int child_brush_max = 4;
-            float initial_pos = (float)(cur_brush - child_brush_min) / (float)(child_brush_max - child_brush_min);
+            /* Initialize brush category based on current expert mode brush */
+            init_child_brush_category(cur_brush);
+            /* cur_brush is now set to first brush in the category by init_child_brush_category() */
+            
+            brush_scroll = 0;  /* Ensure we scroll to top */
+            
+            /* Initialize slider animation state based on brush position in category */
+            int brush_index_in_category = 0;
+            for (int i = 0; i < child_brush_count; i++) {
+              if (child_brush_indices[i] == cur_brush) {
+                brush_index_in_category = i;
+                break;
+              }
+            }
+            float initial_pos = (child_brush_count > 1) ? 
+                                (float)brush_index_in_category / (float)(child_brush_count - 1) : 0.0f;
             slider_current_pos = initial_pos;
             slider_target_pos = initial_pos;
             slider_anim_start_time = 0;
@@ -4358,20 +4377,23 @@ static void mainloop(void)
               slider_dragging = 1;
               
               /* Calculate position and brush based on click position */
-              /* Map slider position to brush range 0-4 */
               click_percentage = (float)(click_y - slider_y) / (float)slider_h;
+              
+              /* Clamp to 0.0-1.0 range */
+              if (click_percentage < 0.0f) click_percentage = 0.0f;
+              if (click_percentage > 1.0f) click_percentage = 1.0f;
               
               /* Set position instantly (no animation on initial click) */
               slider_current_pos = click_percentage;
               slider_target_pos = click_percentage;
               slider_anim_duration = 0;  /* No animation - instant response */
               
-              /* Calculate target brush for the click position */
-              cur_brush = child_brush_min + (int)((click_percentage * (child_brush_max - child_brush_min + 1)));
+              /* Calculate brush index in category based on click position */
+              int brush_idx = (int)(click_percentage * child_brush_count);
+              if (brush_idx >= child_brush_count) brush_idx = child_brush_count - 1;
               
-              /* Clamp to valid range 0-4 */
-              if (cur_brush < child_brush_min) cur_brush = child_brush_min;
-              if (cur_brush > child_brush_max) cur_brush = child_brush_max;
+              /* Get actual brush from category indices */
+              cur_brush = child_brush_indices[brush_idx];
               
               SDL_Log("SLIDER CLICK: percentage=%.2f, brush=%d, instant position update", 
                       click_percentage, cur_brush);
@@ -6381,12 +6403,20 @@ static void mainloop(void)
         {
           slider_dragging = 0;
           
-          /* Snap to final discrete brush position with 0.2s animation */
-          int child_brush_min = 0;
-          int child_brush_max = 4;
+          /* Snap to final discrete brush position with 0.1s animation */
           
-          /* Calculate final snapped position based on cur_brush */
-          float final_pos = (float)(cur_brush - child_brush_min) / (float)(child_brush_max - child_brush_min);
+          /* Find index of cur_brush in category */
+          int brush_idx = 0;
+          for (int i = 0; i < child_brush_count; i++) {
+            if (child_brush_indices[i] == cur_brush) {
+              brush_idx = i;
+              break;
+            }
+          }
+          
+          /* Calculate final snapped position based on brush index in category */
+          float final_pos = (child_brush_count > 1) ? 
+                            (float)brush_idx / (float)(child_brush_count - 1) : 0.0f;
           
           /* Start snap animation with 0.1s duration (fast snap) */
           slider_start_pos = slider_current_pos;  /* Remember where we're animating from */
@@ -6720,8 +6750,6 @@ static void mainloop(void)
           int slider_x, slider_y, slider_w, slider_h;
           int motion_y;
           float click_percentage;
-          int child_brush_min = 0;
-          int child_brush_max = 4;
           
           /* Calculate slider dimensions - MUST match draw_child_mode_brush_slider() */
           slider_w = button_w - 20;
@@ -6743,12 +6771,12 @@ static void mainloop(void)
           slider_target_pos = click_percentage;
           slider_anim_duration = 0;  /* No animation during drag */
           
-          /* Calculate target brush */
-          int new_brush = child_brush_min + (int)((click_percentage * (child_brush_max - child_brush_min + 1)));
+          /* Calculate brush index in category based on drag position */
+          int brush_idx = (int)(click_percentage * child_brush_count);
+          if (brush_idx >= child_brush_count) brush_idx = child_brush_count - 1;
           
-          /* Clamp to valid range 0-4 */
-          if (new_brush < child_brush_min) new_brush = child_brush_min;
-          if (new_brush > child_brush_max) new_brush = child_brush_max;
+          /* Get actual brush from category indices */
+          int new_brush = child_brush_indices[brush_idx];
           
           /* Only update if brush changed */
           if (new_brush != cur_brush)
@@ -11423,6 +11451,131 @@ static float ease_out_cubic(float t)
 }
 
 /**
+ * Initialize child mode brush category based on expert mode brush
+ * Determines which brush set to show in the child mode slider
+ * @param expert_mode_brush The brush index that was active in expert mode
+ */
+static void init_child_brush_category(int expert_mode_brush)
+{
+  child_brush_use_icons = 0;
+  child_brush_variable_size = 1;
+  
+  if (expert_mode_brush >= 0 && expert_mode_brush <= 4) {
+    /* Category 1: Standard brushes (0-4) */
+    child_brush_category = 1;
+    int brushes[] = {0, 1, 2, 3, 4};
+    memcpy(child_brush_indices, brushes, sizeof(brushes));
+    child_brush_count = 5;
+  }
+  else if (expert_mode_brush == 5 || expert_mode_brush == 6 || 
+           expert_mode_brush == 7 || expert_mode_brush == 8 ||
+           expert_mode_brush == 36 || expert_mode_brush == 37) {
+    /* Category 2: Special round brushes (7,8,5,6,37,36) */
+    child_brush_category = 2;
+    int brushes[] = {7, 8, 5, 6, 37, 36};
+    memcpy(child_brush_indices, brushes, sizeof(brushes));
+    child_brush_count = 6;
+  }
+  else if (expert_mode_brush == 35 || expert_mode_brush == 34 ||
+           expert_mode_brush == 50 || expert_mode_brush == 30 || expert_mode_brush == 39 ||
+           expert_mode_brush == 33 || expert_mode_brush == 38 || expert_mode_brush == 49 ||
+           expert_mode_brush == 52) {
+    /* Category 3: Mixed icon brushes */
+    child_brush_category = 3;
+    int brushes[] = {35, 34, 50, 30, 39, 33, 38, 49, 52};
+    memcpy(child_brush_indices, brushes, sizeof(brushes));
+    child_brush_count = 9;
+    child_brush_use_icons = 1;
+    child_brush_variable_size = 0;
+  }
+  else if (expert_mode_brush == 19 || expert_mode_brush == 31 || expert_mode_brush == 32 ||
+           expert_mode_brush == 40 || expert_mode_brush == 61 || expert_mode_brush == 63 ||
+           expert_mode_brush == 64 || expert_mode_brush == 68) {
+    /* Category 4: Shapes */
+    child_brush_category = 4;
+    int brushes[] = {19, 31, 32, 40, 61, 63, 64, 68};
+    memcpy(child_brush_indices, brushes, sizeof(brushes));
+    child_brush_count = 8;
+    child_brush_use_icons = 1;
+    child_brush_variable_size = 0;
+  }
+  else if (expert_mode_brush >= 20 && expert_mode_brush <= 24) {
+    /* Category 5: Flowers */
+    child_brush_category = 5;
+    int brushes[] = {20, 21, 22, 23, 24};
+    memcpy(child_brush_indices, brushes, sizeof(brushes));
+    child_brush_count = 5;
+    child_brush_use_icons = 1;
+    child_brush_variable_size = 1;
+  }
+  else if (expert_mode_brush == 14 || expert_mode_brush == 15 || expert_mode_brush == 16 ||
+           expert_mode_brush == 27 || expert_mode_brush == 28 || expert_mode_brush == 29 ||
+           expert_mode_brush == 53 || expert_mode_brush == 67) {
+    /* Category 6: Animals & Nature (Critters, Footprints, Splats & Water) */
+    child_brush_category = 6;
+    int brushes[] = {14, 15, 16, 27, 28, 29, 53, 67};
+    memcpy(child_brush_indices, brushes, sizeof(brushes));
+    child_brush_count = 8;
+    child_brush_use_icons = 1;
+    child_brush_variable_size = 0;
+  }
+  else if (expert_mode_brush >= 42 && expert_mode_brush <= 47) {
+    /* Category 7: Slash lines */
+    child_brush_category = 7;
+    int brushes[] = {42, 43, 44, 45, 46, 47};
+    memcpy(child_brush_indices, brushes, sizeof(brushes));
+    child_brush_count = 6;
+    child_brush_use_icons = 1;
+    child_brush_variable_size = 1;
+  }
+  else if (expert_mode_brush >= 55 && expert_mode_brush <= 60) {
+    /* Category 8: Squares */
+    child_brush_category = 8;
+    int brushes[] = {55, 56, 57, 58, 59, 60};
+    memcpy(child_brush_indices, brushes, sizeof(brushes));
+    child_brush_count = 6;
+    child_brush_use_icons = 1;
+    child_brush_variable_size = 1;
+  }
+  else if (expert_mode_brush == 9 || expert_mode_brush == 25 || expert_mode_brush == 26 ||
+           expert_mode_brush == 48 || expert_mode_brush == 54 || expert_mode_brush == 62 ||
+           expert_mode_brush == 65 || expert_mode_brush == 66) {
+    /* Category 9: Texture brushes */
+    child_brush_category = 9;
+    int brushes[] = {9, 25, 26, 48, 54, 62, 65, 66};
+    memcpy(child_brush_indices, brushes, sizeof(brushes));
+    child_brush_count = 8;
+    child_brush_use_icons = 1;
+    child_brush_variable_size = 0;
+  }
+  else if (expert_mode_brush == 10 || expert_mode_brush == 11 || expert_mode_brush == 12 ||
+           expert_mode_brush == 13 || expert_mode_brush == 17 || expert_mode_brush == 18 ||
+           expert_mode_brush == 41 || expert_mode_brush == 51) {
+    /* Category 10: Effect brushes */
+    child_brush_category = 10;
+    int brushes[] = {10, 11, 12, 13, 17, 18, 41, 51};
+    memcpy(child_brush_indices, brushes, sizeof(brushes));
+    child_brush_count = 8;
+    child_brush_use_icons = 1;
+    child_brush_variable_size = 0;
+  }
+  else {
+    /* Default to category 1 if no match */
+    child_brush_category = 1;
+    int brushes[] = {0, 1, 2, 3, 4};
+    memcpy(child_brush_indices, brushes, sizeof(brushes));
+    child_brush_count = 5;
+  }
+  
+  /* Set cur_brush to first brush in category */
+  cur_brush = child_brush_indices[0];
+  
+  SDL_Log("CHILD_MODE: category=%d, count=%d, first_brush=%d, icons=%d, var_size=%d",
+          child_brush_category, child_brush_count, cur_brush, 
+          child_brush_use_icons, child_brush_variable_size);
+}
+
+/**
  * Update slider animation state
  * Updates the global slider_current_pos based on animation progress
  */
@@ -11490,20 +11643,21 @@ static void draw_child_mode_brush_slider(void)
   SDL_Log("Slider dimensions: x=%d, y=%d, w=%d, h=%d (r_colors.y=%d, r_colors.h=%d)", 
           slider_x, slider_y, slider_w, slider_h, r_colors.y, r_colors.h);
   
-  /* Calculate handle position using animated slider position */
-  /* In child mode, slider only uses brushes 0-4 */
-  int child_brush_min = 0;  /* Brush index 0 */
-  int child_brush_max = 4;  /* Brush index 4 */
-  
-  /* Clamp cur_brush to range 0-4 (for handle size calculation) */
-  if (cur_brush < child_brush_min) cur_brush = child_brush_min;
-  if (cur_brush > child_brush_max) cur_brush = child_brush_max;
+  /* Find current brush index in category */
+  int brush_index_in_category = 0;
+  for (int i = 0; i < child_brush_count; i++) {
+    if (child_brush_indices[i] == cur_brush) {
+      brush_index_in_category = i;
+      break;
+    }
+  }
   
   /* Update animation and use current animated position (0.0 to 1.0) */
   update_slider_animation();
   brush_percentage = slider_current_pos;
   
-  SDL_Log("Handle position: cur_brush=%d, animated_percentage=%.2f", cur_brush, brush_percentage);
+  SDL_Log("Handle position: cur_brush=%d, brush_idx=%d/%d, animated_percentage=%.2f, category=%d", 
+          cur_brush, brush_index_in_category, child_brush_count, brush_percentage, child_brush_category);
   
   /* Calculate handle position */
   int handle_center_x = slider_x + slider_w / 2;
@@ -11527,15 +11681,18 @@ static void draw_child_mode_brush_slider(void)
   slider_rect.h = (slider_y + slider_h) - handle_center_y;
   SDL_FillRect(screen, &slider_rect, SDL_MapRGB(screen->format, 200, 200, 200));  /* Light gray */
   
-  /* Calculate handle radii - constant white border (4px), variable total radius:
-   * cur_brush=0: total_radius=30, inner_radius=26, border=4 (top - small)
-   * cur_brush=1: total_radius=35, inner_radius=31, border=4
-   * cur_brush=2: total_radius=40, inner_radius=36, border=4
-   * cur_brush=3: total_radius=45, inner_radius=41, border=4
-   * cur_brush=4: total_radius=50, inner_radius=46, border=4 (bottom - large)
-   */
+  /* Calculate handle radii based on category settings */
   int white_border_thickness = 4;  /* Constant 4px white border */
-  int total_radius = 30 + cur_brush * 5;  /* Increases from 30 (brush 0) to 50 (brush 4) */
+  int total_radius;
+  
+  if (child_brush_variable_size && child_brush_count > 1) {
+    /* Variable size: scale from 30px to 50px based on position in category */
+    total_radius = 30 + (brush_index_in_category * 20) / (child_brush_count - 1);
+  } else {
+    /* Constant size: always 50px */
+    total_radius = 50;
+  }
+  
   int inner_radius = total_radius - white_border_thickness;  /* Blue circle radius */
   
   SDL_Log("Handle: inner_radius=%d, border_thickness=%d, total=%d", inner_radius, white_border_thickness, total_radius);
@@ -11568,7 +11725,32 @@ static void draw_child_mode_brush_slider(void)
     SDL_FillRect(screen, &line, blue_color);
   }
   
-  /* No brush preview needed - the circle size itself shows the brush size */
+  /* Show brush icon if category uses icons */
+  if (child_brush_use_icons && cur_brush >= 0 && cur_brush < num_brushes && img_brushes_thumbs[cur_brush] != NULL) {
+    SDL_Surface *icon = img_brushes_thumbs[cur_brush];
+    
+    /* Scale icon to fit in handle (leave some padding) */
+    int icon_max_size = inner_radius;  /* Use inner radius to avoid overlapping border */
+    
+    /* Calculate scaled dimensions while preserving aspect ratio */
+    int icon_w = icon->w;
+    int icon_h = icon->h;
+    if (icon_w > icon_max_size || icon_h > icon_max_size) {
+      float scale = (float)icon_max_size / (float)(icon_w > icon_h ? icon_w : icon_h);
+      icon_w = (int)(icon_w * scale);
+      icon_h = (int)(icon_h * scale);
+    }
+    
+    /* Center icon in handle */
+    SDL_Rect icon_dest;
+    icon_dest.x = handle_center_x - icon_w / 2;
+    icon_dest.y = handle_center_y - icon_h / 2;
+    icon_dest.w = icon_w;
+    icon_dest.h = icon_h;
+    
+    /* Blit icon (scaled) */
+    SDL_SoftStretch(icon, NULL, screen, &icon_dest);
+  }
 }
 
 
