@@ -819,6 +819,9 @@ static float button_scale;      /* scale factor to be applied to the size of but
 static int color_button_w;      /* was 32 */
 static int color_button_h;      /* was 48 */
 static int child_mode = 0;      /* Child mode toggle (simplified UI) */
+static int child_mode_locked = 0;  /* Child mode lock status (prevents accidental exit) */
+static Uint32 child_mode_button_press_start = 0;  /* Timestamp when child mode button was pressed */
+static int child_mode_at_press_start = 0;  /* Child mode state when button press started */
 static int slider_dragging = 0; /* True when user is dragging the child mode brush slider */
 static float slider_current_pos = 0.0; /* Current animated slider position (0.0-1.0 percentage) */
 static float slider_start_pos = 0.0;   /* Animation start position (0.0-1.0 percentage) */
@@ -1776,6 +1779,7 @@ static SDL_Surface *img_tools[NUM_TOOLS], *img_tool_names[NUM_TOOLS];
 static SDL_Surface *img_kids_icon, *img_expert_icon;
 static SDL_Surface *img_kids_label, *img_expert_label;
 static SDL_Surface *img_sound_icon;
+static SDL_Surface *img_lock_icon;
 
 static SDL_Surface *img_oskdel, *img_osktab, *img_oskenter, *img_oskcapslock, *img_oskshift, *img_oskpaste;
 static SDL_Surface *thumbnail(SDL_Surface * src, int max_x, int max_y, int keep_aspect);
@@ -2176,6 +2180,7 @@ static void draw_row_minus_1_buttons(void);
 static void draw_magic(void);
 static void draw_child_mode_brush_slider(void);
 static void update_slider_animation(void);
+static void check_child_mode_longpress(void);
 static void init_child_brush_category(int expert_mode_brush);
 static void draw_brushes(void);
 static void draw_brushes_spacing(void);
@@ -3735,111 +3740,41 @@ static void mainloop(void)
         {
           /* Sound toggle button clicked */
 #ifndef NOSOUND
-          use_sound = !use_sound;
-          Mix_HaltChannel(-1);
-
-          /* Redraw the button with new state */
-          draw_row_minus_1_buttons();
-          update_screen_rect(&r_sound_btn);
-
-          if (!use_sound)
+          if (!child_mode)
           {
-            draw_tux_text(TUX_BORED, gettext("Sound muted."), 0);
+            /* Allow sound toggle only in expert mode */
+            use_sound = !use_sound;
+            Mix_HaltChannel(-1);
+
+            /* Redraw the button with new state */
+            draw_row_minus_1_buttons();
+            update_screen_rect(&r_sound_btn);
+
+            if (!use_sound)
+            {
+              draw_tux_text(TUX_BORED, gettext("Sound muted."), 0);
+            }
+            else
+            {
+              draw_tux_text(TUX_BORED, gettext("Sound unmuted."), 0);
+            }
+
+            playsound(screen, 1, SND_CLICK, 1, SNDPOS_LEFT, SNDDIST_NEAR);
           }
           else
           {
-            draw_tux_text(TUX_BORED, gettext("Sound unmuted."), 0);
+            /* Child mode: sound button locked */
+            draw_tux_text(TUX_BORED, gettext("Sound is locked in child mode."), 0);
           }
-
-          playsound(screen, 1, SND_CLICK, 1, SNDPOS_LEFT, SNDDIST_NEAR);
 #endif
         }
         else if (HIT(r_childmode_btn) && valid_click(event.button.button))
         {
-          /* Child mode toggle button clicked */
-          child_mode = !child_mode;
-          
-          /* Apply or remove tool restrictions */
-          if (child_mode)
-          {
-            /* Entering child mode */
-            apply_child_mode_tool_filter();
-            
-            /* Switch to paint tool if current tool is disabled */
-            if (!tool_avail[cur_tool] || cur_tool != TOOL_BRUSH)
-            {
-              cur_tool = TOOL_BRUSH;
-            }
-            
-            /* Initialize brush category based on current expert mode brush */
-            init_child_brush_category(cur_brush);
-            /* cur_brush is now set to first brush in the category by init_child_brush_category() */
-            
-            brush_scroll = 0;  /* Ensure we scroll to top */
-            
-            /* Initialize slider animation state based on brush position in category */
-            int brush_index_in_category = 0;
-            for (int i = 0; i < child_brush_count; i++) {
-              if (child_brush_indices[i] == cur_brush) {
-                brush_index_in_category = i;
-                break;
-              }
-            }
-            float initial_pos = (child_brush_count > 1) ? 
-                                (float)brush_index_in_category / (float)(child_brush_count - 1) : 0.0f;
-            slider_current_pos = initial_pos;
-            slider_target_pos = initial_pos;
-            slider_anim_start_time = 0;
-            slider_anim_duration = 0;  /* No animation on initial load */
-            
-            render_brush();
-          }
-          else
-          {
-            /* Leaving child mode */
-            remove_child_mode_tool_filter();
-            
-            /* Auto-select Paint tool when exiting child mode */
-            cur_tool = TOOL_BRUSH;
-            SDL_Log("Child mode exit: Auto-selected Paint tool");
-          }
-          
-          /* Redraw button with new state */
-          draw_row_minus_1_buttons();
-          update_screen_rect(&r_childmode_btn);
-          
-          /* Re-layout screen with new mode */
-          setup_screen_layout();
-          
-          /* Redraw entire screen */
-          draw_toolbar();
-          update_screen_rect(&r_tools);  /* Update left toolbar display */
-          draw_colors(COLORSEL_FORCE_REDRAW);
-          
-          /* Clear right panel before drawing brushes/slider */
-          SDL_Rect clear_rect;
-          clear_rect.x = WINDOW_WIDTH - r_ttoolopt.w;
-          clear_rect.y = 0;
-          clear_rect.w = r_ttoolopt.w;
-          clear_rect.h = r_colors.y;
-          SDL_FillRect(screen, &clear_rect, SDL_MapRGB(screen->format, 221, 221, 221));
-          SDL_Log("Child mode toggle: Cleared right panel before redraw");
-          
-          /* Draw brushes if in brush tool */
-          if (cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES)
-          {
-            draw_brushes();
-          }
-          
-          /* Flip screen immediately to prevent old buffer from being restored */
-          SDL_Flip(screen);
-          SDL_Log("Child mode toggle: Screen flipped");
-          
-          draw_tux_text(child_mode ? TUX_GREAT : TUX_DEFAULT, 
-                       child_mode ? gettext("Child mode activated!") : gettext("Child mode deactivated."), 
-                       0);
-          
-          playsound(screen, 1, SND_CLICK, 1, SNDPOS_LEFT, SNDDIST_NEAR);
+          /* Child mode toggle button pressed - track press time for long-press detection */
+          child_mode_button_press_start = SDL_GetTicks();
+          child_mode_at_press_start = child_mode;  /* Remember state when press started */
+          SDL_Log("Child mode button pressed at %u ms, current state: %d, locked: %d", 
+                  child_mode_button_press_start, child_mode, child_mode_locked);
         }
         else if (HIT(r_tools))
         {
@@ -6396,8 +6331,162 @@ static void mainloop(void)
       }
       else if (event.type == SDL_MOUSEBUTTONUP)
       {
+        /* Handle child mode button release (with short-press detection only) */
+        if (HIT(r_childmode_btn) && child_mode_button_press_start > 0 && valid_click(event.button.button))
+        {
+          Uint32 press_duration = SDL_GetTicks() - child_mode_button_press_start;
+          SDL_Log("Child mode button released after %u ms", press_duration);
+          
+          /* Long-press already triggered by check_child_mode_longpress() - ignore release */
+          if (press_duration >= 3000)
+          {
+            SDL_Log("Long-press already handled, ignoring button release");
+            child_mode_button_press_start = 0;
+            continue;
+          }
+          
+          if (child_mode_locked)
+          {
+            /* Child mode is locked: short press shows locked message */
+            draw_tux_text(TUX_BORED, gettext("Child mode is locked. Long-press 3s to unlock."), 0);
+          }
+          else if (child_mode_at_press_start == 0)
+          {
+            /* Transitioning FROM expert TO child mode (short press only) */
+            /* Short press: activate child mode (unlocked) */
+            child_mode = 1;
+            SDL_Log("Child mode activated (unlocked)");
+            draw_tux_text(TUX_GREAT, gettext("Child mode activated."), 0);
+            
+            /* Apply tool restrictions */
+            apply_child_mode_tool_filter();
+            
+            /* Switch to paint tool if current tool is disabled */
+            if (!tool_avail[cur_tool] || cur_tool != TOOL_BRUSH)
+            {
+              cur_tool = TOOL_BRUSH;
+            }
+            
+            /* Initialize brush category based on current expert mode brush */
+            init_child_brush_category(cur_brush);
+            /* cur_brush is now set to first brush in the category by init_child_brush_category() */
+            
+            brush_scroll = 0;  /* Ensure we scroll to top */
+            
+            /* Initialize slider animation state based on brush position in category */
+            int brush_index_in_category = 0;
+            for (int i = 0; i < child_brush_count; i++) {
+              if (child_brush_indices[i] == cur_brush) {
+                brush_index_in_category = i;
+                break;
+              }
+            }
+            float initial_pos = (child_brush_count > 1) ? 
+                                (float)brush_index_in_category / (float)(child_brush_count - 1) : 0.0f;
+            slider_current_pos = initial_pos;
+            slider_target_pos = initial_pos;
+            slider_anim_start_time = 0;
+            slider_anim_duration = 0;  /* No animation on initial load */
+            
+            render_brush();
+            
+            /* Redraw button with new state */
+            draw_row_minus_1_buttons();
+            update_screen_rect(&r_childmode_btn);
+            
+            /* Re-layout screen with new mode */
+            setup_screen_layout();
+            
+            /* Clear entire color area including old label space */
+            SDL_Rect color_clear_rect;
+            color_clear_rect.x = 0;
+            color_clear_rect.y = r_colors.y;
+            color_clear_rect.w = WINDOW_WIDTH;
+            color_clear_rect.h = r_colors.h;
+            SDL_FillRect(screen, &color_clear_rect, SDL_MapRGB(screen->format, 255, 255, 255));
+            
+            /* Redraw entire screen */
+            draw_toolbar();
+            update_screen_rect(&r_tools);
+            draw_colors(COLORSEL_FORCE_REDRAW);
+            
+            /* Clear right panel before drawing brushes/slider */
+            SDL_Rect clear_rect;
+            clear_rect.x = WINDOW_WIDTH - r_ttoolopt.w;
+            clear_rect.y = 0;
+            clear_rect.w = r_ttoolopt.w;
+            clear_rect.h = r_colors.y;
+            SDL_FillRect(screen, &clear_rect, SDL_MapRGB(screen->format, 221, 221, 221));
+            
+            /* Draw brushes if in brush tool */
+            if (cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES)
+            {
+              draw_brushes();
+            }
+            
+            /* Flip screen immediately */
+            SDL_Flip(screen);
+            
+            playsound(screen, 1, SND_CLICK, 1, SNDPOS_LEFT, SNDDIST_NEAR);
+          }
+          else
+          {
+            /* Already in child mode (unlocked): exit to expert mode */
+            child_mode = 0;
+            SDL_Log("Child mode deactivated, returning to expert mode");
+            draw_tux_text(TUX_DEFAULT, gettext("Expert mode activated."), 0);
+            
+            /* Remove tool restrictions */
+            remove_child_mode_tool_filter();
+            
+            /* Auto-select Paint tool when exiting child mode */
+            cur_tool = TOOL_BRUSH;
+            
+            /* Redraw button with new state */
+            draw_row_minus_1_buttons();
+            update_screen_rect(&r_childmode_btn);
+            
+            /* Clear color area with OLD (stretched) dimensions BEFORE re-layout */
+            SDL_Rect color_clear_rect;
+            color_clear_rect.x = 0;
+            color_clear_rect.y = r_colors.y;
+            color_clear_rect.w = WINDOW_WIDTH;
+            color_clear_rect.h = WINDOW_HEIGHT - r_colors.y;  /* Clear to bottom with old height */
+            SDL_FillRect(screen, &color_clear_rect, SDL_MapRGB(screen->format, 255, 255, 255));
+            
+            /* Re-layout screen with new mode (sets new r_colors.h) */
+            setup_screen_layout();
+            
+            /* Redraw entire screen */
+            draw_toolbar();
+            update_screen_rect(&r_tools);
+            draw_colors(COLORSEL_FORCE_REDRAW);
+            
+            /* Clear right panel before drawing brushes */
+            SDL_Rect clear_rect;
+            clear_rect.x = WINDOW_WIDTH - r_ttoolopt.w;
+            clear_rect.y = 0;
+            clear_rect.w = r_ttoolopt.w;
+            clear_rect.h = r_colors.y;
+            SDL_FillRect(screen, &clear_rect, SDL_MapRGB(screen->format, 221, 221, 221));
+            
+            /* Draw brushes if in brush tool */
+            if (cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES)
+            {
+              draw_brushes();
+            }
+            
+            /* Flip screen immediately */
+            SDL_Flip(screen);
+            
+            playsound(screen, 1, SND_CLICK, 1, SNDPOS_LEFT, SNDDIST_NEAR);
+          }
+          
+          child_mode_button_press_start = 0;  /* Reset press tracking */
+        }
+        
         /* Stop slider dragging in child mode and snap to final position */
-        if (slider_dragging)
+        else if (slider_dragging)
         {
           slider_dragging = 0;
           
@@ -7703,6 +7792,9 @@ static void mainloop(void)
         SDL_Flip(screen);
       }
     }
+
+    /* Check for child mode long-press timeout */
+    check_child_mode_longpress();
 
     SDL_Delay(10);
   }
@@ -11084,6 +11176,36 @@ static void draw_row_minus_1_buttons(void)
     SDL_FreeSurface(icon_scaled);
   }
 
+  /* Draw lock indicator if child mode is locked */
+  if (child_mode_locked && img_lock_icon)
+  {
+    /* Scale lock icon smaller (50% size) */
+    SDL_Surface *lock_scaled = rotozoomSurfaceXY(img_lock_icon, 0, 0.5, 0.5, SMOOTHING_ON);
+    if (lock_scaled)
+    {
+      /* Create white version by modifying pixels directly */
+      SDL_LockSurface(lock_scaled);
+      Uint32 *pixels = (Uint32 *)lock_scaled->pixels;
+      int pixel_count = lock_scaled->w * lock_scaled->h;
+      
+      for (int i = 0; i < pixel_count; i++)
+      {
+        Uint8 r, g, b, a;
+        SDL_GetRGBA(pixels[i], lock_scaled->format, &r, &g, &b, &a);
+        /* Keep alpha, set RGB to white */
+        pixels[i] = SDL_MapRGBA(lock_scaled->format, 255, 255, 255, a);
+      }
+      
+      SDL_UnlockSurface(lock_scaled);
+      
+      /* Position lock icon in top-right corner of button */
+      dest.x = r_childmode_btn.x + button_w - lock_scaled->w - 2;
+      dest.y = r_childmode_btn.y + 2;
+      SDL_BlitSurface(lock_scaled, NULL, screen, &dest);
+      SDL_FreeSurface(lock_scaled);
+    }
+  }
+
   /* Apply color to label and draw it below the icon */
   SDL_BlitSurface(button_color, NULL, mode_label, NULL);
   dest.x = r_childmode_btn.x + (button_w - mode_label->w) / 2;
@@ -11640,6 +11762,134 @@ static void update_slider_animation(void)
     
     /* Interpolate between start and target positions */
     slider_current_pos = slider_start_pos + (slider_target_pos - slider_start_pos) * eased_t;
+  }
+}
+
+/**
+ * Check if child mode button is being held for 3s long-press
+ * Auto-triggers mode change after 3 seconds without waiting for button release
+ */
+static void check_child_mode_longpress(void)
+{
+  if (child_mode_button_press_start == 0)
+    return;  /* Button not pressed */
+  
+  Uint32 press_duration = SDL_GetTicks() - child_mode_button_press_start;
+  
+  if (press_duration >= 3000)
+  {
+    SDL_Log("Child mode long-press detected (3s), auto-triggering action. State: child_mode=%d, locked=%d, at_press_start=%d", 
+            child_mode, child_mode_locked, child_mode_at_press_start);
+    
+    if (child_mode_at_press_start == 0)
+    {
+      /* Expert mode → Child mode (locked) via long-press */
+      child_mode = 1;
+      child_mode_locked = 1;
+      SDL_Log("Child mode activated AND locked via long-press");
+      draw_tux_text(TUX_GREAT, gettext("Child mode activated and locked."), 0);
+      
+      /* Apply child mode tool filter */
+      apply_child_mode_tool_filter();
+      
+      /* Initialize child mode brush category based on current brush */
+      init_child_brush_category(cur_brush);
+      
+      /* Force brush tool selection */
+      cur_tool = TOOL_BRUSH;
+      
+      /* Initialize slider animation */
+      slider_dragging = 0;
+      slider_anim_duration = 0;
+      render_brush();
+      
+      /* Redraw button with new state */
+      draw_row_minus_1_buttons();
+      update_screen_rect(&r_childmode_btn);
+      
+      /* Re-layout screen with new mode */
+      setup_screen_layout();
+      
+      /* Clear entire color area including old label space */
+      SDL_Rect color_clear_rect;
+      color_clear_rect.x = 0;
+      color_clear_rect.y = r_colors.y;
+      color_clear_rect.w = WINDOW_WIDTH;
+      color_clear_rect.h = r_colors.h;
+      SDL_FillRect(screen, &color_clear_rect, SDL_MapRGB(screen->format, 255, 255, 255));
+      
+      /* Redraw entire screen */
+      draw_toolbar();
+      update_screen_rect(&r_tools);
+      draw_colors(COLORSEL_FORCE_REDRAW);
+      draw_child_mode_brush_slider();
+      SDL_Flip(screen);
+      
+      playsound(screen, 1, SND_CLICK, 1, SNDPOS_LEFT, SNDDIST_NEAR);
+    }
+    else if (child_mode_locked)
+    {
+      /* Child mode (locked) → Child mode (unlocked) via long-press */
+      child_mode_locked = 0;
+      draw_tux_text(TUX_BORED, gettext("Child mode unlocked."), 0);
+      draw_row_minus_1_buttons();
+      update_screen_rect(&r_childmode_btn);
+      SDL_Log("Child mode unlocked via long-press");
+    }
+    else
+    {
+      /* Child mode (unlocked) → Expert mode via long-press */
+      child_mode = 0;
+      SDL_Log("Child mode (unlocked) deactivated via long-press, returning to expert mode");
+      draw_tux_text(TUX_DEFAULT, gettext("Expert mode activated."), 0);
+      
+      /* Remove tool restrictions */
+      remove_child_mode_tool_filter();
+      
+      /* Auto-select Paint tool when exiting child mode */
+      cur_tool = TOOL_BRUSH;
+      
+      /* Redraw button with new state */
+      draw_row_minus_1_buttons();
+      update_screen_rect(&r_childmode_btn);
+      
+      /* Clear color area with OLD (stretched) dimensions BEFORE re-layout */
+      SDL_Rect color_clear_rect;
+      color_clear_rect.x = 0;
+      color_clear_rect.y = r_colors.y;
+      color_clear_rect.w = WINDOW_WIDTH;
+      color_clear_rect.h = WINDOW_HEIGHT - r_colors.y;  /* Clear to bottom with old height */
+      SDL_FillRect(screen, &color_clear_rect, SDL_MapRGB(screen->format, 255, 255, 255));
+      
+      /* Re-layout screen with new mode (sets new r_colors.h) */
+      setup_screen_layout();
+      
+      /* Redraw entire screen */
+      draw_toolbar();
+      update_screen_rect(&r_tools);
+      draw_colors(COLORSEL_FORCE_REDRAW);
+      
+      /* Clear right panel before drawing brushes */
+      SDL_Rect clear_rect;
+      clear_rect.x = WINDOW_WIDTH - r_ttoolopt.w;
+      clear_rect.y = 0;
+      clear_rect.w = r_ttoolopt.w;
+      clear_rect.h = r_colors.y;
+      SDL_FillRect(screen, &clear_rect, SDL_MapRGB(screen->format, 221, 221, 221));
+      
+      /* Draw brushes if in brush tool */
+      if (cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES)
+      {
+        draw_brushes();
+      }
+      
+      /* Flip screen immediately */
+      SDL_Flip(screen);
+      
+      playsound(screen, 1, SND_CLICK, 1, SNDPOS_LEFT, SNDDIST_NEAR);
+    }
+    
+    child_mode_button_press_start = 0;  /* Reset press tracking */
   }
 }
 
@@ -31783,6 +32033,7 @@ static void setup(void)
   img_kids_icon = loadimagerb(DATA_PREFIX "images/ui/kids_icon.png");
   img_expert_icon = loadimagerb(DATA_PREFIX "images/ui/expert_icon.png");
   img_sound_icon = loadimagerb(DATA_PREFIX "images/ui/sound_icon.png");
+  img_lock_icon = loadimagerb(DATA_PREFIX "images/ui/osk_capslock.png");
 
   img_title_on = loadimagerb(DATA_PREFIX "images/ui/title.png");
   img_title_large_on = loadimagerb(DATA_PREFIX "images/ui/title_large.png");

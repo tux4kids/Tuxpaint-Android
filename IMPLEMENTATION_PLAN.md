@@ -188,7 +188,7 @@ if (child_mode) {
 }
 ```
 
-### 6.3.1 Kontextabhängige Brush-Auswahl im Child Mode
+### 6.3.1 ✅ Kontextabhängige Brush-Auswahl im Child Mode
 
 Der Slider soll verschiedene Brush-Sets anbieten, abhängig davon, welcher Brush im Expert Mode aktiv war beim Wechsel in den Child Mode.
 
@@ -266,7 +266,7 @@ Brushes werden alphabetisch aus data/brushes/ geladen:
 68=x
 ```
 
-**Brush-Kategorien:**
+**Brush-Kategorien: ✅**
 
 #### Kategorie 1: Standard Brushes (0-4)
 - **Bedingung:** Wenn Brush 0, 1, 2, 3 oder 4 im Expert Mode gewählt war
@@ -598,12 +598,181 @@ void handle_slider_drag(int click_y) {
 8. [ ] Wechsel zwischen Expert Mode → Child Mode testen (Kategorie-Auswahl basierend auf aktivem Brush)
 9. [ ] Performance-Test mit Icon-Rendering bei Animation
 
-### 6.4 Left Toolbar
+### 6.4 ✅ Lock Child Mode Features
+
+**Requirements:**
+- [x] In child mode, sound toggle button must be disabled (cannot be changed)
+- [x] when changing to child mode, the buttton can be held for 3s longpress, to lock it
+- [x] if childmode is locked, the Child mode button requires 3s long-press to unlock
+- [x] Locked state prevents accidental exit from child mode
+- [x] Visual indicator for locked state (lock icon in top-right corner)
+- [ ] "Expert mode activated" message when exiting child mode
+
+**Implementation:**
+```c
+/* Global variables */
+static int child_mode_locked = 0;
+static Uint32 child_mode_button_press_start = 0;
+static int child_mode_at_press_start = 0;
+
+/* In event handler (MOUSEBUTTONDOWN) */
+if (HIT(r_childmode_btn)) {
+  child_mode_button_press_start = SDL_GetTicks();
+  child_mode_at_press_start = child_mode;  /* Remember state when press started */
+}
+
+/* In event handler (MOUSEBUTTONUP) */
+if (HIT(r_childmode_btn)) {
+  Uint32 press_duration = SDL_GetTicks() - child_mode_button_press_start;
+  
+  if (child_mode_locked) {
+    /* Child mode is locked: require 3s long-press to unlock */
+    if (press_duration >= 3000) {
+      child_mode_locked = 0;
+      draw_tux_text(TUX_BORED, gettext("Child mode unlocked."), 0);
+    }
+    else {
+      /* Too short: show locked message */
+      draw_tux_text(TUX_BORED, gettext("Child mode is locked. Long-press 3s to unlock."), 0);
+    }
+  }
+  else if (child_mode_at_press_start == 0) {
+    /* Transitioning FROM expert TO child mode */
+    if (press_duration >= 3000) {
+      /* Long press: activate child mode AND lock it */
+      child_mode = 1;
+      child_mode_locked = 1;
+      setup_screen_layout();
+      draw_tux_text(TUX_BORED, gettext("Child mode activated and locked."), 0);
+    }
+    else {
+      /* Short press: just activate child mode (unlocked) */
+      child_mode = 1;
+      setup_screen_layout();
+      draw_tux_text(TUX_BORED, gettext("Child mode activated."), 0);
+    }
+  }
+  else {
+    /* Already in child mode (unlocked): exit to expert mode */
+    child_mode = 0;
+    setup_screen_layout();
+    draw_tux_text(TUX_BORED, gettext("Expert mode activated."), 0);
+  }
+  
+  child_mode_button_press_start = 0;
+}
+
+/* Disable sound button in child mode */
+if (HIT(r_sound_btn)) {
+  if (!child_mode) {
+    /* Allow sound toggle only in expert mode */
+    use_sound = !use_sound;
+    Mix_HaltChannel(-1);
+    draw_row_minus_1_buttons();
+    update_screen_rect(&r_sound_btn);
+    // ...
+  }
+  else {
+    /* Child mode: sound button locked */
+    draw_tux_text(TUX_BORED, gettext("Sound is locked in child mode."), 0);
+  }
+}
+```
+
+### 6.4.2 Preferences (Persistent Storage)
+
+**Save the following in SharedPreferences:**
+- [ ] Sound toggle status (`use_sound`)
+- [ ] Child mode status (`child_mode`)
+- [ ] Child mode locked status (`child_mode_locked`)
+- [ ] Last brush in child mode (restore when switching back from expert mode)
+- [ ] Last brush category in child mode
+
+**Implementation (Android JNI):**
+```c
+/* Save preferences via JNI */
+void save_preferences(void) {
+  JNIEnv *env = (JNIEnv*)SDL_AndroidGetJNIEnv();
+  jobject activity = (jobject)SDL_AndroidGetActivity();
+  
+  jclass clazz = (*env)->GetObjectClass(env, activity);
+  jmethodID method = (*env)->GetMethodID(env, clazz, "savePreferences", "(IIIII)V");
+  
+  (*env)->CallVoidMethod(env, activity, method, 
+    use_sound, child_mode, child_mode_locked, cur_brush, child_brush_category);
+  
+  (*env)->DeleteLocalRef(env, clazz);
+  (*env)->DeleteLocalRef(env, activity);
+}
+
+/* Load preferences via JNI */
+void load_preferences(void) {
+  JNIEnv *env = (JNIEnv*)SDL_AndroidGetJNIEnv();
+  jobject activity = (jobject)SDL_AndroidGetActivity();
+  
+  jclass clazz = (*env)->GetObjectClass(env, activity);
+  jmethodID method_sound = (*env)->GetMethodID(env, clazz, "getUseSoundPref", "()I");
+  jmethodID method_child = (*env)->GetMethodID(env, clazz, "getChildModePref", "()I");
+  jmethodID method_locked = (*env)->GetMethodID(env, clazz, "getChildModeLockedPref", "()I");
+  jmethodID method_brush = (*env)->GetMethodID(env, clazz, "getLastBrushPref", "()I");
+  
+  use_sound = (*env)->CallIntMethod(env, activity, method_sound);
+  child_mode = (*env)->CallIntMethod(env, activity, method_child);
+  child_mode_locked = (*env)->CallIntMethod(env, activity, method_locked);
+  cur_brush = (*env)->CallIntMethod(env, activity, method_brush);
+  
+  (*env)->DeleteLocalRef(env, clazz);
+  (*env)->DeleteLocalRef(env, activity);
+}
+```
+
+**Java Side (TuxPaintActivity.java):**
+```java
+public void savePreferences(int useSound, int childMode, int childModeLocked, 
+                           int lastBrush, int brushCategory) {
+  SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+  SharedPreferences.Editor editor = prefs.edit();
+  editor.putInt("use_sound", useSound);
+  editor.putInt("child_mode", childMode);
+  editor.putInt("child_mode_locked", childModeLocked);
+  editor.putInt("last_brush", lastBrush);
+  editor.putInt("brush_category", brushCategory);
+  editor.apply();
+}
+
+public int getUseSoundPref() {
+  return getPreferences(MODE_PRIVATE).getInt("use_sound", 1);
+}
+
+public int getChildModePref() {
+  return getPreferences(MODE_PRIVATE).getInt("child_mode", 0);
+}
+
+public int getChildModeLockedPref() {
+  return getPreferences(MODE_PRIVATE).getInt("child_mode_locked", 0);
+}
+
+public int getLastBrushPref() {
+  return getPreferences(MODE_PRIVATE).getInt("last_brush", 3);
+}
+```
+
+**Call on app start/exit:**
+```c
+/* In setup() */
+load_preferences();
+
+/* In cleanup() or on pause */
+save_preferences();
+```
+
+
+### 6.5 Left Toolbar
 
 **Layout:**
-- Größere Buttons (mehr Platz pro Button)
-- nur 1 Spalte statt 2
-- den speaker in row -1 auch sperren in dem Zustand, wie er gerade ist
+- Larger buttons (more space per button)
+- Only 1 column instead of 2
+- Lock sound button in row -1 in its current state
 
 **New-Button Behavior:**
 ```c
@@ -613,40 +782,27 @@ if (child_mode && cur_tool == TOOL_NEW) {
 }
 ```
 
-### 6.5 Exit Child Mode Button
-- Spezieller Button unten im Toolbar
-- Setzt `child_mode = 0`
-- Trigger normales Layout
-
-**Test Scenarios:**
-1. Toggle Child Mode aktiviert
-2. UI zeigt nur simplified tools
-3. Slider steuert Brush-Size
-4. New macht Auto-Save
-5. Exit Child Mode → normales UI
-
-**Commit:** `feat: Implement child mode with simplified UI`
 
 ---
 
 ## 7. 🧪 Testing & Documentation
 
-**Unittests:**
-- [ ] Default Brush ist zweiter
-- [ ] Colors Label entfernt, Buttons volle Breite
-- [ ] Tools Label entfernt
-- [ ] Sound Button togglet Sound
-- [ ] Child Mode Button togglet Mode
-- [ ] Child Mode: Simplified UI funktioniert
-- [ ] Child Mode: Slider funktioniert
-- [ ] Child Mode: New macht Auto-Save
-- [ ] Child Mode: Exit zurück zu normal
+**Unit Tests:**
+- [ ] Child Mode: New performs auto-save
+- [ ] Child Mode: Exit returns to normal mode
+- [ ] Child Mode Lock: 3s long-press locks/unlocks
+- [ ] Sound button disabled in child mode
+- [ ] Preferences save/load correctly
 
 **Performance:**
-- Kein Slowdown durch neue Features
-- Smooth drawing weiterhin gewährleistet
+- No slowdown from new features
+- Smooth drawing still guaranteed
 
-**Commit:** `docs: Update documentation with new UI features`
+**Commits:**
+- `feat: Add child mode lock with 3s long-press`
+- `feat: Disable sound toggle in child mode`
+- `feat: Add preferences storage for child mode state`
+- `docs: Update documentation with new UI features`
 
 ---
 
