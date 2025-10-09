@@ -774,7 +774,7 @@ save_preferences();
   - [x] Paint (TOOL_BRUSH)
   - [x] Eraser (TOOL_ERASER)
   - [x] Fill (TOOL_FILL)
-  - [ ] Save (TOOL_SAVE) (dont ask to overwrite the old file, just save an ew file each time in child mode)
+  - [x] Save (TOOL_SAVE) - Always saves new file in child mode
   - [x] New (TOOL_NEW with Auto-Save)
     - [x] Auto-Save before showing dialog
   - [x] Undo (TOOL_UNDO)
@@ -784,7 +784,8 @@ save_preferences();
 - `draw_toolbar()`: Child Mode renders single-column layout with 7 fixed tools
 - Click handling: Custom logic for single-column button detection
 - Cursor handling: Adapted for larger button heights
-- Auto-save: `do_save(cur_tool, 1, 1)` called before `do_new_dialog()`
+- `do_save()`: Child Mode always creates new file via `get_new_file_id()` (no overwrite prompts)
+- Auto-save before NEW: `do_save(cur_tool, 1, 0)` saves current drawing silently
 
 
 ---
@@ -793,6 +794,7 @@ save_preferences();
 
 **Unit Tests:**
 - [x] Child Mode: New performs auto-save
+- [x] Child Mode: Save always creates new file (no overwrite)
 - [x] Child Mode Lock: 3s long-press locks/unlocks
 - [x] Sound button disabled in child mode
 - [x] Preferences save/load correctly

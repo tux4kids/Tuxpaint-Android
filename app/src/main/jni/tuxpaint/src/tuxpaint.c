@@ -109,6 +109,9 @@
 #define COLORSEL_CLOBBER_WIPE 8 /* draw the (greyed out) colors, but don't disable */
 #define COLORSEL_FORCE_REDRAW 16        /* enable, and force redraw (to make color picker work) */
 
+/* Child Mode UI settings */
+#define CHILD_MODE_BUTTON_HEIGHT_SCALE 1.3  /* Child mode buttons are 30% taller */
+
 /* FIXME: Why are we checking this BEFORE the #include "SDL.h"!? Does this even work? -bjk 2010.04.24 */
 /* Setting the amask value based on endianness*/
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
@@ -3921,7 +3924,7 @@ static void mainloop(void)
             if (child_mode)
             {
               int child_tools[] = {TOOL_BRUSH, TOOL_ERASER, TOOL_FILL, TOOL_SAVE, TOOL_NEW, TOOL_UNDO, TOOL_REDO};
-              int button_height = button_h * 1.2;
+              int button_height = button_h * CHILD_MODE_BUTTON_HEIGHT_SCALE;
               int tool_index = (event.button.y - r_tools.y) / button_height;
               
               if (tool_index >= 0 && tool_index < 7)
@@ -7091,7 +7094,7 @@ static void mainloop(void)
           if (child_mode)
           {
             int child_tools[] = {TOOL_BRUSH, TOOL_ERASER, TOOL_FILL, TOOL_SAVE, TOOL_NEW, TOOL_UNDO, TOOL_REDO};
-            int button_height = button_h * 1.2;
+            int button_height = button_h * CHILD_MODE_BUTTON_HEIGHT_SCALE;
             int tool_index = (event.button.y - r_tools.y) / button_height;
             
             if (tool_index >= 0 && tool_index < 7 && tool_avail[child_tools[tool_index]])
@@ -11203,7 +11206,7 @@ static void draw_toolbar(void)
   {
     cols = 1;
     button_width = gd_tools.cols * button_w;  /* Use full width (2x normal) */
-    button_height = button_h * 1.2;  /* 20% taller buttons */
+    button_height = button_h * CHILD_MODE_BUTTON_HEIGHT_SCALE;
   }
   else
   {
@@ -18047,13 +18050,8 @@ static int do_save(int tool, int dont_show_success_results, int autosave)
   }
   else if (child_mode)
   {
-    /* Child Mode: Auto-save without prompts */
-    if (file_id[0] == '\0')
-    {
-      /* No file_id yet, create new one */
-      get_new_file_id();
-    }
-    /* Otherwise save over existing file without prompting */
+    /* Child Mode: Always create a new file without prompts */
+    get_new_file_id();
   }
   else if (promptless_save == SAVE_OVER_NO)
   {
