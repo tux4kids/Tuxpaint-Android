@@ -1,25 +1,25 @@
 # Refactoring Plan: Minimal Sound Toggle Implementation
 
-**Datum**: 9.10.2025 05:57  
-**Ziel**: Reduktion auf minimale Implementierung durch Verwendung von `use_sound` statt `mute`
+**Date**: 2025-10-09 05:57  
+**Goal**: Reduce to minimal implementation by using `use_sound` instead of `mute`
 
 ---
 
 ## Executive Summary
 
-**Problem**: Wir haben eine redundante `mute` Variable eingeführt, die das gleiche macht wie `use_sound` toggle.
+**Problem**: We activated a `mute` variable that has existed since 2015 but was unused. This was redundant since `use_sound` can already fulfill this function.
 
-**Lösung**: `mute` Variable entfernen und stattdessen `use_sound` zur Runtime togglen.
+**Solution**: Remove `mute` variable and toggle `use_sound` at runtime instead.
 
-**Vorteil**:
-- ✅ **-150 LOC** (weniger Code zu maintainen)
-- ✅ **Semantisch korrekt** (`use_sound` bedeutet genau das)
-- ✅ **Keine Verhaltensänderung** (funktional identisch)
-- ✅ **Minimaler Merge Request** (näher am Original)
+**Benefits**:
+- ✅ **-150 LOC** (less code to maintain)
+- ✅ **Semantically correct** (`use_sound` means exactly that)
+- ✅ **No behavior change** (functionally identical)
+- ✅ **Minimal merge request** (closer to original)
 
 ---
 
-## Betroffene Commits (zum Vereinfachen)
+## Affected Commits (to simplify)
 
 1. **16f3b445** - Add sound toggle button to toolbar (+101 LOC)
 2. **a0386f66** - WIP: fix sound toggle: add detailed sound control logging
@@ -31,9 +31,9 @@
 
 ---
 
-## Aktuelle Situation (mit `mute`)
+## Current Situation (with `mute`)
 
-### Variable Deklaration
+### Variable Declaration
 ```c
 // playsound.c:33
 int mute;  // <-- REMOVE
@@ -42,34 +42,22 @@ int mute;  // <-- REMOVE
 extern int mute, use_sound, use_stereo;  // <-- REMOVE mute
 ```
 
-### Alle 20 Verwendungsstellen von `mute` in tuxpaint.c
+### All 20 Usage Locations of `mute` in tuxpaint.c
 
-| Zeile | Kontext | Aktion |
+| Line | Context | Action |
 |-------|---------|--------|
 | 2969 | `mute = !mute;` (Alt+S handler) | → `use_sound = !use_sound;` |
-| 2972 | `if (mute)` | → `if (!use_sound)` |
-| 3740 | `mute = !mute;` (button handler) | → `use_sound = !use_sound;` |
-| 3747 | `if (mute)` | → `if (!use_sound)` |
-| 5372 | `if (toolopt_changed && !mute)` | → `if (toolopt_changed && use_sound)` |
-| 5387 | `if (!mute)` | → `if (use_sound)` |
-| 5403 | `if (!mute)` | → `if (use_sound)` |
-| 6090 | `if (... && !mute)` | → `if (... && use_sound)` (redundant, s.u.) |
-| 6099 | `if (!mute)` | → `if (use_sound)` |
-| 6105 | `if (!mute)` | → `if (use_sound)` |
-| 6392 | `if (!mute && ...)` | → `if (use_sound && ...)` |
-| 6865 | `if (... && !mute ...)` | → `if (... && use_sound ...)` (redundant) |
-| 10999 | `mute ? img_btn_off : img_btn_up` | → `use_sound ? img_btn_up : img_btn_off` |
 | 11000 | `mute ? img_grey : img_black` | → `use_sound ? img_black : img_grey` |
 | 13935 | `if (!mute && use_sound)` | → `if (use_sound)` (redundant check) |
-| 14289 | `if (... && !mute)` | → bereits `use_sound` check (redundant) |
-| 14305 | `if (... && !mute)` | → bereits `use_sound` check (redundant) |
+| 14289 | `if (... && !mute)` | → already `use_sound` check (redundant) |
+| 14305 | `if (... && !mute)` | → already `use_sound` check (redundant) |
 | 23655 | `if (mute \|\| !use_sound)` | → `if (!use_sound)` |
 | 23675 | `if (mute \|\| !use_sound \|\| ...)` | → `if (!use_sound \|\| ...)` |
 | 27221 | `if (!mute && use_sound)` | → `if (use_sound)` (redundant check) |
 
 ### playsound.c
 ```c
-// Zeile 57
+// Line 57
 if (!mute && use_sound && s != SND_NONE)  // <-- REMOVE !mute check
   →
 if (use_sound && s != SND_NONE)
@@ -77,10 +65,10 @@ if (use_sound && s != SND_NONE)
 
 ---
 
-## Refactoring Steps (in dieser Reihenfolge)
+## Refactoring Steps (in this order)
 
-### Step 1: Variable Deklarationen entfernen
-**Dateien**: `playsound.c`, `playsound.h`
+### Step 1: Remove Variable Declarations
+**Files**: `playsound.c`, `playsound.h`
 
 ```diff
 --- a/app/src/main/jni/tuxpaint/src/playsound.c
@@ -103,11 +91,11 @@ if (use_sound && s != SND_NONE)
 +extern int use_sound, use_stereo;
 ```
 
-### Step 2: Toggle-Logik ersetzen (2 Stellen)
+### Step 2: Replace Toggle Logic (2 locations)
 
-**Datei**: `tuxpaint.c`
+**File**: `tuxpaint.c`
 
-#### 2a) Alt+S Keyboard Handler (Zeile 2969)
+#### 2a) Alt+S Keyboard Handler (Line 2969)
 ```diff
 @@ -2966,11 +2966,11 @@
            {
@@ -124,7 +112,7 @@ if (use_sound && s != SND_NONE)
                draw_tux_text(TUX_BORED, gettext("Sound muted."), 0);
 ```
 
-#### 2b) Sound Button Click Handler (Zeile 3740)
+#### 2b) Sound Button Click Handler (Line 3740)
 ```diff
 @@ -3738,13 +3738,13 @@
            /* Sound toggle button clicked */
@@ -144,9 +132,9 @@ if (use_sound && s != SND_NONE)
            }
 ```
 
-### Step 3: Button Rendering (Zeile 10999-11000)
+### Step 3: Button Rendering (Line 10999-11000)
 
-**Datei**: `tuxpaint.c` - Funktion `draw_row_minus_1_buttons()`
+**File**: `tuxpaint.c` - Function `draw_row_minus_1_buttons()`
 
 ```diff
 @@ -10997,8 +10997,8 @@
@@ -162,11 +150,11 @@ if (use_sound && s != SND_NONE)
    button_scaled = rotozoomSurfaceXY(button_body, 0, 1.0, scale_y, SMOOTHING_ON);
 ```
 
-### Step 4: Redundante Checks entfernen (6 Stellen)
+### Step 4: Remove Redundant Checks (6 locations)
 
-Alle Stellen wo `!mute &&` vor `use_sound` steht → redundanter Check!
+All locations where `!mute &&` precedes `use_sound` → redundant check!
 
-#### 4a) playsound() in playsound.c (Zeile 57)
+#### 4a) playsound() in playsound.c (Line 57)
 ```diff
 @@ -54,7 +54,7 @@
  #ifndef NOSOUND
@@ -179,7 +167,7 @@ Alle Stellen wo `!mute &&` vor `use_sound` steht → redundanter Check!
      printf("playsound #%d in channel %d, pos (%d,%d), %soverride, ptr=%p\n",
 ```
 
-#### 4b-f) tuxpaint.c - Redundante Doppel-Checks
+#### 4b-f) tuxpaint.c - Redundant Double-Checks
 ```diff
 @@ -13933,7 +13933,7 @@
  
@@ -219,9 +207,9 @@ Alle Stellen wo `!mute &&` vor `use_sound` steht → redundanter Check!
              {
 ```
 
-### Step 5: Stamp-Sound Checks vereinfachen (10 Stellen)
+### Step 5: Simplify Stamp-Sound Checks (10 locations)
 
-Alle direkten `Mix_PlayChannel()` Aufrufe mit `!mute` check:
+All direct `Mix_PlayChannel()` calls with `!mute` check:
 
 ```diff
 @@ -5370,7 +5370,7 @@
@@ -312,7 +300,7 @@ Alle direkten `Mix_PlayChannel()` Aufrufe mit `!mute` check:
      /* Sound effect: */
 ```
 
-### Step 6: Kommentare aktualisieren
+### Step 6: Update Comments
 
 ```diff
 @@ -23670,8 +23670,7 @@
@@ -331,8 +319,8 @@ Alle direkten `Mix_PlayChannel()` Aufrufe mit `!mute` check:
 
 ## Test Plan
 
-### Unit Test anpassen
-**Datei**: `SoundToggleTest.java`
+### Adapt Unit Test
+**File**: `SoundToggleTest.java`
 
 ```diff
 - Test checks for mute variable
@@ -349,12 +337,12 @@ Alle direkten `Mix_PlayChannel()` Aufrufe mit `!mute` check:
 
 ## Code Statistics
 
-### Before (mit `mute`)
+### Before (with `mute`)
 - Variable declarations: 2 files
 - Usage locations: 20 in tuxpaint.c + 1 in playsound.c
-- Redundant checks: 10+ Stellen wo `!mute && use_sound`
+- Redundant checks: 10+ locations where `!mute && use_sound`
 
-### After (nur `use_sound`)
+### After (only `use_sound`)
 - Variable declarations: ❌ removed
 - Usage locations: 0 (uses existing `use_sound`)
 - Redundant checks: ❌ removed
@@ -425,9 +413,9 @@ Testing:
 
 ---
 
-## Alternative: Sichere Version mit Config-Check
+## Alternative: Safe Version with Config-Check
 
-Falls wir sicherstellen wollen, dass `use_sound` nicht getoggled wird wenn es via Config disabled wurde:
+If we want to ensure that `use_sound` is not toggled when disabled via config:
 
 ```c
 // Add new variable at startup:
@@ -443,18 +431,18 @@ if (use_sound_initial) {  // Only toggle if initially enabled
 }
 ```
 
-**Empfehlung**: Nicht nötig für Android App (keine Config), aber dokumentieren für upstream merge.
+**Recommendation**: Not necessary for Android app (no config), but document for upstream merge.
 
 ---
 
 ## Conclusion
 
-**Empfohlener Ansatz**: 
-1. Jetzt refactoren (Steps 1-6)
-2. Testen
-3. Single commit für sauberen MR
-4. Optional: Kommentar hinzufügen dass für Desktop-Version evtl. `use_sound_initial` check sinnvoll ist
+**Recommended Approach**: 
+1. Refactor now (Steps 1-6)
+2. Test
+3. Single commit for clean MR
+4. Optional: Add comment that for desktop version, `use_sound_initial` check might be useful
 
-**Zeit**: ~1 Stunde Arbeit, spart langfristig Maintenance
+**Time**: ~1 hour work, saves long-term maintenance
 **LOC**: -30 lines cleaner code
-**Risk**: Minimal (nur variable substitution)
+**Risk**: Minimal (only variable substitution)
