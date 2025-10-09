@@ -4127,10 +4127,18 @@ static void mainloop(void)
 
                   draw_fonts();
                   draw_colors(COLORSEL_ENABLE);
+#ifdef __ANDROID__
+                  __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", 
+                                     "TEXT tool: num_font_families=%d, fonts loaded OK", num_font_families);
+#endif
                 }
                 else
                 {
                   /* Problem using fonts! */
+#ifdef __ANDROID__
+                  __android_log_print(ANDROID_LOG_ERROR, "TuxPaint", 
+                                     "TEXT tool FAILED: num_font_families=0, resetting to old_tool=%d", old_tool);
+#endif
 
                   cur_tool = old_tool;
                   draw_toolbar();
@@ -32288,10 +32296,17 @@ static void setup(void)
 #ifndef __ANDROID__
   font_thread = SDL_CreateThread(load_user_fonts_stub, "font_thread", NULL);
 #else
-  /* On Android, skip font loading thread - fonts will be loaded on demand */
-  DEBUG_PRINTF("Android: Skipping font loading thread\n");
+  /* On Android, load fonts synchronously (no threading) */
+  DEBUG_PRINTF("Android: Loading fonts synchronously\n");
+#ifdef __ANDROID__
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Android: Loading fonts now...");
+#endif
+  load_user_fonts_stub(NULL);  /* Load fonts now */
   font_thread_done = 1;
   font_thread_aborted = 0;
+#ifdef __ANDROID__
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Android: Fonts loaded, num_font_families=%d", num_font_families);
+#endif
 #endif
 #endif
 
