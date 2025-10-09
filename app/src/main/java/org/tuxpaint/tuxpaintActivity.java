@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.libsdl.app.SDLActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +16,10 @@ import android.Manifest;
 
 public class tuxpaintActivity extends SDLActivity {
     private static final String TAG = "Tux Paint";
+    private static final String PREFS_NAME = "TuxPaintPrefs";
     private static AssetManager mgr;
+    private static tuxpaintActivity instance;
+    
     private static native boolean managertojni(AssetManager mgr);
     private static native void setnativelibdir(String path);
     private static native void nativeOnTouch(int action, int pointerCount, float[] x, float[] y, long[] pointerIds);
@@ -29,6 +33,7 @@ public class tuxpaintActivity extends SDLActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.v(TAG, "onCreate()");
+        instance = this;
 
         boolean requestPermissions = false;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && Build.VERSION.SDK_INT <= Build.VERSION_CODES.R) {
@@ -43,6 +48,12 @@ public class tuxpaintActivity extends SDLActivity {
         mgr = getResources().getAssets();
         managertojni(mgr);
         setnativelibdir(getApplicationInfo().nativeLibraryDir + "/");
+    }
+    
+    @Override
+    protected void onDestroy() {
+        instance = null;
+        super.onDestroy();
     }
 
     @Override
@@ -67,6 +78,61 @@ public class tuxpaintActivity extends SDLActivity {
         
         // Let SDL handle it too
         return super.onTouchEvent(event);
+    }
+    
+    /**
+     * Save child mode preferences to SharedPreferences
+     * Called from native code via JNI
+     * @param useSound Sound toggle status (1 = enabled, 0 = disabled)
+     * @param childMode Child mode status (1 = enabled, 0 = disabled)
+     * @param childModeLocked Child mode locked status (1 = locked, 0 = unlocked)
+     * @param lastBrush Last brush index in child mode
+     * @param lastBrushCategory Last brush category in child mode
+     */
+    public static void savePreferences(int useSound, int childMode, int childModeLocked, int lastBrush, int lastBrushCategory) {
+        if (instance == null) {
+            Log.w(TAG, "savePreferences() called but instance is null");
+            return;
+        }
+        
+        SharedPreferences prefs = instance.getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        
+        editor.putBoolean("use_sound", useSound != 0);
+        editor.putBoolean("child_mode", childMode != 0);
+        editor.putBoolean("child_mode_locked", childModeLocked != 0);
+        editor.putInt("last_brush", lastBrush);
+        editor.putInt("last_brush_category", lastBrushCategory);
+        
+        editor.apply();
+        
+        Log.d(TAG, "Saved preferences: sound=" + useSound + " childMode=" + childMode + 
+              " locked=" + childModeLocked + " brush=" + lastBrush + " category=" + lastBrushCategory);
+    }
+    
+    /**
+     * Load child mode preferences from SharedPreferences
+     * Called from native code via JNI
+     * @return Array of 5 integers: [useSound, childMode, childModeLocked, lastBrush, lastBrushCategory]
+     */
+    public static int[] loadPreferences() {
+        if (instance == null) {
+            Log.w(TAG, "loadPreferences() called but instance is null, returning defaults");
+            return new int[] {1, 0, 0, 0, 0};  // Default: sound on, child mode off, unlocked, brush 0, category 0
+        }
+        
+        SharedPreferences prefs = instance.getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        
+        int useSound = prefs.getBoolean("use_sound", true) ? 1 : 0;
+        int childMode = prefs.getBoolean("child_mode", false) ? 1 : 0;
+        int childModeLocked = prefs.getBoolean("child_mode_locked", false) ? 1 : 0;
+        int lastBrush = prefs.getInt("last_brush", 0);
+        int lastBrushCategory = prefs.getInt("last_brush_category", 0);
+        
+        Log.d(TAG, "Loaded preferences: sound=" + useSound + " childMode=" + childMode + 
+              " locked=" + childModeLocked + " brush=" + lastBrush + " category=" + lastBrushCategory);
+        
+        return new int[] {useSound, childMode, childModeLocked, lastBrush, lastBrushCategory};
     }
 
     static {

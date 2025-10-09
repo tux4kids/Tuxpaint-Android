@@ -29,6 +29,8 @@
 
 #ifdef __ANDROID__
 #include <android/log.h>
+#include "../../../SDL2/src/core/android/SDL_android.h"
+#include "jni.h"
 #ifdef ENABLE_MULTITOUCH
 #include "android_multitouch.h"
 #endif
@@ -2470,6 +2472,127 @@ confetti_t confetti[NUM_CONFETTI];
 #endif
 
 
+#ifdef __ANDROID__
+/**
+ * Save child mode preferences via JNI to Android SharedPreferences
+ */
+static void save_preferences(void)
+{
+  JNIEnv *env = Android_JNI_GetEnv();
+  if (!env) {
+    __android_log_print(ANDROID_LOG_ERROR, "TuxPaint", "save_preferences: Failed to get JNI environment");
+    return;
+  }
+  
+  jobject activity = (jobject)SDL_AndroidGetActivity();
+  if (!activity) {
+    __android_log_print(ANDROID_LOG_ERROR, "TuxPaint", "save_preferences: Failed to get activity");
+    return;
+  }
+  
+  jclass clazz = (*env)->GetObjectClass(env, activity);
+  jmethodID method = (*env)->GetStaticMethodID(env, clazz, "savePreferences", "(IIIII)V");
+  
+  if (method) {
+    (*env)->CallStaticVoidMethod(env, clazz, method, 
+                          use_sound, child_mode, child_mode_locked, cur_brush, child_brush_category);
+    __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", 
+                       "Saved preferences: sound=%d childMode=%d locked=%d brush=%d category=%d",
+                       use_sound, child_mode, child_mode_locked, cur_brush, child_brush_category);
+  } else {
+    __android_log_print(ANDROID_LOG_ERROR, "TuxPaint", "save_preferences: Method not found");
+  }
+  
+  (*env)->DeleteLocalRef(env, clazz);
+  (*env)->DeleteLocalRef(env, activity);
+}
+
+/**
+ * Load child mode preferences via JNI from Android SharedPreferences
+ */
+static void load_preferences(void)
+{
+  JNIEnv *env = Android_JNI_GetEnv();
+  if (!env) {
+    __android_log_print(ANDROID_LOG_ERROR, "TuxPaint", "load_preferences: Failed to get JNI environment");
+    return;
+  }
+  
+  jobject activity = (jobject)SDL_AndroidGetActivity();
+  if (!activity) {
+    __android_log_print(ANDROID_LOG_ERROR, "TuxPaint", "load_preferences: Failed to get activity");
+    return;
+  }
+  
+  jclass clazz = (*env)->GetObjectClass(env, activity);
+  jmethodID method = (*env)->GetStaticMethodID(env, clazz, "loadPreferences", "()[I");
+  
+  if (method) {
+    jintArray result = (jintArray)(*env)->CallStaticObjectMethod(env, clazz, method);
+    if (result) {
+      jint *values = (*env)->GetIntArrayElements(env, result, NULL);
+      if (values) {
+        use_sound = values[0];
+        child_mode = values[1];
+        child_mode_locked = values[2];
+        int saved_brush = values[3];
+        child_brush_category = values[4];
+        
+        __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", 
+                           "Loaded preferences: sound=%d childMode=%d locked=%d brush=%d category=%d",
+                           use_sound, child_mode, child_mode_locked, saved_brush, child_brush_category);
+        
+        /* If child mode was active, initialize the brush category and restore the brush */
+        if (child_mode) {
+          init_child_brush_category(saved_brush);
+          /* Validate saved brush is in the loaded category, otherwise use first brush */
+          int brush_valid = 0;
+          for (int i = 0; i < child_brush_count; i++) {
+            if (child_brush_indices[i] == saved_brush) {
+              brush_valid = 1;
+              cur_brush = saved_brush;
+              break;
+            }
+          }
+          if (!brush_valid) {
+            cur_brush = child_brush_indices[0];
+            __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", 
+                               "Saved brush %d not in category, using first brush %d",
+                               saved_brush, cur_brush);
+          }
+          
+          /* Apply child mode tool restrictions */
+          apply_child_mode_tool_filter();
+          
+          /* Ensure brush tool is selected */
+          cur_tool = TOOL_BRUSH;
+        } else {
+          /* Not in child mode, just restore the brush directly */
+          /* Validate brush index is within bounds */
+          if (saved_brush >= 0 && saved_brush < num_brushes) {
+            cur_brush = saved_brush;
+          } else {
+            cur_brush = 1; /* Default to second brush (4px) */
+            __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", 
+                               "Saved brush %d out of bounds (num_brushes=%d), using default",
+                               saved_brush, num_brushes);
+          }
+        }
+        
+        (*env)->ReleaseIntArrayElements(env, result, values, JNI_ABORT);
+      }
+      (*env)->DeleteLocalRef(env, result);
+    }
+  } else {
+    __android_log_print(ANDROID_LOG_ERROR, "TuxPaint", "load_preferences: Method not found");
+  }
+  
+  (*env)->DeleteLocalRef(env, clazz);
+  (*env)->DeleteLocalRef(env, activity);
+}
+#endif
+
+
 /**
  * Wait for a keypress or mouse click.
  *
@@ -2972,6 +3095,10 @@ static void mainloop(void)
 
           use_sound = !use_sound;
           Mix_HaltChannel(-1);
+
+#ifdef __ANDROID__
+          save_preferences();
+#endif
 
           if (!use_sound)
           {
@@ -3746,6 +3873,10 @@ static void mainloop(void)
             use_sound = !use_sound;
             Mix_HaltChannel(-1);
 
+#ifdef __ANDROID__
+            save_preferences();
+#endif
+
             /* Redraw the button with new state */
             draw_row_minus_1_buttons();
             update_screen_rect(&r_sound_btn);
@@ -4330,6 +4461,10 @@ static void mainloop(void)
               
               SDL_Log("SLIDER CLICK: percentage=%.2f, brush=%d, instant position update", 
                       click_percentage, cur_brush);
+              
+#ifdef __ANDROID__
+              save_preferences();
+#endif
               
               /* Update brush */
               render_brush();
@@ -5234,6 +5369,10 @@ static void mainloop(void)
             {
               cur_brush = cur_thing;
               render_brush();
+
+#ifdef __ANDROID__
+              save_preferences();
+#endif
 
               if (do_draw)
               {
@@ -6358,6 +6497,10 @@ static void mainloop(void)
             SDL_Log("Child mode activated (unlocked)");
             draw_tux_text(TUX_GREAT, gettext("Child mode activated."), 0);
             
+#ifdef __ANDROID__
+            save_preferences();
+#endif
+            
             /* Apply tool restrictions */
             apply_child_mode_tool_filter();
             
@@ -6435,6 +6578,10 @@ static void mainloop(void)
             child_mode = 0;
             SDL_Log("Child mode deactivated, returning to expert mode");
             draw_tux_text(TUX_DEFAULT, gettext("Expert mode activated."), 0);
+            
+#ifdef __ANDROID__
+            save_preferences();
+#endif
             
             /* Remove tool restrictions */
             remove_child_mode_tool_filter();
@@ -6871,6 +7018,10 @@ static void mainloop(void)
             cur_brush = new_brush;
             SDL_Log("SLIDER DRAG: motion_y=%d, pos=%.2f, new brush=%d", 
                     motion_y, slider_current_pos, cur_brush);
+            
+#ifdef __ANDROID__
+            save_preferences();
+#endif
             
             /* Update brush */
             render_brush();
@@ -11789,6 +11940,10 @@ static void check_child_mode_longpress(void)
       SDL_Log("Child mode activated AND locked via long-press");
       draw_tux_text(TUX_GREAT, gettext("Child mode activated and locked."), 0);
       
+#ifdef __ANDROID__
+      save_preferences();
+#endif
+      
       /* Apply child mode tool filter */
       apply_child_mode_tool_filter();
       
@@ -11832,6 +11987,11 @@ static void check_child_mode_longpress(void)
       /* Child mode (locked) → Child mode (unlocked) via long-press */
       child_mode_locked = 0;
       draw_tux_text(TUX_BORED, gettext("Child mode unlocked."), 0);
+      
+#ifdef __ANDROID__
+      save_preferences();
+#endif
+      
       draw_row_minus_1_buttons();
       update_screen_rect(&r_childmode_btn);
       SDL_Log("Child mode unlocked via long-press");
@@ -11842,6 +12002,10 @@ static void check_child_mode_longpress(void)
       child_mode = 0;
       SDL_Log("Child mode (unlocked) deactivated via long-press, returning to expert mode");
       draw_tux_text(TUX_DEFAULT, gettext("Expert mode activated."), 0);
+      
+#ifdef __ANDROID__
+      save_preferences();
+#endif
       
       /* Remove tool restrictions */
       remove_child_mode_tool_filter();
@@ -31324,6 +31488,12 @@ static void setup(void)
      in SDL1.2, and I found that annoying -bjk 2022.09.15 */
   SDL_SetHint(SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH, "1");
 
+#ifdef __ANDROID__
+  /* Load saved preferences (child mode, sound settings, etc.) */
+  load_preferences();
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Loaded preferences at startup");
+#endif
+
   /* Set up event filter */
 
   SDL_SetEventFilter(TP_EventFilter, NULL);
@@ -32635,9 +32805,6 @@ static void claim_to_be_ready(void)
 
   eraser_sound = 0;
 
-  img_cur_brush = NULL;
-  render_brush();
-
   brush_scroll = 0;
   for (i = 0; i < MAX_STAMP_GROUPS; i++)
   {
@@ -32656,6 +32823,15 @@ static void claim_to_be_ready(void)
   fill_scroll = 0;
 
   reset_avail_tools();
+
+#ifdef __ANDROID__
+  /* Load saved preferences (child mode, sound settings, brush) */
+  load_preferences();
+#endif
+
+  /* Render the brush after loading preferences */
+  img_cur_brush = NULL;
+  render_brush();
 
 
   /* Load current image (if any): */
