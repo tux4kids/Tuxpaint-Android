@@ -2963,23 +2963,20 @@ static void mainloop(void)
         else if (key == SDLK_s && (mod & KMOD_ALT))
         {
 #ifndef NOSOUND
-          if (use_sound)
+          DEBUG_PRINTF("modstate at mainloop %d, mod %d\n", SDL_GetModState(), mod);
+
+          use_sound = !use_sound;
+          Mix_HaltChannel(-1);
+
+          if (!use_sound)
           {
-            DEBUG_PRINTF("modstate at mainloop %d, mod %d\n", SDL_GetModState(), mod);
-
-            mute = !mute;
-            Mix_HaltChannel(-1);
-
-            if (mute)
-            {
-              /* Sound has been muted (silenced) via keyboard shortcut */
-              draw_tux_text(TUX_BORED, gettext("Sound muted."), 0);
-            }
-            else
-            {
-              /* Sound has been unmuted (unsilenced) via keyboard shortcut */
-              draw_tux_text(TUX_BORED, gettext("Sound unmuted."), 0);
-            }
+            /* Sound has been muted (silenced) via keyboard shortcut */
+            draw_tux_text(TUX_BORED, gettext("Sound muted."), 0);
+          }
+          else
+          {
+            /* Sound has been unmuted (unsilenced) via keyboard shortcut */
+            draw_tux_text(TUX_BORED, gettext("Sound unmuted."), 0);
           }
 #endif
         }
@@ -3738,14 +3735,14 @@ static void mainloop(void)
         {
           /* Sound toggle button clicked */
 #ifndef NOSOUND
-          mute = !mute;
+          use_sound = !use_sound;
           Mix_HaltChannel(-1);
 
           /* Redraw the button with new state */
           draw_row_minus_1_buttons();
           update_screen_rect(&r_sound_btn);
 
-          if (mute)
+          if (!use_sound)
           {
             draw_tux_text(TUX_BORED, gettext("Sound muted."), 0);
           }
@@ -5370,7 +5367,7 @@ static void mainloop(void)
             {
 #ifndef NOSOUND
               /* Only play when picking a different stamp */
-              if (toolopt_changed && !mute)
+              if (toolopt_changed && use_sound)
               {
                 /* If the sound hasn't been loaded yet, do it now */
 
@@ -5385,7 +5382,7 @@ static void mainloop(void)
                 {
                   Mix_ChannelFinished(NULL);    /* Prevents multiple clicks from toggling between SFX and desc sound, rather than always playing SFX first, then desc sound... */
 
-                  if (!mute)
+                  if (use_sound)
                     Mix_PlayChannel(2, stamp_data[stamp_group][cur_thing]->ssnd, 0);
 
                   /* If there's a description sound, play it after the SFX! */
@@ -5401,7 +5398,7 @@ static void mainloop(void)
 
                   if (stamp_data[stamp_group][cur_thing]->sdesc != NULL)
                   {
-                    if (!mute)
+                    if (use_sound)
                       Mix_PlayChannel(2, stamp_data[stamp_group][cur_thing]->sdesc, 0);
                   }
                 }
@@ -6088,7 +6085,7 @@ static void mainloop(void)
         {
           /* A sound player button on the lower left has been pressed! */
 #ifndef NOSOUND
-          if (cur_tool == TOOL_STAMP && use_sound && !mute)
+          if (cur_tool == TOOL_STAMP && use_sound)
           {
             which = GRIDHIT_GD(r_sfx, gd_sfx);
 
@@ -6097,13 +6094,13 @@ static void mainloop(void)
               /* Re-play sound effect: */
 
               Mix_ChannelFinished(NULL);
-              if (!mute)
+              if (use_sound)
                 Mix_PlayChannel(2, stamp_data[stamp_group][cur_thing]->ssnd, 0);
             }
             else if (which == 1 && !stamp_data[stamp_group][cur_stamp[stamp_group]]->no_descsound)
             {
               Mix_ChannelFinished(NULL);
-              if (!mute)
+              if (use_sound)
                 Mix_PlayChannel(2, stamp_data[stamp_group][cur_thing]->sdesc, 0);
             }
 
@@ -6390,7 +6387,7 @@ static void mainloop(void)
         {
           if ((int)(intptr_t) event.user.data1 == cur_stamp[stamp_group])       /* Don't play old stamp's sound... *///EP added (intptr_t) to avoid warning on x64
           {
-            if (!mute && stamp_data[stamp_group][(int)(intptr_t) event.user.data1]->sdesc != NULL)      //EP added (intptr_t) to avoid warning on x64
+            if (use_sound && stamp_data[stamp_group][(int)(intptr_t) event.user.data1]->sdesc != NULL)      //EP added (intptr_t) to avoid warning on x64
               Mix_PlayChannel(2, stamp_data[stamp_group][(int)(intptr_t) event.user.data1]->sdesc,      //EP added (intptr_t) to avoid warning on x64
                               0);
           }
@@ -6863,7 +6860,7 @@ static void mainloop(void)
         {
           /* Sound player buttons: */
 
-          if (cur_tool == TOOL_STAMP && use_sound && !mute &&
+          if (cur_tool == TOOL_STAMP && use_sound &&
               ((GRIDHIT_GD(r_sfx, gd_sfx) == 0 &&
                 !stamp_data[stamp_group][cur_stamp[stamp_group]]->no_sound) ||
                (GRIDHIT_GD(r_sfx, gd_sfx) == 1 && !stamp_data[stamp_group][cur_stamp[stamp_group]]->no_descsound)))
@@ -11033,8 +11030,8 @@ static void draw_row_minus_1_buttons(void)
 
 #ifndef NOSOUND
   /* Sound toggle button */
-  button_body = mute ? img_btn_off : img_btn_up;
-  button_color = mute ? img_grey : img_black;
+  button_body = use_sound ? img_btn_up : img_btn_off;
+  button_color = use_sound ? img_black : img_grey;
   
   /* Scale button body to reduced height (squash vertically) */
   button_scaled = rotozoomSurfaceXY(button_body, 0, 1.0, scale_y, SMOOTHING_ON);
@@ -13975,7 +13972,7 @@ static void do_eraser(int x, int y, int update)
 
 
 #ifndef NOSOUND
-  if (!mute && use_sound)
+  if (use_sound)
   {
     if (!Mix_Playing(0))
     {
@@ -14329,7 +14326,7 @@ static void draw_tux_text_ex(int which_tux, const char *const str, int want_righ
     dest.y = r_tuxarea.y;
 
   /* Don't let sfx and speak buttons cover the top of Tux, either: */
-  if (cur_tool == TOOL_STAMP && use_sound && !mute)
+  if (cur_tool == TOOL_STAMP && use_sound)
   {
     if (dest.y < r_sfx.y + r_sfx.h)
       dest.y = r_sfx.y + r_sfx.h;
@@ -14345,7 +14342,7 @@ static void draw_tux_text_ex(int which_tux, const char *const str, int want_righ
 
   /* Draw 'sound effect' and 'speak' buttons, if we're in the Stamp tool */
 
-  if (cur_tool == TOOL_STAMP && use_sound && !mute)
+  if (cur_tool == TOOL_STAMP && use_sound)
   {
     /* Sound effect: */
 
@@ -23696,7 +23693,7 @@ static void special_notify(int flags)
 static void magic_stopsound(void)
 {
 #ifndef NOSOUND
-  if (mute || !use_sound)
+  if (!use_sound)
     return;
 
   Mix_HaltChannel(0);
@@ -23713,10 +23710,9 @@ static void magic_playsound(Mix_Chunk *snd, int left_right, int up_down)
   int left, dist;
 
 
-  /* Don't play if sound is disabled (nosound), or sound is temporarily
-     muted (Alt+S), or sound ptr is NULL */
+  /* Don't play if sound is disabled or sound ptr is NULL */
 
-  if (mute || !use_sound || snd == NULL)
+  if (!use_sound || snd == NULL)
     return;
 
 
@@ -27262,7 +27258,7 @@ static int do_color_mix(void)
           draw_color_mixer_blank_example();
 
 #ifndef NOSOUND
-          if (!mute && use_sound)
+          if (use_sound)
           {
             if (!Mix_Playing(0))
             {

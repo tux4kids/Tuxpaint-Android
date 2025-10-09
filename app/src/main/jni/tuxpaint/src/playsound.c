@@ -30,7 +30,6 @@
 Mix_Chunk *sounds[NUM_SOUNDS];
 #endif
 
-int mute;
 int use_sound = 1;
 int use_stereo = 1;
 static int old_sound[4] = { -1, -1, -1, -1 };
@@ -54,7 +53,7 @@ void playsound(SDL_Surface *screen, int chan, int s, int override, int x, int y)
 #ifndef NOSOUND
   int left, dist;
 
-  if (!mute && use_sound && s != SND_NONE)
+  if (use_sound && s != SND_NONE)
   {
 #ifdef DEBUG
     printf("playsound #%d in channel %d, pos (%d,%d), %soverride, ptr=%p\n",
