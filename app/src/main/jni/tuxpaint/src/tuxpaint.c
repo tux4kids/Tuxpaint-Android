@@ -3931,11 +3931,11 @@ static void mainloop(void)
             /* Child Mode: Calculate tool index from fixed single-column layout */
             if (child_mode)
             {
-              int child_tools[] = {TOOL_BRUSH, TOOL_ERASER, TOOL_FILL, TOOL_TEXT, TOOL_LABEL, TOOL_SAVE, TOOL_NEW, TOOL_UNDO, TOOL_REDO};
+              int child_tools[] = {TOOL_BRUSH, TOOL_ERASER, TOOL_FILL, TOOL_SAVE, TOOL_NEW, TOOL_UNDO, TOOL_REDO};
               int button_height = button_h * CHILD_MODE_BUTTON_HEIGHT_SCALE;
               int tool_index = (event.button.y - r_tools.y) / button_height;
               
-              if (tool_index >= 0 && tool_index < 9)
+              if (tool_index >= 0 && tool_index < 7)
               {
                 whicht = child_tools[tool_index];
               }
@@ -7119,11 +7119,11 @@ static void mainloop(void)
           /* Child Mode: Single column cursor handling */
           if (child_mode)
           {
-            int child_tools[] = {TOOL_BRUSH, TOOL_ERASER, TOOL_FILL, TOOL_TEXT, TOOL_LABEL, TOOL_SAVE, TOOL_NEW, TOOL_UNDO, TOOL_REDO};
+            int child_tools[] = {TOOL_BRUSH, TOOL_ERASER, TOOL_FILL, TOOL_SAVE, TOOL_NEW, TOOL_UNDO, TOOL_REDO};
             int button_height = button_h * CHILD_MODE_BUTTON_HEIGHT_SCALE;
             int tool_index = (event.button.y - r_tools.y) / button_height;
             
-            if (tool_index >= 0 && tool_index < 9 && tool_avail[child_tools[tool_index]])
+            if (tool_index >= 0 && tool_index < 7 && tool_avail[child_tools[tool_index]])
             {
               do_setcursor(cursor_hand);
             }
@@ -11344,8 +11344,8 @@ static void draw_toolbar(void)
   /* Child Mode: Draw only allowed tools in fixed order */
   if (child_mode)
   {
-    int child_tools[] = {TOOL_BRUSH, TOOL_ERASER, TOOL_FILL, TOOL_TEXT, TOOL_LABEL, TOOL_SAVE, TOOL_NEW, TOOL_UNDO, TOOL_REDO};
-    int num_child_tools = 9;
+    int child_tools[] = {TOOL_BRUSH, TOOL_ERASER, TOOL_FILL, TOOL_SAVE, TOOL_NEW, TOOL_UNDO, TOOL_REDO};
+    int num_child_tools = 7;
     
     for (i = 0; i < num_child_tools; i++)
     {
@@ -14850,8 +14850,7 @@ static void apply_child_mode_tool_filter(void)
   tool_avail[TOOL_BRUSH] = 1;
   tool_avail[TOOL_ERASER] = 1;
   tool_avail[TOOL_FILL] = 1;
-  tool_avail[TOOL_TEXT] = 1;  /* Enable TEXT tool in child mode */
-  tool_avail[TOOL_LABEL] = tool_avail_child_mode_bak[TOOL_LABEL];  /* Enable LABEL if not disabled */
+  /* TEXT and LABEL disabled in child mode */
   tool_avail[TOOL_UNDO] = tool_avail_child_mode_bak[TOOL_UNDO];  /* Keep undo state */
   tool_avail[TOOL_REDO] = tool_avail_child_mode_bak[TOOL_REDO];  /* Keep redo state */
   tool_avail[TOOL_NEW] = 1;
