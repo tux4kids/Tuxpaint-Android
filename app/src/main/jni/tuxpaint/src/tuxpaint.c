@@ -20239,7 +20239,8 @@ static int do_open(void)
             cursor_textwidth = 0;
           }
 
-          SDL_FillRect(label, NULL, SDL_MapRGBA(label->format, 0, 0, 0, 0));
+          if (label != NULL)
+            SDL_FillRect(label, NULL, SDL_MapRGBA(label->format, 0, 0, 0, 0));
 
           /* Figure out filename: */
 
@@ -25585,7 +25586,8 @@ static int do_new_dialog(void)
 
     /* Clear label surface */
 
-    SDL_FillRect(label, NULL, SDL_MapRGBA(label->format, 0, 0, 0, 0));
+    if (label != NULL)
+      SDL_FillRect(label, NULL, SDL_MapRGBA(label->format, 0, 0, 0, 0));
 
     /* Clear all info related to label surface */
 
@@ -29023,6 +29025,16 @@ static void derender_node( __attribute__((unused))
                           struct label_node **ref_head)
 {
   SDL_Rect r_tmp_derender;
+
+  /* Safety check: label surface must be valid */
+  if (label == NULL)
+  {
+#ifdef __ANDROID__
+    __android_log_print(ANDROID_LOG_ERROR, "TuxPaint", 
+                       "derender_node: label surface is NULL, skipping derender");
+#endif
+    return;
+  }
 
   r_tmp_derender.w = label->w;
   r_tmp_derender.h = label->h;
