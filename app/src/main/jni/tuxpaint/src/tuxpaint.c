@@ -1413,6 +1413,10 @@ static int onscreen_keyboard = 0;
 static char *onscreen_keyboard_layout = NULL;
 static on_screen_keyboard *kbd = NULL;
 static int onscreen_keyboard_disable_change = 0;
+static Uint32 keyboard_start_time = 0;  /* Track when keyboard was started */
+static Uint32 keyboard_stop_time = 0;   /* Track when keyboard was last stopped */
+static int keyboard_grace_period = 500; /* 500ms grace period before stopping keyboard */
+static int keyboard_stop_cooldown = 100; /* 100ms cooldown between stop calls */
 static int joystick_low_threshold = 3200;
 static int joystick_slowness = 15;
 static int joystick_maxsteps = 7;
@@ -2207,6 +2211,7 @@ static void rect_xor(int x1, int y1, int x2, int y2);
 static void circle_xor(int x, int y, int sz);
 static void draw_blinking_cursor(void);
 static void hide_blinking_cursor(void);
+static void start_text_input_safe(void);
 static int text_label_tool_enter(int font_height);
 
 static void reset_brush_counter(int force);
@@ -2568,8 +2573,11 @@ static void load_preferences(void)
           /* Apply child mode tool restrictions */
           apply_child_mode_tool_filter();
           
-          /* Ensure brush tool is selected */
-          cur_tool = TOOL_BRUSH;
+          /* Switch to brush if current tool is not available in child mode */
+          if (!tool_avail[cur_tool])
+          {
+            cur_tool = TOOL_BRUSH;
+          }
         } else {
           /* Not in child mode, just restore the brush directly */
           /* Validate brush index is within bounds */
@@ -2976,7 +2984,7 @@ static void mainloop(void)
 
             if (onscreen_keyboard && !kbd)
             {
-              SDL_StartTextInput();
+              start_text_input_safe();
             }
           }
         }
@@ -3087,7 +3095,7 @@ static void mainloop(void)
 
               if (onscreen_keyboard && !kbd)
               {
-                SDL_StartTextInput();
+                start_text_input_safe();
               }
             }
           }
@@ -3242,7 +3250,7 @@ static void mainloop(void)
 
             if (onscreen_keyboard && !kbd)
             {
-              SDL_StartTextInput();
+              start_text_input_safe();
             }
           }
           else if (cur_tool == TOOL_SHAPES)
@@ -3307,7 +3315,7 @@ static void mainloop(void)
 
             if (onscreen_keyboard && !kbd)
             {
-              SDL_StartTextInput();
+              start_text_input_safe();
             }
           }
           else if (cur_tool == TOOL_SHAPES)
@@ -3352,7 +3360,7 @@ static void mainloop(void)
 
             if (onscreen_keyboard && !kbd)
             {
-              SDL_StartTextInput();
+              start_text_input_safe();
             }
           }
 
@@ -3393,7 +3401,7 @@ static void mainloop(void)
 
               if (onscreen_keyboard && !kbd)
               {
-                SDL_StartTextInput();
+                start_text_input_safe();
               }
             }
 
@@ -3527,7 +3535,7 @@ static void mainloop(void)
               r_tir.y = (float)cursor_y / render_scale;
               r_tir.x = (float)cursor_x / render_scale;
               SDL_SetTextInputRect(&r_tir);
-              SDL_StartTextInput();
+              start_text_input_safe();
             }
 
 
@@ -3855,7 +3863,7 @@ static void mainloop(void)
             {
               r_tir.y = (float)event.button.y / render_scale;
               SDL_SetTextInputRect(&r_tir);
-              SDL_StartTextInput();
+              start_text_input_safe();
             }
             do_render_cur_text(0);
           }
@@ -3983,6 +3991,11 @@ static void mainloop(void)
 
               old_tool = cur_tool;
               cur_tool = whicht;
+#ifdef __ANDROID__
+              __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", 
+                                 "Tool switched: old=%d, new=%d, child_mode=%d, avail=%d", 
+                                 old_tool, cur_tool, child_mode, tool_avail[cur_tool]);
+#endif
               draw_toolbar();
               update_screen_rect(&r_tools);
               DEBUG_PRINTF("screenrectr_tools %d, %d, %d, %d\n", r_tools.x, r_tools.y, r_tools.w, r_tools.h);
@@ -4101,7 +4114,7 @@ static void mainloop(void)
                 {
                   r_tir.y = (float)event.button.y / render_scale;
                   SDL_SetTextInputRect(&r_tir);
-                  SDL_StartTextInput();
+                  start_text_input_safe();
                 }
                 draw_cur_tool_tip();
 
@@ -4114,10 +4127,18 @@ static void mainloop(void)
 
                   draw_fonts();
                   draw_colors(COLORSEL_ENABLE);
+#ifdef __ANDROID__
+                  __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", 
+                                     "TEXT tool: num_font_families=%d, fonts loaded OK", num_font_families);
+#endif
                 }
                 else
                 {
                   /* Problem using fonts! */
+#ifdef __ANDROID__
+                  __android_log_print(ANDROID_LOG_ERROR, "TuxPaint", 
+                                     "TEXT tool FAILED: num_font_families=0, resetting to old_tool=%d", old_tool);
+#endif
 
                   cur_tool = old_tool;
                   draw_toolbar();
@@ -4226,7 +4247,7 @@ static void mainloop(void)
 
                   if (onscreen_keyboard && !kbd)
                   {
-                    SDL_StartTextInput();
+                    start_text_input_safe();
                   }
                 }
                 else if (cur_tool == TOOL_SHAPES)
@@ -4254,7 +4275,7 @@ static void mainloop(void)
 
                   if (onscreen_keyboard && !kbd)
                   {
-                    SDL_StartTextInput();
+                    start_text_input_safe();
                   }
                 }
                 else if (old_tool == TOOL_STAMP)
@@ -4326,7 +4347,7 @@ static void mainloop(void)
 
                   if (onscreen_keyboard && !kbd)
                   {
-                    SDL_StartTextInput();
+                    start_text_input_safe();
 
                   }
                 }
@@ -4355,7 +4376,7 @@ static void mainloop(void)
 
                   if (onscreen_keyboard && !kbd)
                   {
-                    SDL_StartTextInput();
+                    start_text_input_safe();
                   }
                 }
                 else if (old_tool == TOOL_STAMP)
@@ -4380,7 +4401,7 @@ static void mainloop(void)
 
                   if (onscreen_keyboard && !kbd)
                   {
-                    SDL_StartTextInput();
+                    start_text_input_safe();
 
                   }
                 }
@@ -5115,7 +5136,7 @@ static void mainloop(void)
 
                         if (onscreen_keyboard && !kbd)
                         {
-                          SDL_StartTextInput();
+                          start_text_input_safe();
 
                         }
                         draw_tux_text(TUX_GREAT, tool_tips[TOOL_LABEL], 1);
@@ -5669,7 +5690,7 @@ static void mainloop(void)
 
                   if (onscreen_keyboard && !kbd)
                   {
-                    SDL_StartTextInput();
+                    start_text_input_safe();
                   }
                 }
 
@@ -6108,7 +6129,7 @@ static void mainloop(void)
               {
                 r_tir.y = (float)old_y / render_scale;
                 SDL_SetTextInputRect(&r_tir);
-                SDL_StartTextInput();
+                start_text_input_safe();
               }
 
               /* Text and Label Tools! */
@@ -6185,7 +6206,7 @@ static void mainloop(void)
               {
                 r_tir.y = (float)cursor_y / render_scale;
                 SDL_SetTextInputRect(&r_tir);
-                SDL_StartTextInput();
+                start_text_input_safe();
               }
 
 
@@ -6545,10 +6566,15 @@ static void mainloop(void)
             apply_child_mode_tool_filter();
             
             /* Switch to paint tool if current tool is disabled */
-            if (!tool_avail[cur_tool] || cur_tool != TOOL_BRUSH)
+            if (!tool_avail[cur_tool])
             {
               cur_tool = TOOL_BRUSH;
             }
+#ifdef __ANDROID__
+            __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", 
+                               "Child mode activated, cur_tool=%d, tool_avail=%d", 
+                               cur_tool, tool_avail[cur_tool]);
+#endif
             
             /* Initialize brush category based on current expert mode brush */
             init_child_brush_category(cur_brush);
@@ -6995,7 +7021,7 @@ static void mainloop(void)
 
             if (onscreen_keyboard && !kbd)
             {
-              SDL_StartTextInput();
+              start_text_input_safe();
             }
           }
           else if (cur_tool == TOOL_FILL)
@@ -7973,8 +7999,43 @@ static void mainloop(void)
     {
       if (onscreen_keyboard && !kbd)
       {
-        SDL_StopTextInput();
+        /* Only stop keyboard if grace period has elapsed AND we haven't stopped recently */
+        Uint32 now = SDL_GetTicks();
+#ifdef __ANDROID__
+        if (keyboard_start_time > 0)
+        {
+          __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", 
+                             "cur_tool=%d, start=%u, elapsed=%u, grace=%d, last_stop=%u",
+                             cur_tool, keyboard_start_time, now - keyboard_start_time, 
+                             keyboard_grace_period, keyboard_stop_time);
+        }
+#endif
+        /* Check grace period AND cooldown */
+        if (keyboard_start_time > 0 && 
+            (now - keyboard_start_time) > keyboard_grace_period &&
+            (keyboard_stop_time == 0 || (now - keyboard_stop_time) > keyboard_stop_cooldown))
+        {
+          SDL_StopTextInput();
+          keyboard_start_time = 0;
+          keyboard_stop_time = now;
+#ifdef __ANDROID__
+          __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", 
+                             "Keyboard stopped: cur_tool=%d, time=%u", cur_tool, now);
+#endif
+        }
       }
+    }
+    else
+    {
+#ifdef __ANDROID__
+      /* Reset stop time when TEXT/LABEL tool is active */
+      if (keyboard_stop_time > 0 && onscreen_keyboard && !kbd)
+      {
+        keyboard_stop_time = 0;
+        __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", 
+                           "TEXT/LABEL active, cur_tool=%d, resetting stop_time", cur_tool);
+      }
+#endif
     }
 
     if (motioner | hatmotioner)
@@ -8024,6 +8085,23 @@ static void hide_blinking_cursor(void)
   if (cur_toggle_count & 1)
   {
     draw_blinking_cursor();
+  }
+}
+
+/**
+ * Start text input safely with grace period tracking.
+ * Prevents premature keyboard closing on Android.
+ */
+static void start_text_input_safe(void)
+{
+  if (onscreen_keyboard && !kbd)
+  {
+    SDL_StartTextInput();
+    keyboard_start_time = SDL_GetTicks();
+#ifdef __ANDROID__
+    __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", 
+                       "Keyboard started at %u", keyboard_start_time);
+#endif
   }
 }
 
@@ -12079,8 +12157,11 @@ static void check_child_mode_longpress(void)
       /* Initialize child mode brush category based on current brush */
       init_child_brush_category(cur_brush);
       
-      /* Force brush tool selection */
-      cur_tool = TOOL_BRUSH;
+      /* Switch to brush if current tool is not available in child mode */
+      if (!tool_avail[cur_tool])
+      {
+        cur_tool = TOOL_BRUSH;
+      }
       
       /* Initialize slider animation */
       slider_dragging = 0;
@@ -14769,6 +14850,7 @@ static void apply_child_mode_tool_filter(void)
   tool_avail[TOOL_BRUSH] = 1;
   tool_avail[TOOL_ERASER] = 1;
   tool_avail[TOOL_FILL] = 1;
+  /* TEXT and LABEL disabled in child mode */
   tool_avail[TOOL_UNDO] = tool_avail_child_mode_bak[TOOL_UNDO];  /* Keep undo state */
   tool_avail[TOOL_REDO] = tool_avail_child_mode_bak[TOOL_REDO];  /* Keep redo state */
   tool_avail[TOOL_NEW] = 1;
@@ -20157,7 +20239,8 @@ static int do_open(void)
             cursor_textwidth = 0;
           }
 
-          SDL_FillRect(label, NULL, SDL_MapRGBA(label->format, 0, 0, 0, 0));
+          if (label != NULL)
+            SDL_FillRect(label, NULL, SDL_MapRGBA(label->format, 0, 0, 0, 0));
 
           /* Figure out filename: */
 
@@ -25503,7 +25586,8 @@ static int do_new_dialog(void)
 
     /* Clear label surface */
 
-    SDL_FillRect(label, NULL, SDL_MapRGBA(label->format, 0, 0, 0, 0));
+    if (label != NULL)
+      SDL_FillRect(label, NULL, SDL_MapRGBA(label->format, 0, 0, 0, 0));
 
     /* Clear all info related to label surface */
 
@@ -28942,6 +29026,16 @@ static void derender_node( __attribute__((unused))
 {
   SDL_Rect r_tmp_derender;
 
+  /* Safety check: label surface must be valid */
+  if (label == NULL)
+  {
+#ifdef __ANDROID__
+    __android_log_print(ANDROID_LOG_ERROR, "TuxPaint", 
+                       "derender_node: label surface is NULL, skipping derender");
+#endif
+    return;
+  }
+
   r_tmp_derender.w = label->w;
   r_tmp_derender.h = label->h;
   r_tmp_derender.x = 0;
@@ -32213,10 +32307,17 @@ static void setup(void)
 #ifndef __ANDROID__
   font_thread = SDL_CreateThread(load_user_fonts_stub, "font_thread", NULL);
 #else
-  /* On Android, skip font loading thread - fonts will be loaded on demand */
-  DEBUG_PRINTF("Android: Skipping font loading thread\n");
+  /* On Android, load fonts synchronously (no threading) */
+  DEBUG_PRINTF("Android: Loading fonts synchronously\n");
+#ifdef __ANDROID__
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Android: Loading fonts now...");
+#endif
+  load_user_fonts_stub(NULL);  /* Load fonts now */
   font_thread_done = 1;
   font_thread_aborted = 0;
+#ifdef __ANDROID__
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Android: Fonts loaded, num_font_families=%d", num_font_families);
+#endif
 #endif
 #endif
 
