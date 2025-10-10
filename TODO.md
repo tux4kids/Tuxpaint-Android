@@ -12,11 +12,12 @@
 
 - die haupt datei in mehrere sinnvoll splitten
 
-- Add proper icon assets to APK for visual polish
 - die app umbenennen in "TuxPaint Kids"
 - fastlane beschriebungen anpassen
-- Die Brush Kategorien auch im Export Mode umstritten. Global definieren
+- Die Brush Kategorien auch im Export Mode umsortieren. Global definieren
 - Beim allerersten Mal die App im Kids Mode in Kategorie 3 starten und gesperrt (locked).
 - Meldung beim Start, die das 3s Longpress erklärt, falls der in den preferences aktiv ist
+- beim laden schon bei einfach klick (nicht erst, wie jetzt bei doppelclick) das bild laden bzw. den dialog ob man vorher speichern will öffnen
+- Label mit Text stürzt noch ab beim verlassen des labels
 
 

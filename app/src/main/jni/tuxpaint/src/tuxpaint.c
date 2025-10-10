@@ -24146,6 +24146,17 @@ static void load_magic_plugins(void)
 
                       icon_tmp = magic_funcs[num_plugin_files].get_icon(magic_api_struct, i);
                       
+                      /* Convert loaded icon to display format for proper rendering */
+                      if (icon_tmp != NULL)
+                      {
+                        SDL_Surface *converted = SDL_DisplayFormatAlpha(icon_tmp);
+                        if (converted != NULL)
+                        {
+                          SDL_FreeSurface(icon_tmp);
+                          icon_tmp = converted;
+                        }
+                      }
+                      
                       /* Create dummy icon if plugin doesn't provide one */
                       if (icon_tmp == NULL)
                       {
@@ -24172,6 +24183,13 @@ static void load_magic_plugins(void)
                         magics[group][idx].img_icon =
                           thumbnail(icon_tmp,
                                     40 * button_w / ORIGINAL_BUTTON_SIZE, 30 * button_h / ORIGINAL_BUTTON_SIZE, 1);
+                        
+                        /* Enable alpha blending for icons with transparency (SDL2) */
+                        if (magics[group][idx].img_icon != NULL && magics[group][idx].img_icon->format->Amask != 0)
+                        {
+                          SDL_SetSurfaceBlendMode(magics[group][idx].img_icon, SDL_BLENDMODE_BLEND);
+                        }
+                        
                         SDL_FreeSurface(icon_tmp);
 
                         DEBUG_PRINTF("-- %s\n", magics[group][idx].name);
