@@ -11,3 +11,12 @@
 - check why stamp and magic is not working (disabled all the time)
 
 - die haupt datei in mehrere sinnvoll splitten
+
+- Add proper icon assets to APK for visual polish
+- die app umbenennen in "TuxPaint Kids"
+- fastlane beschriebungen anpassen
+- Die Brush Kategorien auch im Export Mode umstritten. Global definieren
+- Beim allerersten Mal die App im Kids Mode in Kategorie 3 starten und gesperrt (locked).
+- Meldung beim Start, die das 3s Longpress erklärt, falls der in den preferences aktiv ist
+
+

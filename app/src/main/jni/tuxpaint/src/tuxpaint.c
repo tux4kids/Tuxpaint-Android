@@ -11657,16 +11657,18 @@ static void draw_magic(void)
       dest.x = WINDOW_WIDTH - r_ttoolopt.w + ((i % 2) * button_w) + 4;
       dest.y = ((i / 2) * button_h) + r_ttoolopt.h + 4 + off_y;
 
-      SDL_BlitSurface(magics[magic_group][magic].img_icon, NULL, screen, &dest);
+      if (magics[magic_group][magic].img_icon != NULL)
+        SDL_BlitSurface(magics[magic_group][magic].img_icon, NULL, screen, &dest);
 
 
       dest.x =
         WINDOW_WIDTH - r_ttoolopt.w + ((i % 2) * button_w) +
         (4 * button_w) / ORIGINAL_BUTTON_SIZE +
-        ((40 * button_w) / ORIGINAL_BUTTON_SIZE - magics[magic_group][magic].img_name->w) / 2;
-      dest.y = (((i / 2) * button_h) + r_ttoolopt.h + (4 * button_h) / ORIGINAL_BUTTON_SIZE + ((44 * button_h) / ORIGINAL_BUTTON_SIZE - magics[magic_group][magic].img_name->h) + off_y);       // FIXME: CROP LABELS
+        ((40 * button_w) / ORIGINAL_BUTTON_SIZE - (magics[magic_group][magic].img_name ? magics[magic_group][magic].img_name->w : 0)) / 2;
+      dest.y = (((i / 2) * button_h) + r_ttoolopt.h + (4 * button_h) / ORIGINAL_BUTTON_SIZE + ((44 * button_h) / ORIGINAL_BUTTON_SIZE - (magics[magic_group][magic].img_name ? magics[magic_group][magic].img_name->h : 0)) + off_y);       // FIXME: CROP LABELS
 
-      SDL_BlitSurface(magics[magic_group][magic].img_name, NULL, screen, &dest);
+      if (magics[magic_group][magic].img_name != NULL)
+        SDL_BlitSurface(magics[magic_group][magic].img_name, NULL, screen, &dest);
     }
     else
     {
@@ -14745,8 +14747,27 @@ static void reset_avail_tools(void)
   if (num_stamps[0] == 0)
     tool_avail[TOOL_STAMP] = 0;
 
+#ifdef __ANDROID__
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", 
+                     "reset_avail_tools: num_magics_total=%d", num_magics_total);
+#endif
+
   if (num_magics_total == 0)
+  {
     tool_avail[TOOL_MAGIC] = 0;
+#ifdef __ANDROID__
+    __android_log_print(ANDROID_LOG_WARN, "TuxPaint", 
+                       "reset_avail_tools: MAGIC tool DISABLED (no plugins)");
+#endif
+  }
+  else
+  {
+#ifdef __ANDROID__
+    __android_log_print(ANDROID_LOG_INFO, "TuxPaint", 
+                       "reset_avail_tools: MAGIC tool ENABLED (%d tools available)", 
+                       num_magics_total);
+#endif
+  }
 
 
   /* Disable quit? */
@@ -23644,6 +23665,11 @@ static void load_magic_plugins(void)
   char objname[512];
   char funcname[512];
 
+#ifdef __ANDROID__
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", 
+                     "===== load_magic_plugins() START =====");
+#endif
+
   num_plugin_files = 0;
   for (i = 0; i < MAX_MAGIC_GROUPS; i++)
     num_magics[i] = 0;
@@ -23656,6 +23682,8 @@ static void load_magic_plugins(void)
 #if defined (__ANDROID__)
       /* Need this at runtime as Android installs on different locations depending on the user */
       place = strdup(get_nativelibdir());
+      __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", 
+                         "Magic plugins: trying global path: %s", place);
 #else
       place = strdup(MAGIC_PREFIX);
 #endif
@@ -23675,6 +23703,18 @@ static void load_magic_plugins(void)
     /* Gather list of files (for sorting): */
 
     d = opendir(place);
+#ifdef __ANDROID__
+    if (d == NULL)
+    {
+      __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", 
+                         "Magic plugins: opendir(%s) failed: %s", place, strerror(errno));
+    }
+    else
+    {
+      __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", 
+                         "Magic plugins: opendir(%s) SUCCESS", place);
+    }
+#endif
 
     if (d != NULL)
     {
@@ -23949,6 +23989,10 @@ static void load_magic_plugins(void)
               {
                 res =
                   magic_funcs[num_plugin_files].init(magic_api_struct, magic_disabled_features, magic_complexity_level);
+#ifdef __ANDROID__
+                __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", 
+                                   "Magic plugin %s: init returned %d", fname, res);
+#endif
 
                 if (res != 0)
                   n = magic_funcs[num_plugin_files].get_tool_count(magic_api_struct);
@@ -23957,6 +24001,10 @@ static void load_magic_plugins(void)
                   magic_funcs[num_plugin_files].shutdown(magic_api_struct);
                   n = 0;
                 }
+#ifdef __ANDROID__
+                __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", 
+                                   "Magic plugin %s: tool_count = %d", fname, n);
+#endif
 
 
                 if (n == 0)
@@ -23965,6 +24013,11 @@ static void load_magic_plugins(void)
                           "Notice: plugin %1$s failed to startup or reported 0 magic tools (Tux Paint is in complexity mode \"%2$s\")\n",
                           fname, MAGIC_COMPLEXITY_LEVEL_NAMES[magic_complexity_level]);
                   fflush(stderr);
+#ifdef __ANDROID__
+                  __android_log_print(ANDROID_LOG_WARN, "TuxPaint", 
+                                     "Magic plugin %s failed: init=%d, tools=%d, complexity=%s", 
+                                     fname, res, n, MAGIC_COMPLEXITY_LEVEL_NAMES[magic_complexity_level]);
+#endif
                   SDL_UnloadObject(magic_handle[num_plugin_files]);
                 }
                 else
@@ -24092,6 +24145,28 @@ static void load_magic_plugins(void)
                         magics[group][idx].mode = MODE_FULLSCREEN;
 
                       icon_tmp = magic_funcs[num_plugin_files].get_icon(magic_api_struct, i);
+                      
+                      /* Create dummy icon if plugin doesn't provide one */
+                      if (icon_tmp == NULL)
+                      {
+#ifdef __ANDROID__
+                        __android_log_print(ANDROID_LOG_WARN, "TuxPaint", 
+                                           "Magic plugin %s: icon missing, creating dummy", 
+                                           magics[group][idx].name);
+#endif
+                        /* Create a simple colored square as placeholder */
+                        icon_tmp = SDL_CreateRGBSurface(SDL_SWSURFACE, 48, 48, 32,
+                                                        screen->format->Rmask,
+                                                        screen->format->Gmask,
+                                                        screen->format->Bmask,
+                                                        screen->format->Amask);
+                        if (icon_tmp != NULL)
+                        {
+                          /* Fill with a distinctive color (magenta for visibility) */
+                          SDL_FillRect(icon_tmp, NULL, SDL_MapRGB(icon_tmp->format, 200, 100, 200));
+                        }
+                      }
+                      
                       if (icon_tmp != NULL)
                       {
                         magics[group][idx].img_icon =
@@ -24104,6 +24179,11 @@ static void load_magic_plugins(void)
 
                         num_magics[group]++;
                         num_magics_total++;
+#ifdef __ANDROID__
+                        __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", 
+                                           "Magic plugin loaded: %s (total: %d)", 
+                                           magics[group][idx].name, num_magics_total);
+#endif
 
                         if (num_magics[group] >= MAX_MAGICS_PER_GROUP)
                         {
@@ -24154,6 +24234,11 @@ static void load_magic_plugins(void)
 
   DEBUG_PRINTF("Loaded %d magic tools from %d plug-in files\n", num_magics_total, num_plugin_files);
   DEBUG_PRINTF("\n");
+#ifdef __ANDROID__
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", 
+                     "Loaded %d magic tools from %d plug-in files", 
+                     num_magics_total, num_plugin_files);
+#endif
 
   /* Start out with the first magic group that _has_ any tools */
   tries = 0;
@@ -32917,7 +33002,9 @@ static void setup(void)
   {
     for (j = 0; j < num_magics[i]; j++)
     {
-      if (magics[i][j].img_icon->h + magics[i][j].img_name->h > button_h - 1)
+      if (magics[i][j].img_icon != NULL && 
+          magics[i][j].img_name != NULL &&
+          magics[i][j].img_icon->h + magics[i][j].img_name->h > button_h - 1)
       {
         tmp_surf =
           thumbnail(magics[i][j].img_icon, magics[i][j].img_icon->w, (button_h - magics[i][j].img_name->h - 1), 0);
