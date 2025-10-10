@@ -21,6 +21,7 @@
 
 AAssetManager *asset_manager = NULL;
 char *nativelibdir = NULL;
+char *android_files_dir = NULL;
 
 AAssetDir *open_asset_dir(char *dirname)
 {
@@ -82,6 +83,14 @@ JNIEXPORT void Java_org_tuxpaint_tuxpaintActivity_setnativelibdir(JNIEnv *env, j
   const char *cpath = (*env)->GetStringUTFChars(env, path, NULL);
 
   nativelibdir = strdup(cpath);
+  (*env)->ReleaseStringUTFChars(env, path, cpath);
+}
+
+JNIEXPORT void Java_org_tuxpaint_tuxpaintActivity_setfilesdir(JNIEnv *env, jclass clazz, jstring path)
+{
+  const char *cpath = (*env)->GetStringUTFChars(env, path, NULL);
+
+  android_files_dir = strdup(cpath);
   (*env)->ReleaseStringUTFChars(env, path, cpath);
 }
 
