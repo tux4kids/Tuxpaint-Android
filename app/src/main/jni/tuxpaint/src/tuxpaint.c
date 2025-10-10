@@ -14781,6 +14781,11 @@ static void reset_avail_tools(void)
   if (disable_label)
     tool_avail[TOOL_LABEL] = 0;
 
+#ifdef __ANDROID__
+  /* FIXME: Label tool crashes on Android - disable for now */
+  tool_avail[TOOL_LABEL] = 0;
+#endif
+
 
   /* Disable save? */
 
