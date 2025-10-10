@@ -11657,16 +11657,18 @@ static void draw_magic(void)
       dest.x = WINDOW_WIDTH - r_ttoolopt.w + ((i % 2) * button_w) + 4;
       dest.y = ((i / 2) * button_h) + r_ttoolopt.h + 4 + off_y;
 
-      SDL_BlitSurface(magics[magic_group][magic].img_icon, NULL, screen, &dest);
+      if (magics[magic_group][magic].img_icon != NULL)
+        SDL_BlitSurface(magics[magic_group][magic].img_icon, NULL, screen, &dest);
 
 
       dest.x =
         WINDOW_WIDTH - r_ttoolopt.w + ((i % 2) * button_w) +
         (4 * button_w) / ORIGINAL_BUTTON_SIZE +
-        ((40 * button_w) / ORIGINAL_BUTTON_SIZE - magics[magic_group][magic].img_name->w) / 2;
-      dest.y = (((i / 2) * button_h) + r_ttoolopt.h + (4 * button_h) / ORIGINAL_BUTTON_SIZE + ((44 * button_h) / ORIGINAL_BUTTON_SIZE - magics[magic_group][magic].img_name->h) + off_y);       // FIXME: CROP LABELS
+        ((40 * button_w) / ORIGINAL_BUTTON_SIZE - (magics[magic_group][magic].img_name ? magics[magic_group][magic].img_name->w : 0)) / 2;
+      dest.y = (((i / 2) * button_h) + r_ttoolopt.h + (4 * button_h) / ORIGINAL_BUTTON_SIZE + ((44 * button_h) / ORIGINAL_BUTTON_SIZE - (magics[magic_group][magic].img_name ? magics[magic_group][magic].img_name->h : 0)) + off_y);       // FIXME: CROP LABELS
 
-      SDL_BlitSurface(magics[magic_group][magic].img_name, NULL, screen, &dest);
+      if (magics[magic_group][magic].img_name != NULL)
+        SDL_BlitSurface(magics[magic_group][magic].img_name, NULL, screen, &dest);
     }
     else
     {
@@ -14745,8 +14747,27 @@ static void reset_avail_tools(void)
   if (num_stamps[0] == 0)
     tool_avail[TOOL_STAMP] = 0;
 
+#ifdef __ANDROID__
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", 
+                     "reset_avail_tools: num_magics_total=%d", num_magics_total);
+#endif
+
   if (num_magics_total == 0)
+  {
     tool_avail[TOOL_MAGIC] = 0;
+#ifdef __ANDROID__
+    __android_log_print(ANDROID_LOG_WARN, "TuxPaint", 
+                       "reset_avail_tools: MAGIC tool DISABLED (no plugins)");
+#endif
+  }
+  else
+  {
+#ifdef __ANDROID__
+    __android_log_print(ANDROID_LOG_INFO, "TuxPaint", 
+                       "reset_avail_tools: MAGIC tool ENABLED (%d tools available)", 
+                       num_magics_total);
+#endif
+  }
 
 
   /* Disable quit? */
@@ -23644,6 +23665,11 @@ static void load_magic_plugins(void)
   char objname[512];
   char funcname[512];
 
+#ifdef __ANDROID__
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", 
+                     "===== load_magic_plugins() START =====");
+#endif
+
   num_plugin_files = 0;
   for (i = 0; i < MAX_MAGIC_GROUPS; i++)
     num_magics[i] = 0;
@@ -24119,6 +24145,28 @@ static void load_magic_plugins(void)
                         magics[group][idx].mode = MODE_FULLSCREEN;
 
                       icon_tmp = magic_funcs[num_plugin_files].get_icon(magic_api_struct, i);
+                      
+                      /* Create dummy icon if plugin doesn't provide one */
+                      if (icon_tmp == NULL)
+                      {
+#ifdef __ANDROID__
+                        __android_log_print(ANDROID_LOG_WARN, "TuxPaint", 
+                                           "Magic plugin %s: icon missing, creating dummy", 
+                                           magics[group][idx].name);
+#endif
+                        /* Create a simple colored square as placeholder */
+                        icon_tmp = SDL_CreateRGBSurface(SDL_SWSURFACE, 48, 48, 32,
+                                                        screen->format->Rmask,
+                                                        screen->format->Gmask,
+                                                        screen->format->Bmask,
+                                                        screen->format->Amask);
+                        if (icon_tmp != NULL)
+                        {
+                          /* Fill with a distinctive color (magenta for visibility) */
+                          SDL_FillRect(icon_tmp, NULL, SDL_MapRGB(icon_tmp->format, 200, 100, 200));
+                        }
+                      }
+                      
                       if (icon_tmp != NULL)
                       {
                         magics[group][idx].img_icon =
@@ -32954,7 +33002,9 @@ static void setup(void)
   {
     for (j = 0; j < num_magics[i]; j++)
     {
-      if (magics[i][j].img_icon->h + magics[i][j].img_name->h > button_h - 1)
+      if (magics[i][j].img_icon != NULL && 
+          magics[i][j].img_name != NULL &&
+          magics[i][j].img_icon->h + magics[i][j].img_name->h > button_h - 1)
       {
         tmp_surf =
           thumbnail(magics[i][j].img_icon, magics[i][j].img_icon->w, (button_h - magics[i][j].img_name->h - 1), 0);
