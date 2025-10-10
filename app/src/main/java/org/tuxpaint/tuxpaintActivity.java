@@ -12,6 +12,7 @@ import android.util.Log;
 import android.content.res.AssetManager;
 import android.content.pm.PackageManager;
 import android.view.MotionEvent;
+import android.widget.Toast;
 import android.Manifest;
 
 public class tuxpaintActivity extends SDLActivity {
@@ -123,6 +124,59 @@ public class tuxpaintActivity extends SDLActivity {
         
         SharedPreferences prefs = instance.getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         
+        // Check if this is first launch (no preferences saved yet)
+        boolean isFirstLaunch = !prefs.contains("child_mode");
+        
+        if (isFirstLaunch) {
+            Log.i(TAG, "First launch detected - Setting defaults: Kids Mode, Category 3, Locked");
+            
+            // First launch: Start in Kids Mode with category 3, locked
+            int useSound = 1;           // Sound enabled
+            int childMode = 1;          // Kids Mode enabled
+            int childModeLocked = 1;    // Locked
+            int lastBrush = 36;          // First brush
+            int lastBrushCategory = 2;  // Category 3
+            
+            // Save these defaults
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("use_sound", true);
+            editor.putBoolean("child_mode", true);
+            editor.putBoolean("child_mode_locked", true);
+            editor.putInt("last_brush", lastBrush);
+            editor.putInt("last_brush_category", lastBrushCategory);
+            editor.apply();
+            
+            // Show info message about unlocking (run on UI thread)
+            instance.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(instance, 
+                        "Kids Mode is active and locked.",
+                        Toast.LENGTH_LONG).show();
+                }
+            });
+            
+            // Show unlock instructions after delay
+            instance.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    final android.os.Handler handler = new android.os.Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(instance, 
+                                "To unlock: Press and hold the Kids Button for 3 seconds.",
+                                Toast.LENGTH_LONG).show();
+                        }
+                    }, 2500);
+                }
+            });
+            
+            Log.d(TAG, "First launch defaults saved and info message shown");
+            return new int[] {useSound, childMode, childModeLocked, lastBrush, lastBrushCategory};
+        }
+        
+        // Normal load from existing preferences
         int useSound = prefs.getBoolean("use_sound", true) ? 1 : 0;
         int childMode = prefs.getBoolean("child_mode", false) ? 1 : 0;
         int childModeLocked = prefs.getBoolean("child_mode_locked", false) ? 1 : 0;
@@ -131,6 +185,34 @@ public class tuxpaintActivity extends SDLActivity {
         
         Log.d(TAG, "Loaded preferences: sound=" + useSound + " childMode=" + childMode + 
               " locked=" + childModeLocked + " brush=" + lastBrush + " category=" + lastBrushCategory);
+        
+        // Show reminder if locked
+        if (childModeLocked != 0) {
+            instance.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(instance, 
+                        "Kids Mode is locked.",
+                        Toast.LENGTH_SHORT).show();
+                }
+            });
+            
+            // Show unlock instructions after delay
+            instance.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    final android.os.Handler handler = new android.os.Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(instance, 
+                                "To unlock: Hold tool for 3 seconds.",
+                                Toast.LENGTH_LONG).show();
+                        }
+                    }, 2000);
+                }
+            });
+        }
         
         return new int[] {useSound, childMode, childModeLocked, lastBrush, lastBrushCategory};
     }
