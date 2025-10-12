@@ -24046,7 +24046,7 @@ static void load_magic_plugins(void)
             strcpy(objname, objname + 3);
 #endif
 
-            magic_handle[num_plugin_files] = SDL_LoadObject(fname);
+magic_handle[num_plugin_files] = SDL_LoadObject(fname);
 
             if (magic_handle[num_plugin_files] != NULL)
             {
@@ -24493,6 +24493,16 @@ static void load_magic_plugins(void)
                   }
 
                   num_plugin_files++;
+                  
+#ifdef __ANDROID__
+                  /* Only load first plugin for faster startup during development */
+                  if (num_plugin_files >= 1) {
+                    __android_log_print(ANDROID_LOG_INFO, "TuxPaint", 
+                                       "Developer Fast mode: Loaded first magic plugin only, skipping rest");
+                    closedir(d);
+                    goto done_loading_plugins;  /* Skip remaining plugins and directories */
+                  }
+#endif
                 }
               }
             }
@@ -24510,7 +24520,7 @@ static void load_magic_plugins(void)
     }
   }
 
-
+done_loading_plugins:
   for (i = 0; i < MAX_MAGIC_GROUPS; i++)
   {
     qsort(magics[i], num_magics[i], sizeof(magic_t), magic_sort);
