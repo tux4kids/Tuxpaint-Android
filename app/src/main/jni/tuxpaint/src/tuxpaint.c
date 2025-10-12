@@ -841,6 +841,15 @@ static int child_brush_count = 5;     /* Number of brushes in current category *
 static int child_brush_use_icons = 0; /* 1 if category should show icons on handle */
 static int child_brush_variable_size = 1; /* 1 if handle size should vary, 0 for constant size */
 
+/* Fullscreen UI mode configuration */
+static int fullscreen_ui_mode = 1;    /* Enable fullscreen UI with hide/show animations (1=enabled, 0=disabled) */
+
+/* UI offset variables for fullscreen mode */
+static int ui_offset_x = 0;           /* Horizontal offset for toolbar hide/show animation */
+static int ui_offset_y_colors = 0;    /* Vertical offset for colors hide/show animation */
+static int ui_offset_y_canvas = 0;    /* Vertical offset for canvas hide/show animation */
+static int ui_offset_y_tux = 0;       /* Vertical offset for tux area (positive = hidden below) */
+
 static int colors_rows;
 
 static int buttons_tall;        /* promoted to a global variable from setup_normal_screen_layout() */
@@ -1031,6 +1040,18 @@ static void setup_normal_screen_layout(void)
   r_toolopt.h = gd_toolopt.rows * button_h;
   r_toolopt.x = WINDOW_WIDTH - r_ttoolopt.w;
   r_toolopt.y = r_ttoolopt.h + r_ttoolopt.y;
+
+  /* Initialize UI offsets if fullscreen UI mode is enabled */
+  if (fullscreen_ui_mode)
+  {
+    ui_offset_x = -100;           /* Shift left toolbar 100px to the left (hidden) */
+    ui_offset_y_colors = 100;     /* Shift color bar 100px down (hidden) */
+    ui_offset_y_tux = 100;        /* Shift tux area 100px down (hidden) */
+#ifdef __ANDROID__
+    __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "UI offsets initialized: x=%d, y_colors=%d, y_tux=%d", 
+                        ui_offset_x, ui_offset_y_colors, ui_offset_y_tux);
+#endif
+  }
 
   /* TODO: dialog boxes */
 }
@@ -1260,7 +1281,37 @@ static int hit_test(const SDL_Rect *const r, unsigned x, unsigned y)
   return (x - (unsigned)r->x < (unsigned)r->w) && (y - (unsigned)r->y < (unsigned)r->h);
 }
 
+/**
+ * Test whether an x/y coordinate is within a given rect, applying UI offsets.
+ * Used for hit-testing when fullscreen UI mode is enabled and UI elements are offset.
+ *
+ * @param r The rect
+ * @param x X coordinate
+ * @param y Y coordinate
+ * @param offset_x Horizontal offset to apply
+ * @param offset_y Vertical offset to apply
+ * @return true if a hit, else false
+ */
+static int hit_test_offset(const SDL_Rect *const r, unsigned x, unsigned y, int offset_x, int offset_y)
+{
+  /* Adjust the rectangle position by the offsets for hit testing */
+  int adjusted_x = r->x + offset_x;
+  int adjusted_y = r->y + offset_y;
+  
+  /* Convert unsigned coords to signed for proper comparison with potentially negative adjusted values */
+  int signed_x = (int)x;
+  int signed_y = (int)y;
+  
+  /* Check if click coordinates are within the adjusted rectangle */
+  return (signed_x >= adjusted_x && signed_x < adjusted_x + (int)r->w) && 
+         (signed_y >= adjusted_y && signed_y < adjusted_y + (int)r->h);
+}
+
 #define HIT(r) hit_test(&(r), event.button.x, event.button.y)
+#define HIT_OFFSET_X(r) hit_test_offset(&(r), event.button.x, event.button.y, fullscreen_ui_mode ? ui_offset_x : 0, 0)
+#define HIT_OFFSET_Y_TUX(r) hit_test_offset(&(r), event.button.x, event.button.y, 0, fullscreen_ui_mode ? ui_offset_y_tux : 0)
+#define HIT_OFFSET_Y_COLORS(r) hit_test_offset(&(r), event.button.x, event.button.y, 0, fullscreen_ui_mode ? ui_offset_y_colors : 0)
+#define HIT_OFFSET_Y_CANVAS(r) hit_test_offset(&(r), event.button.x, event.button.y, 0, fullscreen_ui_mode ? ui_offset_y_canvas : 0)
 
 
 /**
@@ -1286,8 +1337,49 @@ static int grid_hit_gd(const SDL_Rect *const r, unsigned x, unsigned y, grid_dim
   return col + row * gd->cols;
 }
 
+/**
+ * Returns which item in a grid was clicked, with offset support.
+ *
+ * @param r The rectangle containing the grid on the screen
+ * @param x X coordinate (mouse location) of a click
+ * @param y Y coordinate (mouse location) of a click
+ * @param gd The grid of items
+ * @param offset_x Horizontal offset to apply
+ * @param offset_y Vertical offset to apply
+ * @returns The item clicked, or -1 if click was outside the grid.
+ */
+static int grid_hit_gd_offset(const SDL_Rect *const r, unsigned x, unsigned y, grid_dims *gd, int offset_x, int offset_y)
+{
+  /* Adjust rectangle position with offsets */
+  int adjusted_x = r->x + offset_x;
+  int adjusted_y = r->y + offset_y;
+  
+  /* Convert unsigned coords to signed for proper comparison with potentially negative adjusted values */
+  int signed_x = (int)x;
+  int signed_y = (int)y;
+  
+  /* Check if click is within adjusted bounds */
+  if (signed_x < adjusted_x || signed_x >= adjusted_x + (int)r->w || 
+      signed_y < adjusted_y || signed_y >= adjusted_y + (int)r->h)
+    return -1;
+  
+  unsigned item_w = r->w / gd->cols;
+  unsigned item_h = r->h / gd->rows;
+  unsigned col = (signed_x - adjusted_x) / item_w;
+  unsigned row = (signed_y - adjusted_y) / item_h;
+
+  DEBUG_PRINTF("%d,%d (offset %d,%d) resolves to %d,%d in a %dx%d grid, index is %d\n", 
+               x, y, offset_x, offset_y, col, row, gd->cols, gd->rows, col + row * gd->cols);
+  if (col >= gd->cols || row >= gd->rows)
+    return -1;
+  return col + row * gd->cols;
+}
+
 /* test an SDL_Rect r for a grid location, based on a grid_dims gd */
 #define GRIDHIT_GD(r,gd) grid_hit_gd(&(r), event.button.x, event.button.y, &(gd))
+#define GRIDHIT_GD_OFFSET_X(r,gd) grid_hit_gd_offset(&(r), event.button.x, event.button.y, &(gd), fullscreen_ui_mode ? ui_offset_x : 0, 0)
+#define GRIDHIT_GD_OFFSET_Y_COLORS(r,gd) grid_hit_gd_offset(&(r), event.button.x, event.button.y, &(gd), 0, fullscreen_ui_mode ? ui_offset_y_colors : 0)
+#define GRIDHIT_GD_OFFSET_Y_CANVAS(r,gd) grid_hit_gd_offset(&(r), event.button.x, event.button.y, &(gd), 0, fullscreen_ui_mode ? ui_offset_y_canvas : 0)
 
 /* One global variable defined here so that update_canvas() need not be moved below */
 
@@ -1361,6 +1453,15 @@ static void update_canvas_ex_r(int x1, int y1, int x2, int y2, int screen_too)
 static void update_canvas_ex(int x1, int y1, int x2, int y2, int screen_too)
 {
   SDL_Rect src, dest;
+  SDL_Rect r_canvas_offset = r_canvas;
+  SDL_Rect r_label_offset = r_label;
+  
+  /* Apply vertical offset if fullscreen UI mode enabled */
+  if (fullscreen_ui_mode)
+  {
+    r_canvas_offset.y += ui_offset_y_canvas;
+    r_label_offset.y += ui_offset_y_canvas;
+  }
 
   if (img_starter != NULL)
   {
@@ -1380,12 +1481,12 @@ static void update_canvas_ex(int x1, int y1, int x2, int y2, int screen_too)
     SDL_BlitSurface(img_starter, &dest, canvas, &dest);
   }
 
-  SDL_BlitSurface(canvas, NULL, screen, &r_canvas);
+  SDL_BlitSurface(canvas, NULL, screen, &r_canvas_offset);
 
   /* If label is not disabled, cover canvas with label layer */
 
   if (!disable_label)
-    SDL_BlitSurface(label, NULL, screen, &r_label);
+    SDL_BlitSurface(label, NULL, screen, &r_label_offset);
 
   if (screen_too)
     update_screen(x1 + r_ttools.w, y1, x2 + r_ttools.w, y2);
@@ -3842,7 +3943,7 @@ static void mainloop(void)
       else if (event.type == SDL_MOUSEBUTTONDOWN &&
                event.button.button >= 2 &&
                event.button.button <= 3 &&
-               (no_button_distinction == 0 && !(HIT(r_tools) && GRIDHIT_GD(r_tools, gd_tools) == TOOL_PRINT)))
+               (no_button_distinction == 0 && !(HIT_OFFSET_X(r_tools) && GRIDHIT_GD_OFFSET_X(r_tools, gd_tools) == TOOL_PRINT)))
       {
         /* They're using the middle or right mouse buttons! */
 
@@ -3875,7 +3976,7 @@ static void mainloop(void)
       {
         /* IMPORTANT: Check sound & childmode buttons FIRST, before r_tools! 
            These buttons are inside r_tools rect but need separate handling */
-        if (HIT(r_sound_btn) && valid_click(event.button.button))
+        if (HIT_OFFSET_X(r_sound_btn) && valid_click(event.button.button))
         {
           /* Sound toggle button clicked */
 #ifndef NOSOUND
@@ -3911,7 +4012,7 @@ static void mainloop(void)
           }
 #endif
         }
-        else if (HIT(r_childmode_btn) && valid_click(event.button.button))
+        else if (HIT_OFFSET_X(r_childmode_btn) && valid_click(event.button.button))
         {
           /* Child mode toggle button pressed - track press time for long-press detection */
           child_mode_button_press_start = SDL_GetTicks();
@@ -3919,9 +4020,9 @@ static void mainloop(void)
           SDL_Log("Child mode button pressed at %u ms, current state: %d, locked: %d", 
                   child_mode_button_press_start, child_mode, child_mode_locked);
         }
-        else if (HIT(r_tools))
+        else if (HIT_OFFSET_X(r_tools))
         {
-          if (HIT(real_r_tools))
+          if (HIT_OFFSET_X(real_r_tools))
           {
             /* A tool on the left has been pressed! */
             brushflag = 0;
@@ -3947,7 +4048,7 @@ static void mainloop(void)
             /* Expert Mode: Original grid-based calculation */
             else
             {
-              whicht = tool_scroll + GRIDHIT_GD(real_r_tools, gd_tools);
+              whicht = tool_scroll + GRIDHIT_GD_OFFSET_X(real_r_tools, gd_tools);
             }
 
             if (whicht < NUM_TOOLS && tool_avail[whicht] && (valid_click(event.button.button) || whicht == TOOL_PRINT))
@@ -5641,10 +5742,10 @@ static void mainloop(void)
               update_screen_rect(&r_toolopt);
           }
         }
-        else if (HIT(r_colors) && colors_are_selectable)
+        else if (HIT_OFFSET_Y_COLORS(r_colors) && colors_are_selectable)
         {
           /* Color! */
-          whichc = GRIDHIT_GD(r_colors, gd_colors);
+          whichc = GRIDHIT_GD_OFFSET_Y_COLORS(r_colors, gd_colors);
 
           if (valid_click(event.button.button))
           {
@@ -5752,7 +5853,7 @@ static void mainloop(void)
             }
           }
         }
-        else if (HIT(r_canvas) && valid_click(event.button.button) && keyglobal == 0)
+        else if (HIT_OFFSET_Y_CANVAS(r_canvas) && valid_click(event.button.button) && keyglobal == 0)
         {
           const Uint8 *kbd_state;
 
@@ -6532,7 +6633,7 @@ static void mainloop(void)
       else if (event.type == SDL_MOUSEBUTTONUP)
       {
         /* Handle child mode button release (with short-press detection only) */
-        if (HIT(r_childmode_btn) && child_mode_button_press_start > 0 && valid_click(event.button.button))
+        if (HIT_OFFSET_X(r_childmode_btn) && child_mode_button_press_start > 0 && valid_click(event.button.button))
         {
           Uint32 press_duration = SDL_GetTicks() - child_mode_button_press_start;
           SDL_Log("Child mode button released after %u ms", press_duration);
@@ -7114,7 +7215,7 @@ static void mainloop(void)
         /* FIXME: Is doing this every event too intensive? */
         /* Should I check current cursor first? */
 
-        if (HIT(r_tools))
+        if (HIT_OFFSET_X(r_tools))
         {
           /* Child Mode: Single column cursor handling */
           if (child_mode)
@@ -7194,7 +7295,7 @@ static void mainloop(void)
             do_setcursor(cursor_arrow);
           }
         }
-        else if (HIT(r_colors))
+        else if (HIT_OFFSET_Y_COLORS(r_colors))
         {
           /* Color picker: */
           if (colors_are_selectable)
@@ -7315,7 +7416,7 @@ static void mainloop(void)
             }
           }
         }
-        else if (HIT(r_canvas) && keyglobal == 0)
+        else if (HIT_OFFSET_Y_CANVAS(r_canvas) && keyglobal == 0)
         {
           /* Canvas: */
 
@@ -11418,6 +11519,7 @@ static void draw_toolbar(void)
   int i, off_y, max, most, tool;
   SDL_Rect dest;
   int cols, button_width, button_height;
+  int offset_x = fullscreen_ui_mode ? ui_offset_x : 0;  /* Apply horizontal offset if fullscreen UI mode enabled */
   
   /* Child Mode: Single column layout with larger buttons */
   if (child_mode)
@@ -11451,7 +11553,7 @@ static void draw_toolbar(void)
     max = most - gd_tools.cols + TOOLOFFSET;
     gd_tools.rows = max / gd_tools.cols;
 
-    dest.x = 0;
+    dest.x = 0 + offset_x;
     dest.y = r_ttools.h;
 
     if (tool_scroll > 0)
@@ -11463,7 +11565,7 @@ static void draw_toolbar(void)
       SDL_BlitSurface(img_scroll_up_off, NULL, screen, &dest);
     }
 
-    dest.x = 0;
+    dest.x = 0 + offset_x;
     dest.y = r_ttools.h + off_y + ((most - gd_tools.cols + TOOLOFFSET) / gd_tools.cols * button_h);
 
     if (tool_scroll < NUM_TOOLS - (most - gd_tools.cols) - TOOLOFFSET)
@@ -11491,7 +11593,7 @@ static void draw_toolbar(void)
     {
       tool = child_tools[i];
       
-      dest.x = 0;  /* Single column, always x=0 */
+      dest.x = 0 + offset_x;  /* Single column with offset */
       dest.y = (i * button_height) + r_ttools.h + off_y;
 
       SDL_Surface *button_color;
@@ -11530,12 +11632,12 @@ static void draw_toolbar(void)
       SDL_BlitSurface(button_color, NULL, img_tool_names[tool], NULL);
 
       /* Draw icon - scaled and centered */
-      dest.x = (button_width - img_tools[tool]->w) / 2;
+      dest.x = (button_width - img_tools[tool]->w) / 2 + offset_x;
       dest.y = (i * button_height) + r_ttools.h + 4 + off_y;
       SDL_BlitSurface(img_tools[tool], NULL, screen, &dest);
 
       /* Draw label - centered below icon */
-      dest.x = (button_width - img_tool_names[tool]->w) / 2;
+      dest.x = (button_width - img_tool_names[tool]->w) / 2 + offset_x;
       dest.y = (i * button_height) + r_ttools.h + button_height - img_tool_names[tool]->h - 4 + off_y;
       SDL_BlitSurface(img_tool_names[tool], NULL, screen, &dest);
     }
@@ -11546,7 +11648,7 @@ static void draw_toolbar(void)
     for (tool = tool_scroll; tool < tool_scroll + max; tool++)
     {
       i = tool - tool_scroll;
-      dest.x = ((i % 2) * button_w);
+      dest.x = ((i % 2) * button_w) + offset_x;
       dest.y = ((i / 2) * button_h) + r_ttools.h + off_y;
 
       if (tool < NUM_TOOLS)
@@ -11571,16 +11673,16 @@ static void draw_toolbar(void)
         }
         SDL_BlitSurface(button_body, NULL, screen, &dest);
         SDL_BlitSurface(button_color, NULL, img_tools[tool], NULL);
-        SDL_BlitSurface(button_color, NULL, img_tool_names[tool], NULL);
+        SDL_BlitSurface(img_tools[tool], NULL, screen, &dest);
 
-        dest.x = ((i % 2) * button_w) + 4;
+        dest.x = ((i % 2) * button_w) + 4 + offset_x;
         dest.y = ((i / 2) * button_h) + r_ttools.h + 2 + off_y;
 
         SDL_BlitSurface(img_tools[tool], NULL, screen, &dest);
 
         dest.x =
           ((i % 2) * button_w) + (4 * button_w) / ORIGINAL_BUTTON_SIZE +
-          ((40 * button_w) / ORIGINAL_BUTTON_SIZE - img_tool_names[tool]->w) / 2;
+          ((40 * button_w) / ORIGINAL_BUTTON_SIZE - img_tool_names[tool]->w) / 2 + offset_x;
         dest.y =
           ((i / 2) * button_h) + r_ttools.h +
           (2 * button_w) / ORIGINAL_BUTTON_SIZE +
@@ -11617,6 +11719,7 @@ static void draw_row_minus_1_buttons(void)
   int button_render_h = button_h - 20;  /* Reduced visual height for Row -1 buttons */
   float scale_y = 1.04 * (float)button_render_h / button_h;  /* Scale factor for Y-axis */
   float icon_scale = 0.7;  /* Scale icons to 70% (30% smaller) */
+  int offset_x = fullscreen_ui_mode ? ui_offset_x : 0;  /* Apply horizontal offset if fullscreen UI mode enabled */
 
 #ifndef NOSOUND
   /* Sound toggle button */
@@ -11627,7 +11730,7 @@ static void draw_row_minus_1_buttons(void)
   button_scaled = rotozoomSurfaceXY(button_body, 0, 1.0, scale_y, SMOOTHING_ON);
   if (button_scaled)
   {
-    dest.x = r_sound_btn.x;
+    dest.x = r_sound_btn.x + offset_x;
     dest.y = r_sound_btn.y;
     SDL_BlitSurface(button_scaled, NULL, screen, &dest);
     SDL_FreeSurface(button_scaled);
@@ -11638,7 +11741,7 @@ static void draw_row_minus_1_buttons(void)
   if (icon_scaled)
   {
     /* Position icon at top of button, horizontally centered */
-    dest.x = r_sound_btn.x + (r_sound_btn.w - icon_scaled->w) / 2;
+    dest.x = r_sound_btn.x + (r_sound_btn.w - icon_scaled->w) / 2 + offset_x;
     dest.y = r_sound_btn.y + 2;  /* Top-aligned with small margin */
     SDL_BlitSurface(icon_scaled, NULL, screen, &dest);
     SDL_FreeSurface(icon_scaled);
@@ -11657,7 +11760,7 @@ static void draw_row_minus_1_buttons(void)
   button_scaled = rotozoomSurfaceXY(button_body, 0, 1.0, scale_y, SMOOTHING_ON);
   if (button_scaled)
   {
-    dest.x = r_childmode_btn.x;
+    dest.x = r_childmode_btn.x + offset_x;
     dest.y = r_childmode_btn.y;
     SDL_BlitSurface(button_scaled, NULL, screen, &dest);
     SDL_FreeSurface(button_scaled);
@@ -11668,7 +11771,7 @@ static void draw_row_minus_1_buttons(void)
   if (icon_scaled)
   {
     /* Position icon at top of button, horizontally centered */
-    dest.x = r_childmode_btn.x + (button_w - icon_scaled->w) / 2;
+    dest.x = r_childmode_btn.x + (button_w - icon_scaled->w) / 2 + offset_x;
     dest.y = r_childmode_btn.y + 2;  /* Top-aligned with small margin */
     SDL_BlitSurface(icon_scaled, NULL, screen, &dest);
     SDL_FreeSurface(icon_scaled);
@@ -11697,7 +11800,7 @@ static void draw_row_minus_1_buttons(void)
       SDL_UnlockSurface(lock_scaled);
       
       /* Position lock icon in top-right corner of button */
-      dest.x = r_childmode_btn.x + button_w - lock_scaled->w - 2;
+      dest.x = r_childmode_btn.x + button_w - lock_scaled->w - 2 + offset_x;
       dest.y = r_childmode_btn.y + 2;
       SDL_BlitSurface(lock_scaled, NULL, screen, &dest);
       SDL_FreeSurface(lock_scaled);
@@ -11706,7 +11809,7 @@ static void draw_row_minus_1_buttons(void)
 
   /* Apply color to label and draw it below the icon */
   SDL_BlitSurface(button_color, NULL, mode_label, NULL);
-  dest.x = r_childmode_btn.x + (button_w - mode_label->w) / 2;
+  dest.x = r_childmode_btn.x + (button_w - mode_label->w) / 2 + offset_x;
   dest.y = r_childmode_btn.y + button_render_h - mode_label->h - 2;
   SDL_BlitSurface(mode_label, NULL, screen, &dest);
 }
@@ -12000,6 +12103,7 @@ static unsigned draw_colors(unsigned action)
   SDL_Rect dest;
   static unsigned old_color;
   unsigned old_colors_state;
+  int offset_y = fullscreen_ui_mode ? ui_offset_y_colors : 0;  /* Apply vertical offset if fullscreen UI mode enabled */
 
   old_colors_state = colors_state;
 
@@ -12030,7 +12134,7 @@ static unsigned draw_colors(unsigned action)
                            : img_color_btn_off;
     
     dest.x = r_colors.x + i % gd_colors.cols * color_button_w;
-    dest.y = r_colors.y + i / gd_colors.cols * color_button_h;
+    dest.y = r_colors.y + i / gd_colors.cols * color_button_h + offset_y;
     dest.w = color_button_w;
     dest.h = color_button_h;
     
@@ -12062,7 +12166,18 @@ static unsigned draw_colors(unsigned action)
       }
     }
   }
-  update_screen_rect(&r_colors);
+  
+  /* Update screen rect with offset applied */
+  if (offset_y != 0)
+  {
+    SDL_Rect r_colors_with_offset = r_colors;
+    r_colors_with_offset.y += offset_y;
+    update_screen_rect(&r_colors_with_offset);
+  }
+  else
+  {
+    update_screen_rect(&r_colors);
+  }
 
   /* if only the color changed, no need to draw the title */
   if (colors_state == old_colors_state)
@@ -15095,6 +15210,12 @@ static void draw_tux_text_ex(int which_tux, const char *const str, int want_righ
   SDL_Color black = { 0, 0, 0, 0 };
   int w;
   SDL_Surface *btn;
+  SDL_Rect r_tuxarea_offset = r_tuxarea;
+  int offset_y = fullscreen_ui_mode ? ui_offset_y_tux : 0;  /* Apply vertical offset if fullscreen UI mode enabled */
+  
+  /* Apply offset to tux area rectangle */
+  if (fullscreen_ui_mode)
+    r_tuxarea_offset.y += offset_y;
 
   latest_tux = which_tux;
   latest_tux_text = str;
@@ -15106,15 +15227,15 @@ static void draw_tux_text_ex(int which_tux, const char *const str, int want_righ
   control_drawtext_timer(0, "", 0);
 
   /* Clear first: */
-  SDL_FillRect(screen, &r_tuxarea, SDL_MapRGB(screen->format, 255, 255, 255));
+  SDL_FillRect(screen, &r_tuxarea_offset, SDL_MapRGB(screen->format, 255, 255, 255));
 
   /* Draw tux: */
   dest.x = r_tuxarea.x;
-  dest.y = r_tuxarea.y + r_tuxarea.h - img_tux[which_tux]->h;
+  dest.y = r_tuxarea.y + r_tuxarea.h - img_tux[which_tux]->h + offset_y;
 
   /* if he's too tall to fit, go off the bottom (not top) edge */
-  if (dest.y < r_tuxarea.y)
-    dest.y = r_tuxarea.y;
+  if (dest.y < r_tuxarea.y + offset_y)
+    dest.y = r_tuxarea.y + offset_y;
 
   /* Don't let sfx and speak buttons cover the top of Tux, either: */
   if (cur_tool == TOOL_STAMP && use_sound)
@@ -15128,7 +15249,7 @@ static void draw_tux_text_ex(int which_tux, const char *const str, int want_righ
   /* Wide enough for Tux, or two stamp sound buttons (whichever's wider) */
   w = max(img_tux[which_tux]->w, img_btnsm_up->w * 2) + 5;
 
-  wordwrap_text_ex(str, black, w, r_tuxarea.y, r_tuxarea.w, want_right_to_left, locale_text);
+  wordwrap_text_ex(str, black, w, r_tuxarea.y + offset_y, r_tuxarea.w, want_right_to_left, locale_text);
 
 
   /* Draw 'sound effect' and 'speak' buttons, if we're in the Stamp tool */
@@ -15143,12 +15264,12 @@ static void draw_tux_text_ex(int which_tux, const char *const str, int want_righ
       btn = img_btnsm_up;
 
     dest.x = 0;
-    dest.y = r_tuxarea.y;
+    dest.y = r_tuxarea.y + offset_y;
 
     SDL_BlitSurface(btn, NULL, screen, &dest);
 
     dest.x = (img_btnsm_up->w - img_sfx->w) / 2;
-    dest.y = r_tuxarea.y + ((img_btnsm_up->h - img_sfx->h) / 2);
+    dest.y = r_tuxarea.y + ((img_btnsm_up->h - img_sfx->h) / 2) + offset_y;
 
     SDL_BlitSurface(img_sfx, NULL, screen, &dest);
 
@@ -15161,17 +15282,17 @@ static void draw_tux_text_ex(int which_tux, const char *const str, int want_righ
       btn = img_btnsm_up;
 
     dest.x = img_btnsm_up->w;
-    dest.y = r_tuxarea.y;
+    dest.y = r_tuxarea.y + offset_y;
 
     SDL_BlitSurface(btn, NULL, screen, &dest);
 
     dest.x = img_btnsm_up->w + ((img_btnsm_up->w - img_speak->w) / 2);
-    dest.y = r_tuxarea.y + ((img_btnsm_up->h - img_speak->h) / 2);
+    dest.y = r_tuxarea.y + ((img_btnsm_up->h - img_speak->h) / 2) + offset_y;
 
     SDL_BlitSurface(img_speak, NULL, screen, &dest);
   }
 
-  update_screen_rect(&r_tuxarea);
+  update_screen_rect(&r_tuxarea_offset);
 }
 
 
@@ -34045,7 +34166,7 @@ static void start_motion_convert(SDL_Event event)
 
   int scroll = 0;
 
-  if (HIT(r_tools))
+  if (HIT_OFFSET_X(r_tools))
     scroll = 1;
   else if (HIT(r_toolopt)
            && (cur_tool == TOOL_BRUSH || cur_tool == TOOL_STAMP
@@ -34084,7 +34205,7 @@ static void convert_motion_to_wheel(SDL_Event event)
   int scroll = 0;
   int high = 0;
 
-  if (HIT(r_tools))
+  if (HIT_OFFSET_X(r_tools))
   {
     scroll = 1;
     high = 48;

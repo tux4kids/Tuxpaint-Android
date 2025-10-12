@@ -17,3 +17,9 @@ es soll einfach der ordner stamps analysiert werden, dort die erste ebene als ka
 - Beim allerersten öffnen muss der Sound trigger erlaubt sein
 - Fullscreen mit nur der rechten Leiste sichtbar. Wenn man die drückt, alten die tolle und colours rein bis man wieder Malt, dann slider sie wieder raus
 
+jetzt ist nur noch in der color leiste, der blaue button für die aktive color nicht richtig gesetzt, also wenn man im expert mode eine color drüct, dann wird der button ja blau, aber jetzt nur noch mit einem offset von 100 ( der testwert) also nur ein schmaler streifen oben noch blau
+
+
+
+
+
