@@ -1,4 +1,5 @@
-# TODO
+TODO
+====
 
 - multitouch support when erasing
 - check why stamp is not working (disabled all the time)
@@ -15,9 +16,15 @@
 es soll einfach der ordner stamps analysiert werden, dort die erste ebene als kategorien, diese grösse merken und dann jede kategorie durchgehen und alle dateien darin und in allen  unterordner einlesen und flat als jeweils eine kategorie anzeigen, das resultiert momentan in 17 kategorien, das kann sich aber auch aendern
 
 - Beim allerersten öffnen muss der Sound trigger erlaubt sein
-- Fullscreen mit nur der rechten Leiste sichtbar. Wenn man die drückt, alten die tolle und colours rein bis man wieder Malt, dann slider sie wieder raus
+- Fullscreen mit nur der rechten Leiste sichtbar. Wenn man die drückt, 
 
-jetzt ist nur noch in der color leiste, der blaue button für die aktive color nicht richtig gesetzt, also wenn man im expert mode eine color drüct, dann wird der button ja blau, aber jetzt nur noch mit einem offset von 100 ( der testwert) also nur ein schmaler streifen oben noch blau
+# color slide effekt:
+
+- die slide-in funktioin anpassen, dass sie nicht reinsliden, wenn schon sichtbar ist
+- die slide-out funktion anpassen, dass sie nicht rausslided, wenn schon ausgeblendet ist
+- wenn die colorbar ausgeblendet ist unterhalb des sliders bzw. rechter toolbar einen neuen farbwahl-button anzeigen zum reinsliden
+- wenn number of color rows in settings > 1 ist, dann muss dies im child mode ignorieren undtemporär auf 1 gesetzt werden
+
 
 
 

@@ -849,6 +849,7 @@ static int ui_offset_x = 0;           /* Horizontal offset for toolbar hide/show
 static int ui_offset_y_colors = 0;    /* Vertical offset for colors hide/show animation */
 static int ui_offset_y_canvas = 0;    /* Vertical offset for canvas hide/show animation */
 static int ui_offset_y_tux = 0;       /* Vertical offset for tux area (positive = hidden below) */
+static int colorbar_is_visible = 0;   /* Flag to track color bar visibility state */
 
 static int colors_rows;
 
@@ -955,7 +956,7 @@ static void setup_normal_screen_layout(void)
 
   r_canvas.x = gd_tools.cols * button_w;
   r_canvas.y = 0;
-  r_canvas.w = WINDOW_WIDTH - (gd_tools.cols + gd_toolopt.cols) * button_w;
+  r_canvas.w = WINDOW_WIDTH - (gd_tools.cols + gd_toolopt.cols) * button_w;  /* Canvas width (also used for canvas_width) */
 
   r_tuxarea.x = 0;
   r_tuxarea.w = WINDOW_WIDTH;
@@ -983,34 +984,20 @@ static void setup_normal_screen_layout(void)
   gd_tools.rows = buttons_tall;
   gd_toolopt.rows = buttons_tall;
 
-  r_canvas.h = r_ttoolopt.h + buttons_tall * button_h;
+  r_canvas.h = WINDOW_HEIGHT;  /* TESTING: Fullscreen canvas height (was r_ttoolopt.h + buttons_tall * button_h) */
 
   r_label = r_canvas;
 
   r_colors.y = r_canvas.h + r_canvas.y;
   r_tcolors.y = r_canvas.h + r_canvas.y;
 
-  /* Child mode: Hide Tux area and extend colors to bottom */
-  if (child_mode)
-  {
-    r_tuxarea.y = WINDOW_HEIGHT;  /* Off-screen */
-    r_tuxarea.h = 0;              /* No height */
-    
-    /* Extend colors to fill entire available space - STRETCH buttons like width in 5a8e0829 */
-    r_colors.h = WINDOW_HEIGHT - r_colors.y;  /* Full height to bottom */
-    
-    /* Stretch color buttons vertically to fill space (same as width: color_button_w = r_colors.w / gd_colors.cols) */
-    color_button_h = r_colors.h / gd_colors.rows;
-  }
-  else
-  {
-    /* Reset to normal color area height */
-    r_colors.h = 48 * button_scale * gd_colors.rows;
-    color_button_h = r_colors.h / gd_colors.rows;
-    
-    r_tuxarea.y = r_colors.y + r_colors.h;
-    r_tuxarea.h = WINDOW_HEIGHT - r_tuxarea.y;
-  }
+  /* Normal color area height */
+  r_colors.h = 48 * button_scale * gd_colors.rows;
+  color_button_h = r_colors.h / gd_colors.rows;
+  
+  /* Tux area below colors (same in child_mode and expert mode) */
+  r_tuxarea.y = r_colors.y + r_colors.h;
+  r_tuxarea.h = WINDOW_HEIGHT - r_tuxarea.y;
 
   r_sfx.x = r_tuxarea.x;
   r_sfx.y = r_tuxarea.y;
@@ -1044,12 +1031,13 @@ static void setup_normal_screen_layout(void)
   /* Initialize UI offsets if fullscreen UI mode is enabled */
   if (fullscreen_ui_mode)
   {
-    ui_offset_x = -100;           /* Shift left toolbar 100px to the left (hidden) */
-    ui_offset_y_colors = 100;     /* Shift color bar 100px down (hidden) */
-    ui_offset_y_tux = 100;        /* Shift tux area 100px down (hidden) */
+    ui_offset_x = 0;           /* Shift left toolbar some px to the left (hidden) */
+    ui_offset_y_colors = r_ttoolopt.h + buttons_tall * button_h - WINDOW_HEIGHT;     /* Shift color bar down ( this is the position if the bars are visible ) */
+    ui_offset_y_tux = ui_offset_y_colors;        /* Shift tux area the same amount down (hidden) */
+    colorbar_is_visible = 1;   /* Colors start visible */
 #ifdef __ANDROID__
-    __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "UI offsets initialized: x=%d, y_colors=%d, y_tux=%d", 
-                        ui_offset_x, ui_offset_y_colors, ui_offset_y_tux);
+    __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "UI offsets initialized: x=%d, y_colors=%d, y_tux=%d, colorbar_is_visible=%d", 
+                        ui_offset_x, ui_offset_y_colors, ui_offset_y_tux, colorbar_is_visible);
 #endif
   }
 
@@ -1380,6 +1368,203 @@ static int grid_hit_gd_offset(const SDL_Rect *const r, unsigned x, unsigned y, g
 #define GRIDHIT_GD_OFFSET_X(r,gd) grid_hit_gd_offset(&(r), event.button.x, event.button.y, &(gd), fullscreen_ui_mode ? ui_offset_x : 0, 0)
 #define GRIDHIT_GD_OFFSET_Y_COLORS(r,gd) grid_hit_gd_offset(&(r), event.button.x, event.button.y, &(gd), 0, fullscreen_ui_mode ? ui_offset_y_colors : 0)
 #define GRIDHIT_GD_OFFSET_Y_CANVAS(r,gd) grid_hit_gd_offset(&(r), event.button.x, event.button.y, &(gd), 0, fullscreen_ui_mode ? ui_offset_y_canvas : 0)
+
+/* Forward declarations for functions used in slide animation */
+static void redraw_tux_text(void);
+static void update_canvas(int x, int y, int w, int h);
+
+/**
+ * Slide color bar and tux area into view with animation
+ */
+static void slide_colorbar_in(void)
+{
+#ifdef __ANDROID__
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "slide_colorbar_in() called: fullscreen_ui_mode=%d, current_offset=%d", 
+                      fullscreen_ui_mode, ui_offset_y_colors);
+#endif
+  
+  if (!fullscreen_ui_mode)
+  {
+#ifdef __ANDROID__
+    __android_log_print(ANDROID_LOG_WARN, "TuxPaint", "slide_colorbar_in() aborted: fullscreen_ui_mode is disabled");
+#endif
+    return;
+  }
+  
+  /* If already visible, do nothing */
+  if (colorbar_is_visible)
+  {
+#ifdef __ANDROID__
+    __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", "slide_colorbar_in() skipped: already visible");
+#endif
+    return;
+  }
+  
+  /* Calculate target offset (visible position) */
+  int target_offset = r_ttoolopt.h + buttons_tall * button_h - WINDOW_HEIGHT;
+  int start_offset = ui_offset_y_colors;
+  int steps = 8;
+  int step_size = (target_offset - start_offset) / steps;
+  
+  if (step_size == 0)
+    step_size = (target_offset > start_offset) ? 1 : -1;
+  
+#ifdef __ANDROID__
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Slide IN animation starting: start=%d, target=%d, step_size=%d", 
+                      start_offset, target_offset, step_size);
+#endif
+  
+  /* Simple clearing rectangle covering colorbar and tux area */
+  SDL_Rect clear_rect;
+  clear_rect.x = 0;
+  clear_rect.w = WINDOW_WIDTH;  /* Full width */
+  
+  /* Animate slide-in */
+  while ((step_size < 0 && ui_offset_y_colors > target_offset) ||
+         (step_size > 0 && ui_offset_y_colors < target_offset))
+  {
+    ui_offset_y_colors += step_size;
+    ui_offset_y_tux = ui_offset_y_colors;
+    
+    /* Clamp to target */
+    if ((step_size < 0 && ui_offset_y_colors <= target_offset) ||
+        (step_size > 0 && ui_offset_y_colors >= target_offset))
+    {
+      ui_offset_y_colors = target_offset;
+      ui_offset_y_tux = ui_offset_y_colors;
+    }
+    
+    /* Clear the animated area */
+    clear_rect.y = r_colors.y + ui_offset_y_colors;
+    clear_rect.h = WINDOW_HEIGHT - clear_rect.y;
+    SDL_FillRect(screen, &clear_rect, SDL_MapRGB(screen->format, 255, 255, 255));
+    
+    /* Redraw UI elements at new position */
+    draw_colors(COLORSEL_FORCE_REDRAW);
+    redraw_tux_text();
+    
+    SDL_Flip(screen);
+    
+    if (ui_offset_y_colors == target_offset)
+      break;
+    
+    SDL_Delay(20);  /* 20ms per frame for smoother animation */
+  }
+  
+  /* Ensure exact final position */
+  ui_offset_y_colors = target_offset;
+  ui_offset_y_tux = ui_offset_y_colors;
+  
+  /* Final redraw */
+  clear_rect.y = r_colors.y + ui_offset_y_colors;
+  clear_rect.h = WINDOW_HEIGHT - clear_rect.y;
+  SDL_FillRect(screen, &clear_rect, SDL_MapRGB(screen->format, 255, 255, 255));
+  draw_colors(COLORSEL_FORCE_REDRAW);
+  redraw_tux_text();
+  SDL_Flip(screen);
+  
+  colorbar_is_visible = 1;
+  
+#ifdef __ANDROID__
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Slide IN animation complete: final offset=%d", ui_offset_y_colors);
+#endif
+}
+
+/**
+ * Slide color bar and tux area out of view with animation
+ */
+static void slide_colorbar_out(void)
+{
+#ifdef __ANDROID__
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "slide_colorbar_out() called: fullscreen_ui_mode=%d, current_offset=%d", 
+                      fullscreen_ui_mode, ui_offset_y_colors);
+#endif
+  
+  if (!fullscreen_ui_mode)
+  {
+#ifdef __ANDROID__
+    __android_log_print(ANDROID_LOG_WARN, "TuxPaint", "slide_colorbar_out() aborted: fullscreen_ui_mode is disabled");
+#endif
+    return;
+  }
+  
+  /* If already hidden, do nothing */
+  if (!colorbar_is_visible)
+  {
+#ifdef __ANDROID__
+    __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", "slide_colorbar_out() skipped: already hidden");
+#endif
+    return;
+  }
+  
+  int target_offset = 0;  /* Target position: 0 = bars hidden (off-screen) */
+  int start_offset = ui_offset_y_colors;
+  int steps = 5;
+  int step_size = (target_offset - start_offset) / steps;
+  
+  if (step_size == 0)
+    step_size = (target_offset > start_offset) ? 1 : -1;
+  
+#ifdef __ANDROID__
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Slide animation starting: start=%d, target=%d, step_size=%d, r_colors.y=%d", 
+                      start_offset, target_offset, step_size, r_colors.y);
+#endif
+  
+  /* Clearing rectangle for area between toolbar and colorbar */
+  SDL_Rect clear_rect;
+  clear_rect.x = 0;
+  clear_rect.w = WINDOW_WIDTH;  /* Full width */
+  
+  /* Animate slide-out */
+  while ((step_size > 0 && ui_offset_y_colors < target_offset) ||
+         (step_size < 0 && ui_offset_y_colors > target_offset))
+  {
+    ui_offset_y_colors += step_size;
+    ui_offset_y_tux = ui_offset_y_colors;
+    
+    /* Clamp to target */
+    if ((step_size > 0 && ui_offset_y_colors >= target_offset) ||
+        (step_size < 0 && ui_offset_y_colors <= target_offset))
+    {
+      ui_offset_y_colors = target_offset;
+      ui_offset_y_tux = ui_offset_y_colors;
+    }
+    
+    /* Redraw canvas first (it's now visible) */
+    update_canvas(0, 0, WINDOW_WIDTH - r_ttoolopt.w, WINDOW_HEIGHT);
+    
+    /* Clear area between toolbar and colorbar (freed by slide-out) */
+    clear_rect.y = r_tools.y + r_tools.h;  /* Start below left toolbar (header + tools) */
+    clear_rect.h = (r_colors.y + ui_offset_y_colors) - clear_rect.y;  /* Up to colorbar top */
+    SDL_FillRect(screen, &clear_rect, SDL_MapRGB(screen->format, 255, 255, 255));
+    
+    /* Redraw UI elements at new position */
+    draw_colors(COLORSEL_FORCE_REDRAW);
+    redraw_tux_text();
+    
+    SDL_Flip(screen);
+    
+    if (ui_offset_y_colors == target_offset)
+      break;
+    
+    SDL_Delay(15);  /* 15ms per frame */
+  }
+  
+  /* Ensure exact final position */
+  ui_offset_y_colors = target_offset;
+  ui_offset_y_tux = ui_offset_y_colors;
+  
+  /* Final canvas redraw to ensure clean state */
+  update_canvas(0, 0, WINDOW_WIDTH - r_ttoolopt.w, WINDOW_HEIGHT);
+  draw_colors(COLORSEL_FORCE_REDRAW);
+  SDL_Flip(screen);
+  
+  colorbar_is_visible = 0;
+  
+#ifdef __ANDROID__
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Slide OUT animation complete: final offset=%d, canvas updated", ui_offset_y_colors);
+#endif
+}
 
 /* One global variable defined here so that update_canvas() need not be moved below */
 
@@ -3974,6 +4159,10 @@ static void mainloop(void)
       else if ((event.type == SDL_MOUSEBUTTONDOWN ||
                 event.type == TP_SDL_MOUSEBUTTONSCROLL) && event.button.button <= 3)
       {
+#ifdef __ANDROID__
+        __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", "MOUSEBUTTONDOWN: x=%d, y=%d, r_tools=(%d,%d,%d,%d)", 
+                            event.button.x, event.button.y, r_tools.x, r_tools.y, r_tools.w, r_tools.h);
+#endif
         /* IMPORTANT: Check sound & childmode buttons FIRST, before r_tools! 
            These buttons are inside r_tools rect but need separate handling */
         if (HIT_OFFSET_X(r_sound_btn) && valid_click(event.button.button))
@@ -4022,6 +4211,17 @@ static void mainloop(void)
         }
         else if (HIT_OFFSET_X(r_tools))
         {
+#ifdef __ANDROID__
+          __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", "HIT check for r_tools: x=%d, y=%d, r_tools=(%d,%d,%d,%d), ui_offset_x=%d", 
+                              event.button.x, event.button.y, r_tools.x, r_tools.y, r_tools.w, r_tools.h, ui_offset_x);
+#endif
+#ifdef __ANDROID__
+          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Toolbar HIT! x=%d, y=%d, fullscreen_ui_mode=%d, ui_offset_y_colors=%d", 
+                              event.button.x, event.button.y, fullscreen_ui_mode, ui_offset_y_colors);
+#endif
+          /* Slide color bar out when toolbar is clicked */
+          slide_colorbar_out();
+          
           if (HIT_OFFSET_X(real_r_tools))
           {
             /* A tool on the left has been pressed! */
@@ -4110,6 +4310,7 @@ static void mainloop(void)
 
               if (cur_tool == TOOL_BRUSH)
               {
+                slide_colorbar_in();
                 keybd_flag = 0;
                 cur_thing = cur_brush;
                 num_things = num_brushes;
@@ -4131,6 +4332,7 @@ static void mainloop(void)
               }
               else if (cur_tool == TOOL_LINES)
               {
+                slide_colorbar_in();
                 keybd_flag = 0;
                 cur_thing = cur_brush;
                 num_things = num_brushes;
@@ -4140,6 +4342,7 @@ static void mainloop(void)
               }
               else if (cur_tool == TOOL_FILL)
               {
+                slide_colorbar_in();
                 keybd_flag = 0;
                 cur_thing = cur_fill;
                 num_things = NUM_FILLS;
@@ -4149,6 +4352,7 @@ static void mainloop(void)
               }
               else if (cur_tool == TOOL_SHAPES)
               {
+                slide_colorbar_in();
                 keybd_flag = 0;
                 cur_thing = cur_shape;
                 num_things = NUM_SHAPES;
@@ -4159,6 +4363,7 @@ static void mainloop(void)
               }
               else if (cur_tool == TOOL_TEXT || cur_tool == TOOL_LABEL)
               {
+                slide_colorbar_in();
                 if (onscreen_keyboard && kbd)
                 {
                   if (kbd == NULL)
@@ -4573,6 +4778,12 @@ static void mainloop(void)
 
         else if (HIT(r_toolopt) && valid_click(event.button.button))
         {
+#ifdef __ANDROID__
+          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "r_toolopt clicked! Sliding colors IN");
+#endif
+          /* Slide color bar in when right side (toolopt) is clicked */
+          slide_colorbar_in();
+          
           /* In child mode with brush tool, handle slider clicks and dragging */
           if (child_mode && (cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES))
           {
@@ -4584,10 +4795,10 @@ static void mainloop(void)
             int child_brush_max = 4;  /* Brush index 4 */
             
             slider_w = button_w - 20;
-            /* Use r_colors.y instead of (WINDOW_HEIGHT - r_colors.h) because in child mode
-               r_colors extends to bottom, so WINDOW_HEIGHT - r_colors.h would be tiny/negative */
+            /* Use r_colors.y + ui_offset_y_colors to get the visible (animated) colorbar position
+               in child mode, accounting for slide animation */
             /* Compress by 5% to avoid overlapping neighboring elements */
-            slider_h = (int)((r_colors.y - r_ttoolopt.h - 40) * 0.95);
+            slider_h = (int)(((r_colors.y + ui_offset_y_colors) - r_ttoolopt.h - 40) * 0.95);
             slider_x = WINDOW_WIDTH - r_ttoolopt.w + (r_ttoolopt.w - slider_w) / 2;
             slider_y = r_ttoolopt.h + 30;  /* Add extra margin at top */
             
@@ -5744,6 +5955,12 @@ static void mainloop(void)
         }
         else if (HIT_OFFSET_Y_COLORS(r_colors) && colors_are_selectable)
         {
+#ifdef __ANDROID__
+          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "r_colors clicked! Sliding colors IN");
+#endif
+          /* Slide color bar in when colors area is clicked */
+          slide_colorbar_in();
+          
           /* Color! */
           whichc = GRIDHIT_GD_OFFSET_Y_COLORS(r_colors, gd_colors);
 
@@ -5855,6 +6072,12 @@ static void mainloop(void)
         }
         else if (HIT_OFFSET_Y_CANVAS(r_canvas) && valid_click(event.button.button) && keyglobal == 0)
         {
+#ifdef __ANDROID__
+          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "r_canvas clicked! Sliding colors OUT");
+#endif
+          /* Slide color bar out when canvas is clicked */
+          slide_colorbar_out();
+          
           const Uint8 *kbd_state;
 
           kbd_state = SDL_GetKeyboardState(NULL);
@@ -5903,6 +6126,10 @@ static void mainloop(void)
           }
           else
           {
+#ifdef __ANDROID__
+            __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", "Canvas area: about to draw at x=%d, y=%d, r_canvas=(%d,%d,%d,%d)", 
+                                event.button.x, event.button.y, r_canvas.x, r_canvas.y, r_canvas.w, r_canvas.h);
+#endif
             /* Draw something! */
             old_x = event.button.x - r_canvas.x;
             old_y = event.button.y - r_canvas.y;
@@ -7154,7 +7381,7 @@ static void mainloop(void)
           
           /* Calculate slider dimensions - MUST match draw_child_mode_brush_slider() */
           slider_w = button_w - 20;
-          slider_h = (int)((r_colors.y - r_ttoolopt.h - 40) * 0.95);
+          slider_h = (int)(((r_colors.y + ui_offset_y_colors) - r_ttoolopt.h - 40) * 0.95);
           slider_x = WINDOW_WIDTH - r_ttoolopt.w + (r_ttoolopt.w - slider_w) / 2;
           slider_y = r_ttoolopt.h + 30;
           
@@ -12537,12 +12764,12 @@ static void draw_child_mode_brush_slider(void)
   SDL_Log("draw_child_mode_brush_slider() called, cur_brush=%d, num_brushes=%d", cur_brush, num_brushes);
   
   /* Clear the entire right panel area */
-  /* In child mode, r_colors.h extends to bottom, so use r_colors.y for height calculation */
+  /* In child mode, use r_colors.y + ui_offset_y_colors to get visible colorbar position */
   dest.x = WINDOW_WIDTH - r_ttoolopt.w;
   dest.y = 0;
   dest.w = r_ttoolopt.w;
-  dest.h = r_colors.y;  /* Clear from top to where colors start */
-  SDL_Log("Clearing right panel: x=%d, y=%d, w=%d, h=%d (r_colors.y=%d)", dest.x, dest.y, dest.w, dest.h, r_colors.y);
+  dest.h = r_colors.y + ui_offset_y_colors;  /* Clear from top to visible colors position */
+  SDL_Log("Clearing right panel: x=%d, y=%d, w=%d, h=%d (r_colors.y=%d, offset=%d)", dest.x, dest.y, dest.w, dest.h, r_colors.y, ui_offset_y_colors);
   SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, 255, 255, 255));  /* White background */
   
   /* Draw title "Size" */
@@ -12550,9 +12777,9 @@ static void draw_child_mode_brush_slider(void)
   
   /* Calculate slider dimensions - make it large and centered */
   slider_w = button_w - 20;  /* Slightly narrower than button width */
-  /* In child mode, r_colors extends to bottom, so use r_colors.y instead */
+  /* In child mode, use r_colors.y + ui_offset_y_colors to get visible colorbar position */
   /* Compress by 5% to avoid overlapping neighboring elements */
-  slider_h = (int)((r_colors.y - r_ttoolopt.h - 40) * 0.95);
+  slider_h = (int)(((r_colors.y + ui_offset_y_colors) - r_ttoolopt.h - 40) * 0.95);
   slider_x = WINDOW_WIDTH - r_ttoolopt.w + (r_ttoolopt.w - slider_w) / 2;
   slider_y = r_ttoolopt.h + 30;  /* Add extra margin at top */
   
@@ -32732,8 +32959,9 @@ static void setup(void)
 
   /* Create drawing canvas: */
 
-  canvas_width = WINDOW_WIDTH - r_ttools.w - r_ttoolopt.w;
-  canvas_height = (button_h * buttons_tall) + r_ttools.h;
+  /* Canvas dimensions derived from r_canvas (defined in setup_normal_screen_layout) */
+  canvas_width = r_canvas.w;
+  canvas_height = r_canvas.h;
 
   DEBUG_PRINTF("Canvas size is %d x %d\n", canvas_width, canvas_height);
 
@@ -33474,9 +33702,9 @@ static void claim_to_be_ready(void)
   SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 255, 255, 255));
 
   draw_toolbar();
+  update_canvas(0, 0, WINDOW_WIDTH - r_ttoolopt.w, (48 * 7) + 40 + HEIGHTOFFSET);
   draw_colors(COLORSEL_FORCE_REDRAW);
   draw_brushes();
-  update_canvas(0, 0, WINDOW_WIDTH - r_ttoolopt.w, (48 * 7) + 40 + HEIGHTOFFSET);
 
   SDL_Flip(screen);
 
