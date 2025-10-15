@@ -4219,8 +4219,7 @@ static void mainloop(void)
           __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Toolbar HIT! x=%d, y=%d, fullscreen_ui_mode=%d, ui_offset_y_colors=%d", 
                               event.button.x, event.button.y, fullscreen_ui_mode, ui_offset_y_colors);
 #endif
-          /* Slide color bar out when toolbar is clicked */
-          slide_colorbar_out();
+          /* Note: slide_colorbar_out() is called conditionally after tool selection */
           
           if (HIT_OFFSET_X(real_r_tools))
           {
@@ -4320,6 +4319,12 @@ static void mainloop(void)
               }
               else if (cur_tool == TOOL_STAMP)
               {
+                /* Slide colorbar in only if stamp is colorable or tintable */
+                if (stamp_colorable(cur_stamp[stamp_group]) || stamp_tintable(cur_stamp[stamp_group]))
+                  slide_colorbar_in();
+                else
+                  slide_colorbar_out();
+                
                 keybd_flag = 0;
                 cur_thing = cur_stamp[stamp_group];
                 num_things = num_stamps[stamp_group];
@@ -4453,6 +4458,12 @@ static void mainloop(void)
               }
               else if (cur_tool == TOOL_MAGIC)
               {
+                /* Slide colorbar in only if magic tool uses colors */
+                if (magics[magic_group][cur_magic[magic_group]].colors)
+                  slide_colorbar_in();
+                else
+                  slide_colorbar_out();
+                
                 keybd_flag = 0;
                 cur_thing = cur_magic[magic_group];
                 num_things = num_magics[magic_group];
@@ -4468,6 +4479,7 @@ static void mainloop(void)
               }
               else if (cur_tool == TOOL_ERASER)
               {
+                slide_colorbar_out();
                 keybd_flag = 0;
                 cur_thing = cur_eraser;
                 num_things = NUM_ERASERS;
