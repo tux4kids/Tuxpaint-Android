@@ -15542,6 +15542,11 @@ static void draw_cur_tool_tip(void)
     draw_tux_text(tool_tux[cur_tool],
                   shape_tool_tips[simple_shapes ? SHAPE_COMPLEXITY_SIMPLE : SHAPE_COMPLEXITY_NORMAL], 1);
   }
+  else if (cur_tool == TOOL_BRUSH && child_mode)
+  {
+    /* Child mode: Brush size is adjusted with slider, not brush shapes */
+    draw_tux_text(tool_tux[cur_tool], gettext("Pick a color and adjust the brush size with the slider."), 1);
+  }
   else
   {
     draw_tux_text(tool_tux[cur_tool], tool_tips[cur_tool], 1);
