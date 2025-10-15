@@ -11219,6 +11219,7 @@ static SDL_Surface *do_render_button_label(const char *const label)
   int want_h;
   float height_mult;
   char *upstr;
+  int effective_button_w;
 
   upstr = uppercase(gettext(label));
 
@@ -11254,8 +11255,11 @@ static SDL_Surface *do_render_button_label(const char *const label)
 
   height_mult = 1.0;
 
+  /* In child mode, buttons are twice as wide, so use that for wrapping calculations */
+  effective_button_w = child_mode ? (button_w * 2) : button_w;
+
   /* If very wide, try to wrap on a space (near the end) */
-  if (tmp_surf1->w >= button_w * BUTTON_LABEL_WRAP_THRESHOLD_MULT)
+  if (tmp_surf1->w >= effective_button_w * BUTTON_LABEL_WRAP_THRESHOLD_MULT)
   {
     int i, found = -1, wrapped = 0;
 
@@ -11288,12 +11292,12 @@ static SDL_Surface *do_render_button_label(const char *const label)
   }
 
   /* If STILL very wide, try to wrap on visible hyphen/dash */
-  if (tmp_surf1->w >= button_w * BUTTON_LABEL_WRAP_THRESHOLD_MULT)
+  if (tmp_surf1->w >= effective_button_w * BUTTON_LABEL_WRAP_THRESHOLD_MULT)
   {
     int i, found = -1, wrapped = 0;
     char *broken_str;
 
-    DEBUG_PRINTF("'%s' is STILL very wide (%d) compared to button size (%d)\n", upstr, tmp_surf1->w, button_w);
+    DEBUG_PRINTF("'%s' is STILL very wide (%d) compared to button size (%d)\n", upstr, tmp_surf1->w, effective_button_w);
 
     /* Try to wrap on a visible hyphen/dash */
     if (strstr(upstr, "-") != NULL)
@@ -11339,12 +11343,12 @@ static SDL_Surface *do_render_button_label(const char *const label)
   }
 
   /* If STILL very wide, try to wrap on invisible soft hyphen */
-  if (tmp_surf1->w >= button_w * BUTTON_LABEL_WRAP_THRESHOLD_MULT)
+  if (tmp_surf1->w >= effective_button_w * BUTTON_LABEL_WRAP_THRESHOLD_MULT)
   {
     int i, found = -1, wrapped = 0;
     char *broken_str;
 
-    DEBUG_PRINTF("'%s' is STILL very wide (%d) compared to button size (%d)\n", upstr, tmp_surf1->w, button_w);
+    DEBUG_PRINTF("'%s' is STILL very wide (%d) compared to button size (%d)\n", upstr, tmp_surf1->w, effective_button_w);
 
     /* Try to wrap on an invisible soft hyphen */
     if (strstr(upstr, "\302\255") != NULL)
@@ -11403,10 +11407,10 @@ static SDL_Surface *do_render_button_label(const char *const label)
 
   want_h = (int)(18 * button_scale) * height_mult;
 
-  DEBUG_PRINTF("  button_w = %d -- min w = %d\n", button_w, min(button_w, tmp_surf->w));
+  DEBUG_PRINTF("  effective_button_w = %d -- min w = %d\n", effective_button_w, min(effective_button_w, tmp_surf->w));
   DEBUG_PRINTF("  want_h   = %d -- min h = %d\n", want_h, min(want_h, tmp_surf->h));
 
-  surf = thumbnail(tmp_surf, min(button_w, tmp_surf->w), min(want_h, tmp_surf->h), 1 /* keep aspect! */ );
+  surf = thumbnail(tmp_surf, min(effective_button_w, tmp_surf->w), min(want_h, tmp_surf->h), 1 /* keep aspect! */ );
   SDL_FreeSurface(tmp_surf);
 
   DEBUG_PRINTF("Resized to:  %d x %d\n", surf->w, surf->h);
@@ -31251,6 +31255,12 @@ static void setup_config(char *argv[])
     tmpcfg.parsertmp_lang = NULL;
   if (tmpcfg.parsertmp_locale == PARSE_CLOBBER)
     tmpcfg.parsertmp_locale = NULL;
+
+#ifdef __ANDROID__
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "=== LANGUAGE SETTINGS ===");
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "parsertmp_lang: %s", tmpcfg.parsertmp_lang ? tmpcfg.parsertmp_lang : "NULL");
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "parsertmp_locale: %s", tmpcfg.parsertmp_locale ? tmpcfg.parsertmp_locale : "NULL");
+#endif
 
   setup_i18n(tmpcfg.parsertmp_lang, tmpcfg.parsertmp_locale, &num_wished_langs);
 
