@@ -6934,6 +6934,10 @@ static void mainloop(void)
             /* Re-layout screen with new mode */
             setup_screen_layout();
             
+            /* Recreate button labels with new mode's dimensions */
+            SDL_Log("Recreating button labels for child mode...");
+            create_button_labels();
+            
             /* Clear entire color area including old label space */
             SDL_Rect color_clear_rect;
             color_clear_rect.x = 0;
@@ -6997,6 +7001,10 @@ static void mainloop(void)
             
             /* Re-layout screen with new mode (sets new r_colors.h) */
             setup_screen_layout();
+            
+            /* Recreate button labels with new mode's dimensions */
+            SDL_Log("Recreating button labels for expert mode...");
+            create_button_labels();
             
             /* Redraw entire screen */
             draw_toolbar();
@@ -11223,21 +11231,27 @@ static SDL_Surface *do_render_button_label(const char *const label)
 
   upstr = uppercase(gettext(label));
 
-  DEBUG_PRINTF("do_render_button_label(\"%s\")\n", label);
+  /* Calculate effective button width first (double in child mode) */
+  effective_button_w = child_mode ? (button_w * 2) : button_w;
+  
+  SDL_Log("[LABEL] Rendering '%s' (translated: '%s'), child_mode=%d, button_w=%d, effective_button_w=%d",
+          label, upstr, child_mode, button_w, effective_button_w);
+
+  /* Select font size based on button width (use actual button_w, not effective_button_w in expert mode) */
   if (button_w <= ORIGINAL_BUTTON_SIZE)
   {
-    DEBUG_PRINTF("Small font\n");
     myfont = small_font;
+    SDL_Log("[LABEL] Using SMALL font (button_w=%d <= %d)", button_w, ORIGINAL_BUTTON_SIZE);
   }
-  else if (button_w <= ORIGINAL_BUTTON_SIZE * 3)
+  else if (button_w <= ORIGINAL_BUTTON_SIZE * 2)
   {
-    DEBUG_PRINTF("Medium font\n");
     myfont = medium_font;
+    SDL_Log("[LABEL] Using MEDIUM font (button_w=%d <= %d)", button_w, ORIGINAL_BUTTON_SIZE * 2);
   }
   else
   {
-    DEBUG_PRINTF("Large font\n");
     myfont = large_font;
+    SDL_Log("[LABEL] Using LARGE font (button_w=%d > %d)", button_w, ORIGINAL_BUTTON_SIZE * 2);
   }
 
   if (need_own_font && strcmp(gettext(label), label))
@@ -11253,10 +11267,9 @@ static SDL_Surface *do_render_button_label(const char *const label)
     exit(1);
   }
 
-  height_mult = 1.0;
+  SDL_Log("[LABEL] Initial render: %dx%d pixels", tmp_surf1->w, tmp_surf1->h);
 
-  /* In child mode, buttons are twice as wide, so use that for wrapping calculations */
-  effective_button_w = child_mode ? (button_w * 2) : button_w;
+  height_mult = 1.0;
 
   /* If very wide, try to wrap on a space (near the end) */
   if (tmp_surf1->w >= effective_button_w * BUTTON_LABEL_WRAP_THRESHOLD_MULT)
@@ -11403,18 +11416,20 @@ static SDL_Surface *do_render_button_label(const char *const label)
   SDL_FreeSurface(tmp_surf1);
 #endif
 
-  DEBUG_PRINTF("Rendered as: %d x %d\n", tmp_surf->w, tmp_surf->h);
+  SDL_Log("[LABEL] After wrapping: %dx%d pixels (height_mult=%.2f)", tmp_surf->w, tmp_surf->h, height_mult);
 
-  want_h = (int)(18 * button_scale) * height_mult;
-
-  DEBUG_PRINTF("  effective_button_w = %d -- min w = %d\n", effective_button_w, min(effective_button_w, tmp_surf->w));
-  DEBUG_PRINTF("  want_h   = %d -- min h = %d\n", want_h, min(want_h, tmp_surf->h));
+  /* Calculate target height based on button_h to ensure visible text */
+  /* Use ~40% of button height for text to leave room for icons with padding */
+  want_h = (int)(button_h * 0.4) * height_mult;
+  SDL_Log("[LABEL] Calculated want_h=%d (button_h=%d, height_mult=%.2f)", want_h, button_h, height_mult);
+  
+  SDL_Log("[LABEL] Target dimensions: w=%d (capped at %d), h=%d (capped at %d)",
+          tmp_surf->w, effective_button_w, tmp_surf->h, want_h);
 
   surf = thumbnail(tmp_surf, min(effective_button_w, tmp_surf->w), min(want_h, tmp_surf->h), 1 /* keep aspect! */ );
   SDL_FreeSurface(tmp_surf);
 
-  DEBUG_PRINTF("Resized to:  %d x %d\n", surf->w, surf->h);
-  DEBUG_PRINTF("\n");
+  SDL_Log("[LABEL] Final result: %dx%d pixels\n", surf->w, surf->h);
 
   return surf;
 }
@@ -33509,27 +33524,30 @@ static void setup(void)
   /* Resize any icons if the text we just rendered was too wide,
      and we word-wrapped it to be two lines tall */
 
+  /* Reserve 4 pixels padding between icon and label */
+  int padding = 4;
+
   /* (Tools) */
   for (i = 0; i < NUM_TOOLS; i++)
   {
-    if (img_tools[i]->h + img_tool_names[i]->h > button_h - 1)
+    if (img_tools[i]->h + img_tool_names[i]->h > button_h - padding)
     {
-      tmp_surf = thumbnail(img_tools[i], img_tools[i]->w, (button_h - img_tool_names[i]->h - 1), 0);
+      tmp_surf = thumbnail(img_tools[i], img_tools[i]->w, (button_h - img_tool_names[i]->h - padding), 0);
       SDL_FreeSurface(img_tools[i]);
       img_tools[i] = tmp_surf;
     }
   }
 
   /* (Kids/Expert mode buttons - Row -1) */
-  if (img_kids_icon->h + img_kids_label->h > button_h - 1)
+  if (img_kids_icon->h + img_kids_label->h > button_h - padding)
   {
-    tmp_surf = thumbnail(img_kids_icon, img_kids_icon->w, (button_h - img_kids_label->h - 1), 0);
+    tmp_surf = thumbnail(img_kids_icon, img_kids_icon->w, (button_h - img_kids_label->h - padding), 0);
     SDL_FreeSurface(img_kids_icon);
     img_kids_icon = tmp_surf;
   }
-  if (img_expert_icon->h + img_expert_label->h > button_h - 1)
+  if (img_expert_icon->h + img_expert_label->h > button_h - padding)
   {
-    tmp_surf = thumbnail(img_expert_icon, img_expert_icon->w, (button_h - img_expert_label->h - 1), 0);
+    tmp_surf = thumbnail(img_expert_icon, img_expert_icon->w, (button_h - img_expert_label->h - padding), 0);
     SDL_FreeSurface(img_expert_icon);
     img_expert_icon = tmp_surf;
   }
@@ -33541,10 +33559,10 @@ static void setup(void)
     {
       if (magics[i][j].img_icon != NULL && 
           magics[i][j].img_name != NULL &&
-          magics[i][j].img_icon->h + magics[i][j].img_name->h > button_h - 1)
+          magics[i][j].img_icon->h + magics[i][j].img_name->h > button_h - padding)
       {
         tmp_surf =
-          thumbnail(magics[i][j].img_icon, magics[i][j].img_icon->w, (button_h - magics[i][j].img_name->h - 1), 0);
+          thumbnail(magics[i][j].img_icon, magics[i][j].img_icon->w, (button_h - magics[i][j].img_name->h - padding), 0);
         SDL_FreeSurface(magics[i][j].img_icon);
         magics[i][j].img_icon = tmp_surf;
       }
@@ -33554,9 +33572,9 @@ static void setup(void)
   /* (Shapes) */
   for (i = 0; i < NUM_SHAPES; i++)
   {
-    if (img_shapes[i]->h + img_shape_names[i]->h > button_h - 1)
+    if (img_shapes[i]->h + img_shape_names[i]->h > button_h - padding)
     {
-      tmp_surf = thumbnail(img_shapes[i], img_shapes[i]->w, (button_h - img_shape_names[i]->h - 1), 0);
+      tmp_surf = thumbnail(img_shapes[i], img_shapes[i]->w, (button_h - img_shape_names[i]->h - padding), 0);
       SDL_FreeSurface(img_shapes[i]);
       img_shapes[i] = tmp_surf;
     }
@@ -33565,9 +33583,9 @@ static void setup(void)
   /* (Fill methods) */
   for (i = 0; i < NUM_FILLS; i++)
   {
-    if (img_fills[i]->h + img_fill_names[i]->h > button_h - 1)
+    if (img_fills[i]->h + img_fill_names[i]->h > button_h - padding)
     {
-      tmp_surf = thumbnail(img_fills[i], img_fills[i]->w, (button_h - img_fill_names[i]->h - 1), 0);
+      tmp_surf = thumbnail(img_fills[i], img_fills[i]->w, (button_h - img_fill_names[i]->h - padding), 0);
       SDL_FreeSurface(img_fills[i]);
       img_fills[i] = tmp_surf;
     }
@@ -33699,6 +33717,10 @@ static void claim_to_be_ready(void)
 #ifdef __ANDROID__
   /* Load saved preferences (child mode, sound settings, brush) */
   load_preferences();
+  
+  /* Recreate button labels with loaded child_mode value */
+  SDL_Log("Recreating button labels after loading preferences (child_mode=%d)...", child_mode);
+  create_button_labels();
 #endif
 
   /* Render the brush after loading preferences */
