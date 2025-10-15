@@ -1499,7 +1499,7 @@ static void slide_colorbar_out(void)
   
   int target_offset = 0;  /* Target position: 0 = bars hidden (off-screen) */
   int start_offset = ui_offset_y_colors;
-  int steps = 5;
+  int steps = 2;  /* Reduced from 5 to 2 for 3x faster animation */
   int step_size = (target_offset - start_offset) / steps;
   
   if (step_size == 0)
@@ -1547,7 +1547,7 @@ static void slide_colorbar_out(void)
     if (ui_offset_y_colors == target_offset)
       break;
     
-    SDL_Delay(15);  /* 15ms per frame */
+    SDL_Delay(10);  /* 10ms per frame (reduced from 15ms for faster animation) */
   }
   
   /* Ensure exact final position */
