@@ -7028,7 +7028,6 @@ static void mainloop(void)
             clear_rect.y = 0;
             clear_rect.w = r_ttoolopt.w;
             clear_rect.h = r_colors.y;
-            SDL_FillRect(screen, &clear_rect, SDL_MapRGB(screen->format, 221, 221, 221));
             
             /* Draw brushes if in brush tool */
             if (cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES)
@@ -7088,7 +7087,6 @@ static void mainloop(void)
             clear_rect.y = 0;
             clear_rect.w = r_ttoolopt.w;
             clear_rect.h = r_colors.y;
-            SDL_FillRect(screen, &clear_rect, SDL_MapRGB(screen->format, 221, 221, 221));
             
             /* Draw brushes if in brush tool */
             if (cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES)
@@ -12826,7 +12824,6 @@ static void check_child_mode_longpress(void)
       clear_rect.y = 0;
       clear_rect.w = r_ttoolopt.w;
       clear_rect.h = r_colors.y;
-      SDL_FillRect(screen, &clear_rect, SDL_MapRGB(screen->format, 221, 221, 221));
       
       /* Draw brushes if in brush tool */
       if (cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES)
