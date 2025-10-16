@@ -4795,68 +4795,58 @@ static void mainloop(void)
             }
           }
         }
-        /* Check for color picker button click (when colorbar is hidden) */
-        else if (!colorbar_is_visible && 
-                 event.button.x >= WINDOW_WIDTH - r_ttoolopt.w &&
-                 event.button.x < WINDOW_WIDTH &&
-                 valid_click(event.button.button))
-        {
-          SDL_Log("COLOR_PICKER: Click in right toolbar area at x=%d, y=%d (colorbar_is_visible=%d)", 
-                  event.button.x, event.button.y, colorbar_is_visible);
-          
-          /* Calculate color picker button area */
-          int button_top, button_bottom;
-          int button_min_height = 150;
-          int button_preferred_height = 200;
-          
-          if (child_mode && (cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES))
-          {
-            /* In child mode with slider */
-            int available_height = WINDOW_HEIGHT - r_ttoolopt.h - 10;
-            
-            if (available_height >= button_min_height + 200)
-              button_top = WINDOW_HEIGHT - button_preferred_height;
-            else if (available_height >= button_min_height + 100)
-              button_top = WINDOW_HEIGHT - button_min_height;
-            else
-              button_top = r_ttoolopt.h + (available_height / 2);
-          }
-          else
-          {
-            /* In expert mode or child mode without slider */
-            button_top = WINDOW_HEIGHT - button_preferred_height;
-          }
-          
-          button_bottom = WINDOW_HEIGHT - 5;
-          
-          SDL_Log("COLOR_PICKER: button_top=%d, button_bottom=%d, click_y=%d", 
-                  button_top, button_bottom, event.button.y);
-          
-          /* Check if click is within button area */
-          if (event.button.y >= button_top && event.button.y <= button_bottom)
-          {
-            /* Color picker button clicked - slide colorbar in */
-            SDL_Log("COLOR_PICKER: Button clicked at y=%d (button area: %d-%d)", 
-                    event.button.y, button_top, button_bottom);
-            slide_colorbar_in();
-            playsound(screen, 1, SND_CLICK, 1, SNDPOS_RIGHT, SNDDIST_NEAR);
-          }
-          else
-          {
-            SDL_Log("COLOR_PICKER: Click outside button area");
-          }
-        }
         else if (HIT(r_toolopt) && valid_click(event.button.button))
         {
-#ifdef __ANDROID__
-          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "r_toolopt clicked! Sliding colors IN");
-#endif
-          /* Slide color bar in when right side (toolopt) is clicked */
-          slide_colorbar_in();
+          /* Check for color picker button click first (when colorbar is hidden) */
+          int handle_as_color_picker = 0;
           
-          /* In child mode with brush tool, handle slider clicks and dragging */
-          if (child_mode && (cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES))
+          if (!colorbar_is_visible)
           {
+            /* Calculate color picker button area */
+            int button_top, button_bottom;
+            int button_min_height = 150;
+            int button_preferred_height = 200;
+            
+            if (child_mode && (cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES))
+            {
+              /* In child mode with slider */
+              int available_height = WINDOW_HEIGHT - r_ttoolopt.h - 10;
+              
+              if (available_height >= button_min_height + 200)
+                button_top = WINDOW_HEIGHT - button_preferred_height;
+              else if (available_height >= button_min_height + 100)
+                button_top = WINDOW_HEIGHT - button_min_height;
+              else
+                button_top = r_ttoolopt.h + (available_height / 2);
+            }
+            else
+            {
+              /* In expert mode or child mode without slider */
+              button_top = WINDOW_HEIGHT - button_preferred_height;
+            }
+            
+            button_bottom = WINDOW_HEIGHT - 5;
+            
+            /* Check if click is within color picker button area */
+            if (event.button.y >= button_top && event.button.y <= button_bottom)
+            {
+              /* Color picker button clicked - slide colorbar in and skip normal toolopt handling */
+              slide_colorbar_in();
+              playsound(screen, 1, SND_CLICK, 1, SNDPOS_RIGHT, SNDDIST_NEAR);
+              handle_as_color_picker = 1;
+            }
+          }
+          
+          /* Only do normal toolopt handling if not handled as color picker button */
+          if (!handle_as_color_picker)
+          {
+            /* Slide color bar in when right side (toolopt) is clicked (not color picker) */
+            if (!colorbar_is_visible)
+              slide_colorbar_in();
+          
+            /* In child mode with brush tool, handle slider clicks and dragging */
+            if (child_mode && (cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES))
+            {
             /* Calculate slider position - MUST match draw_child_mode_brush_slider() */
             int slider_x, slider_y, slider_w, slider_h;
             int click_y;
@@ -6023,6 +6013,7 @@ static void mainloop(void)
             if (do_draw)
               update_screen_rect(&r_toolopt);
           }
+          } /* end if (!handle_as_color_picker) */
         }
         else if (HIT_OFFSET_Y_COLORS(r_colors) && colors_are_selectable)
         {
@@ -25765,6 +25756,9 @@ static int do_new_dialog(void)
 
   /* Let user choose a color or image: */
 
+  /* Clear tux area before drawing new text to avoid overlap */
+  redraw_tux_text();
+  
   /* Instructions for 'New' file/color dialog */
   draw_tux_text(TUX_BORED, tool_tips[TOOL_NEW], 1);
 
