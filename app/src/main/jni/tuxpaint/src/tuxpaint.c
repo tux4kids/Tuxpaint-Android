@@ -1372,6 +1372,7 @@ static int grid_hit_gd_offset(const SDL_Rect *const r, unsigned x, unsigned y, g
 /* Forward declarations for functions used in slide animation */
 static void redraw_tux_text(void);
 static void update_canvas(int x, int y, int w, int h);
+static void draw_color_picker_button(void);
 
 /**
  * Slide color bar and tux area into view with animation
@@ -1557,9 +1558,13 @@ static void slide_colorbar_out(void)
   /* Final canvas redraw to ensure clean state */
   update_canvas(0, 0, WINDOW_WIDTH - r_ttoolopt.w, WINDOW_HEIGHT);
   draw_colors(COLORSEL_FORCE_REDRAW);
-  SDL_Flip(screen);
   
   colorbar_is_visible = 0;
+  
+  /* Draw color picker button (now that colorbar is hidden) */
+  draw_color_picker_button();
+  
+  SDL_Flip(screen);
   
 #ifdef __ANDROID__
   __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Slide OUT animation complete: final offset=%d, canvas updated", ui_offset_y_colors);
@@ -2042,6 +2047,7 @@ static SDL_Surface *img_title, *img_title_credits, *img_title_tuxpaint;
 static SDL_Surface *img_btn_up, *img_btn_down, *img_btn_off, *img_btn_hold;
 static SDL_Surface *img_btnsm_up, *img_btnsm_off, *img_btnsm_down, *img_btnsm_hold;
 static SDL_Surface *img_btn_nav, *img_btnsm_nav;
+static SDL_Surface *img_color_picker_icon;
 static SDL_Surface *img_brush_anim, *img_brush_dir;
 static SDL_Surface *img_prev, *img_next;
 static SDL_Surface *img_mirror, *img_flip, *img_rotate;
@@ -2475,6 +2481,7 @@ static void draw_toolbar(void);
 static void draw_row_minus_1_buttons(void);
 static void draw_magic(void);
 static void draw_child_mode_brush_slider(void);
+static void draw_color_picker_button(void);
 static void update_slider_animation(void);
 static void check_child_mode_longpress(void);
 static void init_child_brush_category(int expert_mode_brush);
@@ -4160,8 +4167,9 @@ static void mainloop(void)
                 event.type == TP_SDL_MOUSEBUTTONSCROLL) && event.button.button <= 3)
       {
 #ifdef __ANDROID__
-        __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", "MOUSEBUTTONDOWN: x=%d, y=%d, r_tools=(%d,%d,%d,%d)", 
-                            event.button.x, event.button.y, r_tools.x, r_tools.y, r_tools.w, r_tools.h);
+        __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", "MOUSEBUTTONDOWN: x=%d, y=%d, r_tools=(%d,%d,%d,%d), r_toolopt=(%d,%d,%d,%d), HIT(r_toolopt)=%d, colorbar_is_visible=%d", 
+                            event.button.x, event.button.y, r_tools.x, r_tools.y, r_tools.w, r_tools.h, 
+                            r_toolopt.x, r_toolopt.y, r_toolopt.w, r_toolopt.h, HIT(r_toolopt), colorbar_is_visible);
 #endif
         /* IMPORTANT: Check sound & childmode buttons FIRST, before r_tools! 
            These buttons are inside r_tools rect but need separate handling */
@@ -4787,7 +4795,57 @@ static void mainloop(void)
             }
           }
         }
-
+        /* Check for color picker button click (when colorbar is hidden) */
+        else if (!colorbar_is_visible && 
+                 event.button.x >= WINDOW_WIDTH - r_ttoolopt.w &&
+                 event.button.x < WINDOW_WIDTH &&
+                 valid_click(event.button.button))
+        {
+          SDL_Log("COLOR_PICKER: Click in right toolbar area at x=%d, y=%d (colorbar_is_visible=%d)", 
+                  event.button.x, event.button.y, colorbar_is_visible);
+          
+          /* Calculate color picker button area */
+          int button_top, button_bottom;
+          int button_min_height = 150;
+          int button_preferred_height = 200;
+          
+          if (child_mode && (cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES))
+          {
+            /* In child mode with slider */
+            int available_height = WINDOW_HEIGHT - r_ttoolopt.h - 10;
+            
+            if (available_height >= button_min_height + 200)
+              button_top = WINDOW_HEIGHT - button_preferred_height;
+            else if (available_height >= button_min_height + 100)
+              button_top = WINDOW_HEIGHT - button_min_height;
+            else
+              button_top = r_ttoolopt.h + (available_height / 2);
+          }
+          else
+          {
+            /* In expert mode or child mode without slider */
+            button_top = WINDOW_HEIGHT - button_preferred_height;
+          }
+          
+          button_bottom = WINDOW_HEIGHT - 5;
+          
+          SDL_Log("COLOR_PICKER: button_top=%d, button_bottom=%d, click_y=%d", 
+                  button_top, button_bottom, event.button.y);
+          
+          /* Check if click is within button area */
+          if (event.button.y >= button_top && event.button.y <= button_bottom)
+          {
+            /* Color picker button clicked - slide colorbar in */
+            SDL_Log("COLOR_PICKER: Button clicked at y=%d (button area: %d-%d)", 
+                    event.button.y, button_top, button_bottom);
+            slide_colorbar_in();
+            playsound(screen, 1, SND_CLICK, 1, SNDPOS_RIGHT, SNDDIST_NEAR);
+          }
+          else
+          {
+            SDL_Log("COLOR_PICKER: Click outside button area");
+          }
+        }
         else if (HIT(r_toolopt) && valid_click(event.button.button))
         {
 #ifdef __ANDROID__
@@ -4854,6 +4912,7 @@ static void mainloop(void)
               /* Update brush */
               render_brush();
               draw_child_mode_brush_slider();
+              draw_color_picker_button();
               SDL_Flip(screen);  /* Flip immediately to show new position */
               
               playsound(screen, 1, SND_CLICK, 1, SNDPOS_RIGHT, SNDDIST_NEAR);
@@ -7443,6 +7502,7 @@ static void mainloop(void)
           
           /* Always redraw to show current position */
           draw_child_mode_brush_slider();
+          draw_color_picker_button();
           SDL_Flip(screen);
         }
 
@@ -8405,6 +8465,7 @@ static void mainloop(void)
       if (fabs(slider_current_pos - prev_pos) > 0.001)
       {
         draw_child_mode_brush_slider();
+        draw_color_picker_button();
         SDL_Flip(screen);
       }
     }
@@ -12703,6 +12764,7 @@ static void check_child_mode_longpress(void)
       update_screen_rect(&r_tools);
       draw_colors(COLORSEL_FORCE_REDRAW);
       draw_child_mode_brush_slider();
+      draw_color_picker_button();
       SDL_Flip(screen);
       
       playsound(screen, 1, SND_CLICK, 1, SNDPOS_LEFT, SNDDIST_NEAR);
@@ -12932,6 +12994,100 @@ static void draw_child_mode_brush_slider(void)
   }
 }
 
+/**
+ * Draw color picker button below toolbar when colorbar is hidden
+ * (works in both expert and child mode)
+ */
+static void draw_color_picker_button(void)
+{
+  SDL_Log("COLOR_PICKER: draw_color_picker_button() called, child_mode=%d, colorbar_is_visible=%d", child_mode, colorbar_is_visible);
+  
+  /* Show button when colorbar is hidden, in both expert and child mode */
+  if (!colorbar_is_visible)
+  {
+    /* Calculate button area: from title/content to where colorbar would start */
+    int button_top, button_bottom;
+    
+    /* Reserve space for the button (minimum 150px, preferred 200px) */
+    int button_min_height = 150;
+    int button_preferred_height = 200;
+    
+    if (child_mode && (cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES))
+    {
+      /* In child mode with slider: calculate available space and split between slider and button */
+      int available_height = WINDOW_HEIGHT - r_ttoolopt.h - 10;
+      
+      if (available_height >= button_min_height + 200)
+      {
+        /* Enough space: give button its preferred height, rest to slider */
+        button_top = WINDOW_HEIGHT - button_preferred_height;
+      }
+      else if (available_height >= button_min_height + 100)
+      {
+        /* Limited space: give button minimum height, rest to slider */
+        button_top = WINDOW_HEIGHT - button_min_height;
+      }
+      else
+      {
+        /* Very limited space: split 50/50 */
+        button_top = r_ttoolopt.h + (available_height / 2);
+      }
+    }
+    else
+    {
+      /* In expert mode or child mode without slider: button has fixed preferred height at bottom */
+      button_top = WINDOW_HEIGHT - button_preferred_height;
+    }
+    
+    /* Button goes to bottom of window */
+    button_bottom = WINDOW_HEIGHT - 5;  /* 5px margin from bottom */
+    
+    SDL_Log("COLOR_PICKER: button_top=%d, button_bottom=%d, space=%d, WINDOW_HEIGHT=%d, r_colors.y=%d, ui_offset_y_colors=%d", 
+            button_top, button_bottom, button_bottom - button_top, WINDOW_HEIGHT, r_colors.y, ui_offset_y_colors);
+    
+    if (button_bottom > button_top + 20)  /* Only draw if there's enough space */
+    {
+      SDL_Log("COLOR_PICKER: Drawing button");
+      SDL_Rect button_rect;
+      button_rect.x = WINDOW_WIDTH - r_ttoolopt.w;
+      button_rect.y = button_top;
+      button_rect.w = r_ttoolopt.w;
+      button_rect.h = button_bottom - button_top;
+      
+      /* Draw button background (using img_btn_up) */
+      SDL_SoftStretch(img_btn_up, NULL, screen, &button_rect);
+      
+      /* Scale and center the color_picker_icon */
+      if (img_color_picker_icon != NULL)
+      {
+        int icon_max_w = (int)(button_rect.w * 0.6);
+        int icon_max_h = (int)(button_rect.h * 0.6);
+        int icon_w = img_color_picker_icon->w;
+        int icon_h = img_color_picker_icon->h;
+        
+        /* Scale to fit while preserving aspect ratio */
+        float scale = 1.0f;
+        if (icon_w > icon_max_w || icon_h > icon_max_h)
+        {
+          float scale_w = (float)icon_max_w / (float)icon_w;
+          float scale_h = (float)icon_max_h / (float)icon_h;
+          scale = (scale_w < scale_h) ? scale_w : scale_h;
+          icon_w = (int)(icon_w * scale);
+          icon_h = (int)(icon_h * scale);
+        }
+        
+        SDL_Rect icon_dest;
+        icon_dest.x = button_rect.x + (button_rect.w - icon_w) / 2;
+        icon_dest.y = button_rect.y + (button_rect.h - icon_h) / 2;
+        icon_dest.w = icon_w;
+        icon_dest.h = icon_h;
+        
+        SDL_SoftStretch(img_color_picker_icon, NULL, screen, &icon_dest);
+      }
+    }
+  }
+}
+
 
 /**
  * FIXME
@@ -12949,6 +13105,8 @@ static void draw_brushes(void)
   {
     SDL_Log("Calling draw_child_mode_brush_slider()");
     draw_child_mode_brush_slider();
+    SDL_Log("draw_color_picker_button()");
+    draw_color_picker_button();
     return;
   }
 
@@ -13067,6 +13225,9 @@ static void draw_brushes(void)
 
   if (!disable_brushspacing)
     draw_brushes_spacing();
+  
+  /* Draw color picker button at bottom (when colorbar is hidden) */
+  draw_color_picker_button();
 }
 
 static void draw_brushes_spacing(void)
@@ -13438,6 +13599,9 @@ static void draw_fonts(void)
     SDL_BlitSurface(button_color, NULL, img_grow, NULL);
     SDL_BlitSurface(img_grow, NULL, screen, &dest);
   }
+  
+  /* Draw color picker button at bottom (when colorbar is hidden) */
+  draw_color_picker_button();
 }
 
 
@@ -13749,6 +13913,9 @@ static void draw_stamps(void)
   }                             /* !disable_stamp_controls */
 
   redraw_tux_text();
+  
+  /* Draw color picker button at bottom (when colorbar is hidden) */
+  draw_color_picker_button();
 }
 
 
@@ -13885,6 +14052,9 @@ static void draw_shapes(void)
 
     SDL_BlitSurface(img_shapes_corner, NULL, screen, &dest);
   }
+  
+  /* Draw color picker button at bottom (when colorbar is hidden) */
+  draw_color_picker_button();
 }
 
 
@@ -14057,6 +14227,9 @@ static void draw_erasers(void)
       }
     }
   }
+  
+  /* Draw color picker button at bottom (when colorbar is hidden) */
+  draw_color_picker_button();
 }
 
 
@@ -14080,6 +14253,9 @@ static void draw_none(void)
 
     SDL_BlitSurface(img_btn_off, NULL, screen, &dest);
   }
+  
+  /* Draw color picker button at bottom (when colorbar is hidden) */
+  draw_color_picker_button();
 }
 
 /* Draw Fill sub-tools */
@@ -14168,6 +14344,9 @@ static void draw_fills(void)
       SDL_BlitSurface(img_fill_names[i], NULL, screen, &dest);
     }
   }
+  
+  /* Draw color picker button at bottom (when colorbar is hidden) */
+  draw_color_picker_button();
 }
 
 /**
@@ -17929,6 +18108,7 @@ static void cleanup(void)
   free_surface(&img_btn_down);
   free_surface(&img_btn_off);
   free_surface(&img_btn_hold);
+  free_surface(&img_color_picker_icon);
 
   free_surface(&img_btnsm_up);
   free_surface(&img_btnsm_off);
@@ -33111,6 +33291,7 @@ static void setup(void)
   img_btn_down = loadimagerb(DATA_PREFIX "images/ui/btn_down.png");
   img_btn_off = loadimagerb(DATA_PREFIX "images/ui/btn_off.png");
   img_btn_hold = loadimagerb(DATA_PREFIX "images/ui/btn_hold.png");
+  img_color_picker_icon = loadimagerb(DATA_PREFIX "images/ui/color_picker_icon.png");
 
   img_btnsm_up = loadimagerb(DATA_PREFIX "images/ui/btnsm_up.png");
   img_btnsm_off = loadimagerb(DATA_PREFIX "images/ui/btnsm_off.png");
