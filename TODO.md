@@ -20,7 +20,7 @@ es soll einfach der ordner stamps analysiert werden, dort die erste ebene als ka
 
 # color slide effekt:
 
-- wenn die colorbar ausgeblendet ist unterhalb des sliders (bzw. derr rechten toolbar) einen neuen farbwahl-button anzeigen zum reinsliden: app/src/main/assets/data/images/ui/color_picker_icon.png
+
 
 - wenn number of color rows in settings > 1 ist, dann muss dies im child mode ignorieren undtemporär auf 1 gesetzt werden
 

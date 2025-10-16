@@ -15642,6 +15642,13 @@ static void draw_tux_text_ex(int which_tux, const char *const str, int want_righ
   if (fullscreen_ui_mode)
     r_tuxarea_offset.y += offset_y;
 
+  /* Fix negative height - SDL_FillRect cannot clear rectangles with negative height */
+  if (r_tuxarea_offset.h <= 0)
+  {
+    /* Set to a reasonable minimum height or use the color bar height */
+    r_tuxarea_offset.h = (r_colors.h > 0) ? r_colors.h : 100;
+  }
+
   latest_tux = which_tux;
   latest_tux_text = str;
   latest_r2l = want_right_to_left;
@@ -25757,7 +25764,7 @@ static int do_new_dialog(void)
   /* Let user choose a color or image: */
 
   /* Clear tux area before drawing new text to avoid overlap */
-  redraw_tux_text();
+  draw_tux_text(TUX_BORED, "", 0);
   
   /* Instructions for 'New' file/color dialog */
   draw_tux_text(TUX_BORED, tool_tips[TOOL_NEW], 1);
