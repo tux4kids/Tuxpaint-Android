@@ -851,6 +851,10 @@ static int ui_offset_y_canvas = 0;    /* Vertical offset for canvas hide/show an
 static int ui_offset_y_tux = 0;       /* Vertical offset for tux area (positive = hidden below) */
 static int colorbar_is_visible = 0;   /* Flag to track color bar visibility state */
 
+/* Color picker button dimensions (DRY - used in both drawing and click detection) */
+#define COLOR_PICKER_BUTTON_MIN_HEIGHT 150
+#define COLOR_PICKER_BUTTON_PREFERRED_HEIGHT 200
+
 static int colors_rows;
 
 static int buttons_tall;        /* promoted to a global variable from setup_normal_screen_layout() */
@@ -984,7 +988,7 @@ static void setup_normal_screen_layout(void)
   gd_tools.rows = buttons_tall;
   gd_toolopt.rows = buttons_tall;
 
-  r_canvas.h = WINDOW_HEIGHT;  /* TESTING: Fullscreen canvas height (was r_ttoolopt.h + buttons_tall * button_h) */
+  r_canvas.h = WINDOW_HEIGHT;  /* Fullscreen canvas height (before it was r_ttoolopt.h + buttons_tall * button_h) */
 
   r_label = r_canvas;
 
@@ -998,6 +1002,9 @@ static void setup_normal_screen_layout(void)
   /* Tux area below colors (same in child_mode and expert mode) */
   r_tuxarea.y = r_colors.y + r_colors.h;
   r_tuxarea.h = WINDOW_HEIGHT - r_tuxarea.y;
+  
+  SDL_Log("LAYOUT: r_colors.y=%d, r_ttoolopt.h=%d, WINDOW_HEIGHT=%d, child_mode=%d", 
+          r_colors.y, r_ttoolopt.h, WINDOW_HEIGHT, child_mode);
 
   r_sfx.x = r_tuxarea.x;
   r_sfx.y = r_tuxarea.y;
@@ -1469,6 +1476,93 @@ static void slide_colorbar_in(void)
 #ifdef __ANDROID__
   __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Slide IN animation complete: final offset=%d", ui_offset_y_colors);
 #endif
+}
+
+/**
+ * Calculate color picker button position (DRY - used in both drawing and click detection)
+ * @param is_child_mode: whether in child mode
+ * @param tool: current tool (to check if slider is shown)
+ * @param button_top: output - top Y position of button
+ * @param button_bottom: output - bottom Y position of button
+ */
+static void get_color_picker_button_rect(int is_child_mode, int tool, int *button_top, int *button_bottom)
+{
+  if (is_child_mode && (tool == TOOL_BRUSH || tool == TOOL_LINES))
+  {
+    /* In child mode with slider: calculate available space and split between slider and button */
+    int available_height = WINDOW_HEIGHT - r_ttoolopt.h - 10;
+    
+    if (available_height >= COLOR_PICKER_BUTTON_MIN_HEIGHT + 200)
+      *button_top = WINDOW_HEIGHT - COLOR_PICKER_BUTTON_PREFERRED_HEIGHT;
+    else if (available_height >= COLOR_PICKER_BUTTON_MIN_HEIGHT + 100)
+      *button_top = WINDOW_HEIGHT - COLOR_PICKER_BUTTON_MIN_HEIGHT;
+    else
+      *button_top = r_ttoolopt.h + (available_height / 2);
+  }
+  else
+  {
+    /* In expert mode or child mode without slider: button has fixed preferred height at bottom */
+    *button_top = WINDOW_HEIGHT - COLOR_PICKER_BUTTON_PREFERRED_HEIGHT;
+  }
+  
+  *button_bottom = WINDOW_HEIGHT - 5;  /* 5px margin from bottom */
+}
+
+/**
+ * Check if a click hits the color picker button
+ */
+static int hit_color_picker_button(int x, int y, int is_child_mode, int tool)
+{
+  int button_top, button_bottom;
+  get_color_picker_button_rect(is_child_mode, tool, &button_top, &button_bottom);
+  
+  return (x >= (WINDOW_WIDTH - r_ttoolopt.w) && x <= WINDOW_WIDTH &&
+          y >= button_top && y <= button_bottom);
+}
+
+/**
+ * SINGLE SOURCE OF TRUTH: Calculate child mode slider dimensions
+ * This is the only place where slider geometry is defined
+ */
+static void get_child_mode_slider_rect(int *out_x, int *out_y, int *out_w, int *out_h)
+{
+  int slider_padding = 50;
+  int slider_bottom_extra_padding = 10;
+  int slider_w = button_w - 20;
+  int slider_x = WINDOW_WIDTH - r_ttoolopt.w + (r_ttoolopt.w - slider_w) / 2;
+  int slider_y = r_ttoolopt.h + slider_padding;
+  
+  /* Slider always ends at r_colors.y (same as expert mode toolbar height) */
+  int slider_h = r_ttoolopt.h + buttons_tall * button_h - slider_y - slider_padding - slider_bottom_extra_padding;
+  
+  if (out_x) *out_x = slider_x;
+  if (out_y) *out_y = slider_y;
+  if (out_w) *out_w = slider_w;
+  if (out_h) *out_h = slider_h;
+}
+
+/**
+ * Check if a click hits the child mode brush slider
+ * Returns 1 if hit, 0 otherwise
+ */
+static int hit_child_mode_slider(int x, int y, int is_child_mode, int tool,
+                                 int *out_slider_x, int *out_slider_y, 
+                                 int *out_slider_w, int *out_slider_h)
+{
+  int slider_x, slider_y, slider_w, slider_h;
+  
+  /* Get dimensions from single source of truth */
+  get_child_mode_slider_rect(&slider_x, &slider_y, &slider_w, &slider_h);
+  
+  /* Output parameters */
+  if (out_slider_x) *out_slider_x = slider_x;
+  if (out_slider_y) *out_slider_y = slider_y;
+  if (out_slider_w) *out_slider_w = slider_w;
+  if (out_slider_h) *out_slider_h = slider_h;
+  
+  /* Check if click is within slider area */
+  return (x >= slider_x && x <= slider_x + slider_w &&
+          y >= slider_y && y <= slider_y + slider_h);
 }
 
 /**
@@ -4795,132 +4889,91 @@ static void mainloop(void)
             }
           }
         }
+        /* Child mode slider click (check early to allow canvas clicks to pass through) */
+        else if (child_mode && (cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES) && 
+                 valid_click(event.button.button) &&
+                 hit_child_mode_slider(event.button.x, event.button.y, child_mode, cur_tool,
+                                      NULL, NULL, NULL, NULL))
+        {
+          int slider_x, slider_y, slider_w, slider_h;
+          int click_y = event.button.y;
+          float click_percentage;
+          
+          /* Get slider dimensions for calculations */
+          hit_child_mode_slider(event.button.x, event.button.y, child_mode, cur_tool,
+                               &slider_x, &slider_y, &slider_w, &slider_h);
+          
+          SDL_Log("SLIDER CLICK: click_y=%d, slider_y=%d, slider_h=%d, range=[%d,%d]",
+                  click_y, slider_y, slider_h, slider_y, slider_y + slider_h);
+          
+          /* Start slider dragging mode */
+          slider_dragging = 1;
+          
+          /* Calculate position and brush based on click position */
+          click_percentage = (float)(click_y - slider_y) / (float)slider_h;
+          
+          /* Clamp to 0.0-1.0 range */
+          if (click_percentage < 0.0f) click_percentage = 0.0f;
+          if (click_percentage > 1.0f) click_percentage = 1.0f;
+          
+          /* Set position instantly (no animation on initial click) */
+          slider_current_pos = click_percentage;
+          slider_target_pos = click_percentage;
+          slider_anim_duration = 0;  /* No animation - instant response */
+          
+          /* Calculate brush index in category based on click position */
+          int brush_idx = (int)(click_percentage * child_brush_count);
+          if (brush_idx >= child_brush_count) brush_idx = child_brush_count - 1;
+          
+          /* Get actual brush from category indices */
+          cur_brush = child_brush_indices[brush_idx];
+          
+          SDL_Log("SLIDER CLICK: percentage=%.2f, brush=%d, instant position update", 
+                  click_percentage, cur_brush);
+          
+#ifdef __ANDROID__
+          save_preferences();
+#endif
+          
+          /* Update brush */
+          render_brush();
+          draw_child_mode_brush_slider();
+          draw_color_picker_button();
+          SDL_Flip(screen);  /* Flip immediately to show new position */
+          
+          playsound(screen, 0, SND_CLICK, 0, SNDPOS_CENTER, SNDDIST_NEAR);
+        }
+        /* Color picker button click (separate hit test, as button may be outside r_toolopt) */
+        else if (!colorbar_is_visible && valid_click(event.button.button) &&
+                 hit_color_picker_button(event.button.x, event.button.y, child_mode, cur_tool))
+        {
+#ifdef __ANDROID__
+          __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "COLOR_PICKER: Button clicked! x=%d y=%d",
+                            event.button.x, event.button.y);
+#endif
+          slide_colorbar_in();
+          playsound(screen, 1, SND_CLICK, 1, SNDPOS_RIGHT, SNDDIST_NEAR);
+          /* Note: no continue here, let it fall through to update UI */
+        }
+        /* Right toolbar (r_toolopt) area clicked */
         else if (HIT(r_toolopt) && valid_click(event.button.button))
         {
-          /* Check for color picker button click first (when colorbar is hidden) */
-          int handle_as_color_picker = 0;
+          /* In child mode with slider, the slider is handled above, so skip normal brush selection */
+          if (child_mode && (cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES))
+            {
+              /* Slider already handled above - skip rest of event processing */
+              continue;
+            }
           
-          if (!colorbar_is_visible)
-          {
-            /* Calculate color picker button area */
-            int button_top, button_bottom;
-            int button_min_height = 150;
-            int button_preferred_height = 200;
-            
-            if (child_mode && (cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES))
-            {
-              /* In child mode with slider */
-              int available_height = WINDOW_HEIGHT - r_ttoolopt.h - 10;
-              
-              if (available_height >= button_min_height + 200)
-                button_top = WINDOW_HEIGHT - button_preferred_height;
-              else if (available_height >= button_min_height + 100)
-                button_top = WINDOW_HEIGHT - button_min_height;
-              else
-                button_top = r_ttoolopt.h + (available_height / 2);
-            }
-            else
-            {
-              /* In expert mode or child mode without slider */
-              button_top = WINDOW_HEIGHT - button_preferred_height;
-            }
-            
-            button_bottom = WINDOW_HEIGHT - 5;
-            
-            /* Check if click is within color picker button area */
-            if (event.button.y >= button_top && event.button.y <= button_bottom)
-            {
-              /* Color picker button clicked - slide colorbar in and skip normal toolopt handling */
-              slide_colorbar_in();
-              playsound(screen, 1, SND_CLICK, 1, SNDPOS_RIGHT, SNDDIST_NEAR);
-              handle_as_color_picker = 1;
-            }
-          }
-          
-          /* Only do normal toolopt handling if not handled as color picker button */
-          if (!handle_as_color_picker)
-          {
-            /* Slide color bar in when right side (toolopt) is clicked (not color picker) */
-            if (!colorbar_is_visible)
-              slide_colorbar_in();
-          
-            /* In child mode with brush tool, handle slider clicks and dragging */
-            if (child_mode && (cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES))
-            {
-            /* Calculate slider position - MUST match draw_child_mode_brush_slider() */
-            int slider_x, slider_y, slider_w, slider_h;
-            int click_y;
-            float click_percentage;
-            int child_brush_min = 0;  /* Brush index 0 */
-            int child_brush_max = 4;  /* Brush index 4 */
-            
-            slider_w = button_w - 20;
-            /* Use r_colors.y + ui_offset_y_colors to get the visible (animated) colorbar position
-               in child mode, accounting for slide animation */
-            /* Compress by 5% to avoid overlapping neighboring elements */
-            slider_h = (int)(((r_colors.y + ui_offset_y_colors) - r_ttoolopt.h - 40) * 0.95);
-            slider_x = WINDOW_WIDTH - r_ttoolopt.w + (r_ttoolopt.w - slider_w) / 2;
-            slider_y = r_ttoolopt.h + 30;  /* Add extra margin at top */
-            
-            click_y = event.button.y;
-            
-            SDL_Log("SLIDER CLICK: click_y=%d, slider_y=%d, slider_h=%d, range=[%d,%d]",
-                    click_y, slider_y, slider_h, slider_y, slider_y + slider_h);
-            
-            /* Check if click is within slider area */
-            if (click_y >= slider_y && click_y <= slider_y + slider_h)
-            {
-              /* Start slider dragging mode */
-              slider_dragging = 1;
-              
-              /* Calculate position and brush based on click position */
-              click_percentage = (float)(click_y - slider_y) / (float)slider_h;
-              
-              /* Clamp to 0.0-1.0 range */
-              if (click_percentage < 0.0f) click_percentage = 0.0f;
-              if (click_percentage > 1.0f) click_percentage = 1.0f;
-              
-              /* Set position instantly (no animation on initial click) */
-              slider_current_pos = click_percentage;
-              slider_target_pos = click_percentage;
-              slider_anim_duration = 0;  /* No animation - instant response */
-              
-              /* Calculate brush index in category based on click position */
-              int brush_idx = (int)(click_percentage * child_brush_count);
-              if (brush_idx >= child_brush_count) brush_idx = child_brush_count - 1;
-              
-              /* Get actual brush from category indices */
-              cur_brush = child_brush_indices[brush_idx];
-              
-              SDL_Log("SLIDER CLICK: percentage=%.2f, brush=%d, instant position update", 
-                      click_percentage, cur_brush);
-              
-#ifdef __ANDROID__
-              save_preferences();
-#endif
-              
-              /* Update brush */
-              render_brush();
-              draw_child_mode_brush_slider();
-              draw_color_picker_button();
-              SDL_Flip(screen);  /* Flip immediately to show new position */
-              
-              playsound(screen, 1, SND_CLICK, 1, SNDPOS_RIGHT, SNDDIST_NEAR);
-            }
-            else
-            {
-              SDL_Log("SLIDER: Click outside slider area, ignoring");
-            }
-            /* In child mode, don't process grid-based brush selection - skip the else if below */
-          }
-          /* Options on the right
+          /* Options on the right (normal toolopt grid in expert mode, or child mode without slider)
              WARNING: this must be kept in sync with the mouse-move
              code (for cursor changes) and mouse-scroll code. */
-
-          else if (!child_mode && (cur_tool == TOOL_BRUSH || cur_tool == TOOL_STAMP ||
-              cur_tool == TOOL_SHAPES || cur_tool == TOOL_LINES ||
-              cur_tool == TOOL_MAGIC || cur_tool == TOOL_TEXT ||
-              cur_tool == TOOL_ERASER || cur_tool == TOOL_LABEL || cur_tool == TOOL_FILL))
+          /* ERASER and FILL work the same in both child_mode and expert mode (DRY) */
+          if ((cur_tool == TOOL_ERASER || cur_tool == TOOL_FILL) ||
+              (!child_mode && (cur_tool == TOOL_BRUSH || cur_tool == TOOL_STAMP ||
+                               cur_tool == TOOL_SHAPES || cur_tool == TOOL_LINES ||
+                               cur_tool == TOOL_MAGIC || cur_tool == TOOL_TEXT ||
+                               cur_tool == TOOL_LABEL)))
           {
             int num_rows_needed;
             SDL_Rect r_controls;
@@ -6013,8 +6066,7 @@ static void mainloop(void)
             if (do_draw)
               update_screen_rect(&r_toolopt);
           }
-          } /* end if (!handle_as_color_picker) */
-        }
+        }  /* Close else if (HIT(r_toolopt)) at line 4833 */
         else if (HIT_OFFSET_Y_COLORS(r_colors) && colors_are_selectable)
         {
 #ifdef __ANDROID__
@@ -7447,17 +7499,22 @@ static void mainloop(void)
           int motion_y;
           float click_percentage;
           
-          /* Calculate slider dimensions - MUST match draw_child_mode_brush_slider() */
-          slider_w = button_w - 20;
-          slider_h = (int)(((r_colors.y + ui_offset_y_colors) - r_ttoolopt.h - 40) * 0.95);
-          slider_x = WINDOW_WIDTH - r_ttoolopt.w + (r_ttoolopt.w - slider_w) / 2;
-          slider_y = r_ttoolopt.h + 30;
+          /* Get dimensions from single source of truth */
+          get_child_mode_slider_rect(&slider_x, &slider_y, &slider_w, &slider_h);
           
           motion_y = event.motion.y;
+          int original_motion_y = motion_y;
           
           /* Clamp motion to slider bounds */
-          if (motion_y < slider_y) motion_y = slider_y;
-          if (motion_y > slider_y + slider_h) motion_y = slider_y + slider_h;
+          if (motion_y < slider_y) {
+            motion_y = slider_y;
+            SDL_Log("SLIDER CLAMP: Clamped motion from %d to %d (TOP boundary)", original_motion_y, motion_y);
+          }
+          if (motion_y > slider_y + slider_h) {
+            motion_y = slider_y + slider_h;
+            SDL_Log("SLIDER CLAMP: Clamped motion from %d to %d (BOTTOM boundary at r_colors.y=%d)", 
+                    original_motion_y, motion_y, r_colors.y);
+          }
           
           /* Calculate position based on motion position */
           click_percentage = (float)(motion_y - slider_y) / (float)slider_h;
@@ -12856,16 +12913,11 @@ static void draw_child_mode_brush_slider(void)
   /* Draw title "Size" */
   draw_image_title(TITLE_BRUSHES, r_ttoolopt);
   
-  /* Calculate slider dimensions - make it large and centered */
-  slider_w = button_w - 20;  /* Slightly narrower than button width */
-  /* In child mode, use r_colors.y + ui_offset_y_colors to get visible colorbar position */
-  /* Compress by 5% to avoid overlapping neighboring elements */
-  slider_h = (int)(((r_colors.y + ui_offset_y_colors) - r_ttoolopt.h - 40) * 0.95);
-  slider_x = WINDOW_WIDTH - r_ttoolopt.w + (r_ttoolopt.w - slider_w) / 2;
-  slider_y = r_ttoolopt.h + 30;  /* Add extra margin at top */
+  /* Get dimensions from single source of truth */
+  get_child_mode_slider_rect(&slider_x, &slider_y, &slider_w, &slider_h);
   
-  SDL_Log("Slider dimensions: x=%d, y=%d, w=%d, h=%d (r_colors.y=%d, r_colors.h=%d)", 
-          slider_x, slider_y, slider_w, slider_h, r_colors.y, r_colors.h);
+  SDL_Log("Slider dimensions: x=%d, y=%d, w=%d, h=%d (r_colors.y=%d, colorbar_is_visible=%d)", 
+          slider_x, slider_y, slider_w, slider_h, r_colors.y, colorbar_is_visible);
   
   /* Find current brush index in category */
   int brush_index_in_category = 0;
@@ -12993,42 +13045,9 @@ static void draw_color_picker_button(void)
   /* Show button when colorbar is hidden, in both expert and child mode */
   if (!colorbar_is_visible)
   {
-    /* Calculate button area: from title/content to where colorbar would start */
+    /* Calculate button area using DRY helper function */
     int button_top, button_bottom;
-    
-    /* Reserve space for the button (minimum 150px, preferred 200px) */
-    int button_min_height = 150;
-    int button_preferred_height = 200;
-    
-    if (child_mode && (cur_tool == TOOL_BRUSH || cur_tool == TOOL_LINES))
-    {
-      /* In child mode with slider: calculate available space and split between slider and button */
-      int available_height = WINDOW_HEIGHT - r_ttoolopt.h - 10;
-      
-      if (available_height >= button_min_height + 200)
-      {
-        /* Enough space: give button its preferred height, rest to slider */
-        button_top = WINDOW_HEIGHT - button_preferred_height;
-      }
-      else if (available_height >= button_min_height + 100)
-      {
-        /* Limited space: give button minimum height, rest to slider */
-        button_top = WINDOW_HEIGHT - button_min_height;
-      }
-      else
-      {
-        /* Very limited space: split 50/50 */
-        button_top = r_ttoolopt.h + (available_height / 2);
-      }
-    }
-    else
-    {
-      /* In expert mode or child mode without slider: button has fixed preferred height at bottom */
-      button_top = WINDOW_HEIGHT - button_preferred_height;
-    }
-    
-    /* Button goes to bottom of window */
-    button_bottom = WINDOW_HEIGHT - 5;  /* 5px margin from bottom */
+    get_color_picker_button_rect(child_mode, cur_tool, &button_top, &button_bottom);
     
     SDL_Log("COLOR_PICKER: button_top=%d, button_bottom=%d, space=%d, WINDOW_HEIGHT=%d, r_colors.y=%d, ui_offset_y_colors=%d", 
             button_top, button_bottom, button_bottom - button_top, WINDOW_HEIGHT, r_colors.y, ui_offset_y_colors);
