@@ -2388,6 +2388,14 @@ static void do_wait(int counter)
   SDL_Rect r;
 #endif
 
+#ifdef __ANDROID__
+  /* On Android, skip splash screen wait because:
+   * 1. Android provides its own splash screen
+   * 2. Touch events are not properly recognized
+   * 3. Users expect apps to start immediately after loading */
+  return;
+#endif
+
   if (bypass_splash_wait)
     return;
 
@@ -22327,6 +22335,7 @@ static void load_magic_plugins(void)
   while (num_magics[magic_group] == 0 && tries < MAX_MAGIC_GROUPS)
   {
     magic_group++;
+    tries++;
     if (magic_group >= MAX_MAGIC_GROUPS)
     {
       magic_group = 0;
@@ -29786,6 +29795,16 @@ static void setup(void)
   if (!fullscreen)
     init_flags |= SDL_INIT_NOPARACHUTE; /* allow debugger to catch crash */
 
+  /* Fix Android EGL threading issues - ensure GL context stays on render thread */
+#ifdef __ANDROID__
+  SDL_SetHint(SDL_HINT_TOUCH_MOUSE_EVENTS, "1");
+  SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengles2");
+  SDL_SetHint(SDL_HINT_ANDROID_TRAP_BACK_BUTTON, "1");
+  SDL_SetHint(SDL_HINT_ANDROID_BLOCK_ON_PAUSE, "0");
+  /* Prevent EGL context from being made current on multiple threads */
+  SDL_SetHint(SDL_HINT_VIDEO_ALLOW_SCREENSAVER, "1");
+#endif
+
   /* Init SDL */
   if (SDL_Init(init_flags) < 0)
   {
@@ -29997,7 +30016,12 @@ static void setup(void)
 
     /* FIXME: Check window_screen for being NULL, and abort?! (Also see below) -bjk 2024.12.20 */
 
+#ifdef __ANDROID__
+    /* On Android, use accelerated renderer to ensure proper GL context threading */
+    renderer = SDL_CreateRenderer(window_screen, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+#else
     renderer = SDL_CreateRenderer(window_screen, -1, 0);
+#endif
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
 
     if (native_screensize)
@@ -30180,7 +30204,12 @@ static void setup(void)
     SDL_SetWindowMaximumSize(window_screen, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 
+#ifdef __ANDROID__
+    /* On Android, use accelerated renderer to ensure proper GL context threading */
+    renderer = SDL_CreateRenderer(window_screen, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+#else
     renderer = SDL_CreateRenderer(window_screen, -1, 0);
+#endif
     SDL_GL_GetDrawableSize(window_screen, &ww, &hh);
     texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_STATIC, ww, hh);
 
@@ -30237,6 +30266,7 @@ static void setup(void)
 
   SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 255, 255, 255));
 
+#ifndef __ANDROID__
   dest.x = ((WINDOW_WIDTH - img_title->w - (img_title_tuxpaint->w / 2)) / 2) + (img_title_tuxpaint->w / 2) + 20;
   dest.y = (WINDOW_HEIGHT - img_title->h);
 
@@ -30254,6 +30284,7 @@ static void setup(void)
   dest.y = 5;
 
   SDL_BlitSurface(img_title_credits, NULL, screen, &dest);
+#endif
 
   prog_bar_ctr = 0;
   show_progress_bar(screen);
@@ -30293,6 +30324,7 @@ static void setup(void)
 
   /* Let Pango & fontcache do their work without locking up */
 
+#ifndef __ANDROID__
   fontconfig_thread_done = 0;
 
   DEBUG_PRINTF("Spawning Pango thread\n");
@@ -30318,6 +30350,11 @@ static void setup(void)
     }
     DEBUG_PRINTF("Done generating cache\n");
   }
+#else
+  /* On Android, skip font cache generation to speed up startup */
+  fontconfig_thread_done = 1;
+  DEBUG_PRINTF("Android: Skipping fontconfig cache generation\n");
+#endif
 
 
 #ifdef FORKED_FONTS
@@ -30343,14 +30380,17 @@ static void setup(void)
 
   safe_snprintf(tmp_str, sizeof(tmp_str), "Version: %s – %s", VER_VERSION, VER_DATE);
 
+#ifndef __ANDROID__
   tmp_surf = render_text(medium_font, tmp_str, black);
   dest.x = 10;
   dest.y = WINDOW_HEIGHT - img_progress->h - tmp_surf->h;
   SDL_BlitSurface(tmp_surf, NULL, screen, &dest);
   SDL_FreeSurface(tmp_surf);
+#endif
 
   DEBUG_PRINTF("%s\n", tmp_str);
 
+#ifndef __ANDROID__
   safe_snprintf(tmp_str, sizeof(tmp_str), "© 2002–2024 Bill Kendrick, et al.");
   tmp_surf = render_text(medium_font, tmp_str, black);
   dest.x = 10;
@@ -30359,12 +30399,20 @@ static void setup(void)
   SDL_FreeSurface(tmp_surf);
 
   SDL_Flip(screen);
+#endif
 
 
 #ifdef FORKED_FONTS
   reliable_write(font_socket_fd, &no_system_fonts, sizeof no_system_fonts);
 #else
+#ifndef __ANDROID__
   font_thread = SDL_CreateThread(load_user_fonts_stub, "font_thread", NULL);
+#else
+  /* On Android, skip font loading thread - fonts will be loaded on demand */
+  DEBUG_PRINTF("Android: Skipping font loading thread\n");
+  font_thread_done = 1;
+  font_thread_aborted = 0;
+#endif
 #endif
 
   /* continuing on with the rest of the cursors... */
@@ -30754,7 +30802,9 @@ static void setup(void)
   for (i = 0; i < NUM_TIP_TUX; i++)
     img_tux[i] = loadimagerb(tux_img_fnames[i]);
 
+
   show_progress_bar(screen);
+
 
   img_mouse = loadimagerb(DATA_PREFIX "images/ui/mouse.png");
   img_mouse_click = loadimagerb(DATA_PREFIX "images/ui/mouse_click.png");
@@ -30763,6 +30813,7 @@ static void setup(void)
 
   img_color_picker = loadimagerb(DATA_PREFIX "images/ui/color_picker.png");
   img_color_picker_val = loadimagerb(DATA_PREFIX "images/ui/color_picker_val.png");
+
 
   /* Create toolbox and selector labels: */
 
@@ -30789,7 +30840,9 @@ static void setup(void)
 
 
 
+
   /* Generate color selection buttons: */
+
 
   /* Create appropriately-shaped buttons: */
   img1 = loadimage(DATA_PREFIX "images/ui/paintwell.png");
@@ -31013,6 +31066,7 @@ static void claim_to_be_ready(void)
 
   /* Let the user know we're (nearly) ready now */
 
+#ifndef __ANDROID__
   dest.x = 0;
   dest.y = WINDOW_HEIGHT - img_progress->h;
   dest.h = img_progress->h;
@@ -31024,6 +31078,7 @@ static void claim_to_be_ready(void)
   src.y = img_title->h - img_progress->h;
   dest.x = ((WINDOW_WIDTH - img_title->w - (img_title_tuxpaint->w / 2)) / 2) + (img_title_tuxpaint->w / 2) + 20;
   SDL_BlitSurface(img_title, &src, screen, &dest);
+#endif
 
   SDL_FreeSurface(img_title);
   SDL_FreeSurface(img_title_credits);
