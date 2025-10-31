@@ -13,6 +13,7 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 35
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             ndkBuild {
                 arguments "APP_PLATFORM=android-21"
@@ -94,10 +95,54 @@ task copyConfigFile(type: Copy) {
     into 'src/main/assets/etc'
     rename 'tuxpaint.cfg-android', 'tuxpaint.cfg'
 }
-preBuild.dependsOn copyDataFiles,copyConfigFile
+
+task compileLocaleFiles {
+    description 'Compile .po files to .mo files for translations'
+    
+    def poDir = file('src/main/jni/tuxpaint/src/po')
+    def assetsLocaleDir = file('src/main/assets/locale')
+    
+    inputs.dir poDir
+    outputs.dir assetsLocaleDir
+    
+    doLast {
+        // Create assets/locale directory if it doesn't exist
+        assetsLocaleDir.mkdirs()
+        
+        // Compile each .po file to .mo
+        fileTree(dir: poDir, include: '*.po').each { poFile ->
+            def lang = poFile.name.take(poFile.name.lastIndexOf('.'))
+            def moDir = file("${assetsLocaleDir}/${lang}/LC_MESSAGES")
+            def moFile = file("${moDir}/tuxpaint.mo")
+            
+            // Create directory structure
+            moDir.mkdirs()
+            
+            // Compile .po to .mo using msgfmt
+            exec {
+                commandLine 'msgfmt', poFile.absolutePath, '-o', moFile.absolutePath
+                ignoreExitValue = true
+            }
+            
+            if (moFile.exists()) {
+                println "✓ Built ${lang}"
+            } else {
+                println "✗ Failed ${lang}"
+            }
+        }
+    }
+}
+
+preBuild.dependsOn copyDataFiles,copyConfigFile,compileLocaleFiles
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "androidx.print:print:1.0.0"
     implementation 'androidx.appcompat:appcompat:1.6.1'
+    
+    // Test dependencies
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation 'androidx.test:rules:1.5.0'
+    androidTestImplementation 'junit:junit:4.13.2'
 }

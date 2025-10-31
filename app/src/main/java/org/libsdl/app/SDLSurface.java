@@ -197,9 +197,36 @@ public class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         /* Ref: http://developer.android.com/training/gestures/multi.html */
-        int touchDevId = event.getDeviceId();
-        final int pointerCount = event.getPointerCount();
+        
+        // Forward ALL pointer data to native multitouch handler
         int action = event.getActionMasked();
+        int pointerCount = event.getPointerCount();
+        
+        if (pointerCount > 0) {
+            float[] x = new float[pointerCount];
+            float[] y = new float[pointerCount];
+            long[] pointerIds = new long[pointerCount];
+            
+            for (int i = 0; i < pointerCount; i++) {
+                x[i] = event.getX(i);
+                y[i] = event.getY(i);
+                pointerIds[i] = event.getPointerId(i);
+            }
+            
+            // Call our native multitouch handler
+            try {
+                Class<?> activityClass = Class.forName("org.tuxpaint.tuxpaintActivity");
+                java.lang.reflect.Method method = activityClass.getDeclaredMethod(
+                    "forwardMultitouchToNative", int.class, int.class, float[].class, float[].class, long[].class);
+                method.setAccessible(true);
+                method.invoke(null, action, pointerCount, x, y, pointerIds);
+            } catch (Exception e) {
+                // Silently ignore if method not found (for non-tuxpaint apps)
+            }
+        }
+        
+        int touchDevId = event.getDeviceId();
+        // action and pointerCount already defined above
         int pointerFingerId;
         int i = -1;
         float x,y,p;

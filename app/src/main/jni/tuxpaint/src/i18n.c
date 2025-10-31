@@ -1081,11 +1081,17 @@ static void set_current_language(const char *restrict loc, int *ptr_num_wished_l
   {
     /* Got command line or config file language */
     DEBUG_PRINTF("Language via config: %s\n", loc);
+#ifdef __ANDROID__
+    __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Setting LANGUAGE env var to: '%s'", loc);
+#endif
     mysetenv("LANGUAGE", loc);
   }
   else
   {
     DEBUG_PRINTF("Language NOT set via config\n");
+#ifdef __ANDROID__
+    __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Language NOT set via config - using system defaults");
+#endif
 
     /* Find what language to use from env vars */
     env = getenv("LANGUAGE");
@@ -1138,6 +1144,9 @@ static void set_current_language(const char *restrict loc, int *ptr_num_wished_l
   ctype_utf8();
 
   DEBUG_PRINTF("Locale AFTER is: %s\n", setlocale(LC_ALL, NULL));       //EP
+#ifdef __ANDROID__
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Locale AFTER setlocale(): '%s'", setlocale(LC_ALL, NULL));
+#endif
 
 #ifdef BDIST_WIN32
   // FIXME: After the update of MinGW/MSYS2 in January 2022, gettext() no longer find
@@ -1156,6 +1165,9 @@ static void set_current_language(const char *restrict loc, int *ptr_num_wished_l
   bindtextdomain("tuxpaint", f);
 #else
   bindtextdomain("tuxpaint", LOCALEDIR);
+#ifdef __ANDROID__
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "bindtextdomain set to: '%s'", LOCALEDIR);
+#endif
 #endif
 
   /* Old version of glibc does not have bind_textdomain_codeset() */
@@ -1163,10 +1175,18 @@ static void set_current_language(const char *restrict loc, int *ptr_num_wished_l
   bind_textdomain_codeset("tuxpaint", "UTF-8");
 #endif
   textdomain("tuxpaint");
+#ifdef __ANDROID__
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "textdomain set to 'tuxpaint'");
+#endif
 
   // NULL: Used to direct setlocale() to query the current
   // internationalised environment and return the name of the locale().
   loc = setlocale(LC_MESSAGES, NULL);
+
+#ifdef __ANDROID__
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "LC_MESSAGES locale: '%s', oldloc: '%s'", 
+                      loc ? loc : "NULL", oldloc ? oldloc : "NULL");
+#endif
 
   if (oldloc && loc && strcmp(oldloc, "") != 0 && strcmp(loc, oldloc) != 0)
   {
@@ -1271,6 +1291,11 @@ void setup_i18n(const char *restrict lang, const char *restrict locale, int *num
   DEBUG_PRINTF("lang %p, locale %p\n", lang, locale);
   DEBUG_PRINTF("lang \"%s\", locale \"%s\"\n", lang, locale);
 
+#ifdef __ANDROID__
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "setup_i18n() called: lang='%s', locale='%s'", 
+                      lang ? lang : "NULL", locale ? locale : "NULL");
+#endif
+
   if (locale)
   {
     if (!strcmp(locale, "help"))
@@ -1292,12 +1317,24 @@ void setup_i18n(const char *restrict lang, const char *restrict locale, int *num
     locale = language_to_locale(lang);
 
 #ifdef __ANDROID__
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "After language_to_locale(): locale='%s'", locale ? locale : "NULL");
+  
+  if (locale == NULL)
+  {
+    locale = android_locale();
+    __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Using android_locale(): '%s'", locale ? locale : "NULL");
+  }
+#else
   if (locale == NULL)
     locale = android_locale();
 #endif
 
   if (locale == NULL)
     locale = "";
+
+#ifdef __ANDROID__
+  __android_log_print(ANDROID_LOG_INFO, "TuxPaint", "Final locale before set_current_language(): '%s'", locale);
+#endif
 
   set_current_language(locale, num_wished_langs);
 }

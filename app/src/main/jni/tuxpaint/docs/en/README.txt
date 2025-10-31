@@ -304,12 +304,88 @@ a. "Paint" Tool (Brush) ←
 
     Other brushes are directional — they will draw a different shape depending
     on what direction you are painting with them. An example of this is the
-    arrow brush that ships with Tux Paint. These brushes have a small 8-way
-    arrow icon drawn on their Selector buttons.
+    arrow brush that ships with Tux Paint.
 
-    Finally, some brushes can be both direction and animated. Examples of this
+    Some brushes can be both direction and animated. Examples of this
     are the cat and squirrel brushes that ship with Tux Paint. These brushes
     will have both the "filmstrip" and 8-way arrow icons.
+
+    Finally, some brushes are rotatable. Examples of this are the arrow brush.
+    
+    Brushes that are directional or rotatable have a small green small 8-way
+    arrow icon drawn on their Selector buttons.
+
+    These are all available brushes:
+
+    0=aa_round_03
+    1=aa_round_06
+    2=aa_round_12
+    3=aa_round_24
+    4=aa_round_36
+    5=aa_round_fuzz
+    6=aa_round_seethru_05
+    7=aa_round_seethru_10
+    8=aa_round_seethru
+    9=acrylic (frames=4)
+    10=arrow (rotate)
+    11=arrow_triangles (directional)
+    12=blob
+    13=chisle
+    14=critter_dog (frames=2, directional) *BOTH*
+    15=critter_kuroneko (frames=2, directional) *BOTH*
+    16=critter_squirrel (frames=3, directional) *BOTH*
+    17=cutout_square_diamond
+    18=cutout_star_circle
+    19=diamond
+    20=flower_5
+    21=flower_5_small
+    22=flower_6
+    23=flower_6_small
+    24=flower_7
+    25=fluff_gradient (frames=4)
+    26=fluff (frames=4)
+    27=footprints-human (frames=2, directional) *BOTH*
+    28=footprints-human-shoes (frames=2, directional) *BOTH*
+    29=footprints-paws (frames=2, directional) *BOTH*
+    30=graphite (frames=7)
+    31=heart
+    32=hexagon
+    33=impasto (frames=10, rotate)
+    34=inksplat (frames=5)
+    35=lines-angled (directional)
+    36=lozenge
+    37=oval
+    38=paint_splats (frames=4)
+    39=pencil (frames=4, rotate)
+    40=pentagon
+    41=rotating_dash (rotate)
+    42=slash_10_lt
+    43=slash_10_rt
+    44=slash_16_lt
+    45=slash_16_rt
+    46=slash_20_lt
+    47=slash_20_rt
+    48=smoke (frames=3)
+    49=sparkles (frames=4)
+    50=sphere
+    51=spines
+    52=spiral (frames=4)
+    53=splat
+    54=spray (frames=6)
+    55=square_06
+    56=square_12
+    57=square_24
+    58=square_36
+    59=square_fuzz
+    60=square_seethru
+    61=star
+    62=tiny
+    63=triangle_down
+    64=triangle_up
+    65=vine (frames=6)
+    66=watercolor-texture (frames=4)
+    67=water_still (frames=3)
+    68=x
 
     As you draw, a sound is played. The bigger the brush, the lower the pitch.
 
@@ -1103,13 +1179,9 @@ g."Quit" Command ←
      
 h.Sound Muting ←
 
-    There is no on-screen control button at this time, but by using the [Alt] +
+    There is an on-screen control button or using the [Alt] +
     [S] keyboard sequence, sound effects can be disabled and re-enabled (muted
     and unmuted) while the program is running.
-
-    Note that if sounds are completely disabled via the "nosound" option, the
-    [Alt] + [S] key combination has no effect. (i.e., it cannot be used to turn
-    on sounds when the parent/teacher wants them disabled.)
 
     ⚙ See the "Options" documentation.
 
