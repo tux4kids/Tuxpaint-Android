@@ -543,5 +543,26 @@
           android:text="@string/ok" />
 
     </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/layoutDocs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/viewDocs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Documentation" />
+      <Button
+          android:id="@+id/buttonDocs"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/explore_documentation" />
+
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

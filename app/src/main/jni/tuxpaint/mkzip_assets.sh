@@ -48,6 +48,10 @@ then
 
     make LOCALE_PREFIX=tmpzip/locale install-gettext && \
 	cp -r data tmpzip/data && \
+	cp -r docs tmpzip/docs && \
+	cd magic/magic-docs && \
+	for langdir in *; do if [ -d $langdir ]; then mkdir ../../tmpzip/docs/$langdir/magic-docs && cp -r $langdir/html ../../tmpzip/docs/$langdir/magic-docs/; fi ; done && \
+	cd ../.. && \
 	cp -r fonts/locale tmpzip/data/fonts/locale && \
 	cp -r im tmpzip/data/im && \
 	cp -r osk tmpzip/data/osk && \

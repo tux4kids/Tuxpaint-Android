@@ -99,6 +99,7 @@ public class ConfigActivity extends Activity {
         Spinner osklayoutSpinner = null;
         ToggleButton stamprotationToggle = null;
         Button requestrevoquebtButton = null;
+        Button Docsbutton = null;
     Button okButton = null;
     Button cancelButton = null;
         AssetManager mgr;
@@ -454,6 +455,14 @@ public class ConfigActivity extends Activity {
 				};
 			}
 	});
+
+    Docsbutton = (Button)this.findViewById(R.id.buttonDocs);
+    Docsbutton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View buttonView) {
+startActivity(new Intent(ConfigActivity.this, DocViewerActivity.class));
+			}
+    });
+
 
 		okButton = (Button)this.findViewById(R.id.buttonOk);
 

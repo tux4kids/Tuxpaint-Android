@@ -8,7 +8,7 @@ else {
 }
 
 android {
-    namespace 'org.tuxpaint'
+    namespace = 'org.tuxpaint'
     compileSdkVersion 35
     defaultConfig {
         minSdkVersion 21
@@ -24,7 +24,7 @@ android {
     }
     packagingOptions {
         jniLibs {
-            useLegacyPackaging true
+            useLegacyPackaging = true
         }
     }
     buildTypes {
@@ -53,10 +53,10 @@ android {
         }
     }
     androidResources {
-        ignoreAssetsPattern 'nonexisting.file'
+        ignoreAssetsPattern = 'nonexisting.file'
     }
     lint {
-        abortOnError false
+        abortOnError = false
     }
     if (!project.hasProperty('EXCLUDE_NATIVE_LIBS')) {
         sourceSets.main {
@@ -87,7 +87,7 @@ task copyDataFiles(type: Copy) {
     from('src/main/jni/tuxpaint/data') {
         include '**/*.*'
     }
-    destinationDir(new File('src/main/assets/data'))
+    destinationDir = (new File('src/main/assets/data'))
 }
 task copyConfigFile(type: Copy) {
     from 'src/main/jni/tuxpaint/src/tuxpaint.cfg-android'
