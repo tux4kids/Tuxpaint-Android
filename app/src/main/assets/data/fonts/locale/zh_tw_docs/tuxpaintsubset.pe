@@ -1,0 +1,65 @@
+#!/usr/bin/env fontforge
+# <% The script first draft by Edward Lee<Edward.bbs@bbs.sayya.org>. %>
+# Copyright: Song Huang <song@song.tw>
+# License: GUN GPL
+# create: 2004/10/26 
+# modify: 2006/10/15
+
+copyright="Song Huang <song@song.tw>"
+ver="0.2"
+
+if ($argc < 4)
+  Print("usage: ", $0, " orig.ttf generate.ttf char_nu [char_num ...]")
+  Quit(1)
+endif
+
+Print("Loading ", $1, "...")
+Open($1)
+
+a=Array(($argc - 3))
+Print("argc = " + $argc)
+i=3
+while ( i < $argc )
+    a[(i-3)]=Strtol($argv[i])
+    # Print(">> " + $argv[i])
+    i++
+endloop
+
+i=$argc - 4
+while ( i >= 0 )
+    SelectMore(a[i])
+    i--
+endloop
+
+SelectInvert()
+Clear()
+
+fontName=GetTTFName(0x404, 6) + "[Subset for TuxPaint] "
+fontCopyRight=GetTTFName(0x404, 0)
+fontVersion=GetTTFName(0x404, 5) + "[Subset for TuxPaint] "
+fontMaker="TuxPaint's Font Subset Maker"
+fontSample="TuxPaint Font Subset."
+
+# nameid=1	Font Family Name
+SetTTFName(0x404,1,fontName)
+# nameid=4	Full Font Name
+SetTTFName(0x404,4,fontName)
+# nameid=5	Version string
+SetTTFName(0x404,5,fontVersion)
+# nameid=6	Postscript name for the font
+SetTTFName(0x404,6,fontName)
+# nameid=8	Manufacturer Name
+SetTTFName(0x404,8,fontMaker)
+# nameid=19	Sample text
+SetTTFName(0x404,4,fontName)
+
+# Set font name
+SetFontNames("SubsetForTuxPaint","SubsetForTuxPaint","SubsetForTuxPaint","Book",copyright,ver)
+
+AutoCounter()
+
+Print("Generating fonts...")
+Generate($2)
+Close()
+
+Quit(0)

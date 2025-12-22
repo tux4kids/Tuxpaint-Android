@@ -30,7 +30,6 @@
 Mix_Chunk *sounds[NUM_SOUNDS];
 #endif
 
-int mute;
 int use_sound = 1;
 int use_stereo = 1;
 static int old_sound[4] = { -1, -1, -1, -1 };
@@ -54,7 +53,7 @@ void playsound(SDL_Surface *screen, int chan, int s, int override, int x, int y)
 #ifndef NOSOUND
   int left, dist;
 
-  if (!mute && use_sound && s != SND_NONE)
+  if (use_sound && s != SND_NONE)
   {
 #ifdef DEBUG
     printf("playsound #%d in channel %d, pos (%d,%d), %soverride, ptr=%p\n",
@@ -93,25 +92,15 @@ void playsound(SDL_Surface *screen, int chan, int s, int override, int x, int y)
           left = 0;
         else
         {
-          if (x < 0)
-            x = 0;
-          else if (x >= screen->w)
-            x = screen->w - 1;
-
-          left = ((255 - dist) * ((screen->w - 1) - x)) / (screen->w - 1);
+          left = 255 - dist - ((x * (255 - dist)) / screen->w);
         }
-      }
-      else
-      {
-        /* Stereo disabled; treat everything like a SNDPOS_CENTER
-           (equal amount in each of the left/right channels) */
-        left = (255 - dist) / 2;
-      }
+
+        Mix_SetPanning(chan, left, 255 - left);
+
 #ifdef DEBUG
-      printf("Panning of sound #%d in channel %d, left=%d, right=%d\n", s, chan, left, (255 - dist) - left);
-      fflush(stdout);
+        fflush(stdout);
 #endif
-      Mix_SetPanning(chan, left, (255 - dist) - left);
+      }
     }
   }
 #endif

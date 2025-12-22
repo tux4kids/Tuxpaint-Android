@@ -33,7 +33,7 @@
 * Verbose logging adds metadata to printf, including the source file location
 * from where printf was called and the time it was called at runtime.
 */
-#if defined(DEBUG) && defined(VERBOSE) && defined(__GNUC__)
+#if defined(DEBUG) && defined(VERBOSE) && defined(__GNUC__) && !defined(__ANDROID__)
 #include <stdio.h>
 #include <time.h>
 

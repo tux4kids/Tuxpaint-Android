@@ -36,7 +36,7 @@
 #define SNDDIST_NEAR -999
 
 extern Mix_Chunk *sounds[NUM_SOUNDS];
-extern int mute, use_sound, use_stereo;
+extern int use_sound, use_stereo;
 
 void playsound(SDL_Surface * screen, int chan, int s, int override, int x, int y);
 

@@ -54,4 +54,6 @@ JNIEXPORT jboolean Java_org_tuxpaint_tuxpaintActivity_managertojni(JNIEnv * env,
 
 JNIEXPORT void Java_org_tuxpaint_tuxpaintActivity_setnativelibdir(JNIEnv * env, jclass clazz, jstring path);
 
+JNIEXPORT void Java_org_tuxpaint_tuxpaintActivity_setfilesdir(JNIEnv * env, jclass clazz, jstring path);
+
 #endif

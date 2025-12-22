@@ -1089,10 +1089,12 @@ char **malloc_fontconfig_config_paths(int num_to_malloc, int *num_actually_mallo
     loadfonts(screen, texture, renderer, "/usr/share/fonts");
     loadfonts(screen, texture, renderer, "/usr/X11R6/lib/X11/fonts");
 #elif defined(__ANDROID__)
-    /* Android: Look for fonts inside Tux Paint */
-    loadfonts(screen, texture, renderer, "data/fonts");
-    /* Android: Look for fonts in a system folder */
+    /* Android: Use system fonts (assets not accessible via filesystem) */
     loadfonts(screen, texture, renderer, "/system/fonts");
+#ifdef DEBUG
+    __android_log_print(ANDROID_LOG_DEBUG, "TuxPaint", 
+                       "Loading fonts from /system/fonts");
+#endif
 #elif defined(__sun__)
     /* SunOS: Look for fonts in various system folders */
     loadfonts(screen, texture, renderer, "/usr/openwin/lib/X11/fonts");
