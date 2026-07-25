@@ -9,10 +9,10 @@ else {
 
 android {
     namespace = 'org.tuxpaint'
-    compileSdkVersion 35
+    compileSdkVersion 36
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 35
+        targetSdkVersion 36
         externalNativeBuild {
             ndkBuild {
                 arguments "APP_PLATFORM=android-21"
@@ -39,8 +39,8 @@ android {
             if (buildAsApplication) {
                 dimension "store"
                 applicationId "org.tuxpaint.android"
-                versionCode 9351
-                versionName "0.9.35-1"
+                versionCode 9353
+                versionName "0.9.35-3"
             }
         }
         offPlayStore {
