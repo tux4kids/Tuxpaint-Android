@@ -193,12 +193,13 @@ Build
 
 Android Studio
 =============
-This application has been tested and will build in Android Studio (last test on Chipmunk, 2021.2.1 patch 1).
+This application has been tested and will build in Android Studio (last test on Narwhal, 2025.1.1).
 Steps to run in Android Studio:
 * Open Android Studio
 * File -> New -> Project From Version Control...
 * Paste in this repository URL if you've setup github already, otherwise setup github
 * In Android Studio `Build Variants` window, select variant and target ABI if applicable
+* Make sure to set the emulator's preferred ABI to match the build target arm64-v8a
 * Run -> Edit Configurations...
 * Select `APK from app bundle` for `Deploy` to avoid library build
 
