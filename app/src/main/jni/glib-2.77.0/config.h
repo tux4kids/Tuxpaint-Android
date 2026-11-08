@@ -369,17 +369,25 @@
 
 #define SIZEOF_INT 4
 
+#if defined(__LP64__)
 #define SIZEOF_LONG 8
+#else
+#define SIZEOF_LONG 4
+#endif
 
 #define SIZEOF_LONG_LONG 8
 
 #define SIZEOF_SHORT 2
 
+#if defined(__LP64__)
 #define SIZEOF_SIZE_T 8
-
 #define SIZEOF_SSIZE_T 8
-
 #define SIZEOF_VOID_P 8
+#else
+#define SIZEOF_SIZE_T 4
+#define SIZEOF_SSIZE_T 4
+#define SIZEOF_VOID_P 4
+#endif
 
 #define SIZEOF_WCHAR_T 4
 
